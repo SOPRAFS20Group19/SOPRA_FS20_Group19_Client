@@ -107,6 +107,14 @@ export class Game extends React.Component {
             >
               Logout
             </Button>
+            <Button
+                width="100%"
+                onClick={() => {
+                  this.props.history.push('/map');
+                }}
+            >
+              Show map
+            </Button>
           </div>
         )}
       </Container>
