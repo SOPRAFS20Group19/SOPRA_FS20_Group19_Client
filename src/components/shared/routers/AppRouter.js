@@ -6,6 +6,7 @@ import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Registration from "../../registration/Registration";
 import Map from "../../map/Map";
+import Maps from "../../maps/Maps";
 
 /**
  * Main router of your application.
@@ -50,7 +51,7 @@ class AppRouter extends React.Component {
                   path="/map"
                   exact
                   render={() => (
-                      <Map />
+                      <Maps />
                   )}
               />
             <Route path="/" exact render={() => <Redirect to={"/game"} />} />
