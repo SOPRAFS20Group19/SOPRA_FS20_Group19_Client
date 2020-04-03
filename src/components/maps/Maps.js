@@ -9,6 +9,9 @@ import {
 import * as brunnenData from "./data/wvz_brunnen.json";
 import mapStyles from "./mapStyles";
 
+// this method logs the user out by removing the token and his ID from the localStorage
+
+
 function Map() {
     const [selectedBrunnen, setSelectedBrunnen] = useState(null);
 
@@ -56,6 +59,7 @@ function Map() {
                     }}
                      */
 
+
                 />
             ))}
 
@@ -75,6 +79,8 @@ function Map() {
                     </div>
                 </InfoWindow>
             )}
+                
+            
         </GoogleMap>
     );
 }

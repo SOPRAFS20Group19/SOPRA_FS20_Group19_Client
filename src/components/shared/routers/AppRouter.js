@@ -14,7 +14,7 @@ import Maps from "../../maps/Maps";
  * and another Router that matches the route "/game".
  * The main difference between these two routes is the following:
  * /login renders another component without any sub-route
- * /game renders a Router that contains other sub-routes that render in turn other react components
+ * /map renders a Router that contains other sub-routes that render in turn other react components
  * Documentation about routing in React: https://reacttraining.com/react-router/web/guides/quick-start
  */
 class AppRouter extends React.Component {
@@ -24,11 +24,11 @@ class AppRouter extends React.Component {
         <Switch>
           <div>
             <Route
-              path="/game"
+              path="/map"
               render={() => (
-                <GameGuard>
-                  <GameRouter base={"/game"} />
-                </GameGuard>
+                <MapGuard>
+                  <MapRouter base={"/map"} />
+                </MapGuard>
               )}
             />
             <Route
@@ -47,14 +47,7 @@ class AppRouter extends React.Component {
                     <Registration />
                     )}
               />
-              <Route
-                  path="/map"
-                  exact
-                  render={() => (
-                      <Maps />
-                  )}
-              />
-            <Route path="/" exact render={() => <Redirect to={"/game"} />} />
+            <Route path="/" exact render={() => <Redirect to={"/map"} />} />
           </div>
         </Switch>
       </BrowserRouter>
