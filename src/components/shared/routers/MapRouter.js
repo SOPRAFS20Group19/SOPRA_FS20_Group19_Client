@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { Redirect, Route } from "react-router-dom";
 import Maps from "../../maps/Maps";
+import Game from "../../game/Game";
+import AddLocation from "../../LocationManagement/AddLocation";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 class MapRouter extends React.Component {
     render() {
@@ -18,6 +24,11 @@ class MapRouter extends React.Component {
                       <Maps />
                   )}
               />
+            <Route
+                exact
+                path={`map/addlocation`}
+                render={() => <AddLocation />}
+            />
         </Container>
       );
     }
@@ -25,4 +36,4 @@ class MapRouter extends React.Component {
   /*
   * Don't forget to export your component!
    */
-  export default GameRouter;
+  export default MapRouter;

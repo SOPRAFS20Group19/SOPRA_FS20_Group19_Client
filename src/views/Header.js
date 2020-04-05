@@ -9,17 +9,26 @@ import { ReactLogo } from "./ReactLogo";
  * https://www.styled-components.com/
  */
 const Container = styled.div`
-  height: ${props => props.height}px;
-  background: ${props => props.background};
+  height: 10%;
+  width: 100%;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 10px;
 `;
 
 const Title = styled.h1`
-  font-weight: bold;
-  color: white;
+  font-weight: 900;
+  color: #003068;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  opacity: 0.9;
 `;
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
@@ -32,8 +41,7 @@ const Title = styled.h1`
 const Header = props => {
   return (
     <Container height={props.height}>
-      <Title>SoPra FS20 rocks with React!</Title>
-      <ReactLogo width={60} height={60} />
+      <Title>Know your city</Title>
     </Container>
   );
 };

@@ -8,6 +8,8 @@ import {
 } from "react-google-maps";
 import * as brunnenData from "./data/wvz_brunnen.json";
 import mapStyles from "./mapStyles";
+import Sidebar from "../../views/Sidebar";
+import Header from "../../views/Header";
 
 // this method logs the user out by removing the token and his ID from the localStorage
 
@@ -90,12 +92,16 @@ const MapWrapped = withScriptjs(withGoogleMap(Map));
 export default function Maps() {
     return (
         <div style={{ width: "100vw", height: "100vh" }}>
+
             <MapWrapped
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
-            />
+                >
+            </MapWrapped>
+            <Header/>
+            <Sidebar/>
         </div>
     );
 }

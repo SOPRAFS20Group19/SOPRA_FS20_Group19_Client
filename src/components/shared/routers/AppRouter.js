@@ -2,11 +2,14 @@ import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { GameGuard } from "../routeProtectors/GameGuard";
 import GameRouter from "./GameRouter";
+import MapRouter from "./MapRouter";
+import { MapGuard } from "../routeProtectors/MapGuard";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Registration from "../../registration/Registration";
 import Map from "../../map/Map";
 import Maps from "../../maps/Maps";
+import UserProfile from "../../userprofile/UserProfile";
 
 /**
  * Main router of your application.
@@ -26,10 +29,13 @@ class AppRouter extends React.Component {
             <Route
               path="/map"
               render={() => (
-                <MapGuard>
                   <MapRouter base={"/map"} />
-                </MapGuard>
               )}
+            />
+            <Route
+                path="/user"
+                exact
+                render={() => <UserProfile />}
             />
             <Route
               path="/login"
