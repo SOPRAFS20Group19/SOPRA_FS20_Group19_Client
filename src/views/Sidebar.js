@@ -14,10 +14,13 @@ import Profile from "./Profile";
 import Filter from "../components/maps/Filter";
 import AddLocation from "../components/LocationManagement/AddLocation";
 import { withRouter } from 'react-router-dom';
+import LogoutIcon from "./LogoutIcon.svg"
+import Popover from "react-bootstrap/Popover";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
 const Container = styled.div`
   &:hover {
-    opacity: 1;
+    opacity: 0.9;
     background: #003068;
   }
   height: 100%;
@@ -43,9 +46,7 @@ class Sidebar extends React.Component{
     constructor() {
         super();
         this.state = {
-            showAddLocationError: false,
-            showFilterError: false,
-            showUserError: false
+            filterExpanded: false
         }
     }
 
@@ -53,61 +54,118 @@ class Sidebar extends React.Component{
     }
 
     openFilter(){
+        this.setState({filterExpanded: true})
     }
 
-    openAddLocation(){
-        this.setState({ showAddLocationError: true });
-        //if (localStorage.getItem("token")== null){
-            //this.setState({ showAddLocationError: true });
-        //}
-        //else {
-            //this.props.history.push(`/map/addlocation`);
-        //}
+
+    logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        this.props.history.push('/login');
     }
 
     render() {
         return (
             <Container>
-                <ButtonContainer>
-                <RoundButton
-                    width="75%"
-                    onClick={() => {
-                        this.openUserProfile();
-                    }}
-                >
-                <img src={UserIconComplete} alt="User Icon"/>
-                </RoundButton>
-                </ButtonContainer>
-                <ButtonContainer>
-                <RoundButton
-                    width="75%"
-                    onClick={() => {
-                        this.openFilter();
-                    }}
-                >
-                    <img src={FilterIconComplete}/>
-                </RoundButton>
-                </ButtonContainer>
-                <ButtonContainer>
-                <RoundButton
-                    width="75%"
-                    onClick={() => {
-                        this.openAddLocation();
-                    }}
-                >
-                    <img src={PlusIconComplete}/>
-                </RoundButton>
-                </ButtonContainer>
-                {this.state.showAddLocationError === true ?
+                {localStorage.getItem("token") != null ?
                     <ButtonContainer>
-                        <Button onClick={() => {this.props.history.push(`/registration`)}}>
-                            Please register first to use this feature
-                        </Button>
+                        <RoundButton
+                            width="75%"
+                            onClick={() => {
+                                this.openUserProfile();
+                            }}
+                        >
+                            <img src={UserIconComplete} alt="User Icon"/>
+                        </RoundButton>
                     </ButtonContainer>
-                    : null}
+                    :
+                    null
+                }
+
+                {localStorage.getItem("token") != null ?
+                    <OverlayTrigger trigger="click" placement="left" overlay={<Filter/>}>
+                        <ButtonContainer>
+                            <RoundButton
+                                width="75%"
+                                onClick={() => {
+                                    this.openFilter();
+                                }}
+                            >
+                                <img src={FilterIconComplete}/>
+                            </RoundButton>
+                        </ButtonContainer>
+                    </OverlayTrigger>
+                    :
+                    <OverlayTrigger trigger="click" placement="left" overlay={<Popover id="popover-basic">
+                        <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
+                        <Popover.Content>
+                            Please register first to use this feature.
+                            <ButtonContainer>
+                                <Button onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
+                            </ButtonContainer>
+                        </Popover.Content>
+                    </Popover>}>
+                        <ButtonContainer>
+                            <RoundButton
+                                width="75%"
+                            >
+                                <img src={FilterIconComplete}/>
+                            </RoundButton>
+                        </ButtonContainer>
+                    </OverlayTrigger>
+                }
+
+
+                {localStorage.getItem("token") != null ?
+                    <ButtonContainer>
+                        <RoundButton
+                            width="75%"
+                            onClick={() => {
+                                this.props.history.push(`/map/addlocation`);
+                            }}
+                        >
+                            <img src={PlusIconComplete}/>
+                        </RoundButton>
+                    </ButtonContainer>
+                    :
+                    <OverlayTrigger trigger="click" placement="left" overlay={<Popover id="popover-basic">
+                    <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
+                    <Popover.Content>
+                    Please register first to use this feature.
+                    <ButtonContainer>
+                    <Button onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
+                    </ButtonContainer>
+                    </Popover.Content>
+                    </Popover>}>
+                        <ButtonContainer>
+                            <RoundButton
+                                width="75%"
+                            >
+                                <img src={PlusIconComplete}/>
+                            </RoundButton>
+                        </ButtonContainer>
+                    </OverlayTrigger>
+                }
+
+
+                {localStorage.getItem("token") != null ?
+                    <ButtonContainer>
+                        <RoundButton
+                            width="75%"
+                            onClick={() => {
+                                this.logout();
+                            }}
+                        >
+                            <img src={LogoutIcon}/>
+                        </RoundButton>
+                    </ButtonContainer>
+                    :
+                    null
+                }
+
             </Container>
         );
     }
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);

@@ -4,6 +4,7 @@ import { Redirect, Route } from "react-router-dom";
 import Maps from "../../maps/Maps";
 import Game from "../../game/Game";
 import AddLocation from "../../LocationManagement/AddLocation";
+import {MapGuard} from "../routeProtectors/MapGuard";
 
 const Container = styled.div`
   display: flex;
@@ -26,8 +27,8 @@ class MapRouter extends React.Component {
               />
             <Route
                 exact
-                path={`map/addlocation`}
-                render={() => <AddLocation />}
+                path={`${this.props.base}/addlocation`}
+                render={() => <MapGuard><AddLocation /></MapGuard>}
             />
         </Container>
       );

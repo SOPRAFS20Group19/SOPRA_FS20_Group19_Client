@@ -4,6 +4,8 @@ import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
 import { Button } from '../../views/design/Button';
 import { withRouter } from 'react-router-dom';
+import Header from "../../views/Header";
+import Sidebar from "../../views/Sidebar";
 
 const Container = styled(BaseContainer)`
   color: white;
@@ -43,11 +45,6 @@ class AddLocation extends React.Component {
     constructor() {
         super();
         this.state = {
-            loggedInUserId: localStorage.getItem("userId"),
-            username: null,
-            birthDate: null,
-            changesSaved: false,
-            testThing: false
         };
     }
 
@@ -76,56 +73,12 @@ class AddLocation extends React.Component {
         this.setState({[key]: value});
     }
 
-    async componentDidMount() {}
-
     // renders the page
     render() {
         return (
             <BaseContainer>
-                <Container>
-                    <div>
-                        <Label>Username</Label>
-                        <InputField
-                            placeholder="Enter your new username here"
-                            onChange={e => {
-                                this.handleInputChange('username', e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <Label>Birth Date</Label>
-                        <InputField
-                            placeholder="Enter your birth date here"
-                            onChange={e => {
-                                this.handleInputChange('birthDate', e.target.value);
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <ButtonContainer>
-                            <Button
-                                width="100%"
-                                onClick={() => {
-                                    this.saveChanges();
-                                }}
-                            >
-                                Save Changes
-                            </Button>
-                        </ButtonContainer>
-                    </div>
-                    <div>
-                        <ButtonContainer>
-                            <Button
-                                width="100%"
-                                onClick={() => {
-                                    this.props.history.push('/game/dashboard/user');
-                                }}
-                            >
-                                Cancel
-                            </Button>
-                        </ButtonContainer>
-                    </div>
-                </Container>
+            <Header/>
+            <Sidebar/>
             </BaseContainer>
         );
     }
