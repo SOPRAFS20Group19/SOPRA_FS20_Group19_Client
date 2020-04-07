@@ -13,12 +13,11 @@ import Header from "../../views/Header";
 import {Button} from "react-bootstrap";
 import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
+import {api} from "../../helpers/api";
 
 const MapWrapped = withScriptjs(withGoogleMap(Map));
 
 function Map() {
-
-
     const [selectedBrunnen, setSelectedBrunnen] = useState(null);
 
     useEffect(() => {
@@ -40,6 +39,7 @@ function Map() {
             defaultCenter={{ lat: 47.366950, lng: 8.547200 }}
             defaultOptions={{ styles: mapStyles }}
         >
+
             {brunnenData.features.map(brunnen => (
                 <Marker
                     key={brunnen.properties.objectid}
@@ -52,13 +52,6 @@ function Map() {
                         setSelectedBrunnen(brunnen);
                     }}
 
-                    onMouseOver={() => {
-                        setSelectedBrunnen(brunnen);
-                    }}
-
-                    onMouseOut={() => {
-                        setSelectedBrunnen(null);
-                    }}
                     icon={{
                         url: '/FountainClipart.png',
                         scaledSize: new window.google.maps.Size(25, 25)
@@ -82,6 +75,7 @@ function Map() {
                     </div>
                 </InfoWindow>
             )}
+
         </GoogleMap>
     );
 }
