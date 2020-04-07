@@ -7,7 +7,6 @@ import { MapGuard } from "../routeProtectors/MapGuard";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Registration from "../../registration/Registration";
-import Map from "../../map/Map";
 import Maps from "../../maps/Maps";
 import UserProfile from "../../userprofile/UserProfile";
 
