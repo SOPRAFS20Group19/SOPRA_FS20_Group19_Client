@@ -56,16 +56,13 @@ function Map() {
                         setSelectedBrunnen(brunnen);
                     }}
 
-                    /*
-                    AN ALLE: hier können wir das icon ändern. d.h. der rote "Tropfen" wird dann ein Bild/Symbol unserer Wahl
-
+                    onMouseOut={() => {
+                        setSelectedBrunnen(null);
+                    }}
                     icon={{
-                        url: `/skateboarding.svg`,
+                        url: '/FountainClipart.png',
                         scaledSize: new window.google.maps.Size(25, 25)
                     }}
-                     */
-
-
                 />
             ))}
 
