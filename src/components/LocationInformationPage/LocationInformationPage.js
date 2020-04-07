@@ -4,8 +4,10 @@ import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
 import { Button } from '../../views/design/Button';
 import { withRouter } from 'react-router-dom';
-import Header from "../../views/Header";
 import SidebarInfoAndAddLocation from "../../views/SidebarInfoAndAddLocation";
+import LocationInformation from "../../views/LocationInformation";
+import LocationRating from "../../views/LocationRating";
+
 
 const Container = styled(BaseContainer)`
   color: white;
@@ -41,47 +43,31 @@ const ButtonContainer = styled.div`
 `;
 
 // This component is responsible for the edit profile page
-class AddLocation extends React.Component {
+class LocationInformationPage extends React.Component {
     constructor() {
         super();
         this.state = {
         };
     }
 
-    // when the save changes button is clicked, the new data is sent to the server via put request
-    saveChanges() {
-        try {
-            const requestBody = JSON.stringify({
-                username: this.state.username,
-                birthDate: this.state.birthDate
-            });
-
-            const url = '/users/' + this.state.loggedInUserId;
-            api.put(url, requestBody);
-
-            // after successfully saving the changes, the user is redirected to his profile page
-            this.props.history.push('/game/dashboard/user');
-        } catch (e) {
-            alert(`Something went wrong while editing the profile: \n${handleError(e)}`);
-        }
+    // Get all the needed Information about the selected Location
+    getCurrentLocation() {
     }
 
-    // this method handles the given user input and changes the component's state
-    handleInputChange(key, value) {
-        // Example: if the key is username, this statement is the equivalent to the following one:
-        // this.setState({'username': value});
-        this.setState({[key]: value});
+    // Get the chat box for the current Location
+    getchat() {
     }
 
     // renders the page
     render() {
         return (
             <BaseContainer>
-            <Header/>
-            <SidebarInfoAndAddLocation/>
+                <SidebarInfoAndAddLocation/>
+                <LocationInformation/>
+                <LocationRating/>
             </BaseContainer>
         );
     }
 }
 
-export default withRouter(AddLocation);
+export default withRouter(LocationInformationPage);

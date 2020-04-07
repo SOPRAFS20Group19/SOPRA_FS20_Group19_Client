@@ -5,6 +5,7 @@ import Maps from "../../maps/Maps";
 import Game from "../../game/Game";
 import AddLocation from "../../LocationManagement/AddLocation";
 import {MapGuard} from "../routeProtectors/MapGuard";
+import LocationInformationPage from "../../LocationInformationPage/LocationInformationPage";
 
 const Container = styled.div`
   display: flex;
@@ -29,6 +30,11 @@ class MapRouter extends React.Component {
                 exact
                 path={`${this.props.base}/addlocation`}
                 render={() => <MapGuard><AddLocation /></MapGuard>}
+            />
+            <Route
+                exact
+                path={`${this.props.base}/informationpage`}
+                render={() => <LocationInformationPage />}
             />
         </Container>
       );

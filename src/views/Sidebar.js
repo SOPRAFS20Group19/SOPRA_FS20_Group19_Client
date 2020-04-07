@@ -18,6 +18,8 @@ import LogoutIcon from "./LogoutIcon.svg"
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
+//Sidebar for the map -->Refactoring the name of the class later
+
 const Container = styled.div`
   &:hover {
     opacity: 0.9;
