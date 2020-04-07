@@ -10,11 +10,15 @@ import * as brunnenData from "./data/wvz_brunnen.json";
 import mapStyles from "./mapStyles";
 import Sidebar from "../../views/Sidebar";
 import Header from "../../views/Header";
+import {Button} from "react-bootstrap";
+import Popover from "react-bootstrap/Popover";
+import styled from "styled-components";
 
-// this method logs the user out by removing the token and his ID from the localStorage
-
+const MapWrapped = withScriptjs(withGoogleMap(Map));
 
 function Map() {
+
+
     const [selectedBrunnen, setSelectedBrunnen] = useState(null);
 
     useEffect(() => {
@@ -81,27 +85,72 @@ function Map() {
                     </div>
                 </InfoWindow>
             )}
-                
-            
         </GoogleMap>
     );
 }
 
-const MapWrapped = withScriptjs(withGoogleMap(Map));
+export class Maps extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            latitude: null,
+            longitude: null,
+        };
+        this.getLocation = this.getLocation.bind(this);
+        this.getCoordinates = this.getCoordinates.bind(this);
+    }
 
-export default function Maps() {
-    return (
-        <div style={{ width: "100vw", height: "100vh" }}>
+    getCoordinates(position) {
+        this.setState({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        })
+    }
 
-            <MapWrapped
-                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
-                loadingElement={<div style={{ height: `100%` }} />}
-                containerElement={<div style={{ height: `100%` }} />}
-                mapElement={<div style={{ height: `100%` }} />}
+    getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    handleLocationError(error){
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert ("User denied the request for Geolocation.")
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert ("Location information is unavailable.")
+                break;
+            case error.TIMEOUT:
+                alert ("The request to get user location timed out.")
+                break;
+            case error.UNKNOWN_ERROR:
+                alert ("An unknown error occurred.")
+                break;
+        }
+    }
+
+    render(){
+        return (
+            <div style={{ width: "100vw", height: "100vh" }}>
+                <MapWrapped
+                    googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
+                    loadingElement={<div style={{ height: `100%` }} />}
+                    containerElement={<div style={{ height: `100%` }} />}
+                    mapElement={<div style={{ height: `100%` }} />}
+
                 >
-            </MapWrapped>
-            <Header/>
-            <Sidebar/>
-        </div>
-    );
+                </MapWrapped>
+                <Header/>
+                <Sidebar/>
+                <Button onClick={() => {this.getLocation();}}>Get Current Coordinates</Button>
+                <p>Latitude: {this.state.latitude}</p>
+                <p>Longitude: {this.state.longitude}</p>
+
+            </div>
+        );
+    }
 }
+export default Maps;
