@@ -9,7 +9,6 @@ const Container = styled.div`
   display: flex;
   justify-content: top;
   align-items: left;
-  opacity: 0.4;
   position: absolute;
   top: 15%;
   left:2%;

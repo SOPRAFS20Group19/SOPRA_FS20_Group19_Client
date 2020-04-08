@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import SidebarInfoAndAddLocation from "../../views/SidebarInfoAndAddLocation";
 import LocationInformation from "../../views/LocationInformation";
 import LocationRating from "../../views/LocationRating";
+import Chatbox from "../../views/Chatbox";
 
 
 const Container = styled(BaseContainer)`
@@ -65,6 +66,7 @@ class LocationInformationPage extends React.Component {
                 <SidebarInfoAndAddLocation/>
                 <LocationInformation/>
                 <LocationRating/>
+                <Chatbox/>
             </BaseContainer>
         );
     }

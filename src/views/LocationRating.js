@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
 
 const Container = styled.div`
   height: 10%;
@@ -9,9 +10,8 @@ const Container = styled.div`
   display: flex;
   justify-content: top;
   align-items: left;
-  opacity: 0.4;
   position: absolute;
-  top: 43%;
+  top: 41%;
   left:2%;
   flex-direction: column;
 `;
@@ -29,6 +29,12 @@ const ButtonContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 0%;
+`;
+const ButtonContainer2 = styled.div`
+  justify-content: center;
+  position: absolute;
+  top: 0%;
+  left: 28%;
 `;
 
 /**
@@ -55,9 +61,17 @@ class LocationRating extends React.Component{
     render() {
         return (
             <Container>
-                <Text>Rate this Location: ...</Text>
+                <Text>Rate this Location:</Text>
+                <ButtonContainer2><ButtonGroup aria-label="Basic example">
+                    <Button variant="light">Stern</Button>
+                    <Button variant="light">Stern</Button>
+                    <Button variant="light">Stern</Button>
+                    <Button variant="light">Stern</Button>
+                    <Button variant="light">Stern</Button>
+                </ButtonGroup></ButtonContainer2>
                 <ButtonContainer> <Button
                     variant="primary"
+                    size="lg"
                     onClick={() => {
                         this.saveRating();
                     }}>
