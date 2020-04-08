@@ -13,7 +13,10 @@ import Header from "../../views/Header";
 import {Button} from "react-bootstrap";
 import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
-import {api} from "../../helpers/api";
+import {api, handleError} from "../../helpers/api";
+import {RecyclingIcon} from "../../views/RecyclingIcon.png"
+import {FountainIcon} from "../../views/FountainIcon.png"
+import {FireplaceIcon} from "../../views/FireplaceIcon.png"
 
 const MapWrapped = withScriptjs(withGoogleMap(Map));
 
@@ -84,12 +87,43 @@ export class Maps extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            locationsShown: null,
             latitude: null,
             longitude: null,
         };
+        //this.getLocations();
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
     }
+
+    getLocationsShown() {
+        return this.state.locationsShown;
+    }
+
+    /*getLocations() {
+        try {
+            const response = api.get('/locations');
+            // delays continuous execution of an async operation for 1 second.
+            // This is just a fake async call, so that the spinner can be displayed
+            // feel free to remove it :)
+            // await new Promise(resolve => setTimeout(resolve, 1000));
+
+            // Get the returned users and update the state.
+            this.setState({ locationsShown: response.data });
+
+            // This is just some data for you to see what is available.
+            // Feel free to remove it.
+            console.log('request to:', response.request.responseURL);
+            console.log('status code:', response.status);
+            console.log('status text:', response.statusText);
+            console.log('requested data:', response.data);
+
+            // See here to get more data.
+            console.log(response);
+        } catch (error) {
+            alert(`Something went wrong while fetching the locations: \n${handleError(error)}`);
+        }
+    }*/
 
     getCoordinates(position) {
         this.setState({
@@ -125,6 +159,7 @@ export class Maps extends React.Component{
 
     render(){
         return (
+
             <div style={{ width: "100vw", height: "100vh" }}>
                 <MapWrapped
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
