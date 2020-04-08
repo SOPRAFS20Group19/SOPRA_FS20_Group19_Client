@@ -52,6 +52,7 @@ class InformationPageFavourite extends React.Component {
         }
     }
 
+    //Changes the color of the heart and saves favourite
     changeColor(value){
         this.setState({['liked']: value });
     }
