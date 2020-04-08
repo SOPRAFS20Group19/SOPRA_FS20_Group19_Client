@@ -61,13 +61,30 @@ class Chatbox extends React.Component {
     constructor() {
         super();
         this.state = {
-            filterExpanded: false
+            message: null,
+            messageSent:null,
         }
     }
+    handleInputChange(key, value) {
+        // Example: if the key is username, this statement is the equivalent to the following one:
+        // this.setState({'username': value});
+        this.setState({ [key]: value });
+    }
+
+    sendMessage(){
+        //implement the send message method
+        //next line is for testing purposes
+        this.handleInputChange(`messageSent`,this.state.message)
+    }
+
     render() {
         return ( <Container>
             <Text>Chat</Text>
                 <ChatContainer>
+                    {this.state.message != null ?
+                        <Text>{this.state.messageSent}</Text>
+                    :null
+                    }
                 </ChatContainer>
                 <UserChatConatainer>
                     <InputGroup className="mb-3">
@@ -75,9 +92,18 @@ class Chatbox extends React.Component {
                             placeholder="Enter your message here"
                             aria-label="message"
                             aria-describedby="basic-addon2"
+                            onChange={e => {
+                                this.handleInputChange('message', e.target.value);
+                            }}
                         />
                         <InputGroup.Append>
-                            <Button variant="outline-secondary">Send Message</Button>
+                            <Button variant="outline-secondary"
+                                    size='sm'
+                                    onClick={() => {
+                                        this.sendMessage();
+                                    }}
+                            >
+                                Send Message</Button>
                         </InputGroup.Append>
                     </InputGroup>
                 </UserChatConatainer>
