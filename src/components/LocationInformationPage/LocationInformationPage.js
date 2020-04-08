@@ -9,7 +9,8 @@ import LocationInformation from "../../views/LocationInformation";
 import LocationRating from "../../views/LocationRating";
 import Chatbox from "../../views/Chatbox";
 import InformationPageFavourite from "../../views/InformationPageFavourite";
-
+import LocationPictures from "../../views/LocationPictures";
+import InformationHeader from "../../views/InformationHeader";
 
 const Container = styled(BaseContainer)`
   color: white;
@@ -69,6 +70,8 @@ class LocationInformationPage extends React.Component {
                 <LocationRating/>
                 <Chatbox/>
                 <InformationPageFavourite/>
+                <LocationPictures/>
+                <InformationHeader/>
             </BaseContainer>
         );
     }

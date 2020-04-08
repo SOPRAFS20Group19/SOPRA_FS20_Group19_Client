@@ -57,11 +57,12 @@ class LocationRating extends React.Component{
             ratedStars:0,
         }
     }
+
     //saves The Rating applied to the Stars
     saveRating(){
-        //Next Line only there to test the Button
-        this.props.history.push('/login');
+        //Implement the save Rating Button
     }
+
     changeColor(number){
         this.setState({['ratedStars']: number });
     }
@@ -99,7 +100,6 @@ class LocationRating extends React.Component{
                         />
                     </ButtonGroup></ButtonContainer2>
                     <ButtonContainer> <Button1
-                        variant="primary"
                         width="100%"
                         onClick={() => {
                             this.saveRating();
