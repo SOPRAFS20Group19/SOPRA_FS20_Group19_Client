@@ -8,6 +8,7 @@ import SidebarInfoAndAddLocation from "../../views/SidebarInfoAndAddLocation";
 import LocationInformation from "../../views/LocationInformation";
 import LocationRating from "../../views/LocationRating";
 import Chatbox from "../../views/Chatbox";
+import InformationPageFavourite from "../../views/InformationPageFavourite";
 
 
 const Container = styled(BaseContainer)`
@@ -67,6 +68,7 @@ class LocationInformationPage extends React.Component {
                 <LocationInformation/>
                 <LocationRating/>
                 <Chatbox/>
+                <InformationPageFavourite/>
             </BaseContainer>
         );
     }

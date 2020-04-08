@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 const Container = styled.div`
   height: 25%;
-  width: 43%;
+  width: 70%;
   display: flex;
   justify-content: top;
   align-items: left;
@@ -47,6 +47,15 @@ const Coordinates = styled.div`
   left:0%;
 `;
 
+const Text = styled.div`
+  font-weight: normal;
+  position: absolute;
+  top: 0%;
+  left:102%;
+  width: 200%;
+  text-align: left;
+`;
+
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
  * Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.
@@ -60,15 +69,15 @@ class LocationInformation extends React.Component{
     constructor() {
         super();
         this.state = {
-            filterExpanded: false
         }
     }
     render() {
         return (
             <Container>
-                <Address>Address: ...</Address> <ID>ID: ...</ID>
-                <AdditionalInformation>Additional Information: ...</AdditionalInformation> <Coordinates>Coordinates:
-                ...</Coordinates>
+                <Address>Address: <Text> Examplestreet</Text> </Address>
+                <ID>ID: <Text>12345</Text> </ID>
+                <AdditionalInformation>Additional Information: <Text>This is an example!</Text> </AdditionalInformation>
+                <Coordinates>Coordinates: <Text>Example</Text> </Coordinates>
             </Container>
         );
     }

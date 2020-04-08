@@ -62,7 +62,7 @@ class Chatbox extends React.Component {
         super();
         this.state = {
             message: null,
-            messageSent:null,
+            messageSent: null,
         }
     }
     handleInputChange(key, value) {

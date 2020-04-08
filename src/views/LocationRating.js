@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import {Button as Button1} from "./design/Button";
 
 const Container = styled.div`
   height: 10%;
@@ -29,6 +30,7 @@ const ButtonContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 0%;
+  width: 25%;
 `;
 const ButtonContainer2 = styled.div`
   justify-content: center;
@@ -69,14 +71,14 @@ class LocationRating extends React.Component{
                     <Button variant="light">Stern</Button>
                     <Button variant="light">Stern</Button>
                 </ButtonGroup></ButtonContainer2>
-                <ButtonContainer> <Button
+                <ButtonContainer> <Button1
                     variant="primary"
-                    size="lg"
+                    width="100%"
                     onClick={() => {
                         this.saveRating();
                     }}>
                     Save Rating
-                </Button>{' '}
+                </Button1>{' '}
                 </ButtonContainer>
             </Container>
         );
