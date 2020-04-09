@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-//This button is the same button as 'Button' but the colours are switched (dark blue as filler)
+//This button is the same as 'Button' but the colours are switched (dark blue as filler)
 export const ButtonForLogin = styled.button`
   &:hover {
     transform: translateY(-2px);

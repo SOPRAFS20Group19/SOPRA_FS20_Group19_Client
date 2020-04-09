@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
 import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
@@ -62,12 +61,6 @@ const InputField = styled.input`
   margin-bottom: 20px;
   background: white;
   color: #000000;
-`;
-
-const Label = styled.label`
-  color: white;
-  margin-bottom: 10px;
-  text-transform: uppercase;
 `;
 
 const ButtonContainer = styled.div`

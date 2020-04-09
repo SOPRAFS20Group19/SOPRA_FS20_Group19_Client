@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
 import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
@@ -64,10 +63,17 @@ const InputField = styled.input`
   color: #000000;
 `;
 
-const Label = styled.label`
-  color: white;
-  margin-bottom: 10px;
-  text-transform: uppercase;
+const InputFieldPassword = styled.input`
+  &::placeholder {
+    color: black;
+  }
+  height: 35px;
+  padding-left: 15px;
+  margin-left: -4px;
+  border: 2px solid #003068;
+  margin-bottom: 20px;
+  background: white;
+  color: #000000;
 `;
 
 const ButtonContainer = styled.div`
@@ -165,7 +171,7 @@ class Registration extends React.Component {
                                         this.handleInputChange('name', e.target.value);
                                     }}
                                 />
-                                <InputField
+                                <InputFieldPassword
                                     placeholder="Enter your password here"
                                     onChange={e => {
                                         this.handleInputChange('password', e.target.value);
@@ -197,56 +203,6 @@ class Registration extends React.Component {
                     </EmblemContainer>
                 </BackgroundContainer>
 
-            /*
-                <BaseContainer className="container">
-                    <FormContainer>
-                        <Form>
-                            <Label>Username</Label>
-                            <InputField
-                                placeholder="Enter your username here"
-                                onChange={e => {
-                                    this.handleInputChange('username', e.target.value);
-                                }}
-                            />
-                            <Label>Name</Label>
-                            <InputField
-                                placeholder="Enter your name here"
-                                onChange={e => {
-                                    this.handleInputChange('name', e.target.value);
-                                }}
-                            />
-                            <Label>Password</Label>
-                            <InputField
-                                placeholder="Enter your password here"
-                                onChange={e => {
-                                    this.handleInputChange('password', e.target.value);
-                                }}
-                            />
-                            <ButtonContainer>
-                                <Button
-                                    disabled={!this.state.username || !this.state.password || !this.state.name}
-                                    width="75%"
-                                    onClick={() => {
-                                        this.registration();
-                                    }}
-                                >
-                                    Register
-                                </Button>
-                            </ButtonContainer>
-                            <ButtonContainer>
-                                <Button
-                                    width="75%"
-                                    onClick={() => {
-                                        this.props.history.push(`/login`);
-                                    }}
-                                >
-                                    Login here
-                                </Button>
-                            </ButtonContainer>
-                        </Form>
-                    </FormContainer>
-                </BaseContainer>
-                */
         );
     }
 }
