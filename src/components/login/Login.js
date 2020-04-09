@@ -5,9 +5,30 @@ import { api, handleError } from '../../helpers/api';
 import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
 import { Button } from '../../views/design/Button';
+import '../../views/BackgroundMap.css';
+import '../../views/ZurichEmblem.css';
+import Header from "../../views/Header";
+import {ButtonForLogin} from "../../views/design/ButtonForLogin";
+
+const BackgroundContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 620px;
+  justify-content: center;
+`;
+
+const EmblemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 620px;
+  justify-content: center;
+`;
+
 
 const FormContainer = styled.div`
-  margin-top: 2em;
+  margin-top: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,29 +40,28 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 60%;
+  width: 110%;
   height: 400px;
   font-size: 16px;
   font-weight: 300;
   padding-left: 37px;
   padding-right: 37px;
   border-radius: 5px;
-  background: linear-gradient(rgb(27, 124, 186), rgb(2, 46, 101));
+  background: none;
   transition: opacity 0.5s ease, transform 0.5s ease;
 `;
 
 const InputField = styled.input`
   &::placeholder {
-    color: rgba(255, 255, 255, 1.0);
+    color: black;
   }
   height: 35px;
   padding-left: 15px;
   margin-left: -4px;
-  border: none;
-  border-radius: 20px;
+  border: 2px solid #003068;
   margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  background: white;
+  color: #000000;
 `;
 
 const Label = styled.label`
@@ -131,33 +151,26 @@ class Login extends React.Component {
 
   render() {
     return (
-      <BaseContainer>
+        <BackgroundContainer className={'html'}>
+          <Header/>
+          <EmblemContainer className={'container'}>
         <FormContainer>
           <Form>
-            <Label>Username</Label>
             <InputField
-              placeholder="Enter here.."
+              placeholder="Enter your username here"
               onChange={e => {
                 this.handleInputChange('username', e.target.value);
               }}
             />
-            <Label>Name</Label>
             <InputField
-                placeholder="Enter here.."
-                onChange={e => {
-                  this.handleInputChange('name', e.target.value);
-                }}
-            />
-            <Label>Password</Label>
-            <InputField
-              placeholder="Enter here.."
+              placeholder="Enter your password here"
               onChange={e => {
                 this.handleInputChange('password', e.target.value);
               }}
             />
             <ButtonContainer>
               <Button
-                disabled={!this.state.username || !this.state.password || !this.state.name}
+                disabled={!this.state.username || !this.state.password}
                 width="75%"
                 onClick={() => {
                   this.login();
@@ -167,18 +180,29 @@ class Login extends React.Component {
               </Button>
             </ButtonContainer>
             <ButtonContainer>
-              <Button
+              <ButtonForLogin
                   width="75%"
                   onClick={() => {
                     this.props.history.push(`/registration`);
                   }}
               >
-                You don't have an account yet? Register here!
-              </Button>
+                Continue as a guest
+              </ButtonForLogin>
+            </ButtonContainer>
+            <ButtonContainer>
+              <ButtonForLogin
+                  width="75%"
+                  onClick={() => {
+                    this.props.history.push(`/registration`);
+                  }}
+              >
+                Register here
+              </ButtonForLogin>
             </ButtonContainer>
           </Form>
         </FormContainer>
-      </BaseContainer>
+          </EmblemContainer>
+        </BackgroundContainer>
     );
   }
 }
