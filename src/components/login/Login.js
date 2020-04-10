@@ -176,7 +176,7 @@ class Login extends React.Component {
               <ButtonForLogin
                   width="75%"
                   onClick={() => {
-                    this.props.history.push(`/registration`);
+                    this.props.history.push(`/map`);
                   }}
               >
                 Continue as a guest
