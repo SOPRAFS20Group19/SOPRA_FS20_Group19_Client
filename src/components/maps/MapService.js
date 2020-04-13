@@ -14,9 +14,13 @@ import {Button} from "react-bootstrap";
 import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
+
+/*
 import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
-import {FountainIcon} from "../../views/MapMarkers/FountainIcon.png"
-import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.png"
+import {FountainIcon} from "../../views/FountainClipart.png"
+import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.css"
+ */
+
 import Player from "../../views/Player";
 import {Spinner} from "../../views/design/Spinner";
 
@@ -126,15 +130,21 @@ class MapService extends React.Component{
 
     getIcon(location){
         //funktioniert aktuell nur mit fountainClipart, wenn mit anderen funktioniert, dann einfach ersten return entfernen
-        return '/FountainClipart.png';
+        //return '/FountainClipart.png';
         if (location.locationType === "FOUNTAIN"){
-            return "../../views/MapMarkers/FountainIcon.png"
+            //return "../../views/MapMarkers/FountainIcon.png"
+            //return FountainIcon
+            return '/FountainIcon.png'
         }
         else if (location.locationType === "FIREPLACE"){
-            return "../../views/MapMarkers/FireplaceIcon.png"
+            //return "../../views/MapMarkers/FireplaceIcon.png"
+            //return FireplaceIcon
+            return '/FireplaceIcon.png'
         }
         else {
-            return "../../views/MapMarkers/RecyclingIcon.png"
+            //return "../../views/MapMarkers/RecyclingIcon.png"
+            //return RecyclingIcon
+            return '/RecyclingIcon.png'
         }
     }
 
@@ -169,7 +179,7 @@ class MapService extends React.Component{
                                             }}
                                             icon={{
                                                 url: this.getIcon(location),
-                                                scaledSize: new window.google.maps.Size(25, 25)}}
+                                                scaledSize: new window.google.maps.Size(50, 77)}}
 
 
                                         />
