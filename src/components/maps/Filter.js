@@ -7,21 +7,27 @@ import { withRouter } from 'react-router-dom';
 import { Button } from '../../views/design/Button';
 import Popover from "react-bootstrap/Popover";
 import Form from "react-bootstrap/Form";
+import {Checkbox} from '../../views/Filter/Checkbox';
 import FormCheck from "react-bootstrap/FormCheck";
 
 const Container = styled.div`
   height: flex;
   width: 20%;
-  background: #003068;
+  background: #003068E6;
   display: flex;
   justify-content: top;
   align-items: left;
   padding-left: 10px;
-  opacity: 0.9;
   position: absolute;
   top: 18%;
   right: 10%;
   flex-direction: column;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: left;
+  margin-bottom: 10px;
 `;
 
 const Title = styled.h1`
@@ -42,34 +48,64 @@ class Filter extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            showFountains: false,
-            showFireplaces: false,
-            showRecyclingStations: false
+            checkedFountains: true,
+            checkedFireplaces: false,
+            checkedRecyclingStations: false,
+            showFountains: true,
+            showFireplaces: true,
+            showRecyclingStations: true
         };
     }
 
-    toggleChange(key){
-        //this.setState({ [key]: !this.state.showFountains});
+    applyFilters(){
+        localStorage.setItem('showFountains', this.state.showFountains);
+        localStorage.setItem('showFireplaces', this.state.showFireplaces);
+        localStorage.setItem('showRecyclingStations', this.state.showRecyclingStations);
+    }
+
+    handleCheckboxChangeFountains() {
+        const currentState = this.state.checkedFountains;
+        this.setState({checkedFountains: !currentState});
+    }
+
+    handleCheckboxChangeFireplaces(){
+        const currentState = this.state.checkedFireplaces;
+        this.setState({ checkedFireplaces: !currentState});
+    }
+
+    handleCheckboxChangeRecyclingStations() {
+        const currentState = this.state.checkedRecyclingStations;
+        this.setState({checkedRecyclingStations: !currentState});
     }
 
     render(){
         return(
             <Container>
                 <Title>Filter</Title>
-                <Form>
-                    <Form.Check
-                    type="checkbox"
-                    label="Fountains"/>
-                </Form>
-                <FilterLabel>
-                    <input type="checkbox" onClick={this.toggleChange('showFountains')}/>
-                    Fountains
-                </FilterLabel>
-                <select>
-                    <option>Fountains</option>
-                    <option>Fireplaces</option>
-                    <option>Recycling Stations</option>
-                </select>
+                <label style={{color: 'white'}}>
+                    <Checkbox
+                        checked={this.state.checkedFountains}
+                        onChange={this.handleCheckboxChangeFountains.bind(this)}
+                    />
+                    <span>Fountains</span>
+                </label>
+                <label style={{color: 'white'}}>
+                    <Checkbox
+                        checked={this.state.checkedFireplaces}
+                        onChange={this.handleCheckboxChangeFireplaces.bind(this)}
+                    />
+                    <span>Fireplaces</span>
+                </label>
+                <label style={{color: 'white'}}>
+                    <Checkbox
+                        checked={this.state.checkedRecyclingStations}
+                        onChange={this.handleCheckboxChangeRecyclingStations.bind(this)}
+                    />
+                    <span>Recycling Stations</span>
+                </label>
+                <ButtonContainer>
+                    <Button onClick={() => {this.applyFilters();}}>Apply Filter</Button>
+                </ButtonContainer>
             </Container>
         )
     }

@@ -8,7 +8,7 @@ import {UserIcon} from "./design/UserIcon";
 import {FilterIcon} from "./design/FilterIcon";
 import {PlusIcon} from "./design/PlusIcon";
 import UserIconComplete from "./UserIconComplete.svg"
-import FilterIconComplete from "./FilterIconComplete.svg"
+import FilterIconComplete from "./Filter/FilterIconComplete.svg"
 import PlusIconComplete from "./PlusIconComplete.svg"
 import Profile from "./Profile";
 import Filter from "../components/maps/Filter";
@@ -55,8 +55,8 @@ class Sidebar extends React.Component{
     openUserProfile(){
     }
 
-    openFilter(){
-        this.setState({filterExpanded: true})
+    openCloseFilter(){
+        this.setState({filterExpanded: true});
     }
 
 
@@ -90,7 +90,7 @@ class Sidebar extends React.Component{
                             <RoundButton
                                 width="75%"
                                 onClick={() => {
-                                    this.openFilter();
+                                    this.openCloseFilter();
                                 }}
                             >
                                 <img src={FilterIconComplete}/>
