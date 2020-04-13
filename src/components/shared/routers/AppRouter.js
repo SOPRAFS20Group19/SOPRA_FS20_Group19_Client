@@ -9,6 +9,7 @@ import Login from "../../login/Login";
 import Registration from "../../registration/Registration";
 import Maps from "../../maps/Maps";
 import UserProfile from "../../userprofile/UserProfile";
+import {Game} from "../../game/Game";
 
 /**
  * Main router of your application.
@@ -36,6 +37,11 @@ class AppRouter extends React.Component {
                 exact
                 render={() => <UserProfile />}
             />
+              <Route
+                  path="/dashboard"
+                  exact
+                  render={() => <Game />}
+              />
             <Route
               path="/login"
               exact

@@ -45,7 +45,11 @@ class AddLocation extends React.Component {
     constructor() {
         super();
         this.state = {
+            latitude: null,
+            longitude: null
         };
+        this.getLocation = this.getLocation.bind(this);
+        this.getCoordinates = this.getCoordinates.bind(this);
     }
 
     // when the save changes button is clicked, the new data is sent to the server via put request
@@ -73,12 +77,47 @@ class AddLocation extends React.Component {
         this.setState({[key]: value});
     }
 
+    getCoordinates(position) {
+        this.setState({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        })
+    }
+
+    getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    handleLocationError(error){
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert ("User denied the request for Geolocation.")
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert ("Location information is unavailable.")
+                break;
+            case error.TIMEOUT:
+                alert ("The request to get user location timed out.")
+                break;
+            case error.UNKNOWN_ERROR:
+                alert ("An unknown error occurred.")
+                break;
+        }
+    }
+
     // renders the page
     render() {
         return (
             <BaseContainer>
             <Header/>
             <SidebarInfoAndAddLocation/>
+                <Button onClick={() => {this.getLocation();}}>Get Current Coordinates</Button>
+                <p>Latitude: {this.state.latitude}</p>
+                <p>Longitude: {this.state.longitude}</p>
             </BaseContainer>
         );
     }

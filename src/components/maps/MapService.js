@@ -11,16 +11,16 @@ import mapStyles from "./mapStyles";
 import Sidebar from "../../views/Sidebar";
 import Header from "../../views/Header";
 import {Button} from "react-bootstrap";
-import { withRouter } from 'react-router-dom';
-import MapService from "./MapService";
 import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
 import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
 import {FountainIcon} from "../../views/MapMarkers/FountainIcon.png"
 import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.png"
+import Player from "../../views/Player";
+import {Spinner} from "../../views/design/Spinner";
 
-const MapWrapped = withScriptjs(withGoogleMap(Map));
+//const MapWrapped = withScriptjs(withGoogleMap(Map));
 
 function Map() {
     const [selectedBrunnen, setSelectedBrunnen] = useState(null);
@@ -85,26 +85,23 @@ function Map() {
     );
 }
 
-class Maps extends React.Component{
+class MapService extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             locationsShown: null,
-            latitude: null,
-            longitude: null,
+            selectedLocation: null
         };
-        //this.getLocations();
-        //this.getLocation = this.getLocation.bind(this);
-        //this.getCoordinates = this.getCoordinates.bind(this);
+        this.getLocations();
     }
 
-    getLocationsShown() {
-        return this.state.locationsShown;
+    setSelectedLocation(location){
+        this.setState({selectedLocation: location});
     }
 
-    /*getLocations() {
+    async getLocations() {
         try {
-            const response = api.get('/locations');
+            const response = await api.get('/locations');
             // delays continuous execution of an async operation for 1 second.
             // This is just a fake async call, so that the spinner can be displayed
             // feel free to remove it :)
@@ -127,55 +124,79 @@ class Maps extends React.Component{
         }
     }
 
-    getCoordinates(position) {
-        this.setState({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-        })
-    }
-
-    getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
-        } else {
-            alert("Geolocation is not supported by this browser.");
+    getIcon(location){
+        //funktioniert aktuell nur mit fountainClipart, wenn mit anderen funktioniert, dann einfach ersten return entfernen
+        return '/FountainClipart.png';
+        if (location.locationType === "FOUNTAIN"){
+            return "../../views/MapMarkers/FountainIcon.png"
+        }
+        else if (location.locationType === "FIREPLACE"){
+            return "../../views/MapMarkers/FireplaceIcon.png"
+        }
+        else {
+            return "../../views/MapMarkers/RecyclingIcon.png"
         }
     }
-
-    handleLocationError(error){
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                alert ("User denied the request for Geolocation.")
-                break;
-            case error.POSITION_UNAVAILABLE:
-                alert ("Location information is unavailable.")
-                break;
-            case error.TIMEOUT:
-                alert ("The request to get user location timed out.")
-                break;
-            case error.UNKNOWN_ERROR:
-                alert ("An unknown error occurred.")
-                break;
-        }
-    }*/
 
     render(){
         return (
+            <div>
+                {/*icon={{
+                                                url: FountainIcon,
+                                                scaledSize: new window.google.maps.Size(25, 25)
+                                            }}*/}
+                {!this.state.locationsShown ? (
+                    <Spinner />
+                    ) : (
+                    <GoogleMap
+                        defaultZoom={15}
+                        defaultCenter={{ lat: 47.366950, lng: 8.547200 }}
+                        defaultOptions={{ styles: mapStyles }}
 
-            <div style={{ width: "100vw", height: "100vh" }}>
-                <MapService
-                    googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `100%` }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
+                    >
+                            {this.state.locationsShown.map(location => {
+                                    return (
+                                        <Marker
+                                            key={location.id}
 
-                >
-                </MapService>
-                <Header/>
-                <Sidebar/>
+                                            position={{
+                                                lat: location.coordinates[1],
+                                                lng: location.coordinates[0]
+                                            }}
 
+                                            onClick={() => {
+                                                this.setSelectedLocation(location);
+                                            }}
+                                            icon={{
+                                                url: this.getIcon(location),
+                                                scaledSize: new window.google.maps.Size(25, 25)}}
+
+
+                                        />
+                                    );
+                                })}
+
+                        {this.state.selectedLocation && (
+                            <InfoWindow
+                                onCloseClick={() => {
+                                    this.setSelectedLocation(null);
+                                }}
+                                position={{
+                                    lat: this.state.selectedLocation.coordinates[1],
+                                    lng: this.state.selectedLocation.coordinates[0]
+                                }}
+                            >
+                                <div>
+                                    <h2>{"Location Type: " + this.state.selectedLocation.locationType}</h2>
+                                </div>
+                            </InfoWindow>
+                        )}
+
+                    </GoogleMap>
+                )}
             </div>
         );
     }
 }
-export default withRouter(Maps);
+
+export default withScriptjs(withGoogleMap(MapService));
