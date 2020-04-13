@@ -48,19 +48,16 @@ class Filter extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            checkedFountains: true,
-            checkedFireplaces: false,
-            checkedRecyclingStations: false,
-            showFountains: true,
-            showFireplaces: true,
-            showRecyclingStations: true
+            checkedFountains: localStorage.getItem('showFountains'),
+            checkedFireplaces: localStorage.getItem('showFireplaces'),
+            checkedRecyclingStations: localStorage.getItem('showRecyclingStations')
         };
     }
 
     applyFilters(){
-        localStorage.setItem('showFountains', this.state.showFountains);
-        localStorage.setItem('showFireplaces', this.state.showFireplaces);
-        localStorage.setItem('showRecyclingStations', this.state.showRecyclingStations);
+        localStorage.setItem('showFountains', this.state.checkedFountains);
+        localStorage.setItem('showFireplaces', this.state.checkedFireplaces);
+        localStorage.setItem('showRecyclingStations', this.state.checkedRecyclingStations);
     }
 
     handleCheckboxChangeFountains() {
