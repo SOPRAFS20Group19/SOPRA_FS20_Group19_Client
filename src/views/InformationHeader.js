@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import FireplaceClipart from "./FireplaceClipart.png";
 import RecyclingClipart from "./RecyclingClipart.png";
 import FountainClipart from "./FountainClipart.png";
+import {api, handleError} from "../helpers/api";
+import {Spinner} from "./design/Spinner";
 
 const Container = styled.div`
   height: 25%;
@@ -37,50 +39,67 @@ const Title = styled.div`
 `;
 
 class InformationHeader extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            location: 'fountain',
+            locationToBeShown: null,
+            locationtype : null
+        };
+        //this.getCurrentLocation();
+    }
+    // Get all the needed Information about the selected Location
+   /*
+    async getCurrentLocation() {
+        try {
+            const url = '/locations/' + this.props.match.params.locationId;
+            const response = await api.get(url);
+            this.setState({ locationToBeShown: response.data});
+            //this.setState({ locationtype: response.data.locationType});
+        } catch (error) {
+            alert(`Something went wrong while fetching the locations: \n${handleError(error)}`);
         }
     }
+
     render(){
-        if(this.state.location=='fireplace'){
-            return(
-                <Container>
-                    <PictureContainer>
-                        <img src={FireplaceClipart} alt="Fireplace"/>
-                    </PictureContainer>
-                    <Title>
-                        Fireplace
-                    </Title>
-                </Container>
-            )
+            if (localStorage.getItem("location_type") === 'FIREPLACE') {
+                return (
+                    <Container>
+                        <PictureContainer>
+                            <img src={FireplaceClipart} alt="Fireplace"/>
+                        </PictureContainer>
+                        <Title>
+                            Fireplace
+                        </Title>
+                    </Container>
+                )
+            } else if (this.state.locationToBeShown.locationType === 'FOUNTAIN') {
+                return (
+                    <Container>
+                        <PictureContainer>
+                            <img src={FountainClipart} alt="Fountain"/>
+                        </PictureContainer>
+                        <Title>
+                            Fountain
+                        </Title>
+                    </Container>
+                )
+            } else {
+                return (
+                    <Container>
+                        <PictureContainer>
+                            <img src={RecyclingClipart} alt="Recycling"/>
+                        </PictureContainer>
+                        <Title>
+                            Recycling Station
+                        </Title>
+                    </Container>
+                )
+            }
+
         }
-        else if(this.state.location=='fountain'){
-            return(
-                <Container>
-                    <PictureContainer>
-                        <img src={FountainClipart} alt="Fountain"/>
-                    </PictureContainer>
-                    <Title>
-                        Fountain
-                    </Title>
-                </Container>
-            )
-        }
-        else{
-            return(
-                <Container>
-                    <PictureContainer>
-                        <img src={RecyclingClipart} alt="Recycling"/>
-                    </PictureContainer>
-                    <Title>
-                        Recycling Station
-                    </Title>
-                </Container>
-            )
-        }
+
+    */
     }
-}
+
 
 export default withRouter(InformationHeader);

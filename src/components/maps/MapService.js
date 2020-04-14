@@ -23,6 +23,7 @@ import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.css"
 
 import Player from "../../views/Player";
 import {Spinner} from "../../views/design/Spinner";
+import {withRouter} from "react-router-dom";
 
 //const MapWrapped = withScriptjs(withGoogleMap(Map));
 
@@ -198,6 +199,15 @@ class MapService extends React.Component{
                             >
                                 <div>
                                     <h2>{"Location Type: " + this.state.selectedLocation.locationType}</h2>
+                                    <h2>{"Location Number: " + this.state.selectedLocation.id}</h2>
+                                    <h2>{"URL: " + this.props.match.params.locationId}</h2>
+                                    <Button
+                                        onClick={()=>{
+                                            this.props.history.push(`/map/informationpage/` + this.state.selectedLocation.id);
+                                        }}
+                                    >
+                                        Get more information here!
+                                    </Button>
                                 </div>
                             </InfoWindow>
                         )}
@@ -209,4 +219,4 @@ class MapService extends React.Component{
     }
 }
 
-export default withScriptjs(withGoogleMap(MapService));
+export default withRouter(withScriptjs(withGoogleMap(MapService)));
