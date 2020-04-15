@@ -66,8 +66,8 @@ const Text = styled.div`
  */
 
 class LocationInformation extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
         }
     }
@@ -75,9 +75,9 @@ class LocationInformation extends React.Component{
         return (
             <Container>
                 <Address>Address: <Text> Examplestreet</Text> </Address>
-                <ID>ID: <Text>12345</Text> </ID>
+                <ID>ID: <Text>{this.props.id}</Text> </ID>
                 <AdditionalInformation>Additional Information: <Text>This is an example!</Text> </AdditionalInformation>
-                <Coordinates>Coordinates: <Text>Example</Text> </Coordinates>
+                <Coordinates>Coordinates: <Text>{this.props.coordinates}</Text></Coordinates>
             </Container>
         );
     }

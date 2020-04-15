@@ -42,64 +42,45 @@ class InformationHeader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            locationToBeShown: null,
-            locationtype : null
+            
         };
-        //this.getCurrentLocation();
     }
-    // Get all the needed Information about the selected Location
-   /*
-    async getCurrentLocation() {
-        try {
-            const url = '/locations/' + this.props.match.params.locationId;
-            const response = await api.get(url);
-            this.setState({ locationToBeShown: response.data});
-            //this.setState({ locationtype: response.data.locationType});
-        } catch (error) {
-            alert(`Something went wrong while fetching the locations: \n${handleError(error)}`);
+
+    //returns the image to be rendered according to the type
+    getImage(){
+        if (this.props.type === 'FIREPLACE'){
+            return FireplaceClipart;
+        }else if (this.props.type === 'FOUNTAIN'){
+            return FountainClipart;
         }
+        return RecyclingClipart;
+    }
+
+    //returns the string to be rendered according to the type
+    getTypeAsString(){
+        if (this.props.type === 'FIREPLACE'){
+            return "Fireplace";
+        }else if (this.props.type === 'FOUNTAIN'){
+            return "Fountain";
+        }
+        return "Recycling station";
     }
 
     render(){
-            if (localStorage.getItem("location_type") === 'FIREPLACE') {
-                return (
+        return (
                     <Container>
                         <PictureContainer>
-                            <img src={FireplaceClipart} alt="Fireplace"/>
+                            <img src={this.getImage()} alt={this.getTypeAsString()}/>
                         </PictureContainer>
                         <Title>
-                            Fireplace
+                            {this.getTypeAsString()}
                         </Title>
                     </Container>
-                )
-            } else if (this.state.locationToBeShown.locationType === 'FOUNTAIN') {
-                return (
-                    <Container>
-                        <PictureContainer>
-                            <img src={FountainClipart} alt="Fountain"/>
-                        </PictureContainer>
-                        <Title>
-                            Fountain
-                        </Title>
-                    </Container>
-                )
-            } else {
-                return (
-                    <Container>
-                        <PictureContainer>
-                            <img src={RecyclingClipart} alt="Recycling"/>
-                        </PictureContainer>
-                        <Title>
-                            Recycling Station
-                        </Title>
-                    </Container>
+        
                 )
             }
 
         }
-
-    */
-    }
 
 
 export default withRouter(InformationHeader);
