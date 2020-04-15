@@ -20,8 +20,6 @@ import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
 import {FountainIcon} from "../../views/MapMarkers/FountainIcon.png"
 import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.png"
 
-const MapWrapped = withScriptjs(withGoogleMap(Map));
-
 function Map() {
     const [selectedBrunnen, setSelectedBrunnen] = useState(null);
 
@@ -91,20 +89,26 @@ class Maps extends React.Component{
         this.state = {
             locationsShown: null,
             latitude: null,
-            longitude: null,
+            longitude: null
         };
-        //this.getLocations();
-        //this.getLocation = this.getLocation.bind(this);
-        //this.getCoordinates = this.getCoordinates.bind(this);
+        this.resetFilter();
+        this.getFilteredLocations();
+        this.getFilteredLocations = this.getFilteredLocations.bind(this);
     }
 
     getLocationsShown() {
         return this.state.locationsShown;
     }
 
-    /*getLocations() {
+    async getFilteredLocations(){
         try {
-            const response = api.get('/locations');
+            const requestBody = JSON.stringify({
+                fountains: localStorage.getItem('showFountains'),
+                fireplaces: localStorage.getItem('showFireplaces'),
+                recyclingStations: localStorage.getItem('showRecyclingStations')
+            });
+
+            const response = await api.post('/locations/filter', requestBody);
             // delays continuous execution of an async operation for 1 second.
             // This is just a fake async call, so that the spinner can be displayed
             // feel free to remove it :)
@@ -112,67 +116,33 @@ class Maps extends React.Component{
 
             // Get the returned users and update the state.
             this.setState({ locationsShown: response.data });
-
-            // This is just some data for you to see what is available.
-            // Feel free to remove it.
-            console.log('request to:', response.request.responseURL);
-            console.log('status code:', response.status);
-            console.log('status text:', response.statusText);
-            console.log('requested data:', response.data);
-
-            // See here to get more data.
-            console.log(response);
         } catch (error) {
-            alert(`Something went wrong while fetching the locations: \n${handleError(error)}`);
+            alert(`Something went wrong while fetching the filtered locations: \n${handleError(error)}`);
         }
     }
 
-    getCoordinates(position) {
-        this.setState({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-        })
-    }
-
-    getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
-        } else {
-            alert("Geolocation is not supported by this browser.");
+    resetFilter(){
+        if (localStorage.getItem('showFountains') !== false && localStorage.getItem('showFountains') !== true){
+            localStorage.setItem('showFountains', true);
+            localStorage.setItem('showFireplaces', true);
+            localStorage.setItem('showRecyclingStations', true);
         }
     }
-
-    handleLocationError(error){
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                alert ("User denied the request for Geolocation.")
-                break;
-            case error.POSITION_UNAVAILABLE:
-                alert ("Location information is unavailable.")
-                break;
-            case error.TIMEOUT:
-                alert ("The request to get user location timed out.")
-                break;
-            case error.UNKNOWN_ERROR:
-                alert ("An unknown error occurred.")
-                break;
-        }
-    }*/
 
     render(){
         return (
 
             <div style={{ width: "100vw", height: "100vh" }}>
                 <MapService
+                    locationsShown={this.state.locationsShown}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `100%` }} />}
                     mapElement={<div style={{ height: `100%` }} />}
-
                 >
                 </MapService>
                 <Header/>
-                <Sidebar/>
+                <Sidebar getFilteredLocations={this.getFilteredLocations.bind(this)}/>
 
             </div>
         );

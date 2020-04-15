@@ -45,24 +45,26 @@ const ButtonContainer = styled.div`
 `;
 
 class Sidebar extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            filterExpanded: false
         }
     }
 
     openUserProfile(){
     }
 
-    openCloseFilter(){
-        this.setState({filterExpanded: true});
+    applyFilterSidebar(){
+        this.props.getFilteredLocations();
     }
 
 
     logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');
+        localStorage.removeItem('showFountains');
+        localStorage.removeItem('showFireplaces');
+        localStorage.removeItem('showRecyclingStations');
         this.props.history.push('/login');
     }
 
@@ -85,13 +87,10 @@ class Sidebar extends React.Component{
                 }
 
                 {localStorage.getItem("token") != null ?
-                    <OverlayTrigger trigger="click" placement="left" overlay={<Filter/>}>
+                    <OverlayTrigger trigger="click" placement="left" overlay={<Filter applyFilterSidebar={this.applyFilterSidebar.bind(this)}/>}>
                         <ButtonContainer>
                             <RoundButton
                                 width="75%"
-                                onClick={() => {
-                                    this.openCloseFilter();
-                                }}
                             >
                                 <img src={FilterIconComplete}/>
                             </RoundButton>

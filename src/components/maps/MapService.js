@@ -25,8 +25,6 @@ import Player from "../../views/Player";
 import {Spinner} from "../../views/design/Spinner";
 import {withRouter} from "react-router-dom";
 
-//const MapWrapped = withScriptjs(withGoogleMap(Map));
-
 function Map() {
     const [selectedBrunnen, setSelectedBrunnen] = useState(null);
 
@@ -94,10 +92,8 @@ class MapService extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            locationsShown: null,
             selectedLocation: null
         };
-        this.getLocations();
     }
 
     setSelectedLocation(location){
@@ -152,11 +148,7 @@ class MapService extends React.Component{
     render(){
         return (
             <div>
-                {/*icon={{
-                                                url: FountainIcon,
-                                                scaledSize: new window.google.maps.Size(25, 25)
-                                            }}*/}
-                {!this.state.locationsShown ? (
+                {!this.props.locationsShown ? (
                     <Spinner />
                     ) : (
                     <GoogleMap
@@ -165,7 +157,7 @@ class MapService extends React.Component{
                         defaultOptions={{ styles: mapStyles }}
 
                     >
-                            {this.state.locationsShown.map(location => {
+                            {this.props.locationsShown.map(location => {
                                     return (
                                         <Marker
                                             key={location.id}

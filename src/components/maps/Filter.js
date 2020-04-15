@@ -48,16 +48,36 @@ class Filter extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            checkedFountains: localStorage.getItem('showFountains'),
-            checkedFireplaces: localStorage.getItem('showFireplaces'),
-            checkedRecyclingStations: localStorage.getItem('showRecyclingStations')
+            checkedFountains: null,
+            checkedFireplaces: null,
+            checkedRecyclingStations: null
         };
+        this.setCheckboxes();
     }
 
-    applyFilters(){
+    componentWillMount(){
+        this.setCheckboxes();
+    }
+
+    componentDidMount() {
+        this.setCheckboxes();
+    }
+
+    setCheckboxes() {
+        this.setState({ checkedFountains: localStorage.getItem('showFountains')});
+        this.setState({ checkedFireplaces: localStorage.getItem('showFireplaces')});
+        this.setState({ checkedRecyclingStations: localStorage.getItem('showRecyclingStations')});
+    }
+
+    changeLocalStorage(){
         localStorage.setItem('showFountains', this.state.checkedFountains);
         localStorage.setItem('showFireplaces', this.state.checkedFireplaces);
         localStorage.setItem('showRecyclingStations', this.state.checkedRecyclingStations);
+        this.applyFilter();
+    }
+
+    applyFilter(){
+        this.props.applyFilterSidebar();
     }
 
     handleCheckboxChangeFountains() {
@@ -101,7 +121,7 @@ class Filter extends React.Component{
                     <span>Recycling Stations</span>
                 </label>
                 <ButtonContainer>
-                    <Button onClick={() => {this.applyFilters();}}>Apply Filter</Button>
+                    <Button onClick={() => {this.changeLocalStorage()}}>Apply Filter</Button>
                 </ButtonContainer>
             </Container>
         )
