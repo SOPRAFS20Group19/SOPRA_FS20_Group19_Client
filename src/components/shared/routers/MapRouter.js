@@ -61,7 +61,7 @@ class MapRouter extends React.Component {
             <Route
                 exact
                 path={`${this.props.base}/informationpage/:locationId`}
-                render={() => <LocationInformationPage />}
+                render={() => <MapGuard><LocationInformationPage /></MapGuard>}
             />
 
         </Container>

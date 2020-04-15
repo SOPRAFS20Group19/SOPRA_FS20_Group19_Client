@@ -59,7 +59,7 @@ class Sidebar extends React.Component{
 
     //Return to previous Page
     returnToPage() {
-        this.props.history.back();
+        this.props.history.push(`/map`);
     }
 
     render() {

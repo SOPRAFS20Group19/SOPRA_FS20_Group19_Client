@@ -10,7 +10,7 @@ import * as brunnenData from "./data/wvz_brunnen.json";
 import mapStyles from "./mapStyles";
 import Sidebar from "../../views/Sidebar";
 import Header from "../../views/Header";
-import {Button} from "react-bootstrap";
+import {Button} from "../../views/design/Button";
 import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
