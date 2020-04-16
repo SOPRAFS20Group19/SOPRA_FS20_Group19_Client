@@ -13,18 +13,18 @@ const Container = styled.div`
   align-items: left;
   position: absolute;
   top: 0%;
-  left:46%;
+  left:47%;
   flex-direction: column;
 `;
 
 const ImageContainer= styled.div`
-  height: 5%;
-  width: 5%;
+  height: 6.5%;
+  width: 6.5%;
   display: flex;
   justify-content: top;
   align-items: left;
   position: absolute;
-  top: 0%;
+  top: -12%;
   left:0%;
   flex-direction: column;
 `;
@@ -38,8 +38,8 @@ const TextContainer= styled.div`
   justify-content: top;
   align-items: left;
   position: absolute;
-  top: 65%;
-  left: 6%;
+  top: 63%;
+  left: 8%;
   flex-direction: column;
 `;
 

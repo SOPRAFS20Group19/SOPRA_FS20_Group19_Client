@@ -46,13 +46,13 @@ const ChatContainer = styled.div`
 
 const UserChatConatainer = styled.div`
   height: 10%;
-  width: 98%;
+  width: 100%;
   display: flex;
   justify-content: top;
   align-items: left;
   position: absolute;
-  top: 89%;
-  left:1%;
+  top: 88%;
+  left:0%;
   flex-direction: column;
 `;
 

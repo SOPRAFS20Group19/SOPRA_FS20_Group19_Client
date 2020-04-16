@@ -26,7 +26,7 @@ const PictureContainer = styled.div`
   align-items: left;
   position: absolute;
   top: 0%;
-  left: 3%;
+  left: 0%;
 `;
 
 
@@ -70,7 +70,7 @@ class InformationHeader extends React.Component {
         return (
                     <Container>
                         <PictureContainer>
-                            <img src={this.getImage()} alt={this.getTypeAsString()}/>
+                            <img src={this.getImage()} alt={this.getTypeAsString()} width='80%'/>
                         </PictureContainer>
                         <Title>
                             {this.getTypeAsString()}

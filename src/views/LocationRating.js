@@ -14,7 +14,7 @@ const Container = styled.div`
   justify-content: top;
   align-items: left;
   position: absolute;
-  top: 41%;
+  top: 37%;
   left:2%;
   flex-direction: column;
 `;
@@ -38,7 +38,7 @@ const ButtonContainer2 = styled.div`
   justify-content: center;
   position: absolute;
   top: -5%;
-  left: 28%;
+  left: 37%;
 `;
 
 /**

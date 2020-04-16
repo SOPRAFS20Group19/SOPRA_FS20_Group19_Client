@@ -5,13 +5,13 @@ import {Button} from "./design/Button";
 
 const Container = styled.div`
   height: 43%;
-  width: 43%;
+  width: 39%;
   display: flex;
   justify-content: top;
   align-items: left;
   position: absolute;
   top: 20%;
-  left:56%;
+  left:51%;
   flex-direction: column;
 `;
 
@@ -34,7 +34,7 @@ const PictureContainer = styled.div`
   align-items: left;
   position: absolute;
   top: 12%;
-  left: 5%;
+  left: 20%;
   flex-direction: column;
 `;
 
@@ -46,7 +46,7 @@ const ButtonContainer = styled.div`
   align-items: left;
   position: absolute;
   top: 66%;
-  left:17%;
+  left:32%;
   flex-direction: column;
 `;
 

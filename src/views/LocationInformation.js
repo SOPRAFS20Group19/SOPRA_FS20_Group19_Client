@@ -15,19 +15,11 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Address = styled.div`
-  font-weight: bold;
-  font-size: x-large;
-  position: absolute;
-  top: 0%;
-  left: 0%;
-`;
-
 const ID = styled.div`
   font-weight: bold;
   font-size: x-large;
   position: absolute;
-  top: 25%;
+  top: 0%;
   left:0%;
 `;
 
@@ -35,7 +27,7 @@ const AdditionalInformation = styled.div`
   font-weight: bold;
   font-size: x-large;
   position: absolute;
-  top: 50%;
+  top: 25%;
   left:0%;
 `;
 
@@ -43,7 +35,7 @@ const Coordinates = styled.div`
   font-weight: bold;
   font-size: x-large;
   position: absolute;
-  top: 75%;
+  top: 50%;
   left:0%;
 `;
 
@@ -74,7 +66,6 @@ class LocationInformation extends React.Component{
     render() {
         return (
             <Container>
-                <Address>Address: <Text> Examplestreet</Text> </Address>
                 <ID>ID: <Text>{this.props.id}</Text> </ID>
                 <AdditionalInformation>Additional Information: <Text>This is an example!</Text> </AdditionalInformation>
                 <Coordinates>Coordinates: <Text>{this.props.coordinates}</Text></Coordinates>
