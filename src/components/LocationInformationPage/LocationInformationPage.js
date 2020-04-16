@@ -92,7 +92,6 @@ class LocationInformationPage extends React.Component {
                 <Chatbox/>
                 <InformationPageFavourite/>
                 <LocationPictures/>
-                <h1>Test: {this.state.locationToBeShown.locationType}</h1>
             </BaseContainer>
         );
     }

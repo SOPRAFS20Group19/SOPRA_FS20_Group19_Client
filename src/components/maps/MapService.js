@@ -14,6 +14,7 @@ import {Button} from "../../views/design/Button";
 import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
+import CurentPositionMarker from "../../views/design/CurentPositionMarker";
 
 /*
 import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
@@ -92,13 +93,16 @@ class MapService extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            selectedLocation: null
+            selectedLocation: null,
+            currCenter: [47.366950, 8.547200]
         };
+        this.setCenter();
     }
 
     setSelectedLocation(location){
         this.setState({selectedLocation: location});
     }
+
 
     async getLocations() {
         try {
@@ -145,6 +149,22 @@ class MapService extends React.Component{
         }
     }
 
+    handleInputChange(key, value) {
+        // Example: if the key is username, this statement is the equivalent to the following one:
+        // this.setState({'username': value});
+        this.setState({[key]: value});
+    }
+
+    setCenter(){
+        if (this.props.currentLocation[0] != null && this.props.currentLocation[1] != null){
+            this.setState({currCenter: [this.props.currentLocation[0], this.props.currentLocation[1]]})
+        }
+        else{
+            this.setState({currCenter: [47.366950, 8.547200]})
+        }
+    }
+
+
     render(){
         return (
             <div>
@@ -153,7 +173,8 @@ class MapService extends React.Component{
                     ) : (
                     <GoogleMap
                         defaultZoom={15}
-                        defaultCenter={{ lat: 47.366950, lng: 8.547200 }}
+                        //Center at current location
+                        defaultCenter={{lat: this.state.currCenter[0], lng: this.state.currCenter[1]}}
                         defaultOptions={{ styles: mapStyles }}
 
                     >
@@ -204,6 +225,19 @@ class MapService extends React.Component{
                             </InfoWindow>
                         )}
 
+                        <Marker
+                            key={1414141441141414}
+
+                            position={{
+                                lat: this.props.currentLocation[0],
+                                lng: this.props.currentLocation[1]
+                            }}
+
+
+                            icon={{
+                                url: '/currentMan.png',
+                                scaledSize: new window.google.maps.Size(10,30)}}
+                        />
                     </GoogleMap>
                 )}
             </div>

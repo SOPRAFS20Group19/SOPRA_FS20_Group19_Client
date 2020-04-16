@@ -1,7 +1,7 @@
 import React from 'react';
-import './MapMarker.css';
+import './CurrentPositionMarker.css';
 
-export const MapMarker = (props: any) => {
+export const CurentPositionMarker = (props: any) => {
     const { color, name, id } = props;
     return (
         <div>
@@ -15,4 +15,4 @@ export const MapMarker = (props: any) => {
     );
 };
 
-export default MapMarker;
+export default CurentPositionMarker;

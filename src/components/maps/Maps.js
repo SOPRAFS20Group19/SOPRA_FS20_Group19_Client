@@ -88,12 +88,16 @@ class Maps extends React.Component{
         super(props);
         this.state = {
             locationsShown: null,
-            latitude: null,
-            longitude: null
+            currentPosition: [],
+            //currentCenter: [47.366950, 8.547200]
         };
         this.resetFilter();
         this.getFilteredLocations();
         this.getFilteredLocations = this.getFilteredLocations.bind(this);
+        this.getLocation = this.getLocation.bind(this);
+        this.getCoordinates = this.getCoordinates.bind(this);
+        this.getLocation();
+        //this.setCenter();
     }
 
     getLocationsShown() {
@@ -129,11 +133,55 @@ class Maps extends React.Component{
         }
     }
 
+    getCoordinates(position) {
+        this.setState({
+            currentPosition: [position.coords.latitude, position.coords.longitude]
+        })
+    }
+
+    getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    handleLocationError(error){
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert ("User denied the request for Geolocation.")
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert ("Location information is unavailable.")
+                break;
+            case error.TIMEOUT:
+                alert ("The request to get user location timed out.")
+                break;
+            case error.UNKNOWN_ERROR:
+                alert ("An unknown error occurred.")
+                break;
+        }
+    }
+    /*
+    setCenter(){
+        if (this.state.currentPosition[0] != null && this.state.currentPosition[1] != null){
+            this.setState({currentCenter: [this.state.currentPosition[0], this.state.currentPosition[1]]})
+        }
+        else{
+            this.setState({currentCenter: [47.366950, 8.547200]})
+        }
+    }
+
+     */
+
     render(){
         return (
 
             <div style={{ width: "100vw", height: "100vh" }}>
                 <MapService
+                    currentLocation = {this.state.currentPosition}
+                    //currentCenter = {this.state.currentCenter}
                     locationsShown={this.state.locationsShown}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
                     loadingElement={<div style={{ height: `100%` }} />}
