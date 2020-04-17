@@ -1,11 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import FormControl from "react-bootstrap/FormControl";
+import Player from "./Player";
+import {Button} from "./design/Button";
+import {Spinner} from "./design/Spinner";
 
 
 const Container = styled.div`
   height: 25%;
-  width: 70%;
+  width: 40%;
   display: flex;
   justify-content: top;
   align-items: left;
@@ -63,15 +70,22 @@ class LocationInformation extends React.Component{
         this.state = {
         }
     }
+
+
     render() {
         return (
             <Container>
+                {!this.props.location ? (<Spinner/>) :(<div>
                 <ID>ID: <Text>{this.props.id}</Text> </ID>
-                <AdditionalInformation>Additional Information: <Text>This is an example!</Text> </AdditionalInformation>
-                <Coordinates>Coordinates: <Text>{this.props.coordinates}</Text></Coordinates>
+                        <AdditionalInformation>Additional Information:
+                            <Text>{this.props.information}</Text>
+                </AdditionalInformation>
+                <Coordinates>Coordinates: <Text>{this.props.longitude}, {this.props.latitude}</Text></Coordinates>
+                    </div>
+                    )}
             </Container>
         );
     }
-};
+}
 
 export default withRouter(LocationInformation);

@@ -12,6 +12,7 @@ import InformationPageFavourite from "../../views/InformationPageFavourite";
 import LocationPictures from "../../views/LocationPictures";
 import Location from "../shared/models/Location";
 import InformationHeader from "../../views/InformationHeader";
+import Spinner from "react-bootstrap/Spinner";
 
 const Container = styled(BaseContainer)`
   color: white;
@@ -51,7 +52,8 @@ class LocationInformationPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            locationToBeShown: new Location()
+            locationToBeShown: null,
+            location: null
         };
         this.getCurrentLocation();
     }
@@ -67,6 +69,7 @@ class LocationInformationPage extends React.Component {
             const location = new Location(response.data);
             // Get the returned location and update the state.
             this.setState({ locationToBeShown: location});
+            this.setState({ location: response.data});
 
             // See here to get more data.
             console.log(response);
@@ -85,13 +88,24 @@ class LocationInformationPage extends React.Component {
     render() {
         return (
             <BaseContainer>
-                <InformationHeader type={this.state.locationToBeShown.locationType}/>
-                <SidebarInfoAndAddLocation/>
-                <LocationInformation id={this.state.locationToBeShown.id} coordinates={this.state.locationToBeShown.coordinates}/>
-                <LocationRating/>
-                <Chatbox/>
-                <InformationPageFavourite/>
-                <LocationPictures/>
+                {!this.state.locationToBeShown ? (<Spinner/>) : (
+                    <BaseContainer>
+                    <InformationHeader type={this.state.locationToBeShown.locationType}/>
+                    <SidebarInfoAndAddLocation/>
+                    <LocationInformation
+                        location={this.state.location}
+                        id={this.state.locationToBeShown.id}
+                        information={this.state.locationToBeShown.additionalInformation}
+                        longitude={this.state.locationToBeShown.longitude}
+                        latitude={this.state.locationToBeShown.latitude}
+                        coordinates={this.state.locationToBeShown.coordinates}
+                    />
+                    <LocationRating/>
+                    <Chatbox/>
+                    <InformationPageFavourite/>
+                    <LocationPictures/>
+                    </BaseContainer>
+                    )}
             </BaseContainer>
         );
     }
