@@ -14,10 +14,22 @@ import Location from "../shared/models/Location";
 import InformationHeader from "../../views/InformationHeader";
 import Spinner from "react-bootstrap/Spinner";
 
-const Container = styled(BaseContainer)`
-  color: white;
-  text-align: center;
-  flex-direction: column;
+const Container1 = styled(BaseContainer)`
+  color: black;
+  text-align: left;
+  justify-content: left;
+  flex-direction: row;
+`;
+
+const Container =styled.div`
+  color: black;
+  flex-direction: row;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  justify-content: left;
+  grid-column-gap: 30px;
 `;
 
 const Label = styled.label`
@@ -53,7 +65,8 @@ class LocationInformationPage extends React.Component {
         super(props);
         this.state = {
             locationToBeShown: null,
-            location: null
+            location: null,
+            additionalInformation: null
         };
         this.getCurrentLocation();
     }
@@ -67,9 +80,10 @@ class LocationInformationPage extends React.Component {
             const response = await api.get(url);
 
             const location = new Location(response.data);
+            const additionalInformation = response.data.additionalInformation.map((textLine) => <li>{textLine}</li>);
             // Get the returned location and update the state.
             this.setState({ locationToBeShown: location});
-            this.setState({ location: response.data});
+            this.setState({ location: response.data, additionalInformation: additionalInformation});
 
             // See here to get more data.
             console.log(response);
@@ -87,15 +101,15 @@ class LocationInformationPage extends React.Component {
     // renders the page
     render() {
         return (
-            <BaseContainer>
+            <Container>
                 {!this.state.locationToBeShown ? (<Spinner/>) : (
-                    <BaseContainer>
+                    <Container>
                     <InformationHeader type={this.state.locationToBeShown.locationType}/>
                     <SidebarInfoAndAddLocation/>
                     <LocationInformation
                         location={this.state.location}
                         id={this.state.locationToBeShown.id}
-                        information={this.state.locationToBeShown.additionalInformation}
+                        information={this.state.additionalInformation}
                         longitude={this.state.locationToBeShown.longitude}
                         latitude={this.state.locationToBeShown.latitude}
                         coordinates={this.state.locationToBeShown.coordinates}
@@ -104,9 +118,9 @@ class LocationInformationPage extends React.Component {
                     <Chatbox/>
                     <InformationPageFavourite/>
                     <LocationPictures/>
-                    </BaseContainer>
+                    </Container>
                     )}
-            </BaseContainer>
+            </Container>
         );
     }
 }

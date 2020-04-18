@@ -9,36 +9,39 @@ import StarFull from "./StarFilled.svg";
 
 const Container = styled.div`
   height: 10%;
-  width: 43%;
-  display: flex;
-  justify-content: top;
-  align-items: left;
-  position: absolute;
-  top: 37%;
-  left:2%;
-  flex-direction: column;
+  width: 50%;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-top: 30px;
+  padding-left: 0.5%;
+  grid-column: 1;
+  grid-row: 5;
 `;
 
 const Text = styled.div`
   font-weight: bold;
   font-size: x-large;
-  position: absolute;
-  top: 0%;
-  left: 0%;
+  margin-right: 20px;
+  grid-column: 1;
+  grid-row: 1;
 `;
 
 const ButtonContainer = styled.div`
-  justify-content: center;
-  position: absolute;
-  top: 50%;
-  left: 0%;
-  width: 25%;
+  justify-content: left;
+  width: 50%;
+  margin-top: 10px;
+  flex-direction: column;
+  grid-column: 1 / span 2;
+  grid-row: 2;
 `;
 const ButtonContainer2 = styled.div`
   justify-content: center;
-  position: absolute;
-  top: -5%;
-  left: 37%;
+  grid-column: 2;
+  grid-row: 1;
 `;
 
 /**

@@ -8,52 +8,48 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 
 const Container = styled.div`
-  height: 40%;
-  width: 43%;
-  display: flex;
-  justify-content: top;
+  height: 100%;
+  width: 90%;
+  display: grid;
+  grid-template-rows: 20% 60% 20%;
+  justify-content: bottom;
   border-color: black;
   border-width: thick;
   border-style: solid;
-  align-items: left;
-  position: absolute;
-  top: 55%;
-  left:2%;
+  align-items: top;
   flex-direction: column;
+  grid-column: 2;
+  grid-row: 4 / span 2;
+  margin-top: 30px;
 `;
 
 const Text = styled.div`
   font-weight: bold;
-  font-size: xx-large;
-  position: absolute;
-  top: 1%;
-  left: 2%;
+  font-size: 25px;
+  padding-left: 1.5%;
+  padding-top: 2.5px;
+  padding-bottom: 2.5px;
+  grid-row: 1;
 `;
 
 const ChatContainer = styled.div`
-  height: 75%;
+  min-height: 100px;
   width: 100%;
   display: flex;
   justify-content: top;
-  background: #66A3E0;
-  opacity: 0.2;
+  background: #66A3E033;
   align-items: left;
-  position: absolute;
-  top: 13%;
-  left:0%;
+  padding-top: 0.5%
   flex-direction: column;
+  grid-row: 2;
 `;
 
-const UserChatConatainer = styled.div`
-  height: 10%;
+const UserChatContainer = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: top;
-  align-items: left;
-  position: absolute;
-  top: 88%;
-  left:0%;
+  justify-content: bottom;
+  align-items: bottom;
   flex-direction: column;
+  grid-row: 3;
 `;
 
 
@@ -86,7 +82,7 @@ class Chatbox extends React.Component {
                     :null
                     }
                 </ChatContainer>
-                <UserChatConatainer>
+                <UserChatContainer>
                     <InputGroup className="mb-3">
                         <FormControl
                             placeholder="Enter your message here"
@@ -98,7 +94,7 @@ class Chatbox extends React.Component {
                         />
                         <InputGroup.Append>
                             <Button variant="outline-secondary"
-                                    size='sm'
+                                    height="100%"
                                     onClick={() => {
                                         this.sendMessage();
                                     }}
@@ -106,7 +102,7 @@ class Chatbox extends React.Component {
                                 Send Message</Button>
                         </InputGroup.Append>
                     </InputGroup>
-                </UserChatConatainer>
+                </UserChatContainer>
                 </Container>
         );
     }

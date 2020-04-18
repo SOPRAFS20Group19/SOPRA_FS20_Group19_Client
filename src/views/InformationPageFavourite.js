@@ -3,44 +3,40 @@ import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
 import HeartEmpty from "./HeartEmpty.svg";
 import HeartFull from "./HeartFull.svg";
+import HeartUnfilled from "../views/InformationPage/HeartUnfilled.png"
+import HeartRed from "../views/InformationPage/HeartRed.png"
 
 
 const Container = styled.div`
-  height: 10%;
-  width: 40%;
-  display: flex;
-  justify-content: top;
+  display: grid;
+  height: 100px;
+  grid-template-columns: 100px 475px;
+  grid-template-rows: auto;
+  justify-content: left;
   align-items: left;
-  position: absolute;
-  top: 0%;
-  left:47%;
-  flex-direction: column;
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 10px;
 `;
 
 const ImageContainer= styled.div`
-  height: 6.5%;
-  width: 6.5%;
-  display: flex;
+  height: 10%;
+  width: 10%;
   justify-content: top;
   align-items: left;
-  position: absolute;
-  top: -12%;
-  left:0%;
-  flex-direction: column;
+  grid-column: 1;
+  grid-row: 1;
 `;
 
 const TextContainer= styled.div`
-  height: 5%;
-  width: 150%;
   font-weight: normal;
   font-size: large;
   display: flex;
   justify-content: top;
   align-items: left;
-  position: absolute;
-  top: 63%;
-  left: 8%;
   flex-direction: column;
+  grid-column: 2;
+  grid-row: 1;
 `;
 
 
@@ -61,21 +57,21 @@ class InformationPageFavourite extends React.Component {
         return (
             <Container>
                 <ImageContainer>
-                    {this.state.liked == false ?
-                        <img src={HeartEmpty} alt="Hearth Empty"
+                    {this.state.liked === false ?
+                        <img src={HeartUnfilled} alt="Heart Empty" height="56.5px" width="63.1px"
                              onClick={() => {
                                  this.changeColor(true);
                              }}
                         />
                         :
-                        <img src={HeartFull} alt="Hearth Full"
+                        <img src={HeartRed} alt="Heart Full" height="56.5px" width="63.1px"
                              onClick={() => {
                                  this.changeColor(false);
                              }}
                         />
                     }
                 </ImageContainer>
-                    {this.state.liked == false ?
+                    {this.state.liked === false ?
                         <TextContainer>
                         Press the heart to save this location to your favourites
                         </TextContainer>

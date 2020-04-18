@@ -11,49 +11,48 @@ import {Spinner} from "./design/Spinner";
 
 
 const Container = styled.div`
-  height: 25%;
-  width: 40%;
+  height: flex;
+  width: 100%;
   display: flex;
   justify-content: top;
   align-items: left;
-  position: absolute;
-  top: 15%;
-  left:2%;
+  padding: 0.5%
   flex-direction: column;
+  margin-left: 20px;
+  grid-column: 1;
+  grid-row: 2 / span 3;
 `;
 
 const ID = styled.div`
   font-weight: bold;
   font-size: x-large;
-  position: absolute;
-  top: 0%;
-  left:0%;
+  margin-bottom: 0.25%;
+  flex-direction: row;
 `;
 
 const AdditionalInformation = styled.div`
   font-weight: bold;
   font-size: x-large;
-  position: absolute;
-  top: 25%;
-  left:0%;
+  margin-bottom: 0.25%;
+  flex-direction: row;
 `;
 
 const Coordinates = styled.div`
   font-weight: bold;
   font-size: x-large;
-  position: absolute;
-  top: 50%;
-  left:0%;
+  margin-bottom: 0.25%;
+  flex-direction: row;
 `;
 
 const Text = styled.div`
   font-weight: normal;
-  position: absolute;
-  top: 0%;
-  left:102%;
-  width: 200%;
+  font-size: large;
+  margin-left: 0;
+  width: 100%;
   text-align: left;
+  list-style-type: none;
 `;
+
 
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.

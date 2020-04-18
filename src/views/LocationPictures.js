@@ -4,50 +4,40 @@ import { withRouter } from 'react-router-dom';
 import {Button} from "./design/Button";
 
 const Container = styled.div`
-  height: 43%;
-  width: 39%;
   display: flex;
   justify-content: top;
   align-items: left;
-  position: absolute;
-  top: 20%;
-  left:51%;
   flex-direction: column;
+  grid-column: 2;
+  grid-row: 2 / span 2;
 `;
 
 const Text = styled.div`
   font-weight: bold;
   font-size: large;
-  position: absolute;
-  top: 0%;
-  left: 0%;
+  
 `;
 
 const PictureContainer = styled.div`
-  height: 50%;
-  width: 50%;
+  min-height: 200px;
+  width: 90%;
+  margin-top: 10px;
   border-color: black;
   border-width: normal;
   border-style: dotted;
-  display: flex;
   justify-content: top;
   align-items: left;
-  position: absolute;
-  top: 12%;
-  left: 20%;
   flex-direction: column;
 `;
 
 const ButtonContainer = styled.div`
-  height: 43%;
-  width: 43%;
+  height: 100%;
+  width: 50%;
   display: flex;
   justify-content: top;
   align-items: left;
-  position: absolute;
-  top: 66%;
-  left:32%;
   flex-direction: column;
+  margin-top: 10px;
 `;
 
 
