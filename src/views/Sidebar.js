@@ -52,6 +52,7 @@ class Sidebar extends React.Component{
     }
 
     openUserProfile(){
+        this.props.history.push(`/userprofile`);
     }
 
     applyFilterSidebar(){

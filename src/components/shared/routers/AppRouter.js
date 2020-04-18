@@ -33,7 +33,7 @@ class AppRouter extends React.Component {
               )}
             />
             <Route
-                path="/user"
+                path="/userprofile"
                 exact
                 render={() => <UserProfile />}
             />
@@ -46,9 +46,9 @@ class AppRouter extends React.Component {
               path="/login"
               exact
               render={() => (
-                <LoginGuard>
+                //<LoginGuard>
                   <Login />
-                </LoginGuard>
+                //</LoginGuard>
               )}
             />
             <Route

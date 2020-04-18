@@ -23,9 +23,10 @@ class UserProfile extends React.Component {
     constructor() {
         super();
         this.state = {
-            loggedInUserId: localStorage.getItem("userId"),
-            userToBeShownId: localStorage.getItem("showUserId"),
-            userToBeShown: null
+            loggedInUserId: localStorage.getItem('userId'),
+            loggedInUser: null,
+            //userToBeShownId: localStorage.getItem("showUserId"),
+            //userToBeShown: null
         };
         this.getUser();
     }
@@ -33,13 +34,13 @@ class UserProfile extends React.Component {
     // this method sends a get request to the server and saves the received user data in the component's state
     async getUser() {
         try {
-            const url = '/users/' + this.state.userToBeShownId;
+            const url = '/users/' + this.state.loggedInUserId;
 
             const response = await api.get(url);
 
             const user = new User(response.data);
 
-            this.setState({userToBeShown: user});
+            this.setState({loggedInUser: user});
         } catch (e) {
             alert(`Something went wrong while displaying the user profile: \n${handleError(e)}`);
         }
@@ -52,8 +53,8 @@ class UserProfile extends React.Component {
 
     // if the user wants to return to the user overview the items are removed from the local storage and the user is redirected
     returnToDashboard(){
-        localStorage.removeItem("showUserID")
-        this.setState({userToBeShownId: null});
+        //localStorage.removeItem("showUserID")
+        //this.setState({userToBeShownId: null});
         this.setState({userToBeShown: null});
         this.props.history.push('/game/dashboard');
     }
@@ -72,7 +73,8 @@ class UserProfile extends React.Component {
         return (
             <BaseContainer>
                 <Container>
-                    <h2>User: {this.state.userToBeShown ? this.state.userToBeShown.username : null} </h2>
+                    <h2>User: {this.state.loggedInUser ? this.state.loggedInUser.username : null} </h2>
+                    /*
                     <div>
                     {this.state.userToBeShown != null ? (
                         <Profile user={this.state.userToBeShown}/>
@@ -99,6 +101,8 @@ class UserProfile extends React.Component {
                             </Button>
                         </ButtonContainer>
                     </div>
+
+                     */
                 </Container>
             </BaseContainer>
         );
