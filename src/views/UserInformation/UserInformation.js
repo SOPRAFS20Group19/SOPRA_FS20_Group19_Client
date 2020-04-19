@@ -40,7 +40,7 @@ const ButtonContainer = styled.div`
   margin-top: 10px;
   flex-direction: column;
   grid-column: 1;
-  grid-row: 4;
+  grid-row: 3;
 `;
 
 
@@ -66,13 +66,14 @@ class UserInformation extends React.Component{
                             <Text>{this.props.username}</Text>
                         </Title>
                         <Title>creation date: <Text>{this.props.creationDate}</Text></Title>
+                        <Title>birth date: <Text>{this.props.birthDate}</Text></Title>
 
                     </div>
                 )}
                 <ButtonContainer>
                     <Button
                         variant="primary"
-                        width="40%"
+                        width="100%"
                         onClick={() => {
                         this.goToEditProfile();
                     }}>

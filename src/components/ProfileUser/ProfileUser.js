@@ -10,7 +10,18 @@ import UserHeader from '../../views/UserInformation/UserHeader';
 import UserInformation from '../../views/UserInformation/UserInformation';
 import SidebarUserInformation from "../../views/UserInformation/SidebarUserInformation";
 import SavedLocations from "../../views/UserInformation/SavedLocations";
+import {Spinner} from "../../views/design/Spinner";
 
+const MainContainer =styled.div`
+  color: black;
+  flex-direction: row;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  justify-content: center;
+  grid-column-gap: 30px;
+`;
 
 const Container =styled.div`
   color: black;
@@ -76,17 +87,20 @@ class ProfileUser extends React.Component {
 
     render(){
         return(
-            <BaseContainer>
+            <MainContainer>
+                {!this.state.loggedInUser ? (<Spinner/>) : (
+                <MainContainer>
                 <UserHeader username={"joggeli"}/>
                 <SidebarUserInformation/>
                 <UserInformation
-                    username={"joggeli"}
+                    username={this.state.loggedInUser.username}
                     name={"Chasper"}
                     creationDate={"01.01."}
-                    birthDate={null}
+                    birthDate={"03.02"}
                 />
                 <SavedLocations/>
-            </BaseContainer>
+                </MainContainer>)}
+            </MainContainer>
         )
     }
 }

@@ -7,6 +7,18 @@ import { withRouter } from 'react-router-dom';
 import SidebarEditUserInformation from "../../views/UserInformation/SidebarEditUserInformation";
 import UserEditHeader from "../../views/UserInformation/UserEditHeader";
 import InfoEditProfile from "../../views/UserInformation/InfoEditProfile";
+import EditPicture from "../../views/UserInformation/EditPicture";
+
+const MainContainer =styled.div`
+  color: black;
+  flex-direction: row;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  justify-content: center;
+  grid-column-gap: 30px;
+`;
 
 const Container = styled(BaseContainer)`
   color: white;
@@ -14,7 +26,7 @@ const Container = styled(BaseContainer)`
   flex-direction: column;
   margin-top: 15px;
 `;
-const Container2 = styled.div`
+const Container1 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
@@ -25,6 +37,46 @@ const Container2 = styled.div`
   margin-left: 20px;
   grid-column: 1;
   grid-row: 2;
+  margin-top: 15px;
+`;
+
+const Container2 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: top;
+  align-items: left;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 20px;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 15px;
+`;
+const Container3 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: top;
+  align-items: left;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 20px;
+  grid-column: 1;
+  grid-row: 5;
+  margin-top: 15px;
+`;
+const Container4 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: top;
+  align-items: left;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 20px;
+  grid-column: 1;
+  grid-row: 6;
   margin-top: 15px;
 `;
 
@@ -47,7 +99,6 @@ const ButtonContainer = styled.div`
   grid-column: 1;
   grid-row: 3;
   margin-top: 15px;
-  margin-left: 10px;
   width: 30%;
 `;
 
@@ -101,10 +152,10 @@ class ProfileEdit extends React.Component {
     // renders the page
     render() {
         return (
-            <BaseContainer>
+            <MainContainer>
                 <UserEditHeader username={"joggeli"}/>
                 <SidebarEditUserInformation/>
-                <Container2>
+                <Container1>
                     <Title>name: </Title>
                     <InputField
                         placeholder="enter your new name here"
@@ -112,7 +163,7 @@ class ProfileEdit extends React.Component {
                             this.handleInputChange('name', e.target.value);
                         }}
                     />
-                </Container2>
+                </Container1>
                 <Container2>
                 <Title>username: </Title>
                     <InputField
@@ -123,7 +174,7 @@ class ProfileEdit extends React.Component {
                     />
                 </Container2>
                 <InfoEditProfile creationDate={"drüvordünnschiss"}/>
-                <Container2>
+                <Container3>
                     <Title>birth date: </Title>
                     <InputField
                         placeholder="enter your birth date here"
@@ -131,8 +182,8 @@ class ProfileEdit extends React.Component {
                             this.handleInputChange('birthDate', e.target.value);
                         }}
                     />
-                </Container2>
-                <Container>
+                </Container3>
+                <Container4>
                     <div>
                         <ButtonContainer>
                             <Button
@@ -150,15 +201,16 @@ class ProfileEdit extends React.Component {
                             <Button
                                 width="100%"
                                 onClick={() => {
-                                    this.props.history.push('/game/dashboard/user');
+                                    this.props.history.push('/userprofile');
                                 }}
                             >
                                 Cancel
                             </Button>
                         </ButtonContainer>
                     </div>
-                </Container>
-            </BaseContainer>
+                </Container4>
+                <EditPicture/>
+            </MainContainer>
         );
     }
 }
