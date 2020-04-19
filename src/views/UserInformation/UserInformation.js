@@ -5,6 +5,17 @@ import User from "../../components/shared/models/User";
 import styled from "styled-components";
 import {Button} from "../../views/design/Button";
 
+const GridContainer =styled.div`
+  color: black;
+  flex-direction: row;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  justify-content: left;
+  grid-column-gap: 0px;
+`;
+
 const Container = styled.div`
   height: flex;
   width: 100%;
@@ -24,6 +35,8 @@ const Title = styled.div`
   font-size: x-large;
   margin-bottom: 0.25%;
   flex-direction: row;
+  grid-column: 1;
+  grid-row: 1;
 `;
 
 
@@ -32,6 +45,9 @@ const Text = styled.div`
   font-size: large;
   width: 100%;
   list-style-type: none;
+  grid-column: 1;
+  grid-row: 2;
+
 `;
 
 const ButtonContainer = styled.div`
@@ -60,13 +76,20 @@ class UserInformation extends React.Component{
         return (
             <Container>
                 {!this.props.username ? (<Spinner/>) :(<div>
+                        <GridContainer>
                         <Title>name:</Title>
                         <Text>{this.props.name}</Text>
-                        <Title>username:
-                            <Text>{this.props.username}</Text>
+                        </GridContainer>
+                        <GridContainer>
+                        <Title>username:<Text>{this.props.username}</Text>
                         </Title>
+                        </GridContainer>
+                        <GridContainer>
                         <Title>creation date: <Text>{this.props.creationDate}</Text></Title>
-                        <Title>birth date: <Text>{this.props.birthDate}</Text></Title>
+                        </GridContainer>
+                        <GridContainer>
+                        <Title>birth date: <Text> {this.props.birthDate != null ? (this.props.birthDate) : ("You haven't set a birth date yet!")}</Text></Title>
+                        </GridContainer>
 
                     </div>
                 )}

@@ -10,6 +10,8 @@ const Container = styled.div`
   flex-direction: column;
   grid-column: 2;
   grid-row: 2 /span 3;
+  margin-top: 15px;
+
 `;
 
 const Text = styled.div`
@@ -20,7 +22,7 @@ const Text = styled.div`
 
 const PictureContainer = styled.div`
   min-height: 200px;
-  width: 30%;
+  width: 100%;
   margin-top: 10px;
   border-color: black;
   border-width: normal;
@@ -32,7 +34,7 @@ const PictureContainer = styled.div`
 
 const ButtonContainer = styled.div`
   height: 100%;
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: top;
   align-items: left;
@@ -64,7 +66,7 @@ class EditPicture extends React.Component {
                 </PictureContainer>
                 <ButtonContainer>
                     <Button
-                        width="60%"
+                        width="100%"
                         onClick={() => {
                             this.savePicture();
                         }}>

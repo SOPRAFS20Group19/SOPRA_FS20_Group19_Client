@@ -90,13 +90,13 @@ class ProfileUser extends React.Component {
             <MainContainer>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                 <MainContainer>
-                <UserHeader username={"joggeli"}/>
+                <UserHeader username={this.state.loggedInUser.username}/>
                 <SidebarUserInformation/>
                 <UserInformation
                     username={this.state.loggedInUser.username}
-                    name={"Chasper"}
-                    creationDate={"01.01."}
-                    birthDate={"03.02"}
+                    name={this.state.loggedInUser.name}
+                    creationDate={this.state.loggedInUser.creationDate}
+                    birthDate={this.state.loggedInUser.birthDate}
                 />
                 <SavedLocations/>
                 </MainContainer>)}

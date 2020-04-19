@@ -8,6 +8,8 @@ import SidebarEditUserInformation from "../../views/UserInformation/SidebarEditU
 import UserEditHeader from "../../views/UserInformation/UserEditHeader";
 import InfoEditProfile from "../../views/UserInformation/InfoEditProfile";
 import EditPicture from "../../views/UserInformation/EditPicture";
+import {Spinner} from "../../views/design/Spinner";
+import User from "../shared/models/User";
 
 const MainContainer =styled.div`
   color: black;
@@ -86,7 +88,7 @@ const InputField = styled.input`
     color: black;
   }
   height: 35px;
-  width: 30%;
+  width: 80%;
   border: 2px solid #003068;
   border-color: #66A3E0;
   border-radius: 5px;
@@ -99,7 +101,7 @@ const ButtonContainer = styled.div`
   grid-column: 1;
   grid-row: 3;
   margin-top: 15px;
-  width: 30%;
+  width: 80%;
 `;
 
 const Title = styled.div`
@@ -114,12 +116,29 @@ class ProfileEdit extends React.Component {
         super();
         this.state = {
             loggedInUserId: localStorage.getItem("userId"),
+            loggedInUser: null,
             name: null,
             username: null,
             birthDate: null,
             changesSaved: false,
             testThing: false
         };
+        this.getUser();
+
+    }
+    // this method sends a get request to the server and saves the received user data in the component's state
+    async getUser() {
+        try {
+            const url = '/users/' + this.state.loggedInUserId;
+
+            const response = await api.get(url);
+
+            const user = new User(response.data);
+
+            this.setState({loggedInUser: user});
+        } catch (e) {
+            alert(`Something went wrong while displaying the user profile: \n${handleError(e)}`);
+        }
     }
 
     // when the save changes button is clicked, the new data is sent to the server via put request
@@ -152,8 +171,11 @@ class ProfileEdit extends React.Component {
     // renders the page
     render() {
         return (
+
             <MainContainer>
-                <UserEditHeader username={"joggeli"}/>
+                {!this.state.loggedInUser ? (<Spinner/>) : (
+                    <MainContainer>
+                <UserEditHeader username={this.state.loggedInUser.username}/>
                 <SidebarEditUserInformation/>
                 <Container1>
                     <Title>name: </Title>
@@ -173,7 +195,7 @@ class ProfileEdit extends React.Component {
                         }}
                     />
                 </Container2>
-                <InfoEditProfile creationDate={"drüvordünnschiss"}/>
+                <InfoEditProfile creationDate={this.state.loggedInUser.creationDate}/>
                 <Container3>
                     <Title>birth date: </Title>
                     <InputField
@@ -210,6 +232,7 @@ class ProfileEdit extends React.Component {
                     </div>
                 </Container4>
                 <EditPicture/>
+                    </MainContainer>)}
             </MainContainer>
         );
     }
