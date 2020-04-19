@@ -8,6 +8,8 @@ import '../../views/BackgroundMap.css';
 import '../../views/ZurichEmblem.css';
 import Header from "../../views/Header";
 import { ButtonForLogin } from '../../views/design/ButtonForLogin';
+import HeaderForLogin from "../../views/HeaderForLogin";
+
 
 const BackgroundContainer = styled.div`
   display: flex;
@@ -154,8 +156,8 @@ class Registration extends React.Component {
     render() {
         return (
             //className html (BackgroundMap.css) and container (ZurichEmblem.css) are css files with the background images in it (map and emblem)
-                <BackgroundContainer className={'html'}>
-                    <Header/>
+            <BackgroundContainer className={'html'}>
+                    <HeaderForLogin/>
                     <EmblemContainer className={'container'}>
                         <FormContainer>
                             <Form>

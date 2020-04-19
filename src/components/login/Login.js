@@ -8,6 +8,14 @@ import '../../views/BackgroundMap.css';
 import '../../views/ZurichEmblem.css';
 import Header from "../../views/Header";
 import {ButtonForLogin} from "../../views/design/ButtonForLogin";
+import HeaderForLogin from "../../views/HeaderForLogin";
+
+const Container = styled.div`
+  display: flex;
+  margin-top: 10px;
+  margin-left: 20px;
+  align-content: center;
+`;
 
 const BackgroundContainer = styled.div`
   display: flex;
@@ -145,7 +153,7 @@ class Login extends React.Component {
   render() {
     return (
         <BackgroundContainer className={'html'}>
-          <Header/>
+          <HeaderForLogin/>
           <EmblemContainer className={'container'}>
         <FormContainer>
           <Form>
