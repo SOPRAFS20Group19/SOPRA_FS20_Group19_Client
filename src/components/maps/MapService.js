@@ -26,69 +26,6 @@ import Player from "../../views/Player";
 import {Spinner} from "../../views/design/Spinner";
 import {withRouter} from "react-router-dom";
 
-function Map() {
-    const [selectedBrunnen, setSelectedBrunnen] = useState(null);
-
-    useEffect(() => {
-        const listener = e => {
-            if (e.key === "Escape") {
-                setSelectedBrunnen(null);
-            }
-        };
-        window.addEventListener("keydown", listener);
-
-        return () => {
-            window.removeEventListener("keydown", listener);
-        };
-    }, []);
-
-    return (
-        <GoogleMap
-            defaultZoom={15}
-            defaultCenter={{ lat: 47.366950, lng: 8.547200 }}
-            defaultOptions={{ styles: mapStyles }}
-        >
-
-            {brunnenData.features.map(brunnen => (
-                <Marker
-                    key={brunnen.properties.objectid}
-                    position={{
-                        lat: brunnen.geometry.coordinates[1],
-                        lng: brunnen.geometry.coordinates[0]
-                    }}
-
-                    onClick={() => {
-                        setSelectedBrunnen(brunnen);
-                    }}
-
-                    icon={{
-                        url: '/FountainClipart.png',
-                        scaledSize: new window.google.maps.Size(25, 25)
-                    }}
-                />
-            ))}
-
-            {selectedBrunnen && (
-                <InfoWindow
-                    onCloseClick={() => {
-                        setSelectedBrunnen(null);
-                    }}
-                    position={{
-                        lat: selectedBrunnen.geometry.coordinates[1],
-                        lng: selectedBrunnen.geometry.coordinates[0]
-                    }}
-                >
-                    <div>
-                        <h2>{"Art des Brunnens:" + selectedBrunnen.properties.art_txt}</h2>
-                        <p>{"Baujahr:" + selectedBrunnen.properties.baujahr}</p>
-                    </div>
-                </InfoWindow>
-            )}
-
-        </GoogleMap>
-    );
-}
-
 class MapService extends React.Component{
     constructor(props){
         super(props);
@@ -101,32 +38,6 @@ class MapService extends React.Component{
 
     setSelectedLocation(location){
         this.setState({selectedLocation: location});
-    }
-
-
-    async getLocations() {
-        try {
-            const response = await api.get('/locations');
-            // delays continuous execution of an async operation for 1 second.
-            // This is just a fake async call, so that the spinner can be displayed
-            // feel free to remove it :)
-            // await new Promise(resolve => setTimeout(resolve, 1000));
-
-            // Get the returned users and update the state.
-            this.setState({ locationsShown: response.data });
-
-            // This is just some data for you to see what is available.
-            // Feel free to remove it.
-            console.log('request to:', response.request.responseURL);
-            console.log('status code:', response.status);
-            console.log('status text:', response.statusText);
-            console.log('requested data:', response.data);
-
-            // See here to get more data.
-            console.log(response);
-        } catch (error) {
-            alert(`Something went wrong while fetching the locations: \n${handleError(error)}`);
-        }
     }
 
     getIcon(location){
@@ -174,7 +85,7 @@ class MapService extends React.Component{
                     <GoogleMap
                         defaultZoom={15}
                         //Center at current location
-                        defaultCenter={{lat: this.state.currCenter[0], lng: this.state.currCenter[1]}}
+                        defaultCenter={{lat: this.props.currentCenter[0], lng: this.props.currentCenter[1]}}
                         defaultOptions={{ styles: mapStyles }}
 
                     >

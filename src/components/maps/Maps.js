@@ -19,69 +19,18 @@ import {api, handleError} from "../../helpers/api";
 import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
 import {FountainIcon} from "../../views/MapMarkers/FountainIcon.png"
 import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.png"
+import {Spinner} from "../../views/design/Spinner";
 
-function Map() {
-    const [selectedBrunnen, setSelectedBrunnen] = useState(null);
-
-    useEffect(() => {
-        const listener = e => {
-            if (e.key === "Escape") {
-                setSelectedBrunnen(null);
-            }
-        };
-        window.addEventListener("keydown", listener);
-
-        return () => {
-            window.removeEventListener("keydown", listener);
-        };
-    }, []);
-
-    return (
-        <GoogleMap
-            defaultZoom={15}
-            defaultCenter={{ lat: 47.366950, lng: 8.547200 }}
-            defaultOptions={{ styles: mapStyles }}
-        >
-
-            {brunnenData.features.map(brunnen => (
-                <Marker
-                    key={brunnen.properties.objectid}
-                    position={{
-                        lat: brunnen.geometry.coordinates[1],
-                        lng: brunnen.geometry.coordinates[0]
-                    }}
-
-                    onClick={() => {
-                        setSelectedBrunnen(brunnen);
-                    }}
-
-                    icon={{
-                        url: '/FountainClipart.png',
-                        scaledSize: new window.google.maps.Size(25, 25)
-                    }}
-                />
-            ))}
-
-            {selectedBrunnen && (
-                <InfoWindow
-                    onCloseClick={() => {
-                        setSelectedBrunnen(null);
-                    }}
-                    position={{
-                        lat: selectedBrunnen.geometry.coordinates[1],
-                        lng: selectedBrunnen.geometry.coordinates[0]
-                    }}
-                >
-                    <div>
-                        <h2>{"Art des Brunnens:" + selectedBrunnen.properties.art_txt}</h2>
-                        <p>{"Baujahr:" + selectedBrunnen.properties.baujahr}</p>
-                    </div>
-                </InfoWindow>
-            )}
-
-        </GoogleMap>
-    );
-}
+const MainContainer =styled.div`
+  color: black;
+  flex-direction: row;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  justify-content: center;
+  grid-column-gap: 30px;
+`;
 
 class Maps extends React.Component{
     constructor(props){
@@ -89,15 +38,16 @@ class Maps extends React.Component{
         this.state = {
             locationsShown: null,
             currentPosition: [],
-            //currentCenter: [47.366950, 8.547200]
+            currentCenter: null,
+            setLocation: false
         };
-        this.resetFilter();
-        this.getFilteredLocations();
-        this.getFilteredLocations = this.getFilteredLocations.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.getLocation();
-        //this.setCenter();
+        this.resetFilter();
+        this.getFilteredLocations();
+        this.getFilteredLocations = this.getFilteredLocations.bind(this);
+        this.setCenter();
     }
 
     getLocationsShown() {
@@ -145,6 +95,7 @@ class Maps extends React.Component{
         } else {
             alert("Geolocation is not supported by this browser.");
         }
+        this.setState({setLocation: true})
     }
 
     handleLocationError(error){
@@ -163,25 +114,26 @@ class Maps extends React.Component{
                 break;
         }
     }
-    /*
+
     setCenter(){
-        if (this.state.currentPosition[0] != null && this.state.currentPosition[1] != null){
-            this.setState({currentCenter: [this.state.currentPosition[0], this.state.currentPosition[1]]})
-        }
-        else{
-            this.setState({currentCenter: [47.366950, 8.547200]})
-        }
+            if (this.state.currentPosition[0] != null && this.state.currentPosition[1] != null) {
+                this.setState({currentCenter: [this.state.currentPosition[0], this.state.currentPosition[1]]})
+            } else {
+                this.setState({currentCenter: [47.366950, 8.547200]})
+            }
     }
 
-     */
+
 
     render(){
         return (
-
+            <div>
+            {!this.state.currCenter ? (<Spinner/>) : (
+                <div>
             <div style={{ width: "100vw", height: "100vh" }}>
                 <MapService
                     currentLocation = {this.state.currentPosition}
-                    //currentCenter = {this.state.currentCenter}
+                    currentCenter = {this.state.currentCenter}
                     locationsShown={this.state.locationsShown}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
                     loadingElement={<div style={{ height: `100%` }} />}
@@ -191,7 +143,8 @@ class Maps extends React.Component{
                 </MapService>
                 <Header/>
                 <Sidebar getFilteredLocations={this.getFilteredLocations.bind(this)}/>
-
+            </div>
+                </div>)}
             </div>
         );
     }
