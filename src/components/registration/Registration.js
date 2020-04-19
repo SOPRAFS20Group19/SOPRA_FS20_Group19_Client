@@ -13,7 +13,7 @@ const BackgroundContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 620px;
+  min-height: 200px;
   justify-content: center;
 `;
 

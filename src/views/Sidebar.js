@@ -25,7 +25,7 @@ const Container = styled.div`
     opacity: 0.9;
     background: #003068;
   }
-  height: 50%;
+  height: 63.5%;
   width: 10%;
   background: #66A3E0;
   display: flex;

@@ -1,8 +1,11 @@
 .html{
-    background-image: url(BackgroundMap.png);
-    background-size: cover;
+    background-image: url(BackgroundMapNew.png);
+    background-size: cover; /* 100% 100% fits the all screens perfectly, cover doesn't distort the image */
     background-repeat: no-repeat;
     background-position: center;
+    min-height: 768px;
+    min-width: 1366px;
+    margin-bottom: fill;
 
 
 }
