@@ -92,10 +92,11 @@ class Maps extends React.Component{
     getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
+            //this.setState({setLocation: true})
         } else {
+            //this.setState({setLocation: true})
             alert("Geolocation is not supported by this browser.");
         }
-        this.setState({setLocation: true})
     }
 
     handleLocationError(error){
@@ -116,11 +117,13 @@ class Maps extends React.Component{
     }
 
     setCenter(){
+        //while (this.state.setLocation === false){
             if (this.state.currentPosition[0] != null && this.state.currentPosition[1] != null) {
                 this.setState({currentCenter: [this.state.currentPosition[0], this.state.currentPosition[1]]})
             } else {
                 this.setState({currentCenter: [47.366950, 8.547200]})
             }
+        //}
     }
 
 
