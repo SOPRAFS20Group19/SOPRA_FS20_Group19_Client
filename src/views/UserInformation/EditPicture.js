@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
 import {Button} from "../../views/design/Button";
+import { api, handleError } from '../../helpers/api';
+
 
 
 const Container = styled.div`
@@ -45,15 +47,35 @@ const ButtonContainer = styled.div`
 
 
 class EditPicture extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            selectedFile: null
         }
     }
 
     //saves the added picture
     savePicture(){
         //implement the save picture method
+    }
+
+    fileSelectedHandler = event =>{
+        this.setState({
+            selectedFile: event.target.files[0]
+        })
+    }
+
+    fileUploadHandler = () => {
+        const fd = new FormData();
+        fd.append(this.props.userId, this.state.selectedFile)
+        const url = '/users/picture/' + this.state.loggedInUserId;
+        try {
+            api.put(url, fd);
+        }
+        catch (e) {
+            alert(`Something went wrong while uploading the picture: \n${handleError(e)}`);
+        }
+
     }
 
     render(){
@@ -64,13 +86,24 @@ class EditPicture extends React.Component {
                 </Text>
                 <PictureContainer>
                 </PictureContainer>
+                <input style={{display: 'none'}} type="file" onChange={this.fileSelectedHandler} ref={fileInput => this.fileInput = fileInput}/>
                 <ButtonContainer>
                     <Button
                         width="100%"
                         onClick={() => {
-                            this.savePicture();
+                            this.fileInput.click();
                         }}>
-                        Save Picture
+                        Pick File
+                    </Button>
+                </ButtonContainer>
+                <ButtonContainer>
+                    <Button
+                        disabled={!this.fileInput}
+                        width="100%"
+                        onClick={() => {
+                            this.fileUploadHandler();
+                        }}>
+                        Upload Picture
 
                     </Button>
                 </ButtonContainer>

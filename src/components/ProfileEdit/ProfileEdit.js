@@ -236,7 +236,7 @@ class ProfileEdit extends React.Component {
                         </ButtonContainer>
                     </div>
                 </Container4>
-                <EditPicture/>
+                <EditPicture userId={this.state.loggedInUser.id}/>
                     </MainContainer>)}
             </MainContainer>
         );
