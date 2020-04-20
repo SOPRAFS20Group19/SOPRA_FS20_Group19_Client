@@ -85,7 +85,7 @@ class UserInformation extends React.Component{
                         </Title>
                         </GridContainer>
                         <GridContainer>
-                        <Title>creation date: <Text>{this.props.creationDate}</Text></Title>
+                        <Title>using Know Your City since: <Text>{this.props.creationDate}</Text></Title>
                         </GridContainer>
                         <GridContainer>
                         <Title>birth date: <Text> {this.props.birthDate != null ? (this.props.birthDate) : ("You haven't set a birth date yet!")}</Text></Title>

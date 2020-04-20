@@ -145,6 +145,7 @@ class ProfileEdit extends React.Component {
     saveChanges() {
         try {
             const requestBody = JSON.stringify({
+                name: this.state.name,
                 username: this.state.username,
                 birthDate: this.state.birthDate
             });
@@ -209,6 +210,7 @@ class ProfileEdit extends React.Component {
                     <div>
                         <ButtonContainer>
                             <Button
+                                disabled={!this.state.name && !this.state.username && !this.state.birthDate}
                                 width="100%"
                                 onClick={() => {
                                     this.saveChanges();
