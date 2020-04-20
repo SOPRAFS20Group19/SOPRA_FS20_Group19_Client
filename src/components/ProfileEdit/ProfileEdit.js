@@ -10,6 +10,8 @@ import InfoEditProfile from "../../views/UserInformation/InfoEditProfile";
 import EditPicture from "../../views/UserInformation/EditPicture";
 import {Spinner} from "../../views/design/Spinner";
 import User from "../shared/models/User";
+import HeaderForLogin from "../../views/HeaderForLogin";
+import TitleEdit from "../../views/UserInformation/TitleEdit";
 
 const MainContainer =styled.div`
   color: black;
@@ -38,7 +40,7 @@ const Container1 = styled.div`
   flex-direction: column;
   margin-left: 20px;
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 3;
   margin-top: 15px;
 `;
 
@@ -52,7 +54,7 @@ const Container2 = styled.div`
   flex-direction: column;
   margin-left: 20px;
   grid-column: 1;
-  grid-row: 3;
+  grid-row: 4;
   margin-top: 15px;
 `;
 const Container3 = styled.div`
@@ -65,7 +67,7 @@ const Container3 = styled.div`
   flex-direction: column;
   margin-left: 20px;
   grid-column: 1;
-  grid-row: 5;
+  grid-row: 6;
   margin-top: 15px;
 `;
 const Container4 = styled.div`
@@ -78,7 +80,7 @@ const Container4 = styled.div`
   flex-direction: column;
   margin-left: 20px;
   grid-column: 1;
-  grid-row: 6;
+  grid-row: 7;
   margin-top: 15px;
 `;
 
@@ -99,7 +101,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   grid-column: 1;
-  grid-row: 3;
+  grid-row: 4;
   margin-top: 15px;
   width: 80%;
 `;
@@ -176,7 +178,8 @@ class ProfileEdit extends React.Component {
             <MainContainer>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                     <MainContainer>
-                <UserEditHeader username={this.state.loggedInUser.username}/>
+                        <TitleEdit/>
+                        <UserEditHeader username={this.state.loggedInUser.username}/>
                 <SidebarEditUserInformation/>
                 <Container1>
                     <Title>name: </Title>

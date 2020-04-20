@@ -8,10 +8,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   grid-column: 1 / span 2;
-  grid-row: 1;
+  grid-row: 2;
   margin-top: 20px;
   margin-left: 20px;
-  align-content: left;
+  align-content: center;
 `;
 
 const PictureContainer = styled.div`

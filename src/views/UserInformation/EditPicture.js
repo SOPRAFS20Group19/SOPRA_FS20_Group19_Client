@@ -9,7 +9,7 @@ const Container = styled.div`
   justify-content: top;
   flex-direction: column;
   grid-column: 2;
-  grid-row: 2 /span 3;
+  grid-row: 3 /span 4;
   margin-top: 15px;
 
 `;

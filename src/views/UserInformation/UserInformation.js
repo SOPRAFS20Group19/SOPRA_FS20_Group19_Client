@@ -26,7 +26,7 @@ const Container = styled.div`
   flex-direction: column;
   margin-left: 20px;
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 3;
   margin-top: 20px;
 `;
 
@@ -85,7 +85,7 @@ class UserInformation extends React.Component{
                         </Title>
                         </GridContainer>
                         <GridContainer>
-                        <Title>using Know Your City since: <Text>{this.props.creationDate}</Text></Title>
+                        <Title>KYC-user since: <Text>{this.props.creationDate}</Text></Title>
                         </GridContainer>
                         <GridContainer>
                         <Title>birth date: <Text> {this.props.birthDate != null ? (this.props.birthDate) : ("You haven't set a birth date yet!")}</Text></Title>

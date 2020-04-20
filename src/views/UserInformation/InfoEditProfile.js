@@ -15,7 +15,7 @@ const Container = styled.div`
   flex-direction: column;
   margin-left: 20px;
   grid-column: 1;
-  grid-row: 4;
+  grid-row: 5;
   margin-top: 15px;
 `;
 
@@ -45,7 +45,7 @@ class InfoEditProfile extends React.Component{
         return (
             <Container>
                 {!this.props.creationDate ? (<Spinner/>) :(<div>
-                        <Title>creation date: <Text>{this.props.creationDate}</Text></Title>
+                        <Title>KYC-user since: <Text>{this.props.creationDate}</Text></Title>
                     </div>
                 )}
             </Container>
