@@ -14,12 +14,8 @@ import {Spinner} from "../../views/design/Spinner";
 import HeaderForLogin from "../../views/HeaderForLogin";
 import TitleProfile from "../../views/UserInformation/TitleProfile";
 
-const BackgroundContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const BackgroundContainer = styled(BaseContainer)`
   min-height: 620px;
-  justify-content: center;
 `;
 
 const MainContainer =styled.div`
@@ -28,7 +24,7 @@ const MainContainer =styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto;
   justify-content: center;
   grid-column-gap: 30px;
 `;
@@ -97,22 +93,22 @@ class ProfileUser extends React.Component {
 
     render(){
         return(
-            <MainContainer>
+            <BaseContainer>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                         <MainContainer>
                             <TitleProfile/>
                             <UserHeader username={this.state.loggedInUser.username}/>
-                <SidebarUserInformation/>
-                <UserInformation
-                    username={this.state.loggedInUser.username}
-                    name={this.state.loggedInUser.name}
-                    creationDate={this.state.loggedInUser.creationDate}
-                    birthDate={this.state.loggedInUser.birthDate}
-                />
-                <SavedLocations/>
-                </MainContainer>
+                            <SidebarUserInformation/>
+                            <UserInformation
+                                username={this.state.loggedInUser.username}
+                                name={this.state.loggedInUser.name}
+                                creationDate={this.state.loggedInUser.creationDate}
+                                birthDate={this.state.loggedInUser.birthDate}
+                            />
+                            <SavedLocations userId={this.state.loggedInUserId}/>
+                        </MainContainer>
                 ) }
-            </MainContainer>
+            </BaseContainer>
         )
     }
 }

@@ -5,7 +5,7 @@ import { api, handleError } from '../../helpers/api';
 import { Button } from '../../views/design/Button';
 import { withRouter } from 'react-router-dom';
 import Header from "../../views/Header";
-import SidebarInfoAndAddLocation from "../../views/SidebarInfoAndAddLocation";
+import SidebarInfoAndAddLocation from "../../views/InformationPage/SidebarInfoAndAddLocation";
 
 const Container = styled(BaseContainer)`
   color: white;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import {Button} from "./design/Button";
+import {Button} from "../design/Button";
 
 const Container = styled.div`
   display: flex;

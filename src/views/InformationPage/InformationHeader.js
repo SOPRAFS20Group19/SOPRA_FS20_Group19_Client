@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import FireplaceClipart from "./FireplaceClipart.png";
-import RecyclingClipart from "./RecyclingClipart.png";
-import FountainClipart from "./FountainClipart.png";
-import FireplaceCircle from "../views/MapMarkers/FireplaceCircle.png"
-import RecyclingCircle from "../views/MapMarkers/RecyclingCircle.png"
-import FountainCircle from "../views/MapMarkers/FountainCircle.png"
-import {api, handleError} from "../helpers/api";
-import {Spinner} from "./design/Spinner";
+import FireplaceClipart from "../FireplaceClipart.png";
+import RecyclingClipart from "../RecyclingClipart.png";
+import FountainClipart from "../FountainClipart.png";
+import FireplaceCircle from "../MapMarkers/FireplaceCircle.png"
+import RecyclingCircle from "../MapMarkers/RecyclingCircle.png"
+import FountainCircle from "../MapMarkers/FountainCircle.png"
+import {api, handleError} from "../../helpers/api";
+import {Spinner} from "../design/Spinner";
 
 const Container = styled.div`
   display: flex;

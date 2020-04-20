@@ -4,14 +4,14 @@ import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
 import { Button } from '../../views/design/Button';
 import { withRouter } from 'react-router-dom';
-import SidebarInfoAndAddLocation from "../../views/SidebarInfoAndAddLocation";
-import LocationInformation from "../../views/LocationInformation";
-import LocationRating from "../../views/LocationRating";
-import Chatbox from "../../views/Chatbox";
-import InformationPageFavourite from "../../views/InformationPageFavourite";
-import LocationPictures from "../../views/LocationPictures";
+import SidebarInfoAndAddLocation from "../../views/InformationPage/SidebarInfoAndAddLocation";
+import LocationInformation from "../../views/InformationPage/LocationInformation";
+import LocationRating from "../../views/InformationPage/LocationRating";
+import Chatbox from "../../views/InformationPage/Chatbox";
+import InformationPageFavourite from "../../views/InformationPage/InformationPageFavourite";
+import LocationPictures from "../../views/InformationPage/LocationPictures";
 import Location from "../shared/models/Location";
-import InformationHeader from "../../views/InformationHeader";
+import InformationHeader from "../../views/InformationPage/InformationHeader";
 import Spinner from "react-bootstrap/Spinner";
 
 const Container1 = styled(BaseContainer)`
@@ -116,7 +116,7 @@ class LocationInformationPage extends React.Component {
                     />
                     <LocationRating/>
                     <Chatbox/>
-                    <InformationPageFavourite/>
+                    <InformationPageFavourite locationId={this.props.match.params.locationId}/>
                     <LocationPictures/>
                     </Container>
                     )}

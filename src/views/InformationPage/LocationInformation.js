@@ -5,9 +5,9 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import FormControl from "react-bootstrap/FormControl";
-import Player from "./Player";
-import {Button} from "./design/Button";
-import {Spinner} from "./design/Spinner";
+import Player from "../Player";
+import {Button} from "../design/Button";
+import {Spinner} from "../design/Spinner";
 
 
 const Container = styled.div`

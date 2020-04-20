@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import HeartEmpty from "./HeartEmpty.svg";
-import HeartFull from "./HeartFull.svg";
-import HeartUnfilled from "../views/InformationPage/HeartUnfilled.png"
-import HeartRed from "../views/InformationPage/HeartRed.png"
+import HeartEmpty from "../HeartEmpty.svg";
+import HeartFull from "../HeartFull.svg";
+import HeartUnfilled from "./HeartUnfilled.png"
+import HeartRed from "./HeartRed.png"
+import {api, handleError} from "../../helpers/api";
+import LocationListItem from "../UserInformation/LocationListItem";
 
 
 const Container = styled.div`
@@ -53,6 +55,24 @@ class InformationPageFavourite extends React.Component {
         this.setState({['liked']: value });
     }
 
+    async saveToFavorites(){
+        try {
+            const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.locationId;
+            await api.put(url);
+        } catch (e) {
+            alert(`Something went wrong while updating the favorite locations: \n${handleError(e)}`);
+        }
+    }
+
+    async deleteFromFavorites(){
+        try {
+            const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.locationId;
+            await api.delete(url);
+        } catch (e) {
+            alert(`Something went wrong while updating the favorite locations: \n${handleError(e)}`);
+        }
+    }
+
     render() {
         return (
             <Container>
@@ -61,12 +81,14 @@ class InformationPageFavourite extends React.Component {
                         <img src={HeartUnfilled} alt="Heart Empty" height="56.5px" width="63.1px"
                              onClick={() => {
                                  this.changeColor(true);
+                                 this.saveToFavorites();
                              }}
                         />
                         :
                         <img src={HeartRed} alt="Heart Full" height="56.5px" width="63.1px"
                              onClick={() => {
                                  this.changeColor(false);
+                                 this.deleteFromFavorites();
                              }}
                         />
                     }
