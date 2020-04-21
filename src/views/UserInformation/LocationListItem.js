@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 import {api, handleError} from "../../helpers/api";
 import User from "../../components/shared/models/User";
@@ -11,6 +11,7 @@ import FountainCircle from "../MapMarkers/FountainCircle.png"
 import HeartUnfilled from "../InformationPage/HeartUnfilled.png"
 import HeartRed from "../InformationPage/HeartRed.png"
 import ListGroupItem from "react-bootstrap/ListGroupItem";
+import {Button} from "../design/Button";
 
 const Container = styled.div`
   display: grid;
@@ -36,7 +37,7 @@ const Title = styled.div`
   grid-row: 1;
 `;
 
-const Text = styled.div`
+const ButtonContainer = styled.div`
   font-weight: normal;
   font-size: normal;
   width: 100%;
@@ -51,11 +52,22 @@ const ImageContainer= styled.div`
   grid-row: 1 / span 2;
 `;
 
+const InfoPageButton = styled(Button)`
+  background: transparent;
+  font-weight: normal;
+  font-size: normal;
+  border: 0px solid black;
+  border-radius: 1px;
+  color: black;
+  padding-left: 0px;
+`;
+
 export default class LocationListItem extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            liked: true
+            liked: true,
+            redirectTo: '/map/informationpage/' + this.props.location.id
         };
     }
 
@@ -106,6 +118,10 @@ export default class LocationListItem extends React.Component{
         }
     }
 
+    goToInfoPage(){
+        return(<Redirect to={this.state.redirectTo}/>);
+    }
+
     render(){
         return (
             <Container>
@@ -113,7 +129,14 @@ export default class LocationListItem extends React.Component{
                     <img src={this.getImage()} alt={this.getTypeAsString()} width="60px" height="60px"/>
                 </IconContainer>
                 <Title>{this.getTypeAsString()} - ID: {this.props.location.id}</Title>
-                <Text>Visit the information page of this location</Text>
+                <ButtonContainer>
+                    <InfoPageButton
+                        variant="primary"
+                        width="100%"
+                        onClick={() => {this.props.goToInfoPageSavedLocations(this.props.location.id);}}>
+                        Visit the information page of this location
+                    </InfoPageButton>
+                </ButtonContainer>
                 <ImageContainer>
                     {this.state.liked === false ?
                         <img src={HeartUnfilled} alt="Heart Empty" height="42.375px" width="47.325px"
@@ -132,5 +155,4 @@ export default class LocationListItem extends React.Component{
             </Container>
         )
     }
-
 }

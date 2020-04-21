@@ -44,10 +44,13 @@ class SavedLocations extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            favoriteLocations: null,
-            listItems: null
+            favoriteLocations: null
         };
         this.getFavoriteLocations();
+    }
+
+    goToInfoPageSavedLocations(locationId){
+        this.props.history.push(`/map/informationpage/` + locationId);
     }
 
     async getFavoriteLocations(){
@@ -56,10 +59,8 @@ class SavedLocations extends React.Component {
 
             const response = await api.get(url);
 
-            const locationsList = response.data.map((location) => <LocationListItem location={location}/>);
-            let listItems = [];
-            response.data.map((location) => listItems.push({id: location.id, content: <LocationListItem location={location}/>}));
-            this.setState({favoriteLocations: locationsList, listItems: listItems});
+            const locationsList = response.data.map((location) => <LocationListItem location={location} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>);
+            this.setState({favoriteLocations: locationsList});
         } catch (e) {
             alert(`Something went wrong while getting the favorite locations: \n${handleError(e)}`);
         }

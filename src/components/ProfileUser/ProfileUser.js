@@ -81,7 +81,6 @@ class ProfileUser extends React.Component {
         this.props.history.push('/game/dashboard');
     }
 
-
     async componentDidMount() {
         this.getUser();
     }

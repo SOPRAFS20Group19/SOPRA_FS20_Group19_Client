@@ -59,11 +59,11 @@ class InformationPageFavourite extends React.Component {
 
             const response = await api.get(url);
 
-            const locationsList = response.data.map((location) => location.id);
+            const locationsList = response.data.map((location) => <li>{location.id}</li>);
 
             this.setState({locationsList: locationsList});
 
-            if (locationsList.includes(this.props.locationId)){
+            if (locationsList.includes(<li>{this.props.locationId}</li>)){
                 this.setState({liked: true})
             }
             else {
@@ -106,7 +106,7 @@ class InformationPageFavourite extends React.Component {
     render() {
         return (
             <div>
-                {this.state.liked === "not set yet" ? (<Spinner/>) : (
+                {this.state.liked === "not set yet" ? null : (
             <Container>
                 <ImageContainer>
                     {this.state.liked === false ?
