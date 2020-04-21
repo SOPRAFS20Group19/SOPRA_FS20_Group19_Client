@@ -25,11 +25,27 @@ const Title = styled.div`
   margin-top: 30px;
 `;
 
+const Text = styled.div`
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  line-height: 1.1em;
+  margin-top: 20px;
+`;
+
+const ListContainer = styled.div`
+  max-height: 225px;
+  overflow: scroll;
+  width: 100%;
+`;
+
+
 class SavedLocations extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            favoriteLocations: null
+            favoriteLocations: null,
+            listItems: null
         };
         this.getFavoriteLocations();
     }
@@ -40,13 +56,13 @@ class SavedLocations extends React.Component {
 
             const response = await api.get(url);
 
-            const locationsList = response.data.favoriteLocations.map((location) => <LocationListItem>location={location}</LocationListItem>);
-            this.setState({favoriteLocations: locationsList});
+            const locationsList = response.data.map((location) => <LocationListItem location={location}/>);
+            let listItems = [];
+            response.data.map((location) => listItems.push({id: location.id, content: <LocationListItem location={location}/>}));
+            this.setState({favoriteLocations: locationsList, listItems: listItems});
         } catch (e) {
-            alert(`Something went wrong while displaying the user profile: \n${handleError(e)}`);
+            alert(`Something went wrong while getting the favorite locations: \n${handleError(e)}`);
         }
-
-
     }
 
     render(){
@@ -55,10 +71,10 @@ class SavedLocations extends React.Component {
                 <Title>
                     SAVED LOCATIONS
                 </Title>
-                {!this.state.favoriteLocations ? (<Spinner/>) : (
-                <ListGroup variant="flush">
-                    {this.state.favoriteLocations}
-                </ListGroup>
+                {!this.state.favoriteLocations ? (<Text>We are currently retrieving your favorite locations. Please wait...</Text>) : (
+                    <ListContainer>
+                        {this.state.favoriteLocations}
+                    </ListContainer>
                 )}
             </Container>
         )

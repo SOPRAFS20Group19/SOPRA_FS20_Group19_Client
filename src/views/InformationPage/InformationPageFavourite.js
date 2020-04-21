@@ -7,6 +7,7 @@ import HeartUnfilled from "./HeartUnfilled.png"
 import HeartRed from "./HeartRed.png"
 import {api, handleError} from "../../helpers/api";
 import LocationListItem from "../UserInformation/LocationListItem";
+import Spinner from "react-bootstrap/Spinner";
 
 
 const Container = styled.div`
@@ -46,13 +47,42 @@ class InformationPageFavourite extends React.Component {
     constructor() {
         super();
         this.state = {
-            liked: false,
+            liked: "not set yet",
+            locationsList: null
+        };
+        this.getFavoriteLocations();
+    }
+
+    async getFavoriteLocations(){
+        try {
+            const url = '/locations/favorites/' + localStorage.getItem('userId');
+
+            const response = await api.get(url);
+
+            const locationsList = response.data.map((location) => location.id);
+
+            this.setState({locationsList: locationsList});
+
+            if (locationsList.includes(this.props.locationId)){
+                this.setState({liked: true})
+            }
+            else {
+                this.setState({liked: false})
+            }
+        } catch (e) {
+            alert(`Something went wrong while checking if this location belongs to the favorites: \n${handleError(e)}`);
         }
     }
 
     //Changes the color of the heart and saves favourite
     changeColor(value){
         this.setState({['liked']: value });
+        if (value === true){
+            this.saveToFavorites();
+        }
+        else {
+            this.deleteFromFavorites();
+        }
     }
 
     async saveToFavorites(){
@@ -75,20 +105,20 @@ class InformationPageFavourite extends React.Component {
 
     render() {
         return (
+            <div>
+                {this.state.liked === "not set yet" ? (<Spinner/>) : (
             <Container>
                 <ImageContainer>
                     {this.state.liked === false ?
                         <img src={HeartUnfilled} alt="Heart Empty" height="56.5px" width="63.1px"
                              onClick={() => {
                                  this.changeColor(true);
-                                 this.saveToFavorites();
                              }}
                         />
                         :
                         <img src={HeartRed} alt="Heart Full" height="56.5px" width="63.1px"
                              onClick={() => {
                                  this.changeColor(false);
-                                 this.deleteFromFavorites();
                              }}
                         />
                     }
@@ -103,6 +133,8 @@ class InformationPageFavourite extends React.Component {
                         </TextContainer>
                     }
             </Container>
+                )}
+            </div>
         );
     }
 }

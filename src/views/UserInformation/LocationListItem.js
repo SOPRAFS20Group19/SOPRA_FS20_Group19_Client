@@ -10,12 +10,16 @@ import RecyclingCircle from "../MapMarkers/RecyclingCircle.png"
 import FountainCircle from "../MapMarkers/FountainCircle.png"
 import HeartUnfilled from "../InformationPage/HeartUnfilled.png"
 import HeartRed from "../InformationPage/HeartRed.png"
+import ListGroupItem from "react-bootstrap/ListGroupItem";
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
   grid-template-rows: auto auto;
+  grid-column-gap: 20px;
   align-content: left;
+  margin-top: 15px;
+  justify-content: left;
 `;
 
 const IconContainer = styled.div`
@@ -73,9 +77,20 @@ export default class LocationListItem extends React.Component{
         return "RECYCLING";
     }
 
+    //Changes the color of the heart and saves favourite
+    changeColor(value){
+        this.setState({['liked']: value });
+        if (value === true){
+            this.saveToFavorites();
+        }
+        else {
+            this.deleteFromFavorites();
+        }
+    }
+
     async saveToFavorites(){
         try {
-            const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.locationId;
+            const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.location.id;
             await api.put(url);
         } catch (e) {
             alert(`Something went wrong while updating the favorite locations: \n${handleError(e)}`);
@@ -84,7 +99,7 @@ export default class LocationListItem extends React.Component{
 
     async deleteFromFavorites(){
         try {
-            const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.locationId;
+            const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.location.id;
             await api.delete(url);
         } catch (e) {
             alert(`Something went wrong while updating the favorite locations: \n${handleError(e)}`);
@@ -97,21 +112,19 @@ export default class LocationListItem extends React.Component{
                 <IconContainer>
                     <img src={this.getImage()} alt={this.getTypeAsString()} width="60px" height="60px"/>
                 </IconContainer>
-                <Title>{this.getTypeAsString()} - {this.props.location.id}</Title>
+                <Title>{this.getTypeAsString()} - ID: {this.props.location.id}</Title>
                 <Text>Visit the information page of this location</Text>
                 <ImageContainer>
                     {this.state.liked === false ?
-                        <img src={HeartUnfilled} alt="Heart Empty" height="56.5px" width="63.1px"
+                        <img src={HeartUnfilled} alt="Heart Empty" height="42.375px" width="47.325px"
                              onClick={() => {
                                  this.changeColor(true);
-                                 this.saveToFavorites();
                              }}
                         />
                         :
-                        <img src={HeartRed} alt="Heart Full" height="56.5px" width="63.1px"
+                        <img src={HeartRed} alt="Heart Full" height="42.375px" width="47.325px"
                              onClick={() => {
                                  this.changeColor(false);
-                                 this.deleteFromFavorites();
                              }}
                         />
                     }
