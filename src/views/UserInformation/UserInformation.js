@@ -188,11 +188,6 @@ class UserInformation extends React.Component{
                             <TitleCreationDate>KYC-user since:</TitleCreationDate>
                             <TextCreationDate>{this.props.creationDate}</TextCreationDate>
                         </GridContainerCreationDate>
-                        <GridContainerBirthDate>
-                            <TitleBirthDate>Birth date:</TitleBirthDate>
-                            <TextBirthDate> {this.props.birthDate != null ? (this.props.birthDate) : ("You haven't set a birth date yet!")}</TextBirthDate>
-                        </GridContainerBirthDate>
-
                     </div>
                 )}
                 <ButtonContainer>

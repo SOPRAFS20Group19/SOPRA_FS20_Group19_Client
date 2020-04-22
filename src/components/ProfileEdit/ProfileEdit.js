@@ -24,6 +24,7 @@ const MainContainer =styled.div`
   grid-column-gap: 30px;
 `;
 
+
 const Container = styled(BaseContainer)`
   color: white;
   text-align: center;
@@ -123,7 +124,8 @@ class ProfileEdit extends React.Component {
             username: null,
             birthDate: null,
             changesSaved: false,
-            testThing: false
+            testThing: false,
+            password: null
         };
         this.getUser();
 
@@ -149,7 +151,7 @@ class ProfileEdit extends React.Component {
             const requestBody = JSON.stringify({
                 name: this.state.name,
                 username: this.state.username,
-                birthDate: this.state.birthDate
+                password: this.state.password
             });
 
             const url = '/users/' + this.state.loggedInUserId;
@@ -182,7 +184,7 @@ class ProfileEdit extends React.Component {
                         <UserEditHeader username={this.state.loggedInUser.username}/>
                 <SidebarEditUserInformation/>
                 <Container1>
-                    <Title>name: </Title>
+                    <Title>Name: </Title>
                     <InputField
                         placeholder="enter your new name here"
                         onChange={e => {
@@ -191,7 +193,7 @@ class ProfileEdit extends React.Component {
                     />
                 </Container1>
                 <Container2>
-                <Title>username: </Title>
+                <Title>Username: </Title>
                     <InputField
                         placeholder="enter your new username here"
                         onChange={e => {
@@ -199,21 +201,21 @@ class ProfileEdit extends React.Component {
                         }}
                     />
                 </Container2>
+                        <Container3>
+                            <Title>Password: </Title>
+                            <InputField
+                                placeholder="enter your new password here"
+                                onChange={e => {
+                                    this.handleInputChange('password', e.target.value);
+                                }}
+                            />
+                        </Container3>
                 <InfoEditProfile creationDate={this.state.loggedInUser.creationDate}/>
-                <Container3>
-                    <Title>birth date: </Title>
-                    <InputField
-                        placeholder="enter your birth date here"
-                        onChange={e => {
-                            this.handleInputChange('birthDate', e.target.value);
-                        }}
-                    />
-                </Container3>
                 <Container4>
                     <div>
                         <ButtonContainer>
                             <Button
-                                disabled={!this.state.name && !this.state.username && !this.state.birthDate}
+                                disabled={!this.state.name && !this.state.username && !this.state.password}
                                 width="100%"
                                 onClick={() => {
                                     this.saveChanges();

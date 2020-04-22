@@ -102,7 +102,6 @@ class ProfileUser extends React.Component {
                                 username={this.state.loggedInUser.username}
                                 name={this.state.loggedInUser.name}
                                 creationDate={this.state.loggedInUser.creationDate}
-                                birthDate={this.state.loggedInUser.birthDate}
                             />
                             <SavedLocations userId={this.state.loggedInUserId}/>
                         </MainContainer>
