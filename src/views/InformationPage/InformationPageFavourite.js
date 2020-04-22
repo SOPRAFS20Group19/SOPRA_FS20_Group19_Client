@@ -8,18 +8,33 @@ import HeartRed from "./HeartRed.png"
 import {api, handleError} from "../../helpers/api";
 import LocationListItem from "../UserInformation/LocationListItem";
 import Spinner from "react-bootstrap/Spinner";
+import Location from "../../components/shared/models/Location";
+import {Checkbox} from "../Filter/Checkbox";
 
 
-const Container = styled.div`
+const Container2 = styled.div`
   display: grid;
   height: 100px;
   grid-template-columns: 100px 475px;
   grid-template-rows: auto;
   justify-content: left;
   align-items: left;
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: 10px;
+`;
+
+const Container = styled.div`
+  display: grid;
+  height: 100px;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  justify-content: left;
+  align-items: left;
   grid-column: 2;
   grid-row: 1;
   margin-top: 10px;
+ 
 `;
 
 const ImageContainer= styled.div`
@@ -44,31 +59,34 @@ const TextContainer= styled.div`
 
 
 class InformationPageFavourite extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            liked: "not set yet",
-            locationsList: null
+            liked: false,
+            locationId: null
         };
-        this.getFavoriteLocations();
+        this.checkFavoriteLocations();
     }
 
-    async getFavoriteLocations(){
+    async checkFavoriteLocations(){
         try {
-            const url = '/locations/favorites/' + localStorage.getItem('userId');
+            const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.locationId;
 
             const response = await api.get(url);
-
-            const locationsList = response.data.map((location) => <li>{location.id}</li>);
-
-            this.setState({locationsList: locationsList});
-
-            if (locationsList.includes(<li>{this.props.locationId}</li>)){
-                this.setState({liked: true})
+            const location = new Location(response.data);
+            if (location.id !== null) {
+                this.setState({locationId: location.id});
             }
             else {
-                this.setState({liked: false})
+                this.setState({locationId: 1});
             }
+            /*
+            if (this.state.location.id === this.props.locationId){
+                this.setState({liked: true});
+            }
+            else {
+                this.setState({liked: false});
+            }*/
         } catch (e) {
             alert(`Something went wrong while checking if this location belongs to the favorites: \n${handleError(e)}`);
         }
@@ -76,7 +94,7 @@ class InformationPageFavourite extends React.Component {
 
     //Changes the color of the heart and saves favourite
     changeColor(value){
-        this.setState({['liked']: value });
+        this.setState({liked: value });
         if (value === true){
             this.saveToFavorites();
         }
@@ -103,11 +121,27 @@ class InformationPageFavourite extends React.Component {
         }
     }
 
+    // this.state.locationId == this.props.locationId nicht zu === ändern!!!
     render() {
         return (
             <div>
-                {this.state.liked === "not set yet" ? null : (
+                {this.state.locationId === null ? null : (
             <Container>
+                {this.state.locationId == this.props.locationId ? (
+                    <Container2>
+                    <ImageContainer>
+                        <img src={HeartRed} alt="Heart Full" height="56.5px" width="63.1px"
+                             onClick={() => {
+                                 this.changeColor(false);
+                             }}
+                        />
+                    </ImageContainer>
+                    <TextContainer>
+                    Press the heart to delete this location from your favourites
+                    </TextContainer>
+                    </Container2>
+                ) : (
+                    <Container2>
                 <ImageContainer>
                     {this.state.liked === false ?
                         <img src={HeartUnfilled} alt="Heart Empty" height="56.5px" width="63.1px"
@@ -132,6 +166,8 @@ class InformationPageFavourite extends React.Component {
                         Press the heart to delete this location from your favourites
                         </TextContainer>
                     }
+                    </Container2>
+                    )}
             </Container>
                 )}
             </div>
