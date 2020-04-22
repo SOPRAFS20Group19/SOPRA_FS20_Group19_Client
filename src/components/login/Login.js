@@ -110,7 +110,6 @@ class Login extends React.Component {
   async login() {
     try {
       const requestBody = JSON.stringify({
-        name: this.state.name,
         username: this.state.username,
         password: this.state.password
       });
@@ -119,8 +118,12 @@ class Login extends React.Component {
       // Get the returned user and update a new object.
       const user = new User(response.data);
 
-      // Store the token into the local storage.
-      localStorage.setItem('token', user.token);
+      //check whether there already was a user in the local storage, if yes, logout this user
+      if (localStorage.getItem('userId')){
+        api.put('/logout/' + localStorage.getItem('userId'));
+      }
+
+      // Store the id into the local storage.
       localStorage.setItem('userId', user.id);
 
       // Login successfully worked --> navigate to the the route /map in the GameRouter

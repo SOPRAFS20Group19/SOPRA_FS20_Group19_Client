@@ -11,7 +11,7 @@ import { Redirect } from "react-router-dom";
  * @param props
  */
 export const MapGuard = props => {
-  if (localStorage.getItem("token")) {
+  if (localStorage.getItem("userId")) {
     return props.children;
   }
   return <Redirect to={"/map"} />;

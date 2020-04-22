@@ -7,6 +7,7 @@ import {Nav} from "react-bootstrap";
 import {UserIcon} from "./design/UserIcon";
 import {FilterIcon} from "./design/FilterIcon";
 import {PlusIcon} from "./design/PlusIcon";
+import { api, handleError } from '../helpers/api';
 import UserIconComplete from "./UserIconComplete.svg"
 import FilterIconComplete from "./Filter/FilterIconComplete.svg"
 import PlusIconComplete from "./PlusIconComplete.svg"
@@ -61,18 +62,22 @@ class Sidebar extends React.Component{
 
 
     logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('showFountains');
-        localStorage.removeItem('showFireplaces');
-        localStorage.removeItem('showRecyclingStations');
-        this.props.history.push('/login');
+        try{
+            api.put('/logout/' + localStorage.getItem('userId')); //logs out user in database
+            localStorage.removeItem('userId');
+            localStorage.removeItem('showFountains');
+            localStorage.removeItem('showFireplaces');
+            localStorage.removeItem('showRecyclingStations');
+            this.props.history.push('/login');
+        }catch (error) {
+            alert(`Something went wrong during the logout: \n${handleError(error)}`);
+          }
     }
 
     render() {
         return (
             <Container>
-                {localStorage.getItem("token") != null ?
+                {localStorage.getItem("userId") != null ?
                     <ButtonContainer>
                         <RoundButton
                             width="75%"
@@ -87,7 +92,7 @@ class Sidebar extends React.Component{
                     null
                 }
 
-                {localStorage.getItem("token") != null ?
+                {localStorage.getItem("userId") != null ?
                     <OverlayTrigger trigger="click" placement="left" overlay={<Filter applyFilterSidebar={this.applyFilterSidebar.bind(this)}/>}>
                         <ButtonContainer>
                             <RoundButton
@@ -118,7 +123,7 @@ class Sidebar extends React.Component{
                 }
 
 
-                {localStorage.getItem("token") != null ?
+                {localStorage.getItem("userId") != null ?
                     <ButtonContainer>
                         <RoundButton
                             width="75%"
@@ -150,7 +155,7 @@ class Sidebar extends React.Component{
                 }
 
 
-                {localStorage.getItem("token") != null ?
+                {localStorage.getItem("userId") != null ?
                     <ButtonContainer>
                         <RoundButton
                             width="75%"

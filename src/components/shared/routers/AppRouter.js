@@ -1,9 +1,7 @@
 import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { GameGuard } from "../routeProtectors/GameGuard";
-import GameRouter from "./GameRouter";
 import MapRouter from "./MapRouter";
-import { MapGuard } from "../routeProtectors/MapGuard";
+import { ProfileGuard } from "../routeProtectors/ProfileGuard";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Registration from "../../registration/Registration";
@@ -37,25 +35,29 @@ class AppRouter extends React.Component {
             <Route
                 path="/userprofile"
                 exact
-                render={() => <ProfileUser />}
+                render={() => 
+                <ProfileGuard>
+                  <ProfileUser />
+                </ProfileGuard>
+                }
             />
             <Route
                 path="/userprofile/edit"
                 exact
-                render={() => <ProfileEdit />}
+                render={() => 
+                <ProfileGuard>
+                  <ProfileEdit />
+                </ProfileGuard>
+                
+              }
             />
-              <Route
-                  path="/dashboard"
-                  exact
-                  render={() => <Game />}
-              />
             <Route
               path="/login"
               exact
               render={() => (
-                //<LoginGuard>
+                <LoginGuard>
                   <Login />
-                //</LoginGuard>
+                </LoginGuard>
               )}
             />
             <Route
@@ -65,7 +67,7 @@ class AppRouter extends React.Component {
                     <Registration />
                     )}
               />
-            <Route path="/" exact render={() => <Redirect to={"/map"} />} />
+            <Route path="/" exact render={() => <Redirect to={"/map"} />} /> 
           </div>
         </Switch>
       </BrowserRouter>
