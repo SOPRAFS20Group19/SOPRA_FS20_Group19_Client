@@ -25,6 +25,46 @@ import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.css"
 import Player from "../../views/Player";
 import {Spinner} from "../../views/design/Spinner";
 import {withRouter} from "react-router-dom";
+import {ButtonForLogin} from "../../views/design/ButtonForLogin";
+
+
+const Text = styled.div`
+  font-size: 16px;
+  display: inline;
+  line-height: 1.6;
+`;
+
+const HeaderOfPopUp = styled.div`
+    display: inline;
+    font-size: 1.3em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+`;
+
+const BorderFountain = styled.div`
+    border: 5px solid #66A3E0;
+    border-radius: 7px;
+    margin: 4px;
+    padding: 20px;
+`;
+
+const BorderFireplace = styled.div`
+    border: 5px solid #66A3E0;
+    border-radius: 7px;
+    margin: 4px;
+    padding: 20px;
+`;
+
+const BorderRecycling = styled.div`
+    border: 5px solid #66A3E0;
+    border-radius: 7px;
+    margin: 4px;
+    padding: 20px;
+`;
+
 
 function Map() {
     const [selectedBrunnen, setSelectedBrunnen] = useState(null);
@@ -164,6 +204,16 @@ class MapService extends React.Component{
         }
     }
 
+    // Returns the string to be rendered according to the type
+    getTypeAsString(location){
+        if (this.state.selectedLocation.locationType === 'FIREPLACE'){
+            return 'FIREPLACE';
+        }else if (this.state.selectedLocation.locationType === 'FOUNTAIN'){
+            return 'FOUNTAIN';
+        }
+        return 'RECYCLING';
+    }
+
 
     render(){
         return (
@@ -209,11 +259,13 @@ class MapService extends React.Component{
                                     lat: this.state.selectedLocation.coordinates[1],
                                     lng: this.state.selectedLocation.coordinates[0]
                                 }}
-                            >
+                            ><BorderFountain>
                                 <div>
-                                    <h2>{"Location Type: " + this.state.selectedLocation.locationType}</h2>
-                                    <h2>{"Location Number: " + this.state.selectedLocation.id}</h2>
-                                    <h2>{"URL: " + this.props.match.params.locationId}</h2>
+
+                                    <h2>{this.getTypeAsString()}</h2>
+                                    <HeaderOfPopUp>{"Location Number: "}</HeaderOfPopUp> <Text>{this.state.selectedLocation.id}</Text><br/>
+                                    <HeaderOfPopUp> {"Coordinates: "}</HeaderOfPopUp> <Text>{this.state.selectedLocation.coordinates}</Text><br/>
+                                    {/*<h2>{"URL: " + this.props.match.params.locationId}</h2> only for testing purpose*/}
                                     <Button
                                         onClick={()=>{
                                             this.props.history.push(`/map/informationpage/` + this.state.selectedLocation.id);
@@ -222,6 +274,7 @@ class MapService extends React.Component{
                                         Get more information here!
                                     </Button>
                                 </div>
+                            </BorderFountain>
                             </InfoWindow>
                         )}
 
