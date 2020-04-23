@@ -6,6 +6,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import {Button as Button1} from "../design/Button";
 import StarEmpty from "../StarEmpty.svg";
 import StarFull from "../StarFilled.svg";
+import {api, handleError} from "../../helpers/api";
+import Location from "../../components/shared/models/Location";
 
 const Container = styled.div`
   height: 10%;
@@ -44,6 +46,13 @@ const ButtonContainer2 = styled.div`
   grid-row: 1;
 `;
 
+const Text2 = styled.div`
+  font-weight: bold;
+  font-size: x-large;
+  grid-column: 1 / span 2;
+  grid-row: 3;
+`;
+
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
  * Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.
@@ -54,16 +63,36 @@ const ButtonContainer2 = styled.div`
  */
 
 class LocationRating extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             ratedStars:0,
+            actualRating:0,
         }
+        this.showRating();
     }
 
     //saves The Rating applied to the Stars
-    saveRating(){
+    async saveRating(){
         //Implement the save Rating Button
+        try {
+            const url = '/locations/rating/' + localStorage.getItem('userId') + '/' + this.props.locationId + "/" + this.state.ratedStars;
+            await api.put(url);
+            window.location.reload();
+        } catch (e) {
+            alert(`Something went wrong while updating the rating: \n${handleError(e)}`);
+        }
+    }
+
+    async showRating() {
+        try {
+            const url = '/locations/rating/' + localStorage.getItem('userId') + '/' + this.props.locationId;
+            const response = await api.get(url);
+            const rating = response.data;
+            this.setState({['actualRating']: rating});
+        } catch (e) {
+            alert(`Something went wrong while getting the rating: \n${handleError(e)}`);
+        }
     }
 
     changeColor(number){
@@ -110,6 +139,9 @@ class LocationRating extends React.Component{
                         Save Rating
                     </Button1>{' '}
                     </ButtonContainer>
+                    <Text2>
+                        Current Rating: {this.state.actualRating}
+                    </Text2>
                 </Container>
             );
         } else if (this.state.ratedStars == 1){
@@ -152,6 +184,9 @@ class LocationRating extends React.Component{
                         Save Rating
                     </Button1>{' '}
                     </ButtonContainer>
+                    <Text2>
+                        Current Rating: {this.state.actualRating}
+                    </Text2>
                 </Container>
             );
         }
@@ -195,6 +230,9 @@ class LocationRating extends React.Component{
                         Save Rating
                     </Button1>{' '}
                     </ButtonContainer>
+                    <Text2>
+                        Current Rating: {this.state.actualRating}
+                    </Text2>
                 </Container>
             );
         }
@@ -238,6 +276,9 @@ class LocationRating extends React.Component{
                         Save Rating
                     </Button1>{' '}
                     </ButtonContainer>
+                    <Text2>
+                        Current Rating: {this.state.actualRating}
+                    </Text2>
                 </Container>
             );
         }
@@ -281,6 +322,9 @@ class LocationRating extends React.Component{
                         Save Rating
                     </Button1>{' '}
                     </ButtonContainer>
+                    <Text2>
+                        Current Rating: {this.state.actualRating}
+                    </Text2>
                 </Container>
             );
         }
@@ -324,6 +368,9 @@ class LocationRating extends React.Component{
                         Save Rating
                     </Button1>{' '}
                     </ButtonContainer>
+                    <Text2>
+                        Current Rating: {this.state.actualRating}
+                    </Text2>
                 </Container>
             );
         }

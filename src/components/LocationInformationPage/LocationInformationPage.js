@@ -114,7 +114,7 @@ class LocationInformationPage extends React.Component {
                         latitude={this.state.locationToBeShown.latitude}
                         coordinates={this.state.locationToBeShown.coordinates}
                     />
-                    <LocationRating/>
+                    <LocationRating locationId={this.props.match.params.locationId}/>
                     <Chatbox/>
                     <InformationPageFavourite locationId={this.props.match.params.locationId}/>
                     <LocationPictures/>
