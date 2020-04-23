@@ -25,7 +25,8 @@ import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.css"
 import Player from "../../views/Player";
 import {Spinner} from "../../views/design/Spinner";
 import {withRouter} from "react-router-dom";
-import {ButtonForLogin} from "../../views/design/ButtonForLogin";
+import {ButtonForRecycling} from "../../views/design/ButtonForRecycling";
+import {ButtonForFireplace} from "../../views/design/ButtonForFireplace";
 
 
 const Text = styled.div`
@@ -44,26 +45,53 @@ const HeaderOfPopUp = styled.div`
     font-weight: bold;
 `;
 
-const BorderFountain = styled.div`
-    border: 5px solid #66A3E0;
-    border-radius: 7px;
-    margin: 4px;
-    padding: 20px;
+const Border = styled.div`
 `;
 
-const BorderFireplace = styled.div`
-    border: 5px solid #66A3E0;
-    border-radius: 7px;
-    margin: 4px;
-    padding: 20px;
-`;
+const BorderFountain = {
+    color: '#003068',
+    border: '3px solid #66A3E0',
+    borderRadius: 7,
+    margin: 4,
+    padding: 20,
 
-const BorderRecycling = styled.div`
-    border: 5px solid #66A3E0;
-    border-radius: 7px;
-    margin: 4px;
-    padding: 20px;
-`;
+};
+
+const BorderFireplace = {
+    color: 'darkred',
+    border: '3px solid chocolate',
+    borderRadius: 7,
+    margin: 4,
+    padding: 10,
+};
+
+const BorderRecycling = {
+    color: '#013220',
+    border: '3px solid #228B22',
+    borderRadius: 7,
+    margin: 4,
+    padding: 10,
+};
+
+const ButtonRecycling = {
+    color: '#228B22',
+    border: '2px solid #228B22',
+    background: '#013220',
+};
+
+const ButtonFirePlace = {
+    color: 'chocolate',
+    border: '2px solid chocolate',
+    background: 'darkred',
+};
+
+const ButtonFountain = {
+    color: '#66A3E0',
+    border: '2px solid #66A3E0',
+    background: '#003068',
+
+}
+
 
 
 function Map() {
@@ -129,17 +157,17 @@ function Map() {
     );
 }
 
-class MapService extends React.Component{
-    constructor(props){
+class MapService extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
             selectedLocation: null,
-            currCenter: [47.366950, 8.547200]
+            currCenter: [47.366950, 8.547200],
         };
         this.setCenter();
     }
 
-    setSelectedLocation(location){
+    setSelectedLocation(location) {
         this.setState({selectedLocation: location});
     }
 
@@ -214,6 +242,30 @@ class MapService extends React.Component{
         return 'RECYCLING';
     }
 
+    // Gets the right style for the different types of information windows
+    getStyleOfBorder() {
+        if (this.state.selectedLocation.locationType === 'FOUNTAIN'){
+            return BorderFountain;
+        }
+        else if (this.state.selectedLocation.locationType === 'FIREPLACE'){
+            return BorderFireplace;
+        }
+
+        return BorderRecycling;
+    }
+
+    getStyleOfButton() {
+        if (this.state.selectedLocation.locationType === 'FOUNTAIN') {
+            return ButtonFountain;
+        } else if (this.state.selectedLocation.locationType === 'FIREPLACE') {
+            return ButtonFirePlace;
+        }
+
+        return ButtonRecycling;
+    }
+
+
+
 
     render(){
         return (
@@ -259,22 +311,26 @@ class MapService extends React.Component{
                                     lat: this.state.selectedLocation.coordinates[1],
                                     lng: this.state.selectedLocation.coordinates[0]
                                 }}
-                            ><BorderFountain>
-                                <div>
+                            >
 
-                                    <h2>{this.getTypeAsString()}</h2>
-                                    <HeaderOfPopUp>{"Location Number: "}</HeaderOfPopUp> <Text>{this.state.selectedLocation.id}</Text><br/>
-                                    <HeaderOfPopUp> {"Coordinates: "}</HeaderOfPopUp> <Text>{this.state.selectedLocation.coordinates}</Text><br/>
-                                    {/*<h2>{"URL: " + this.props.match.params.locationId}</h2> only for testing purpose*/}
-                                    <Button
-                                        onClick={()=>{
-                                            this.props.history.push(`/map/informationpage/` + this.state.selectedLocation.id);
-                                        }}
-                                    >
-                                        Get more information here!
-                                    </Button>
-                                </div>
-                            </BorderFountain>
+                                <Border style={this.getStyleOfBorder()}>
+
+                                        <h2>{this.getTypeAsString()}</h2>
+                                        <HeaderOfPopUp>{"Location Number: "}</HeaderOfPopUp>
+                                        <Text>{this.state.selectedLocation.id}</Text><br/>
+                                        <HeaderOfPopUp> {"Coordinates: "}</HeaderOfPopUp>
+                                        <Text>{this.state.selectedLocation.coordinates}</Text><br/>
+                                        <br/>
+
+                                        {/*<h2>{"URL: " + this.props.match.params.locationId}</h2> only for testing purpose*/}
+                                        <Button style={this.getStyleOfButton()}
+                                            onClick={() => {
+                                                this.props.history.push(`/map/informationpage/` + this.state.selectedLocation.id);
+                                            }}
+                                        >
+                                            Get more information here!
+                                        </Button>
+                                </Border>
                             </InfoWindow>
                         )}
 
