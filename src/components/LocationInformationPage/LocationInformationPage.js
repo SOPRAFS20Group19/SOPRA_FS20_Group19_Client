@@ -73,7 +73,7 @@ class LocationInformationPage extends React.Component {
 
     // Get all the needed Information about the selected Location
 
-    
+
     async getCurrentLocation() {
         try {
             const url = '/locations/' + this.props.match.params.locationId;
@@ -92,7 +92,7 @@ class LocationInformationPage extends React.Component {
         }
     }
 
-     
+
 
     // Get the chat box for the current Location
     getchat() {
@@ -114,7 +114,7 @@ class LocationInformationPage extends React.Component {
                         latitude={this.state.locationToBeShown.latitude}
                         coordinates={this.state.locationToBeShown.coordinates}
                     />
-                    <LocationRating/>
+                    <LocationRating locationId={this.props.match.params.locationId}/>
                     <Chatbox locationId={this.props.match.params.locationId}/>
                     <InformationPageFavourite locationId={this.props.match.params.locationId}/>
                     <LocationPictures/>
