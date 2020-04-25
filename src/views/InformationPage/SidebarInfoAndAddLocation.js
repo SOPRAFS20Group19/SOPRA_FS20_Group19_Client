@@ -17,6 +17,8 @@ import { withRouter } from 'react-router-dom';
 import LogoutIcon from "../LogoutIcon.svg"
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import {ButtonForLogin} from "../design/ButtonForLogin";
+import {api, handleError} from "../../helpers/api";
 
 //Sidebar for Information Page and Add Location
 
@@ -54,6 +56,7 @@ class Sidebar extends React.Component{
 
     //Open the profile of the logged in User
     openUserProfile(){
+        this.props.history.push('/userprofile');
     }
 
 
@@ -62,19 +65,44 @@ class Sidebar extends React.Component{
         this.props.history.push(`/map`);
     }
 
+    logout() {
+        try{
+            api.put('/logout/' + localStorage.getItem('userId')); //logs out user in database
+            localStorage.removeItem('userId');
+            localStorage.removeItem('showFountains');
+            localStorage.removeItem('showFireplaces');
+            localStorage.removeItem('showRecyclingStations');
+            this.props.history.push('/login');
+        }catch (error) {
+            alert(`Something went wrong during the logout: \n${handleError(error)}`);
+        }
+    }
+
     render() {
         return (
             <Container>
+                <OverlayTrigger trigger="click" placement="left" overlay={<Popover id="popover-basic">
+                    <Popover.Content>
+                        <ButtonContainer>
+                            <Button
+                                width="100%"
+                                onClick={() => {this.openUserProfile();}}>Go to your profile
+                            </Button>
+                        </ButtonContainer>
+                        <ButtonContainer>
+                            <ButtonForLogin
+                                width="100%"
+                                onClick={() => {this.logout();}}>Logout
+                            </ButtonForLogin>
+                        </ButtonContainer>
+                    </Popover.Content>
+                </Popover>}>
                     <ButtonContainer>
-                        <RoundButton
-                            width="75%"
-                            onClick={() => {
-                                this.openUserProfile();
-                            }}
-                        >
+                        <RoundButton width="75%">
                             <img src={UserIconComplete} alt="User Icon"/>
                         </RoundButton>
                     </ButtonContainer>
+                </OverlayTrigger>
                     <ButtonContainer>
                         <RoundButton
                             width="75%"

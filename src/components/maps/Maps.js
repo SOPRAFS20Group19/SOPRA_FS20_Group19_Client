@@ -89,7 +89,7 @@ class Maps extends React.Component{
         this.state = {
             locationsShown: null,
             currentPosition: [],
-            //currentCenter: [47.366950, 8.547200]
+            currentCenter: [47.366950, 8.547200]
         };
         this.resetFilter();
         this.getFilteredLocations();
@@ -97,12 +97,11 @@ class Maps extends React.Component{
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.getLocation();
-        //this.setCenter();
     }
 
-    getLocationsShown() {
-        return this.state.locationsShown;
-    }
+    /*componentDidMount(): void {
+        this.getFilteredLocations();
+    }*/
 
     async getFilteredLocations(){
         try {
@@ -135,14 +134,17 @@ class Maps extends React.Component{
 
     getCoordinates(position) {
         this.setState({
-            currentPosition: [position.coords.latitude, position.coords.longitude]
+            currentPosition: [position.coords.latitude, position.coords.longitude],
+            currentCenter: [position.coords.latitude, position.coords.longitude]
         })
     }
 
     getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
-        } else {
+        }
+        else if (sessionStorage.getItem('alerted') !== true) {
+            sessionStorage.setItem('alerted', true);
             alert("Geolocation is not supported by this browser.");
         }
     }
@@ -150,16 +152,20 @@ class Maps extends React.Component{
     handleLocationError(error){
         switch(error.code) {
             case error.PERMISSION_DENIED:
-                alert ("User denied the request for Geolocation.")
+                localStorage.setItem('alerted', true);
+                alert ("User denied the request for Geolocation.");
                 break;
             case error.POSITION_UNAVAILABLE:
-                alert ("Location information is unavailable.")
+                localStorage.setItem('alerted', true);
+                alert ("Location information is unavailable.");
                 break;
             case error.TIMEOUT:
-                alert ("The request to get user location timed out.")
+                localStorage.setItem('alerted', true);
+                alert ("The request to get user location timed out.");
                 break;
             case error.UNKNOWN_ERROR:
-                alert ("An unknown error occurred.")
+                localStorage.setItem('alerted', true);
+                alert ("An unknown error occurred.");
                 break;
         }
     }
@@ -181,7 +187,7 @@ class Maps extends React.Component{
             <div style={{ width: "100vw", height: "100vh" }}>
                 <MapService
                     currentLocation = {this.state.currentPosition}
-                    //currentCenter = {this.state.currentCenter}
+                    currentCenter = {this.state.currentCenter}
                     locationsShown={this.state.locationsShown}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
                     loadingElement={<div style={{ height: `100%` }} />}

@@ -113,13 +113,10 @@ export default class LocationListItem extends React.Component{
         try {
             const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.location.id;
             await api.delete(url);
+            this.props.refreshPage();
         } catch (e) {
             alert(`Something went wrong while updating the favorite locations: \n${handleError(e)}`);
         }
-    }
-
-    goToInfoPage(){
-        return(<Redirect to={this.state.redirectTo}/>);
     }
 
     render(){

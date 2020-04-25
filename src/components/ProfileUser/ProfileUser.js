@@ -47,15 +47,17 @@ class ProfileUser extends React.Component {
         this.state = {
             loggedInUserId: localStorage.getItem('userId'),
             loggedInUser: null,
+            loading: false
             //userToBeShownId: localStorage.getItem("showUserId"),
             //userToBeShown: null
         };
-        this.getUser();
+        //this.getUser();
     }
 
     // this method sends a get request to the server and saves the received user data in the component's state
     async getUser() {
         try {
+            this.setState({loading: true});
             const url = '/users/' + this.state.loggedInUserId;
 
             const response = await api.get(url);
@@ -63,6 +65,7 @@ class ProfileUser extends React.Component {
             const user = new User(response.data);
 
             this.setState({loggedInUser: user});
+            this.setState({loading: false});
         } catch (e) {
             alert(`Something went wrong while displaying the user profile: \n${handleError(e)}`);
         }
@@ -81,13 +84,15 @@ class ProfileUser extends React.Component {
         this.props.history.push('/game/dashboard');
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.getUser();
     }
 
     // when the page is updated the user data is requested again so the changes from the edit profile page are immediately displayed
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        this.getUser();
+    componentDidUpdate() {
+        if (!this.state.loading){
+            this.getUser();
+        }
     }
 
     render(){

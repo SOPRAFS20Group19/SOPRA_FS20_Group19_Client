@@ -17,7 +17,9 @@ import AddLocation from "../components/LocationManagement/AddLocation";
 import { withRouter } from 'react-router-dom';
 import LogoutIcon from "./LogoutIcon.svg"
 import Popover from "react-bootstrap/Popover";
+import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import {ButtonForLogin} from "./design/ButtonForLogin";
 
 //Sidebar for the map -->Refactoring the name of the class later
 
@@ -26,7 +28,8 @@ const Container = styled.div`
     opacity: 0.9;
     background: #003068;
   }
-  height: 63.5%;
+  height: 50%;
+  min-height: 375px;
   width: 10%;
   background: #66A3E0;
   display: flex;
@@ -53,7 +56,7 @@ class Sidebar extends React.Component{
     }
 
     openUserProfile(){
-        this.props.history.push(`/userprofile`);
+        this.props.history.push('/userprofile');
     }
 
     applyFilterSidebar(){
@@ -78,16 +81,28 @@ class Sidebar extends React.Component{
         return (
             <Container>
                 {localStorage.getItem("userId") != null ?
+                    <OverlayTrigger trigger="click" placement="left" overlay={<Popover id="popover-basic">
+                        <Popover.Content>
+                            <ButtonContainer>
+                                <Button
+                                    width="100%"
+                                    onClick={() => {this.openUserProfile();}}>Go to your profile
+                                </Button>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <ButtonForLogin
+                                    width="100%"
+                                    onClick={() => {this.logout();}}>Logout
+                                </ButtonForLogin>
+                            </ButtonContainer>
+                        </Popover.Content>
+                    </Popover>}>
                     <ButtonContainer>
-                        <RoundButton
-                            width="75%"
-                            onClick={() => {
-                                this.openUserProfile();
-                            }}
-                        >
+                        <RoundButton width="75%">
                             <img src={UserIconComplete} alt="User Icon"/>
                         </RoundButton>
                     </ButtonContainer>
+                    </OverlayTrigger>
                     :
                     null
                 }
@@ -97,6 +112,7 @@ class Sidebar extends React.Component{
                         <ButtonContainer>
                             <RoundButton
                                 width="75%"
+
                             >
                                 <img src={FilterIconComplete}/>
                             </RoundButton>
@@ -152,22 +168,6 @@ class Sidebar extends React.Component{
                             </RoundButton>
                         </ButtonContainer>
                     </OverlayTrigger>
-                }
-
-
-                {localStorage.getItem("userId") != null ?
-                    <ButtonContainer>
-                        <RoundButton
-                            width="75%"
-                            onClick={() => {
-                                this.logout();
-                            }}
-                        >
-                            <img src={LogoutIcon}/>
-                        </RoundButton>
-                    </ButtonContainer>
-                    :
-                    null
                 }
 
             </Container>

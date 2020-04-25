@@ -23,7 +23,7 @@ import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.css"
  */
 
 import Player from "../../views/Player";
-import {Spinner} from "../../views/design/Spinner";
+import Spinner from "react-bootstrap/Spinner";
 import {withRouter} from "react-router-dom";
 import {ButtonForRecycling} from "../../views/design/ButtonForRecycling";
 import {ButtonForFireplace} from "../../views/design/ButtonForFireplace";
@@ -90,7 +90,7 @@ const ButtonFountain = {
     border: '2px solid #66A3E0',
     background: '#003068',
 
-}
+};
 
 
 
@@ -162,9 +162,9 @@ class MapService extends React.Component {
         super(props);
         this.state = {
             selectedLocation: null,
-            currCenter: [47.366950, 8.547200],
+            currCenter: null
         };
-        this.setCenter();
+        //this.setCenter();
     }
 
     setSelectedLocation(location) {
@@ -198,21 +198,13 @@ class MapService extends React.Component {
     }
 
     getIcon(location){
-        //funktioniert aktuell nur mit fountainClipart, wenn mit anderen funktioniert, dann einfach ersten return entfernen
-        //return '/FountainClipart.png';
         if (location.locationType === "FOUNTAIN"){
-            //return "../../views/MapMarkers/FountainIcon.png"
-            //return FountainIcon
             return '/FountainIcon.png'
         }
         else if (location.locationType === "FIREPLACE"){
-            //return "../../views/MapMarkers/FireplaceIcon.png"
-            //return FireplaceIcon
             return '/FireplaceIcon.png'
         }
         else {
-            //return "../../views/MapMarkers/RecyclingIcon.png"
-            //return RecyclingIcon
             return '/RecyclingIcon.png'
         }
     }
@@ -224,8 +216,8 @@ class MapService extends React.Component {
     }
 
     setCenter(){
-        if (this.props.currentLocation[0] != null && this.props.currentLocation[1] != null){
-            this.setState({currCenter: [this.props.currentLocation[0], this.props.currentLocation[1]]})
+        if (this.props.currentLocation != null){
+            this.setState({currCenter: this.props.currentLocation})
         }
         else{
             this.setState({currCenter: [47.366950, 8.547200]})
@@ -276,7 +268,10 @@ class MapService extends React.Component {
                     <GoogleMap
                         defaultZoom={15}
                         //Center at current location
-                        defaultCenter={{lat: this.state.currCenter[0], lng: this.state.currCenter[1]}}
+                        defaultCenter={{
+                        lat: this.props.currentCenter[0],
+                        lng: this.props.currentCenter[1]
+                    }}
                         defaultOptions={{ styles: mapStyles }}
 
                     >

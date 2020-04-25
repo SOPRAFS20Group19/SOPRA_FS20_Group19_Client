@@ -5,7 +5,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import {api, handleError} from "../../helpers/api";
 import User from "../../components/shared/models/User";
 import LocationListItem from "./LocationListItem";
-import {Spinner} from "../design/Spinner";
+import Spinner from "react-bootstrap/Spinner";
 
 const Container = styled.div`
   display: flex;
@@ -59,11 +59,15 @@ class SavedLocations extends React.Component {
 
             const response = await api.get(url);
 
-            const locationsList = response.data.map((location) => <LocationListItem location={location} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>);
+            const locationsList = response.data.map((location) => <LocationListItem location={location} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>);
             this.setState({favoriteLocations: locationsList});
         } catch (e) {
             alert(`Something went wrong while getting the favorite locations: \n${handleError(e)}`);
         }
+    }
+
+    refreshPage(){
+        window.location.reload();
     }
 
     render(){
@@ -72,7 +76,9 @@ class SavedLocations extends React.Component {
                 <Title>
                     SAVED LOCATIONS
                 </Title>
-                {!this.state.favoriteLocations ? (<Text>We are currently retrieving your favorite locations. Please wait...</Text>) : (
+                {!this.state.favoriteLocations ? (<Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>) : (
                     <ListContainer>
                         {this.state.favoriteLocations}
                     </ListContainer>
