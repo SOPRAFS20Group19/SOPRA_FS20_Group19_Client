@@ -75,6 +75,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  min-width: 240px;
 `;
 
 /**

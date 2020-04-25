@@ -314,10 +314,19 @@ class MapService extends React.Component {
                                         <HeaderOfPopUp>{"Location Number: "}</HeaderOfPopUp>
                                         <Text>{this.state.selectedLocation.id}</Text><br/>
                                         <HeaderOfPopUp> {"Coordinates: "}</HeaderOfPopUp>
-                                        <Text>{this.state.selectedLocation.coordinates}</Text><br/>
+                                        <Text>{this.state.selectedLocation.longitude}, {this.state.selectedLocation.latitude}</Text><br/>
                                         <br/>
 
                                         {/*<h2>{"URL: " + this.props.match.params.locationId}</h2> only for testing purpose*/}
+                                    {!localStorage.getItem('userId') ? (
+                                        <Button style={this.getStyleOfButton()}
+                                                onClick={() => {
+                                                    this.props.history.push('/registration');
+                                                }}
+                                        >
+                                            Register here to get more information!
+                                        </Button>
+                                    ) : (
                                         <Button style={this.getStyleOfButton()}
                                             onClick={() => {
                                                 this.props.history.push(`/map/informationpage/` + this.state.selectedLocation.id);
@@ -325,6 +334,7 @@ class MapService extends React.Component {
                                         >
                                             Get more information here!
                                         </Button>
+                                    )}
                                 </Border>
                             </InfoWindow>
                         )}
