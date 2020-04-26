@@ -12,6 +12,7 @@ class Location {
         this.art_txt = null;
         this.brunnenart_txt = null;
         this.additionalInformation = null;
+        this.ausstattung = null;
         Object.assign(this, data);
     }
 }
