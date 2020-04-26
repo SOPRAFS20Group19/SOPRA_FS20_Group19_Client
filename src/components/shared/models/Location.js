@@ -7,6 +7,10 @@ class Location {
         this.coordinates = null;
         this.latitude = null;
         this.longitude = null;
+        this.locationType = null;
+        this.baujahr = null;
+        this.art_txt = null;
+        this.brunnenart_txt = null;
         this.additionalInformation = null;
         Object.assign(this, data);
     }
