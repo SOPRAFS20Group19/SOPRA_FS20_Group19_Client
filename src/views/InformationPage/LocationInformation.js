@@ -30,6 +30,13 @@ const ID = styled.div`
   flex-direction: row;
 `;
 
+const Address = styled.div`
+  font-weight: bold;
+  font-size: x-large;
+  margin-bottom: 0.25%;
+  flex-direction: row;
+`;
+
 const AdditionalInformation = styled.div`
   font-weight: bold;
   font-size: x-large;
@@ -74,12 +81,14 @@ class LocationInformation extends React.Component{
     render() {
         return (
             <Container>
-                {!this.props.location ? (<Spinner/>) :(<div>
-                <ID>ID: <Text>{this.props.id}</Text> </ID>
+                {!this.props.location ? (<Spinner/>) :(
+                    <div>
+                        <ID>ID: <Text>{this.props.id}</Text> </ID>
+                        <Address>Address: <Text>{this.props.address}</Text></Address>
                         <AdditionalInformation>Additional Information:
                             <Text>{this.props.information}</Text>
-                </AdditionalInformation>
-                <Coordinates>Coordinates: <Text>{this.props.longitude}, {this.props.latitude}</Text></Coordinates>
+                        </AdditionalInformation>
+                        <Coordinates>Coordinates: <Text>{this.props.latitude}, {this.props.longitude}</Text></Coordinates>
                     </div>
                     )}
             </Container>

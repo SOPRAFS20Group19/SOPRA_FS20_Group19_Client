@@ -109,6 +109,7 @@ class LocationInformationPage extends React.Component {
                     <LocationInformation
                         location={this.state.location}
                         id={this.state.locationToBeShown.id}
+                        address={this.state.locationToBeShown.address}
                         information={this.state.additionalInformation}
                         longitude={this.state.locationToBeShown.longitude}
                         latitude={this.state.locationToBeShown.latitude}

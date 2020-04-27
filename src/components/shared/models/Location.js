@@ -4,6 +4,7 @@
 class Location {
     constructor(data = {}) {
         this.id = null;
+        this.address = null;
         this.coordinates = null;
         this.latitude = null;
         this.longitude = null;

@@ -311,10 +311,10 @@ class MapService extends React.Component {
                                 <Border style={this.getStyleOfBorder()}>
 
                                         <h2>{this.getTypeAsString()}</h2>
-                                        <HeaderOfPopUp>{"Location Number: "}</HeaderOfPopUp>
-                                        <Text>{this.state.selectedLocation.id}</Text><br/>
+                                        <HeaderOfPopUp>{"Address: "}</HeaderOfPopUp>
+                                        <Text>{this.state.selectedLocation.address}</Text><br/>
                                         <HeaderOfPopUp> {"Coordinates: "}</HeaderOfPopUp>
-                                        <Text>{this.state.selectedLocation.longitude}, {this.state.selectedLocation.latitude}</Text><br/>
+                                        <Text>{this.state.selectedLocation.latitude}, {this.state.selectedLocation.longitude}</Text><br/>
                                         <br/>
 
                                         {/*<h2>{"URL: " + this.props.match.params.locationId}</h2> only for testing purpose*/}

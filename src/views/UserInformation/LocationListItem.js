@@ -125,7 +125,7 @@ export default class LocationListItem extends React.Component{
                 <IconContainer>
                     <img src={this.getImage()} alt={this.getTypeAsString()} width="60px" height="60px"/>
                 </IconContainer>
-                <Title>{this.getTypeAsString()} - ID: {this.props.location.id}</Title>
+                <Title>{this.getTypeAsString()} - {this.props.location.address}</Title>
                 <ButtonContainer>
                     <InfoPageButton
                         variant="primary"
