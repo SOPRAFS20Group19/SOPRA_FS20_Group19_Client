@@ -15,6 +15,7 @@ import RecyclingCircle from "../../views/MapMarkers/RecyclingCircle.png"
 import {ButtonForRecycling} from "../../views/design/ButtonForRecycling";
 import {RoundButton} from "../../views/design/RoundButton";
 import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo"
+import Spinner from "react-bootstrap/Spinner";
 
 
 const MainContainer =styled.div`
@@ -240,6 +241,20 @@ const ButtonContainer = styled.div`
   width: 100%;
 `;
 
+const ButtonContainerSpinnerAddLocation = styled.div`
+height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: top;
+  align-items: left;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 4;
+  margin-top: 15px;
+`;
+
 const ButtonContainerFountainCircle = styled.div`
   display: flex;
   justify-content: center;
@@ -287,7 +302,7 @@ const ButtonContainerCoordinatesManually = styled.div`
 
 const QuestionContainer = styled.div`
   display: flex;
-  justify-content: left;
+  justify-content: center;
   grid-column: 1;
   grid-row: 2;
   margin-top: 15px;
@@ -297,10 +312,10 @@ const QuestionContainer = styled.div`
 const Question = styled.div`
   font-weight: bolder;
   font-size: 30px;
-  margin-left: 30px;
+  margin-left: 0px;
   letter-spacing: 0.2em;
   line-height: 1.1em;
-  margin-top: 30px;
+  margin-top: 15px;
 `;
 const Title = styled.div`
   font-weight: bold;
@@ -320,6 +335,7 @@ class AddLocation extends React.Component {
     constructor() {
         super();
         this.state = {
+            savingLocation: null,
             setCoordinates: null,
             locationType: null,
             latitude: null,
@@ -345,6 +361,7 @@ class AddLocation extends React.Component {
             baden: null,
             hunde: null,
             kinderwagen: null,
+            ausstattung: {
             holz_string: "",
             rost_string: "",
             tisch_string: "",
@@ -353,8 +370,7 @@ class AddLocation extends React.Component {
             parkplatz_string: "",
             baden_string: "",
             hunde_string: "",
-            kinderwagen_string: ""
-
+            kinderwagen_string: ""}
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
@@ -415,18 +431,23 @@ class AddLocation extends React.Component {
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesFireplace() {
         try {
+            this.setState({savingLocation: true})
             if(this.state.holz==="X"){
-                this.setState({holz_string: "Holz, "})
+                const newAusstattung = {...this.state.ausstattung};
+                newAusstattung["holz_string"] = "Holz, ";
+                this.setState({ausstattung: newAusstattung});
             }
             if(this.state.rost==="X"){
-                this.setState({rost_string: "Rost, "})
+                const newAusstattung = {...this.state.ausstattung};
+                newAusstattung["rost_string"] = "Rost, ";
+                this.setState({ausstattung: newAusstattung});
             }
 
             const requestBody = JSON.stringify({
                 locationType: "FIREPLACE",
                 longitude: this.state.longitude,
                 latitude: this.state.latitude,
-                ausstattung: toString(this.state.holz_string + this.state.rost_string)
+                ausstattung: this.state.ausstattung.holz_string + this.state.ausstattung.rost_string
             });
 
             const url = '/locations';
@@ -445,6 +466,7 @@ class AddLocation extends React.Component {
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesRecycling() {
         try {
+            this.setState({savingLocation: true})
             if (this.state.glas==="X"){
                 this.state.glas_definite = "X";
             }
@@ -483,6 +505,7 @@ class AddLocation extends React.Component {
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesFountain() {
         try {
+            this.setState({savingLocation: true})
             const requestBody = JSON.stringify({
                 locationType: "FOUNTAIN",
                 longitude: this.state.longitude,
@@ -514,7 +537,7 @@ class AddLocation extends React.Component {
         return (
             <MainContainer>
             <TitleEdit/>
-            <SidebarInfoAndAddLocation/>
+                <SidebarInfoAndAddLocation/>
                 {!this.state.locationType ?
                     (<MainContainer>
                         <QuestionContainer>
@@ -544,7 +567,7 @@ class AddLocation extends React.Component {
                     </MainContainer>)
                     : (!this.state.setCoordinates ? (<MainContainer>
                         <QuestionContainer>
-                            <Question>Set the coordinates: </Question>
+                            <Question>Set the coordinates:</Question>
                         </QuestionContainer>
                         <ImageContainer>
                         <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
@@ -553,7 +576,7 @@ class AddLocation extends React.Component {
                             <Button
                                 disabled={this.state.latitude || this.state.longitude}
                                 onClick={() => {this.getLocation();
-                                this.setCoordinatesSuccessfully();}}>Get current Coordinates  </Button>
+                                this.setCoordinatesSuccessfully();}}>Get current Coordinates</Button>
                         </ButtonContainerCoordinates>
                         <Container3>
                             <Title>Latitude: </Title>
@@ -580,7 +603,30 @@ class AddLocation extends React.Component {
                         </ButtonContainerCoordinatesManually>
 
                     </MainContainer>) : (this.state.locationType==="FOUNTAIN" ?
-                        (<MainContainer>
+                        (this.state.savingLocation ? (
+                            <MainContainer>
+                            <ImageContainer>
+                                <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
+                            </ImageContainer>
+                            <Container2>
+                                <Title>Thank's!</Title>
+                            </Container2>
+                            <Container3>
+                                <ButtonContainerSpinnerAddLocation>
+                                    <Button variant="primary" disabled
+                                    width="100%">
+                                        <Spinner
+                                            as="span"
+                                            animation="border"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        />
+                                        Creating...
+                                    </Button>
+                                </ButtonContainerSpinnerAddLocation>
+                            </Container3>
+                        </MainContainer>) : (<MainContainer>
                             <QuestionContainer>
                                 <Question>Location information: </Question>
                             </QuestionContainer>
@@ -589,7 +635,10 @@ class AddLocation extends React.Component {
                             </ImageContainer>
                             <Container2>
                                 <Title>Coordinates</Title>
-                                <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>
+                                {!this.state.latitude && !this.state.longitude ? (<Spinner animation="border" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </Spinner>) : (
+                                    <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>)}
                             </Container2>
                             <Container3>
                                 <Title>Baujahr (optional): </Title>
@@ -638,8 +687,30 @@ class AddLocation extends React.Component {
                                     </Button>
                                 </ButtonContainer>
                             </Container6>
-                        </MainContainer>) :
-                        (this.state.locationType==="FIREPLACE" ? (
+                        </MainContainer>)) :
+                        (this.state.locationType==="FIREPLACE" ? (this.state.savingLocation ? (<MainContainer>
+                                <ImageContainer>
+                                    <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
+                                </ImageContainer>
+                                <Container2>
+                                    <Title>Thank's!</Title>
+                                </Container2>
+                                <Container3>
+                                    <ButtonContainerSpinnerAddLocation>
+                                        <Button variant="primary" disabled
+                                                width="100%">
+                                            <Spinner
+                                                as="span"
+                                                animation="border"
+                                                size="sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                            />
+                                            Creating...
+                                        </Button>
+                                    </ButtonContainerSpinnerAddLocation>
+                                </Container3>
+                            </MainContainer>) : (
                             <MainContainer>
                                 <QuestionContainer>
                                     <Question>Location information: </Question>
@@ -649,7 +720,10 @@ class AddLocation extends React.Component {
                                 </ImageContainer>
                                 <Container2>
                                     <Title>Coordinates</Title>
-                                    <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>
+                                    {!this.state.latitude && !this.state.longitude ? (<Spinner animation="border" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </Spinner>) : (
+                                    <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>)}
                                 </Container2>
                                 <Container3>
                                     <Title>Holz vorhanden? </Title>
@@ -781,9 +855,31 @@ class AddLocation extends React.Component {
                                         </Button>
                                     </ButtonContainer>
                                 </Container12>
-                        </MainContainer>)
-                            :
-                            (<MainContainer>
+                        </MainContainer>))
+                            : (this.state.savingLocation ? (<MainContainer>
+                                <ImageContainer>
+                                    <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
+                                </ImageContainer>
+                                <Container2>
+                                    <Title>Thank's!</Title>
+                                </Container2>
+                                <Container3>
+                                    <ButtonContainerSpinnerAddLocation>
+                                        <Button variant="primary" disabled
+                                                width="100%">
+                                <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                />
+                                Creating...
+                            </Button>
+                                    </ButtonContainerSpinnerAddLocation>
+                                </Container3>
+                            </MainContainer>) : (
+                                <MainContainer>
                                 <QuestionContainer>
                                     <Question>Location information: </Question>
                                 </QuestionContainer>
@@ -792,7 +888,10 @@ class AddLocation extends React.Component {
                                 </ImageContainer>
                                 <Container2>
                                     <Title>Coordinates</Title>
-                                    <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>
+                                    {!this.state.latitude && !this.state.longitude ? (<Spinner animation="border" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </Spinner>) : (
+                                        <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>)}
                                 </Container2>
                                 <Container3>
                                     <Title>Adresse: </Title>
@@ -860,7 +959,6 @@ class AddLocation extends React.Component {
                                         </Button>
                                     </ButtonContainer>
                                 </Container8>
-
                                 <Container9>
                                     <ButtonContainer>
                                         <Button
@@ -874,7 +972,7 @@ class AddLocation extends React.Component {
                                         </Button>
                                     </ButtonContainer>
                                 </Container9>
-                            </MainContainer>))))}
+                            </MainContainer>)))))}
 
             </MainContainer>
         );
