@@ -35,6 +35,7 @@ const Title = styled.div`
   line-height: 1.1em;
   grid-column: 2;
   grid-row: 1;
+  min-width: 400px;
 `;
 
 const ButtonContainer = styled.div`
@@ -60,6 +61,7 @@ const InfoPageButton = styled(Button)`
   border-radius: 1px;
   color: black;
   padding-left: 0px;
+  text-align: left;
 `;
 
 export default class LocationListItem extends React.Component{

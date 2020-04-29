@@ -162,6 +162,7 @@ class MapService extends React.Component {
         super(props);
         this.state = {
             selectedLocation: null,
+            selectedLocationRating: null,
             currCenter: null
         };
         //this.setCenter();
@@ -169,6 +170,20 @@ class MapService extends React.Component {
 
     setSelectedLocation(location) {
         this.setState({selectedLocation: location});
+        if (location != null){
+            this.showAverageRating(location.id);
+        }
+    }
+
+    async showAverageRating(locationId){
+        try {
+            const url = '/locations/rating/' + locationId;
+            const response = await api.get(url);
+            const rating = response.data;
+            this.setState({selectedLocationRating: rating});
+        } catch (e) {
+            alert(`Something went wrong while getting the average rating: \n${handleError(e)}`);
+        }
     }
 
 
@@ -313,9 +328,20 @@ class MapService extends React.Component {
                                         <h2>{this.getTypeAsString()}</h2>
                                         <HeaderOfPopUp>{"Address: "}</HeaderOfPopUp>
                                         <Text>{this.state.selectedLocation.address}</Text><br/>
-                                        <HeaderOfPopUp> {"Coordinates: "}</HeaderOfPopUp>
-                                        <Text>{this.state.selectedLocation.latitude}, {this.state.selectedLocation.longitude}</Text><br/>
-                                        <br/>
+
+                                    {this.state.selectedLocationRating ? (
+                                    <div>
+                                        <HeaderOfPopUp> {"Average Rating: "}</HeaderOfPopUp>
+                                        <Text>{this.state.selectedLocationRating}/5</Text>
+                                    </div>) :
+                                        (
+                                            <div>
+                                                <HeaderOfPopUp> {"Average Rating: "}</HeaderOfPopUp>
+                                                <Text>0/5</Text>
+                                            </div>)}
+                                    <HeaderOfPopUp> {"Coordinates: "}</HeaderOfPopUp>
+                                    <Text>{this.state.selectedLocation.latitude}, {this.state.selectedLocation.longitude}</Text><br/>
+                                    <br/>
 
                                         {/*<h2>{"URL: " + this.props.match.params.locationId}</h2> only for testing purpose*/}
                                     {!localStorage.getItem('userId') ? (
