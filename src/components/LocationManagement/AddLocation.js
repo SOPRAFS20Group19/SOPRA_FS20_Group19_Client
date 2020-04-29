@@ -16,6 +16,8 @@ import {ButtonForRecycling} from "../../views/design/ButtonForRecycling";
 import {RoundButton} from "../../views/design/RoundButton";
 import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo"
 import Spinner from "react-bootstrap/Spinner";
+import SidebarAddLocation from "../../views/AddLocation/SidebarAddLocation";
+import SidebarAddLocationtoStart from "../../views/AddLocation/SidebarAddLocationtoStart";
 
 
 const MainContainer =styled.div`
@@ -361,16 +363,6 @@ class AddLocation extends React.Component {
             baden: null,
             hunde: null,
             kinderwagen: null,
-            ausstattung: {
-            holz_string: "",
-            rost_string: "",
-            tisch_string: "",
-            trinkwasser_string: "",
-            abfall_string: "",
-            parkplatz_string: "",
-            baden_string: "",
-            hunde_string: "",
-            kinderwagen_string: ""}
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
@@ -432,6 +424,7 @@ class AddLocation extends React.Component {
     async saveChangesFireplace() {
         try {
             this.setState({savingLocation: true})
+            /*
             if(this.state.holz==="X"){
                 const newAusstattung = {...this.state.ausstattung};
                 newAusstattung["holz_string"] = "Holz, ";
@@ -443,11 +436,21 @@ class AddLocation extends React.Component {
                 this.setState({ausstattung: newAusstattung});
             }
 
+             */
+
             const requestBody = JSON.stringify({
                 locationType: "FIREPLACE",
                 longitude: this.state.longitude,
                 latitude: this.state.latitude,
-                ausstattung: this.state.ausstattung.holz_string + this.state.ausstattung.rost_string
+                holz: this.state.holz,
+                baden: this.state.baden,
+                hunde: this.state.hunde,
+                kinderwagen: this.state.kinderwagen,
+                trinkwasser: this.state.trinkwasser,
+                parkplatz: this.state.parkplatz,
+                abfall: this.state.abfall,
+                tisch: this.state.tisch,
+                rost: this.state.rost,
             });
 
             const url = '/locations';
@@ -537,9 +540,9 @@ class AddLocation extends React.Component {
         return (
             <MainContainer>
             <TitleEdit/>
-                <SidebarInfoAndAddLocation/>
                 {!this.state.locationType ?
                     (<MainContainer>
+                            <SidebarAddLocation/>
                         <QuestionContainer>
                 <Question>What location type do you want to add?</Question>
             </QuestionContainer>
@@ -563,9 +566,9 @@ class AddLocation extends React.Component {
                     </RoundButton>
                     </ButtonContainerRecyclingCircle>
                 </ButtonContainer>
-
                     </MainContainer>)
                     : (!this.state.setCoordinates ? (<MainContainer>
+                        <SidebarAddLocationtoStart/>
                         <QuestionContainer>
                             <Question>Set the coordinates:</Question>
                         </QuestionContainer>
@@ -605,7 +608,7 @@ class AddLocation extends React.Component {
                     </MainContainer>) : (this.state.locationType==="FOUNTAIN" ?
                         (this.state.savingLocation ? (
                             <MainContainer>
-                            <ImageContainer>
+                                <ImageContainer>
                                 <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
                             </ImageContainer>
                             <Container2>
@@ -627,6 +630,7 @@ class AddLocation extends React.Component {
                                 </ButtonContainerSpinnerAddLocation>
                             </Container3>
                         </MainContainer>) : (<MainContainer>
+                            <SidebarAddLocationtoStart/>
                             <QuestionContainer>
                                 <Question>Location information: </Question>
                             </QuestionContainer>
@@ -712,6 +716,7 @@ class AddLocation extends React.Component {
                                 </Container3>
                             </MainContainer>) : (
                             <MainContainer>
+                                <SidebarAddLocationtoStart/>
                                 <QuestionContainer>
                                     <Question>Location information: </Question>
                                 </QuestionContainer>
@@ -880,7 +885,8 @@ class AddLocation extends React.Component {
                                 </Container3>
                             </MainContainer>) : (
                                 <MainContainer>
-                                <QuestionContainer>
+                                    <SidebarAddLocationtoStart/>
+                                    <QuestionContainer>
                                     <Question>Location information: </Question>
                                 </QuestionContainer>
                                 <ImageContainer>
