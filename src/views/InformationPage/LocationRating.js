@@ -17,11 +17,11 @@ const Container = styled.div`
   grid-template-rows: auto auto;
   align-items: center;
   flex-direction: row;
-  margin-left: 20px;
-  margin-top: 30px;
+  margin-left: 0px;
+  margin-top: 0px;
   padding-left: 0.5%;
-  grid-column: 1;
-  grid-row: 5;
+  grid-column: 2;
+  grid-row: 2;
 `;
 
 const Text = styled.div`
@@ -85,7 +85,9 @@ class LocationRating extends React.Component{
         try {
             const url = '/locations/rating/' + localStorage.getItem('userId') + '/' + this.props.locationId + "/" + this.state.ratedStars;
             await api.put(url);
-            window.location.reload();
+            this.showUserRating();
+            this.showAverageRating();
+            //window.location.reload();
         } catch (e) {
             alert(`Something went wrong while updating the rating: \n${handleError(e)}`);
         }
@@ -150,6 +152,7 @@ class LocationRating extends React.Component{
                         />
                     </ButtonGroup></ButtonContainer2>
                     <ButtonContainer> <Button1
+                        disabled={true}
                         width="100%"
                         onClick={() => {
                             this.saveRating();

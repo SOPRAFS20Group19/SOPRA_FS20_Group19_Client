@@ -21,7 +21,7 @@ const Container = styled.div`
   align-content: top;
   flex-direction: column;
   grid-column: 2;
-  grid-row: 4 / span 2;
+  grid-row: 3/ span 2;
   margin-top: 30px;
 `;
 
@@ -182,7 +182,7 @@ class Chatbox extends React.Component {
 
     render() {
         return ( <Container>
-            <Text>Chat</Text>
+            <Text>Comments</Text>
                 {!this.state.oldMessages ? <EmptyChatContainer/> :
                 <ChatContainer>
                     <MessagesList>
@@ -204,7 +204,9 @@ class Chatbox extends React.Component {
                         }}
                     />
                     <ButtonContainer>
-                    <Button variant="outline-secondary"
+                    <Button
+                        disabled={!this.state.message}
+                        variant="outline-secondary"
                             height="100%"
                             onClick={() => {
                                 this.handleClick();

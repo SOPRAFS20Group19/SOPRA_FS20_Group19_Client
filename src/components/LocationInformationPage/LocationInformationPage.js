@@ -118,7 +118,6 @@ class LocationInformationPage extends React.Component {
                     <LocationRating locationId={this.props.match.params.locationId}/>
                     <Chatbox locationId={this.props.match.params.locationId}/>
                     <InformationPageFavourite locationId={this.props.match.params.locationId}/>
-                    <LocationPictures/>
                     </Container>
                     )}
             </Container>
