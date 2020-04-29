@@ -16,6 +16,8 @@ import {ButtonForRecycling} from "../../views/design/ButtonForRecycling";
 import {RoundButton} from "../../views/design/RoundButton";
 import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo"
 import Spinner from "react-bootstrap/Spinner";
+import SidebarAddLocation from "../../views/AddLocation/SidebarAddLocation";
+import SidebarAddLocationtoStart from "../../views/AddLocation/SidebarAddLocationtoStart";
 
 
 const MainContainer =styled.div`
@@ -538,9 +540,9 @@ class AddLocation extends React.Component {
         return (
             <MainContainer>
             <TitleEdit/>
-                <SidebarInfoAndAddLocation/>
                 {!this.state.locationType ?
                     (<MainContainer>
+                            <SidebarAddLocation/>
                         <QuestionContainer>
                 <Question>What location type do you want to add?</Question>
             </QuestionContainer>
@@ -564,9 +566,9 @@ class AddLocation extends React.Component {
                     </RoundButton>
                     </ButtonContainerRecyclingCircle>
                 </ButtonContainer>
-
                     </MainContainer>)
                     : (!this.state.setCoordinates ? (<MainContainer>
+                        <SidebarAddLocationtoStart/>
                         <QuestionContainer>
                             <Question>Set the coordinates:</Question>
                         </QuestionContainer>
@@ -606,7 +608,7 @@ class AddLocation extends React.Component {
                     </MainContainer>) : (this.state.locationType==="FOUNTAIN" ?
                         (this.state.savingLocation ? (
                             <MainContainer>
-                            <ImageContainer>
+                                <ImageContainer>
                                 <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
                             </ImageContainer>
                             <Container2>
@@ -628,6 +630,7 @@ class AddLocation extends React.Component {
                                 </ButtonContainerSpinnerAddLocation>
                             </Container3>
                         </MainContainer>) : (<MainContainer>
+                            <SidebarAddLocationtoStart/>
                             <QuestionContainer>
                                 <Question>Location information: </Question>
                             </QuestionContainer>
@@ -713,6 +716,7 @@ class AddLocation extends React.Component {
                                 </Container3>
                             </MainContainer>) : (
                             <MainContainer>
+                                <SidebarAddLocationtoStart/>
                                 <QuestionContainer>
                                     <Question>Location information: </Question>
                                 </QuestionContainer>
@@ -881,7 +885,8 @@ class AddLocation extends React.Component {
                                 </Container3>
                             </MainContainer>) : (
                                 <MainContainer>
-                                <QuestionContainer>
+                                    <SidebarAddLocationtoStart/>
+                                    <QuestionContainer>
                                     <Question>Location information: </Question>
                                 </QuestionContainer>
                                 <ImageContainer>
