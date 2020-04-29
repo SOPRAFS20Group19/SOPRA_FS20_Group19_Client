@@ -10,7 +10,7 @@ import * as brunnenData from "./data/wvz_brunnen.json";
 import mapStyles from "./mapStyles";
 import Sidebar from "../../views/Sidebar";
 import Header from "../../views/Header";
-import {Button} from "react-bootstrap";
+import {Button} from '../../views/design/Button';
 import { withRouter } from 'react-router-dom';
 import MapService from "./MapService";
 import Popover from "react-bootstrap/Popover";
@@ -19,69 +19,21 @@ import {api, handleError} from "../../helpers/api";
 import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
 import {FountainIcon} from "../../views/MapMarkers/FountainIcon.png"
 import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.png"
+import Spinner from "react-bootstrap/Spinner";
 
-function Map() {
-    const [selectedBrunnen, setSelectedBrunnen] = useState(null);
-
-    useEffect(() => {
-        const listener = e => {
-            if (e.key === "Escape") {
-                setSelectedBrunnen(null);
-            }
-        };
-        window.addEventListener("keydown", listener);
-
-        return () => {
-            window.removeEventListener("keydown", listener);
-        };
-    }, []);
-
-    return (
-        <GoogleMap
-            defaultZoom={15}
-            defaultCenter={{ lat: 47.366950, lng: 8.547200 }}
-            defaultOptions={{ styles: mapStyles }}
-        >
-
-            {brunnenData.features.map(brunnen => (
-                <Marker
-                    key={brunnen.properties.objectid}
-                    position={{
-                        lat: brunnen.geometry.coordinates[1],
-                        lng: brunnen.geometry.coordinates[0]
-                    }}
-
-                    onClick={() => {
-                        setSelectedBrunnen(brunnen);
-                    }}
-
-                    icon={{
-                        url: '/FountainClipart.png',
-                        scaledSize: new window.google.maps.Size(25, 25)
-                    }}
-                />
-            ))}
-
-            {selectedBrunnen && (
-                <InfoWindow
-                    onCloseClick={() => {
-                        setSelectedBrunnen(null);
-                    }}
-                    position={{
-                        lat: selectedBrunnen.geometry.coordinates[1],
-                        lng: selectedBrunnen.geometry.coordinates[0]
-                    }}
-                >
-                    <div>
-                        <h2>{"Art des Brunnens:" + selectedBrunnen.properties.art_txt}</h2>
-                        <p>{"Baujahr:" + selectedBrunnen.properties.baujahr}</p>
-                    </div>
-                </InfoWindow>
-            )}
-
-        </GoogleMap>
-    );
-}
+const Container = styled.div`
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 0px;
+`;
 
 class Maps extends React.Component{
     constructor(props){
@@ -169,36 +121,33 @@ class Maps extends React.Component{
                 break;
         }
     }
-    /*
-    setCenter(){
-        if (this.state.currentPosition[0] != null && this.state.currentPosition[1] != null){
-            this.setState({currentCenter: [this.state.currentPosition[0], this.state.currentPosition[1]]})
-        }
-        else{
-            this.setState({currentCenter: [47.366950, 8.547200]})
-        }
-    }
-
-     */
 
     render(){
-        return (
-
-            <div style={{ width: "100vw", height: "100vh" }}>
-                <MapService
-                    currentLocation = {this.state.currentPosition}
-                    currentCenter = {this.state.currentCenter}
-                    locationsShown={this.state.locationsShown}
-                    googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `100%` }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
-                >
-                </MapService>
-                <Header/>
-                <Sidebar getFilteredLocations={this.getFilteredLocations.bind(this)}/>
-
-            </div>
+        return (<div>
+            {!this.state.locationsShown ? (<Container><Button variant="primary" disabled>
+                <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                />
+                Loading Map...
+            </Button></Container>) : (<div style={{ width: "100vw", height: "100vh" }}>
+            <MapService
+                currentLocation = {this.state.currentPosition}
+                currentCenter = {this.state.currentCenter}
+                locationsShown={this.state.locationsShown}
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDdG-nTEZ_bGS064sMlgL_dBdA4uZ2h5c0`}
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: `100%` }} />}
+                mapElement={<div style={{ height: `100%` }} />}
+            >
+            </MapService>
+            </div>)}
+            <Header/>
+            <Sidebar getFilteredLocations={this.getFilteredLocations.bind(this)}/>
+        </div>
         );
     }
 }
