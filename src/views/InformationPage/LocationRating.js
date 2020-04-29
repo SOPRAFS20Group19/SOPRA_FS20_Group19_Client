@@ -85,7 +85,9 @@ class LocationRating extends React.Component{
         try {
             const url = '/locations/rating/' + localStorage.getItem('userId') + '/' + this.props.locationId + "/" + this.state.ratedStars;
             await api.put(url);
-            window.location.reload();
+            this.showUserRating();
+            this.showAverageRating();
+            //window.location.reload();
         } catch (e) {
             alert(`Something went wrong while updating the rating: \n${handleError(e)}`);
         }
