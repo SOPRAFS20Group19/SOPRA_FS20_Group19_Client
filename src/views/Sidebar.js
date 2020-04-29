@@ -1,4 +1,5 @@
 import React from "react";
+import {useState} from "react";
 import styled from "styled-components";
 import {BaseContainer} from "../helpers/layout";
 import {Button} from "./design/Button";
@@ -28,7 +29,7 @@ const Container = styled.div`
     opacity: 0.9;
     background: #003068;
   }
-  height: 50%;
+  height: 55%;
   min-height: 375px;
   width: 10%;
   background: #66A3E0;
@@ -48,10 +49,29 @@ const ButtonContainer = styled.div`
   margin-top: 20px;
 `;
 
+const HoverContainer = styled.div`
+  display: flex;
+  color: white;
+  background: transparent;
+  justify-content: center;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: small;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+`;
+
 class Sidebar extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            showUser: false,
+            showFilter: false,
+            showAdd: false,
+            showUserHover: false,
+            showFilterHover: false,
+            showAddHover: false
         }
     }
 
@@ -77,11 +97,29 @@ class Sidebar extends React.Component{
           }
     }
 
+    toggleShowUserHover(value){
+        this.setState({showUserHover: value})
+    }
+
+    toggleShowFilterHover(value){
+        this.setState({showFilterHover: value})
+    }
+
+    toggleShowAddHover(value){
+        this.setState({showAddHover: value})
+    }
+
     render() {
         return (
             <Container>
                 {localStorage.getItem("userId") != null ?
-                    <OverlayTrigger trigger="click" placement="left" overlay={<Popover id="popover-basic">
+                    <OverlayTrigger
+                        rootClose={true}
+                        show={this.state.showUser}
+                        onHide={() => this.setState({ showUser: false })}
+                        trigger="click"
+                        placement="left"
+                        overlay={<Popover id="popover-basic">
                         <Popover.Content>
                             <ButtonContainer>
                                 <Button
@@ -97,29 +135,52 @@ class Sidebar extends React.Component{
                             </ButtonContainer>
                         </Popover.Content>
                     </Popover>}>
+                        <div>
                     <ButtonContainer>
-                        <RoundButton width="75%">
+                        <RoundButton
+                            width="75%"
+                            onMouseOver={() => this.toggleShowUserHover(true)}
+                            onMouseLeave={() => this.toggleShowUserHover(false)}
+                        >
                             <img src={UserIconComplete} alt="User Icon"/>
                         </RoundButton>
                     </ButtonContainer>
+                            {this.state.showUserHover ? <HoverContainer>Profile options</HoverContainer> : null}
+                        </div>
                     </OverlayTrigger>
                     :
                     null
                 }
 
                 {localStorage.getItem("userId") != null ?
-                    <OverlayTrigger trigger="click" placement="left" overlay={<Filter applyFilterSidebar={this.applyFilterSidebar.bind(this)}/>}>
-                        <ButtonContainer>
-                            <RoundButton
-                                width="75%"
-
-                            >
-                                <img src={FilterIconComplete}/>
-                            </RoundButton>
-                        </ButtonContainer>
+                    <OverlayTrigger
+                        rootClose={true}
+                        show={this.state.showFilter}
+                        onHide={() => this.setState({ showFilter: false })}
+                        trigger="click"
+                        placement="left"
+                        overlay={<Filter applyFilterSidebar={this.applyFilterSidebar.bind(this)}/>}>
+                        <div>
+                            <ButtonContainer>
+                                <RoundButton
+                                    width="75%"
+                                    onMouseOver={() => this.toggleShowFilterHover(true)}
+                                    onMouseLeave={() => this.toggleShowFilterHover(false)}
+                                >
+                                    <img src={FilterIconComplete}/>
+                                </RoundButton>
+                            </ButtonContainer>
+                            {this.state.showFilterHover ? <HoverContainer>Filter</HoverContainer> : null}
+                        </div>
                     </OverlayTrigger>
                     :
-                    <OverlayTrigger trigger="click" placement="left" overlay={<Popover id="popover-basic">
+                    <OverlayTrigger
+                        rootClose={true}
+                        show={this.state.showFilter}
+                        onHide={() => this.setState({ showFilter: false })}
+                        trigger="click"
+                        placement="left"
+                        overlay={<Popover id="popover-basic">
                         <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
                         <Popover.Content>
                             Please register first to use this feature.
@@ -128,21 +189,29 @@ class Sidebar extends React.Component{
                             </ButtonContainer>
                         </Popover.Content>
                     </Popover>}>
+                        <div>
                         <ButtonContainer>
                             <RoundButton
                                 width="75%"
+                                onMouseOver={() => this.toggleShowFilterHover(true)}
+                                onMouseLeave={() => this.toggleShowFilterHover(false)}
                             >
                                 <img src={FilterIconComplete}/>
                             </RoundButton>
                         </ButtonContainer>
+                        {this.state.showFilterHover ? <HoverContainer>Filter</HoverContainer> : null}
+                        </div>
                     </OverlayTrigger>
                 }
 
 
                 {localStorage.getItem("userId") != null ?
+                    <div>
                     <ButtonContainer>
                         <RoundButton
                             width="75%"
+                            onMouseOver={() => this.toggleShowAddHover(true)}
+                            onMouseLeave={() => this.toggleShowAddHover(false)}
                             onClick={() => {
                                 this.props.history.push(`/map/addlocation`);
                             }}
@@ -150,8 +219,16 @@ class Sidebar extends React.Component{
                             <img src={PlusIconComplete}/>
                         </RoundButton>
                     </ButtonContainer>
+                        {this.state.showAddHover ? <HoverContainer>Add new location</HoverContainer> : null}
+                    </div>
                     :
-                    <OverlayTrigger trigger="click" placement="left" overlay={<Popover id="popover-basic">
+                    <OverlayTrigger
+                        rootClose={true}
+                        show={this.state.showAdd}
+                        onHide={() => this.setState({ showAdd: false })}
+                        trigger="click"
+                        placement="left"
+                        overlay={<Popover id="popover-basic">
                     <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
                     <Popover.Content>
                     Please register first to use this feature.
@@ -160,13 +237,18 @@ class Sidebar extends React.Component{
                     </ButtonContainer>
                     </Popover.Content>
                     </Popover>}>
+                        <div>
                         <ButtonContainer>
                             <RoundButton
                                 width="75%"
+                                onMouseOver={() => this.toggleShowAddHover(true)}
+                                onMouseLeave={() => this.toggleShowAddHover(false)}
                             >
                                 <img src={PlusIconComplete}/>
                             </RoundButton>
                         </ButtonContainer>
+                        {this.state.showAddHover ? <HoverContainer>Add new location</HoverContainer> : null}
+                        </div>
                     </OverlayTrigger>
                 }
 
