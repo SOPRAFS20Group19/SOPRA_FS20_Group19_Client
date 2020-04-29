@@ -361,16 +361,6 @@ class AddLocation extends React.Component {
             baden: null,
             hunde: null,
             kinderwagen: null,
-            ausstattung: {
-            holz_string: "",
-            rost_string: "",
-            tisch_string: "",
-            trinkwasser_string: "",
-            abfall_string: "",
-            parkplatz_string: "",
-            baden_string: "",
-            hunde_string: "",
-            kinderwagen_string: ""}
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
@@ -432,6 +422,7 @@ class AddLocation extends React.Component {
     async saveChangesFireplace() {
         try {
             this.setState({savingLocation: true})
+            /*
             if(this.state.holz==="X"){
                 const newAusstattung = {...this.state.ausstattung};
                 newAusstattung["holz_string"] = "Holz, ";
@@ -443,11 +434,21 @@ class AddLocation extends React.Component {
                 this.setState({ausstattung: newAusstattung});
             }
 
+             */
+
             const requestBody = JSON.stringify({
                 locationType: "FIREPLACE",
                 longitude: this.state.longitude,
                 latitude: this.state.latitude,
-                ausstattung: this.state.ausstattung.holz_string + this.state.ausstattung.rost_string
+                holz: this.state.holz,
+                baden: this.state.baden,
+                hunde: this.state.hunde,
+                kinderwagen: this.state.kinderwagen,
+                trinkwasser: this.state.trinkwasser,
+                parkplatz: this.state.parkplatz,
+                abfall: this.state.abfall,
+                tisch: this.state.tisch,
+                rost: this.state.rost,
             });
 
             const url = '/locations';
