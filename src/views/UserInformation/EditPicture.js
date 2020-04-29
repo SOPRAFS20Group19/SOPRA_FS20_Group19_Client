@@ -15,6 +15,8 @@ import femaleScientistColor from "../../views/UserInformation/scientist-woman-co
 import femaleYogiColor from "../../views/UserInformation/yogi-man-color.svg";
 import maleYogiColor from "../../views/UserInformation/yogi-woman-color.svg";
 
+import { api, handleError } from '../../helpers/api';
+
 
 
 const Container = styled.div`
@@ -23,24 +25,25 @@ const Container = styled.div`
   flex-direction: column;
   grid-column: 2;
   grid-row: 3 /span 4;
-  margin-top: 15px;
+  margin-top: 10px;
 
 `;
 
 const Text = styled.div`
   font-weight: bold;
   font-size: large;
-  
+  flex-direction: row;
 `;
 
 const PictureContainer = styled.div`
   max-width: 500px;
-  border-color: black;
-  border-width: normal;
-  border-style: solid;
+  border: 2px solid #003068;
+  border-color: #66A3E0;
+  border-radius: 5px;
   align-items: center;
   flex-direction: column;
   padding: 10px;
+  margin-top: 10px;
   
   
 `;
@@ -50,9 +53,9 @@ const IconContainer = styled.div`
   height: 33%;
   width: 25%;
   display: inline-block;
-  background: ${props => props.filled ? "#003068" : "white"};
+  background: ${props => props.filled ? "#66A3E0" : "white"};
   :hover {
-    background: #003068;
+    background: #66A3E0;
     cursor: pointer;
 }
 `;
@@ -60,6 +63,7 @@ const IconContainer = styled.div`
 const ButtonContainer = styled.div`
   height: 100%;
   width: 100%;
+  max-width: 500px;
   display: flex;
   justify-content: top;
   align-items: left;
@@ -78,17 +82,29 @@ const PictureStyle = {
 
 
 class EditPicture extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            chosenAvatar: null
+            chosenAvatar: this.props.avatarNr
         }
     }
 
     //saves the added picture
     savePicture(){
-        //implement the save picture method
+        const requestBody = JSON.stringify({
+            avatarNr: this.state.chosenAvatar
+        });
+        const url = '/users/' + this.props.loggedInUserId;
+        try{
+            api.put(url, requestBody);
+
+            // after successfully saving the changes, the user is redirected to his profile page
+            this.props.history.push('/userprofile');
+        } catch (e) {
+            alert(`Something went wrong saving the new avatar: \n${handleError(e)}`);
+        }
     }
+
 
     handleClick(n){
         this.setState({

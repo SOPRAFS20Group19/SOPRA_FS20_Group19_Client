@@ -15,83 +15,36 @@ import TitleEdit from "../../views/UserInformation/TitleEdit";
 
 const MainContainer =styled.div`
   color: black;
-  flex-direction: row;
   width: 100%;
-  display: grid;
+  display:grid;
   grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto auto auto;
+  grid-template-rows: auto auto 100px 100px 100px 100px 100px;
   justify-content: center;
   grid-column-gap: 30px;
 `;
 
 
-const Container = styled(BaseContainer)`
-  color: white;
-  text-align: center;
-  flex-direction: column;
-  margin-top: 15px;
-`;
-const Container1 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: top;
-  align-items: left;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 20px;
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 15px;
+const Container = styled.div`
+margin-top: 10px;
+width: 100%;
+display: flex;
+justify-content: top;
+align-items: left;
+flex-direction: column;
+margin-left: 20px;
+grid-column: ${props => props.column};
 `;
 
-const Container2 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: top;
-  align-items: left;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 20px;
-  grid-column: 1;
-  grid-row: 4;
-  margin-top: 15px;
-`;
-const Container3 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: top;
-  align-items: left;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 20px;
-  grid-column: 1;
-  grid-row: 6;
-  margin-top: 15px;
-`;
-const Container4 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: top;
-  align-items: left;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 20px;
-  grid-column: 1;
-  grid-row: 7;
-  margin-top: 15px;
-`;
+
 
 
 const InputField = styled.input`
   &::placeholder {
     color: black;
   }
+  margin-top: 10px;
   height: 35px;
-  width: 80%;
+  width: 90%;
   border: 2px solid #003068;
   border-color: #66A3E0;
   border-radius: 5px;
@@ -99,17 +52,15 @@ const InputField = styled.input`
 `;
 
 const ButtonContainer = styled.div`
-  display: flex;
   justify-content: center;
   grid-column: 1;
-  grid-row: 4;
-  margin-top: 15px;
-  width: 80%;
+  margin-top: 10px;
+  width: 90%;
 `;
 
 const Title = styled.div`
   font-weight: bold;
-  font-size: x-large;
+  font-size: large;
   flex-direction: row;
 `;
 
@@ -181,9 +132,9 @@ class ProfileEdit extends React.Component {
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                     <MainContainer>
                         <TitleEdit/>
-                        <UserEditHeader username={this.state.loggedInUser.username}/>
+                        <UserEditHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
                 <SidebarEditUserInformation/>
-                <Container1>
+                <Container column={1}>
                     <Title>Name: </Title>
                     <InputField
                         placeholder="enter your new name here"
@@ -191,8 +142,8 @@ class ProfileEdit extends React.Component {
                             this.handleInputChange('name', e.target.value);
                         }}
                     />
-                </Container1>
-                <Container2>
+                </Container>
+                <Container column={1}>
                 <Title>Username: </Title>
                     <InputField
                         placeholder="enter your new username here"
@@ -200,19 +151,17 @@ class ProfileEdit extends React.Component {
                             this.handleInputChange('username', e.target.value);
                         }}
                     />
-                </Container2>
-                        <Container3>
-                            <Title>Password: </Title>
-                            <InputField
-                                placeholder="enter your new password here"
-                                onChange={e => {
-                                    this.handleInputChange('password', e.target.value);
-                                }}
-                            />
-                        </Container3>
-                <InfoEditProfile creationDate={this.state.loggedInUser.creationDate}/>
-                <Container4>
-                    <div>
+                </Container>
+                <Container column={1}>
+                    <Title>Password: </Title>
+                    <InputField
+                        placeholder="enter your new password here"
+                        onChange={e => {
+                            this.handleInputChange('password', e.target.value);
+                        }}
+                    />
+                </Container>
+                <Container column={1}>
                         <ButtonContainer>
                             <Button
                                 disabled={!this.state.name && !this.state.username && !this.state.password}
@@ -224,8 +173,6 @@ class ProfileEdit extends React.Component {
                                 Save Changes
                             </Button>
                         </ButtonContainer>
-                    </div>
-                    <div>
                         <ButtonContainer>
                             <Button
                                 width="100%"
@@ -236,10 +183,10 @@ class ProfileEdit extends React.Component {
                                 Cancel
                             </Button>
                         </ButtonContainer>
-                    </div>
-                </Container4>
-                <EditPicture/>
-                    </MainContainer>)}
+                </Container>
+                <EditPicture user={this.state.loggedInUser} loggedInUserId={this.state.loggedInUserId}/>
+                    </MainContainer>
+                    )}
             </MainContainer>
         );
     }

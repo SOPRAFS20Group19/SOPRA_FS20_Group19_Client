@@ -1,22 +1,10 @@
 import styled from "styled-components";
 import React from "react";
 import {withRouter} from "react-router-dom";
-import UserIconComplete from "../../views/UserIconComplete.svg"
-import maleCoder from "../../views/UserInformation/coder-man.svg";
-import femaleCoder from "../../views/UserInformation/coder-woman.svg";
-import maleScientist from "../../views/UserInformation/scientist-man.svg";
-import femaleScientist from "../../views/UserInformation/scientist-woman.svg";
-import femaleYogi from "../../views/UserInformation/yogi-man.svg";
-import maleYogi from "../../views/UserInformation/yogi-woman.svg";
-import maleCoderColor from "../../views/UserInformation/coder-man-color.svg";
-import femaleCoderColor from "../../views/UserInformation/coder-woman-color.svg";
-import maleScientistColor from "../../views/UserInformation/scientist-man-color.svg";
-import femaleScientistColor from "../../views/UserInformation/scientist-woman-color.svg";
-import femaleYogiColor from "../../views/UserInformation/yogi-man-color.svg";
-import maleYogiColor from "../../views/UserInformation/yogi-woman-color.svg";
 import { api } from "../../helpers/api";
+import avatarArray from "../AvatarArray"
 
-const avatarArray = [femaleCoder, femaleCoderColor, maleCoder, maleCoderColor, femaleScientist, femaleCoderColor, maleScientist, maleScientistColor, femaleYogi, femaleYogiColor, maleYogi, maleYogiColor]
+
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -43,6 +31,7 @@ const Title = styled.div`
   margin-top: 30px;
 `;
 
+
 class UserHeader extends React.Component {
     constructor(props) {
         super(props);
@@ -52,8 +41,8 @@ class UserHeader extends React.Component {
     }
 
     //returns the set image
-    getProfileImage(){
-        return UserIconComplete;
+    getProfileImage(nr){
+        return avatarArray[nr];
     }
 
 
@@ -61,7 +50,7 @@ class UserHeader extends React.Component {
         return (
             <Container>
                 <PictureContainer>
-                    <img src={this.getProfileImage()} alt="User icon" width="120px" height="120px"/>
+                    <img src={this.getProfileImage(this.props.avatarNr)} alt="User icon" width="120px" height="120px"/>
                     <Title>
                         {this.props.username}, that's you:
                     </Title>

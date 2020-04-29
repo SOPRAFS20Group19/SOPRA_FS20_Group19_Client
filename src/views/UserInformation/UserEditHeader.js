@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import {withRouter} from "react-router-dom";
-import UserIconComplete from "../../views/UserIconComplete.svg"
+import avatarArray from "../AvatarArray"
 
 
 const Container = styled.div`
@@ -39,8 +39,8 @@ class UserEditHeader extends React.Component {
     }
 
     //returns the set image
-    getProfileImage(){
-        return UserIconComplete;
+    getProfileImage(nr){
+        return avatarArray[nr];
     }
 
 
@@ -48,7 +48,7 @@ class UserEditHeader extends React.Component {
         return (
             <Container>
                 <PictureContainer>
-                    <img src={this.getProfileImage()} alt="User icon" width="120px" height="120px"/>
+                    <img src={this.getProfileImage(this.props.avatarNr)} alt="User icon" width="120px" height="120px"/>
                     <Title>
                         {this.props.username}, edit your profile:
                     </Title>

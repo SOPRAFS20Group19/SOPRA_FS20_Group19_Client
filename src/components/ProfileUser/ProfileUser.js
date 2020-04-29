@@ -101,7 +101,7 @@ class ProfileUser extends React.Component {
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                         <MainContainer>
                             <TitleProfile/>
-                            <UserHeader username={this.state.loggedInUser.username}/>
+                            <UserHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
                             <SidebarUserInformation/>
                             <UserInformation
                                 username={this.state.loggedInUser.username}

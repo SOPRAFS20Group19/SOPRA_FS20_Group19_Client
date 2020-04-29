@@ -22,6 +22,9 @@ import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import {ButtonForLogin} from "./design/ButtonForLogin";
 
+import User from "../components/shared/models/User"
+import avatarArray from "./AvatarArray"
+
 //Sidebar for the map -->Refactoring the name of the class later
 
 const Container = styled.div`
@@ -62,6 +65,11 @@ const HoverContainer = styled.div`
   width: 100%;
 `;
 
+const imgStyle = {
+    "height": "100%",
+    "width": "100%"
+}
+
 class Sidebar extends React.Component{
     constructor(props) {
         super(props);
@@ -71,9 +79,38 @@ class Sidebar extends React.Component{
             showAdd: false,
             showUserHover: false,
             showFilterHover: false,
-            showAddHover: false
+            showAddHover: false,
+            loggedInUserId: localStorage.getItem("userId"),
+            loggedInUser: new User(),
+            loading: false
+        }
+        this.getUser();
+    }
+
+    //gets the logged in user in order to display the correct 
+    async getUser() {
+        try {
+            this.setState({loading: true});
+            if (this.state.loggedInUserId){
+
+                const url = '/users/' + this.state.loggedInUserId;
+
+                const response = await api.get(url);
+
+                const user = new User(response.data);
+
+                this.setState({loggedInUser: user});}
+
+            else{
+                const user = new User()
+                this.setState({loggedInUser: user})
+            }
+            this.setState({loading: false});
+        } catch (e) {
+            alert(`Something went wrong while displaying the avatar: \n${handleError(e)}`);
         }
     }
+
 
     openUserProfile(){
         this.props.history.push('/userprofile');
@@ -142,7 +179,7 @@ class Sidebar extends React.Component{
                             onMouseOver={() => this.toggleShowUserHover(true)}
                             onMouseLeave={() => this.toggleShowUserHover(false)}
                         >
-                            <img src={UserIconComplete} alt="User Icon"/>
+                            <img src={this.state.loading ? avatarArray[0]: avatarArray[this.state.loggedInUser.avatarNr]} style={imgStyle} />
                         </RoundButton>
                     </ButtonContainer>
                             {this.state.showUserHover ? <HoverContainer>Profile options</HoverContainer> : null}
