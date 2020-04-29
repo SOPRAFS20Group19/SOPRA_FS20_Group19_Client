@@ -80,13 +80,6 @@ class InformationPageFavourite extends React.Component {
             else {
                 this.setState({locationId: 1});
             }
-            /*
-            if (this.state.location.id === this.props.locationId){
-                this.setState({liked: true});
-            }
-            else {
-                this.setState({liked: false});
-            }*/
         } catch (e) {
             alert(`Something went wrong while checking if this location belongs to the favorites: \n${handleError(e)}`);
         }

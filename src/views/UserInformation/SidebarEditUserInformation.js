@@ -30,10 +30,24 @@ const ButtonContainer = styled.div`
   margin-top: 20px;
 `;
 
+const HoverContainer = styled.div`
+  display: flex;
+  color: white;
+  background: transparent;
+  justify-content: center;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: small;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+`;
+
 class Sidebar extends React.Component{
     constructor() {
         super();
         this.state = {
+            showReturnHover: false
         }
     }
 
@@ -42,12 +56,18 @@ class Sidebar extends React.Component{
         this.props.history.push(`/userprofile`);
     }
 
+    toggleShowReturnHover(value){
+        this.setState({showReturnHover: value})
+    }
+
     render() {
         return (
             <Container>
                 <ButtonContainer>
                     <RoundButton
                         width="75%"
+                        onMouseOver={() => this.toggleShowReturnHover(true)}
+                        onMouseLeave={() => this.toggleShowReturnHover(false)}
                         onClick={() => {
                             this.returnToPage();
                         }}
@@ -55,6 +75,7 @@ class Sidebar extends React.Component{
                         <img src={LogoutIcon}/>
                     </RoundButton>
                 </ButtonContainer>
+                {this.state.showReturnHover ? <HoverContainer>Return to profile</HoverContainer> : null}
             </Container>
         );
     }

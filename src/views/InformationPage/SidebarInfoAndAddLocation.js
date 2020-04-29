@@ -46,11 +46,26 @@ const ButtonContainer = styled.div`
   margin-top: 20px;
 `;
 
+const HoverContainer = styled.div`
+  display: flex;
+  color: white;
+  background: transparent;
+  justify-content: center;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: small;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+`;
+
 class Sidebar extends React.Component{
     constructor() {
         super();
         this.state = {
-            filterExpanded: false
+            showUser: false,
+            showUserHover: false,
+            showReturnHover: false
         }
     }
 
@@ -78,34 +93,58 @@ class Sidebar extends React.Component{
         }
     }
 
+    toggleShowUserHover(value){
+        this.setState({showUserHover: value})
+    }
+
+    toggleShowReturnHover(value){
+        this.setState({showReturnHover: value})
+    }
+
     render() {
         return (
             <Container>
-                <OverlayTrigger trigger="click" placement="left" overlay={<Popover id="popover-basic">
-                    <Popover.Content>
+                <OverlayTrigger
+                    rootClose={true}
+                    show={this.state.showUser}
+                    onHide={() => this.setState({ showUser: false })}
+                    trigger="click"
+                    placement="left"
+                    overlay={<Popover id="popover-basic">
+                        <Popover.Content>
+                            <ButtonContainer>
+                                <Button
+                                    width="100%"
+                                    onClick={() => {this.openUserProfile();}}>Go to your profile
+                                </Button>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <ButtonForLogin
+                                    width="100%"
+                                    onClick={() => {this.logout();}}>Logout
+                                </ButtonForLogin>
+                            </ButtonContainer>
+                        </Popover.Content>
+                    </Popover>}>
+                    <div>
                         <ButtonContainer>
-                            <Button
-                                width="100%"
-                                onClick={() => {this.openUserProfile();}}>Go to your profile
-                            </Button>
+                            <RoundButton
+                                width="75%"
+                                onMouseOver={() => this.toggleShowUserHover(true)}
+                                onMouseLeave={() => this.toggleShowUserHover(false)}
+                            >
+                                <img src={UserIconComplete} alt="User Icon"/>
+                            </RoundButton>
                         </ButtonContainer>
-                        <ButtonContainer>
-                            <ButtonForLogin
-                                width="100%"
-                                onClick={() => {this.logout();}}>Logout
-                            </ButtonForLogin>
-                        </ButtonContainer>
-                    </Popover.Content>
-                </Popover>}>
-                    <ButtonContainer>
-                        <RoundButton width="75%">
-                            <img src={UserIconComplete} alt="User Icon"/>
-                        </RoundButton>
-                    </ButtonContainer>
+                        {this.state.showUserHover ? <HoverContainer>Profile options</HoverContainer> : null}
+                    </div>
                 </OverlayTrigger>
+                <div>
                     <ButtonContainer>
                         <RoundButton
                             width="75%"
+                            onMouseOver={() => this.toggleShowReturnHover(true)}
+                            onMouseLeave={() => this.toggleShowReturnHover(false)}
                             onClick={() => {
                                 this.returnToPage();
                             }}
@@ -113,6 +152,8 @@ class Sidebar extends React.Component{
                             <img src={LogoutIcon}/>
                         </RoundButton>
                     </ButtonContainer>
+                    {this.state.showReturnHover ? <HoverContainer>Return to map</HoverContainer> : null}
+                </div>
             </Container>
         );
     }

@@ -11,7 +11,7 @@ import Location from "../../components/shared/models/Location";
 
 const Container = styled.div`
   height: 10%;
-  width: 50%;
+  width: 90%;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
@@ -66,10 +66,17 @@ class LocationRating extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            ratedStars:0,
+            ratedStars:null,
             actualRating:0,
-        }
-        this.showRating();
+            averageRating:0
+        };
+        this.showUserRating();
+        this.showAverageRating();
+    }
+
+    componentDidMount(): void {
+        this.showUserRating();
+        this.showAverageRating();
     }
 
     //saves The Rating applied to the Stars
@@ -84,23 +91,34 @@ class LocationRating extends React.Component{
         }
     }
 
-    async showRating() {
+    async showAverageRating(){
+        try {
+            const url = '/locations/rating/' + this.props.locationId;
+            const response = await api.get(url);
+            const rating = response.data;
+            this.setState({averageRating: rating});
+        } catch (e) {
+            alert(`Something went wrong while getting the average rating: \n${handleError(e)}`);
+        }
+    }
+
+    async showUserRating() {
         try {
             const url = '/locations/rating/' + localStorage.getItem('userId') + '/' + this.props.locationId;
             const response = await api.get(url);
             const rating = response.data;
-            this.setState({['actualRating']: rating});
+            this.setState({ratedStars: rating});
         } catch (e) {
-            alert(`Something went wrong while getting the rating: \n${handleError(e)}`);
+            alert(`Something went wrong while getting the user rating: \n${handleError(e)}`);
         }
     }
 
     changeColor(number){
-        this.setState({['ratedStars']: number });
+        this.setState({ratedStars: number });
     }
 
     render() {
-        if (this.state.ratedStars == 0) {
+        if (this.state.ratedStars == 0 ) {
             return (
                 <Container>
                     <Text>Rate this Location:</Text>
@@ -140,7 +158,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.actualRating}
+                        Current Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
@@ -185,7 +203,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.actualRating}
+                        Current Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
@@ -231,7 +249,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.actualRating}
+                        Current Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
@@ -277,7 +295,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.actualRating}
+                        Current Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
@@ -323,7 +341,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.actualRating}
+                        Current Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
@@ -369,12 +387,12 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.actualRating}
+                        Current Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
         }
     }
-};
+}
 
 export default withRouter(LocationRating);
