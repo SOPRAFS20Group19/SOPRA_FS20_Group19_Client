@@ -51,7 +51,7 @@ class ProfileUser extends React.Component {
             //userToBeShownId: localStorage.getItem("showUserId"),
             //userToBeShown: null
         };
-        //this.getUser();
+        this.getUser();
     }
 
     // this method sends a get request to the server and saves the received user data in the component's state
@@ -69,19 +69,6 @@ class ProfileUser extends React.Component {
         } catch (e) {
             alert(`Something went wrong while displaying the user profile: \n${handleError(e)}`);
         }
-    }
-
-    // this method redirects the user to the edit user page upon successfully clicking the corresponding button
-    editProfile() {
-        this.props.history.push('/game/dashboard/user/edit');
-    }
-
-    // if the user wants to return to the user overview the items are removed from the local storage and the user is redirected
-    returnToDashboard(){
-        //localStorage.removeItem("showUserID")
-        //this.setState({userToBeShownId: null});
-        this.setState({userToBeShown: null});
-        this.props.history.push('/game/dashboard');
     }
 
     componentDidMount() {

@@ -16,6 +16,7 @@ import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
 import CurentPositionMarker from "../../views/design/CurentPositionMarker";
 
+
 /*
 import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
 import {FountainIcon} from "../../views/FountainClipart.png"
@@ -27,7 +28,21 @@ import Spinner from "react-bootstrap/Spinner";
 import {withRouter} from "react-router-dom";
 import {ButtonForRecycling} from "../../views/design/ButtonForRecycling";
 import {ButtonForFireplace} from "../../views/design/ButtonForFireplace";
+import coderWoman from "../../views/Avatar/markers/coder-woman-marker.svg";
+import coderWomanColor from "../../views/Avatar/markers/coder-woman-color-marker.svg";
+import coderMan from "../../views/Avatar/markers/coder-man-marker.svg";
+import coderManColor from "../../views/Avatar/markers/coder-man-color-marker.svg";
+import scientistWoman from "../../views/Avatar/markers/scientist-woman-marker.svg";
+import scientistWomanColor from "../../views/Avatar/markers/scientist-woman-color-marker.svg";
+import scientistMan from "../../views/Avatar/markers/scientist-man-marker.svg";
+import scientistManColor from "../../views/Avatar/markers/scientist-man-color-marker.svg";
+import yogiWoman from "../../views/Avatar/markers/yogi-woman-marker.svg";
+import yogiWomanColor from "../../views/Avatar/markers/yogi-woman-color-marker.svg";
+import yogiMan from "../../views/Avatar/markers/yogi-man-marker.svg";
+import yogiManColor from "../../views/Avatar/markers/yogi-man-color-marker.svg";
+import unknownMarker from "../../views/Avatar/markers/unknown-marker.svg";
 
+const markerArray = [unknownMarker, coderWoman, coderWomanColor, coderMan, coderManColor, scientistWoman, scientistWomanColor, scientistMan, scientistManColor, yogiWoman, yogiWomanColor, yogiMan, yogiManColor]
 
 const Text = styled.div`
   font-size: 16px;
@@ -375,8 +390,8 @@ class MapService extends React.Component {
 
 
                             icon={{
-                                url: '/currentMan.png',
-                                scaledSize: new window.google.maps.Size(10,30)}}
+                                url: markerArray[this.props.loggedInUser.avatarNr],
+                                scaledSize: new window.google.maps.Size(70, 100)}}
                         />
                     </GoogleMap>
                 )}

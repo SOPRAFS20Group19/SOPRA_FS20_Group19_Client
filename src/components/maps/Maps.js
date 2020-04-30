@@ -20,6 +20,7 @@ import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
 import {FountainIcon} from "../../views/MapMarkers/FountainIcon.png"
 import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.png"
 import Spinner from "react-bootstrap/Spinner";
+import User from "../shared/models/User"
 
 const Container = styled.div`
   height: 100%;
@@ -41,7 +42,10 @@ class Maps extends React.Component{
         this.state = {
             locationsShown: null,
             currentPosition: [],
-            currentCenter: [47.366950, 8.547200]
+            currentCenter: [47.366950, 8.547200],
+            loggedInUserId: localStorage.getItem("userId"),
+            loggedInUser: new User(),
+            loading: false
         };
         this.resetFilter();
         this.getFilteredLocations();
@@ -49,11 +53,37 @@ class Maps extends React.Component{
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.getLocation();
+        this.getUser();
     }
 
     /*componentDidMount(): void {
         this.getFilteredLocations();
     }*/
+
+    //gets the logged in user in order to display the correct 
+    async getUser() {
+        try {
+            this.setState({loading: true});
+            if (this.state.loggedInUserId){
+
+                const url = '/users/' + this.state.loggedInUserId;
+
+                const response = await api.get(url);
+
+                const user = new User(response.data);
+
+                this.setState({loggedInUser: user});}
+
+            else{
+                const user = new User()
+                this.setState({loggedInUser: user})
+            }
+            this.setState({loading: false});
+        } catch (e) {
+            alert(`Something went wrong while displaying the avatar: \n${handleError(e)}`);
+        }
+    }
+
 
     async getFilteredLocations(){
         try {
@@ -142,11 +172,12 @@ class Maps extends React.Component{
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
+                loggedInUser={this.state.loggedInUser}
             >
             </MapService>
             </div>)}
             <Header/>
-            <Sidebar getFilteredLocations={this.getFilteredLocations.bind(this)}/>
+            <Sidebar getFilteredLocations={this.getFilteredLocations.bind(this)} avatarNr={this.state.loggedInUser.avatarNr}/>
         </div>
         );
     }
