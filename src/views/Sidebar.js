@@ -68,7 +68,7 @@ const HoverContainer = styled.div`
 const imgStyle = {
     "height": "100%",
     "width": "100%"
-}
+};
 
 class Sidebar extends React.Component{
     constructor(props) {
@@ -160,7 +160,42 @@ class Sidebar extends React.Component{
                         </div>
                     </OverlayTrigger>
                     :
-                    null
+                    (<OverlayTrigger
+                        rootClose={true}
+                        show={this.state.showUser}
+                        onHide={() => this.setState({ showUser: false })}
+                        trigger="click"
+                        placement="left"
+                        overlay={<Popover id="popover-basic">
+                            <Popover.Content>
+                                Create a profile or login below.
+                                <ButtonContainer>
+                                    <Button
+                                        width="75%"
+                                        onClick={() => {this.props.history.push(`/registration`);}}>Register here
+                                    </Button>
+                                </ButtonContainer>
+                                <ButtonContainer>
+                                    <ButtonForLogin
+                                        width="75%"
+                                        onClick={() => {this.props.history.push(`/login`);}}>Login here
+                                    </ButtonForLogin>
+                                </ButtonContainer>
+                            </Popover.Content>
+                        </Popover>}>
+                        <div>
+                            <ButtonContainer>
+                                <RoundButton
+                                    width="75%"
+                                    onMouseOver={() => this.toggleShowUserHover(true)}
+                                    onMouseLeave={() => this.toggleShowUserHover(false)}
+                                >
+                                    <img src={avatarArray[this.props.avatarNr]} style={imgStyle} />
+                                </RoundButton>
+                            </ButtonContainer>
+                            {this.state.showUserHover ? <HoverContainer>Profile options</HoverContainer> : null}
+                        </div>
+                    </OverlayTrigger>)
                 }
 
                 {localStorage.getItem("userId") != null ?
@@ -194,9 +229,15 @@ class Sidebar extends React.Component{
                         overlay={<Popover id="popover-basic">
                         <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
                         <Popover.Content>
-                            Please register first to use this feature.
+                            Please register or login first to use this feature.
                             <ButtonContainer>
-                                <Button onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
+                                <Button width="75%" onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <ButtonForLogin
+                                    width="75%"
+                                    onClick={() => {this.props.history.push(`/login`);}}>Login here
+                                </ButtonForLogin>
                             </ButtonContainer>
                         </Popover.Content>
                     </Popover>}>
@@ -242,10 +283,16 @@ class Sidebar extends React.Component{
                         overlay={<Popover id="popover-basic">
                     <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
                     <Popover.Content>
-                    Please register first to use this feature.
+                    Please register or login first to use this feature.
                     <ButtonContainer>
-                    <Button onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
+                    <Button width="75%" onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
                     </ButtonContainer>
+                        <ButtonContainer>
+                            <ButtonForLogin
+                                width="75%"
+                                onClick={() => {this.props.history.push(`/login`);}}>Login here
+                            </ButtonForLogin>
+                        </ButtonContainer>
                     </Popover.Content>
                     </Popover>}>
                         <div>
