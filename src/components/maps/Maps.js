@@ -72,7 +72,10 @@ class Maps extends React.Component{
 
                 const user = new User(response.data);
 
-                this.setState({loggedInUser: user});}
+                this.setState({loggedInUser: user});
+                localStorage.setItem("userAvatar", user.avatarNr);
+            }
+
 
             else{
                 const user = new User()

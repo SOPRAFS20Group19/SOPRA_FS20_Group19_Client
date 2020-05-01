@@ -16,13 +16,13 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  grid-column: 1/span 2;
+  grid-column: 1;
   grid-row: 1;
   margin-top: 20px;
   margin-left: 0px;
-  align-content: center
+  align-content: center;
   justify-content: center;
-  position: center;;
+  position: center;
 `;
 
 const Title = styled.h1`

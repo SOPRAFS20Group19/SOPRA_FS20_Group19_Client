@@ -25,17 +25,16 @@ const MainContainer =styled.div`
   flex-direction: row;
   width: 100%;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto;
   grid-template-rows: auto auto auto auto auto;
   justify-content: center;
-  grid-column-gap: 30px;
 `;
 
 const ImageContainer = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -62,7 +61,7 @@ const Container2 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -75,7 +74,7 @@ const Container3 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -88,7 +87,7 @@ const Container4 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -102,7 +101,7 @@ const Container5 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -116,7 +115,7 @@ const Container6 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -129,7 +128,7 @@ const Container7 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -143,7 +142,7 @@ const Container8 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -157,7 +156,7 @@ const Container9 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -171,7 +170,7 @@ const Container10 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -185,7 +184,7 @@ const Container11 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -199,7 +198,7 @@ const Container12 = styled.div`
   height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
   padding: 0.5%
   flex-direction: column;
@@ -243,12 +242,23 @@ const ButtonContainer = styled.div`
   width: 100%;
 `;
 
+const ButtonContainerYesNo = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 10px;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 15px;
+  width: 100%;
+`;
+
 const ButtonContainerSpinnerAddLocation = styled.div`
-height: flex;
+  height: flex;
   width: 100%;
   display: flex;
-  justify-content: top;
-  align-items: left;
+  justify-content: center;
+  align-items: center;
   padding: 0.5%
   flex-direction: column;
   margin-left: 0px;
@@ -542,7 +552,7 @@ class AddLocation extends React.Component {
             <TitleEdit/>
                 {!this.state.locationType ?
                     (<MainContainer>
-                            <SidebarAddLocation/>
+                            <SidebarAddLocation avatarNr={localStorage.getItem("userAvatar")}/>
                         <QuestionContainer>
                 <Question>What location type do you want to add?</Question>
             </QuestionContainer>
@@ -568,7 +578,7 @@ class AddLocation extends React.Component {
                 </ButtonContainer>
                     </MainContainer>)
                     : (!this.state.setCoordinates ? (<MainContainer>
-                        <SidebarAddLocationtoStart/>
+                        <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
                         <QuestionContainer>
                             <Question>Set the coordinates:</Question>
                         </QuestionContainer>
@@ -617,7 +627,7 @@ class AddLocation extends React.Component {
                             <Container3>
                                 <ButtonContainerSpinnerAddLocation>
                                     <Button variant="primary" disabled
-                                    width="100%">
+                                            width="200px">
                                         <Spinner
                                             as="span"
                                             animation="border"
@@ -630,7 +640,7 @@ class AddLocation extends React.Component {
                                 </ButtonContainerSpinnerAddLocation>
                             </Container3>
                         </MainContainer>) : (<MainContainer>
-                            <SidebarAddLocationtoStart/>
+                            <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
                             <QuestionContainer>
                                 <Question>Location information: </Question>
                             </QuestionContainer>
@@ -645,7 +655,7 @@ class AddLocation extends React.Component {
                                     <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>)}
                             </Container2>
                             <Container3>
-                                <Title>Baujahr (optional): </Title>
+                                <Title>Year of construction (optional): </Title>
                                 <InputFieldBaujahr
                                     placeholder="enter Baujahr here"
                                     onChange={e => {
@@ -654,8 +664,8 @@ class AddLocation extends React.Component {
                                 />
                             </Container3>
                             <Container4>
-                                <Title>Trinkwasser (optional)? </Title>
-                                <ButtonContainer>
+                                <Title>Potable water (optional)? </Title>
+                                <ButtonContainerYesNo>
                                     <ButtonYesNo
                                         disabled={this.state.art_txt === "Trinkwasserbrunnen"}
                                         onClick={() => {this.setState({art_txt: "Trinkwasserbrunnen"});}}>Yes
@@ -664,20 +674,20 @@ class AddLocation extends React.Component {
                                         disabled={this.state.art_txt === "Kein Trinkwasser"}
                                         onClick={() => {this.setState({art_txt: "Kein Trinkwasser"});}}>No
                                     </ButtonYesNo>
-                                </ButtonContainer>
+                                </ButtonContainerYesNo>
                             </Container4>
                             <Container5>
-                                <Title>Öffentlich (optional)? </Title>
-                                <ButtonContainer>
-                                    <Button
+                                <Title>Public access (optional)? </Title>
+                                <ButtonContainerYesNo>
+                                    <ButtonYesNo
                                         disabled={this.state.brunnenart_txt === "öffentlicher Brunnen"}
                                         onClick={() => {this.setState({brunnenart_txt: "öffentlicher Brunnen"});}}>Yes
-                                    </Button>
-                                    <Button
+                                    </ButtonYesNo>
+                                    <ButtonYesNo
                                         disabled={this.state.brunnenart_txt === "privater Brunnen"}
                                         onClick={() => {this.setState({brunnenart_txt: "privater Brunnen"});}}>No
-                                    </Button>
-                                </ButtonContainer>
+                                    </ButtonYesNo>
+                                </ButtonContainerYesNo>
                             </Container5>
                             <Container6>
                                 <ButtonContainer>
@@ -702,7 +712,7 @@ class AddLocation extends React.Component {
                                 <Container3>
                                     <ButtonContainerSpinnerAddLocation>
                                         <Button variant="primary" disabled
-                                                width="100%">
+                                                width="200px">
                                             <Spinner
                                                 as="span"
                                                 animation="border"
@@ -716,7 +726,7 @@ class AddLocation extends React.Component {
                                 </Container3>
                             </MainContainer>) : (
                             <MainContainer>
-                                <SidebarAddLocationtoStart/>
+                                <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
                                 <QuestionContainer>
                                     <Question>Location information: </Question>
                                 </QuestionContainer>
@@ -731,8 +741,8 @@ class AddLocation extends React.Component {
                                     <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>)}
                                 </Container2>
                                 <Container3>
-                                    <Title>Holz vorhanden? </Title>
-                                    <ButtonContainer>
+                                    <Title>Firewood available? </Title>
+                                    <ButtonContainerYesNo>
                                         <ButtonYesNo
                                             disabled={this.state.holz === "X"}
                                             onClick={() => {this.setState({holz: "X"});}}>Yes
@@ -741,11 +751,11 @@ class AddLocation extends React.Component {
                                             disabled={this.state.holz === "Y"}
                                             onClick={() => {this.setState({holz: "Y"});}}>No
                                         </ButtonYesNo>
-                                    </ButtonContainer>
+                                    </ButtonContainerYesNo>
                                 </Container3>
                                 <Container4>
-                                    <Title>Grillrost vorhanden? </Title>
-                                    <ButtonContainer>
+                                    <Title>Cooking grate available? </Title>
+                                    <ButtonContainerYesNo>
                                         <ButtonYesNo
                                             disabled={this.state.rost === "X"}
                                             onClick={() => {this.setState({rost: "X"});}}>Yes
@@ -754,11 +764,11 @@ class AddLocation extends React.Component {
                                             disabled={this.state.rost === "Y"}
                                             onClick={() => {this.setState({rost: "Y"});}}>No
                                         </ButtonYesNo>
-                                    </ButtonContainer>
+                                    </ButtonContainerYesNo>
                                 </Container4>
                                 <Container5>
-                                    <Title>Esstisch vorhanden? </Title>
-                                    <ButtonContainer>
+                                    <Title>Table available? </Title>
+                                    <ButtonContainerYesNo>
                                         <ButtonYesNo
                                             disabled={this.state.tisch === "X"}
                                             onClick={() => {this.setState({tisch: "X"});}}>Yes
@@ -767,11 +777,11 @@ class AddLocation extends React.Component {
                                             disabled={this.state.tisch === "Y"}
                                             onClick={() => {this.setState({tisch: "Y"});}}>No
                                         </ButtonYesNo>
-                                    </ButtonContainer>
+                                    </ButtonContainerYesNo>
                                 </Container5>
                                 <Container6>
-                                    <Title>Trinkwasser vorhanden? </Title>
-                                    <ButtonContainer>
+                                    <Title>Water available? </Title>
+                                    <ButtonContainerYesNo>
                                         <ButtonYesNo
                                             disabled={this.state.trinkwasser === "X"}
                                             onClick={() => {this.setState({trinkwasser: "X"});}}>Yes
@@ -780,11 +790,11 @@ class AddLocation extends React.Component {
                                             disabled={this.state.trinkwasser === "Y"}
                                             onClick={() => {this.setState({trinkwasser: "Y"});}}>No
                                         </ButtonYesNo>
-                                    </ButtonContainer>
+                                    </ButtonContainerYesNo>
                                 </Container6>
                                 <Container7>
-                                    <Title>Abfall-Eimer vorhanden? </Title>
-                                    <ButtonContainer>
+                                    <Title>Trash can available? </Title>
+                                    <ButtonContainerYesNo>
                                         <ButtonYesNo
                                             disabled={this.state.abfall === "X"}
                                             onClick={() => {this.setState({abfall: "X"});}}>Yes
@@ -793,11 +803,11 @@ class AddLocation extends React.Component {
                                             disabled={this.state.abfall === "Y"}
                                             onClick={() => {this.setState({abfall: "Y"});}}>No
                                         </ButtonYesNo>
-                                    </ButtonContainer>
+                                    </ButtonContainerYesNo>
                                 </Container7>
                                 <Container8>
-                                    <Title>Parkplatz vorhanden? </Title>
-                                    <ButtonContainer>
+                                    <Title>Parking available? </Title>
+                                    <ButtonContainerYesNo>
                                         <ButtonYesNo
                                             disabled={this.state.parkplatz === "X"}
                                             onClick={() => {this.setState({parkplatz: "X"});}}>Yes
@@ -806,11 +816,11 @@ class AddLocation extends React.Component {
                                             disabled={this.state.parkplatz === "Y"}
                                             onClick={() => {this.setState({parkplatz: "Y"});}}>No
                                         </ButtonYesNo>
-                                    </ButtonContainer>
+                                    </ButtonContainerYesNo>
                                 </Container8>
                                 <Container9>
-                                    <Title>Schwimm-Möglichkeit vorhanden? </Title>
-                                    <ButtonContainer>
+                                    <Title>Swimming possible? </Title>
+                                    <ButtonContainerYesNo>
                                         <ButtonYesNo
                                             disabled={this.state.baden === "X"}
                                             onClick={() => {this.setState({baden: "X"});}}>Yes
@@ -819,11 +829,11 @@ class AddLocation extends React.Component {
                                             disabled={this.state.baden === "Y"}
                                             onClick={() => {this.setState({baden: "Y"});}}>No
                                         </ButtonYesNo>
-                                    </ButtonContainer>
+                                    </ButtonContainerYesNo>
                                 </Container9>
                                 <Container10>
-                                    <Title>Hunde erlaubt? </Title>
-                                    <ButtonContainer>
+                                    <Title>Dogs allowed? </Title>
+                                    <ButtonContainerYesNo>
                                         <ButtonYesNo
                                             disabled={this.state.hunde === "X"}
                                             onClick={() => {this.setState({hunde: "X"});}}>Yes
@@ -832,11 +842,11 @@ class AddLocation extends React.Component {
                                             disabled={this.state.hunde === "Y"}
                                             onClick={() => {this.setState({hunde: "Y"});}}>No
                                         </ButtonYesNo>
-                                    </ButtonContainer>
+                                    </ButtonContainerYesNo>
                                 </Container10>
                                 <Container11>
-                                    <Title>Kinderwagen-freundlich? </Title>
-                                    <ButtonContainer>
+                                    <Title>Stroller-friendly? </Title>
+                                    <ButtonContainerYesNo>
                                         <ButtonYesNo
                                             disabled={this.state.kinderwagen === "X"}
                                             onClick={() => {this.setState({kinderwagen: "X"});}}>Yes
@@ -845,7 +855,7 @@ class AddLocation extends React.Component {
                                             disabled={this.state.kinderwagen === "Y"}
                                             onClick={() => {this.setState({kinderwagen: "Y"});}}>No
                                         </ButtonYesNo>
-                                    </ButtonContainer>
+                                    </ButtonContainerYesNo>
                                 </Container11>
                                 <Container12>
                                     <ButtonContainer>
@@ -871,7 +881,7 @@ class AddLocation extends React.Component {
                                 <Container3>
                                     <ButtonContainerSpinnerAddLocation>
                                         <Button variant="primary" disabled
-                                                width="100%">
+                                                width="200px">
                                 <Spinner
                                     as="span"
                                     animation="border"
@@ -885,7 +895,7 @@ class AddLocation extends React.Component {
                                 </Container3>
                             </MainContainer>) : (
                                 <MainContainer>
-                                    <SidebarAddLocationtoStart/>
+                                    <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
                                     <QuestionContainer>
                                     <Question>Location information: </Question>
                                 </QuestionContainer>
@@ -900,70 +910,70 @@ class AddLocation extends React.Component {
                                         <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>)}
                                 </Container2>
                                 <Container3>
-                                    <Title>Adresse: </Title>
+                                    <Title>Address: </Title>
                                     <InputFieldBaujahr
-                                        placeholder="enter street here"
+                                        placeholder="enter address here"
                                         onChange={e => {
                                             this.handleInputChange('adresse', e.target.value);
                                         }}
                                     />
                                 </Container3>
                                 <Container4>
-                                    <Title>PLZ: </Title>
+                                    <Title>Zip code: </Title>
                                     <InputFieldBaujahr
-                                        placeholder="enter plz here"
+                                        placeholder="enter zip code here"
                                         onChange={e => {
                                             this.handleInputChange('plz', e.target.value);
                                         }}
                                     />
                                 </Container4>
                                 <Container5>
-                                    <Title>Ort: </Title>
+                                    <Title>City: </Title>
                                     <InputFieldBaujahr
-                                        placeholder="enter town here"
+                                        placeholder="enter city here"
                                         onChange={e => {
                                             this.handleInputChange('ort', e.target.value);
                                         }}
                                     />
                                 </Container5>
                                 <Container6>
-                                    <Title>Metall-Entsorgung? </Title>
-                                    <ButtonContainer>
-                                        <Button
+                                    <Title>Metal disposable? </Title>
+                                    <ButtonContainerYesNo>
+                                        <ButtonYesNo
                                             disabled={this.state.metall === "X"}
                                             onClick={() => {this.setState({metall: "X"});}}>Yes
-                                        </Button>
-                                        <Button
+                                        </ButtonYesNo>
+                                        <ButtonYesNo
                                             disabled={this.state.metall === "Y"}
                                             onClick={() => {this.setState({metall: "Y"});}}>No
-                                        </Button>
-                                    </ButtonContainer>
+                                        </ButtonYesNo>
+                                    </ButtonContainerYesNo>
                                 </Container6>
                                 <Container7>
-                                    <Title>Glas-Entsorgung? </Title>
-                                    <ButtonContainer>
-                                        <Button
+                                    <Title>Glass disposable? </Title>
+                                    <ButtonContainerYesNo>
+                                        <ButtonYesNo
                                             disabled={this.state.glas === "X"}
                                             onClick={() => {this.setState({glas: "X"});}}>Yes
-                                        </Button>
-                                        <Button
+                                        </ButtonYesNo>
+                                        <ButtonYesNo
                                             disabled={this.state.glas === "Y"}
                                             onClick={() => {this.setState({glas: "Y"});}}>No
-                                        </Button>
-                                    </ButtonContainer>
+                                        </ButtonYesNo>
+                                    </ButtonContainerYesNo>
                                 </Container7>
                                 <Container8>
-                                    <Title>Oel-Entsorgung? </Title>
-                                    <ButtonContainer>
-                                        <Button
+                                    <Title>Oil disposable? </Title>
+                                    <ButtonContainerYesNo>
+                                        <ButtonYesNo
                                             disabled={this.state.oel === "X"}
                                             onClick={() => {this.setState({oel: "X"});}}>Yes
-                                        </Button>
-                                        <Button
+                                        </ButtonYesNo>
+                                        <ButtonYesNo
                                             disabled={this.state.oel === "Y"}
                                             onClick={() => {this.setState({oel: "Y"});}}>No
-                                        </Button>
-                                    </ButtonContainer>
+                                        </ButtonYesNo>
+                                    </ButtonContainerYesNo>
                                 </Container8>
                                 <Container9>
                                     <ButtonContainer>

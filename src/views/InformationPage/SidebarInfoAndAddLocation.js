@@ -19,6 +19,7 @@ import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import {ButtonForLogin} from "../design/ButtonForLogin";
 import {api, handleError} from "../../helpers/api";
+import avatarArray from "../AvatarArray";
 
 //Sidebar for Information Page and Add Location
 
@@ -59,6 +60,11 @@ const HoverContainer = styled.div`
   width: 100%;
 `;
 
+const imgStyle = {
+    "height": "100%",
+    "width": "100%"
+};
+
 class Sidebar extends React.Component{
     constructor() {
         super();
@@ -87,6 +93,7 @@ class Sidebar extends React.Component{
             localStorage.removeItem('showFountains');
             localStorage.removeItem('showFireplaces');
             localStorage.removeItem('showRecyclingStations');
+            localStorage.removeItem('userAvatar');
             this.props.history.push('/login');
         }catch (error) {
             alert(`Something went wrong during the logout: \n${handleError(error)}`);
@@ -133,7 +140,7 @@ class Sidebar extends React.Component{
                                 onMouseOver={() => this.toggleShowUserHover(true)}
                                 onMouseLeave={() => this.toggleShowUserHover(false)}
                             >
-                                <img src={UserIconComplete} alt="User Icon"/>
+                                <img src={avatarArray[this.props.avatarNr]} style={imgStyle} />
                             </RoundButton>
                         </ButtonContainer>
                         {this.state.showUserHover ? <HoverContainer>Profile options</HoverContainer> : null}

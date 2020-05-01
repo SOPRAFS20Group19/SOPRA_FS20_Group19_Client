@@ -105,7 +105,7 @@ class LocationInformationPage extends React.Component {
                 {!this.state.locationToBeShown ? (<Spinner/>) : (
                     <Container>
                     <InformationHeader type={this.state.locationToBeShown.locationType}/>
-                    <SidebarInfoAndAddLocation/>
+                    <SidebarInfoAndAddLocation avatarNr={localStorage.getItem("userAvatar")}/>
                     <LocationInformation
                         location={this.state.location}
                         id={this.state.locationToBeShown.id}

@@ -206,7 +206,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.averageRating}
+                        Average Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
@@ -252,7 +252,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.averageRating}
+                        Average Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
@@ -298,7 +298,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.averageRating}
+                        Average Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
@@ -344,7 +344,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.averageRating}
+                        Average Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
@@ -390,7 +390,7 @@ class LocationRating extends React.Component{
                     </Button1>{' '}
                     </ButtonContainer>
                     <Text2>
-                        Current Rating: {this.state.averageRating}
+                        Average Rating: {this.state.averageRating}
                     </Text2>
                 </Container>
             );
