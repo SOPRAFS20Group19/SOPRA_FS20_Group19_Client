@@ -622,7 +622,7 @@ class AddLocation extends React.Component {
                                 <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
                             </ImageContainer>
                             <Container2>
-                                <Title>Thank's!</Title>
+                                <Title>Thank you!</Title>
                             </Container2>
                             <Container3>
                                 <ButtonContainerSpinnerAddLocation>
@@ -707,7 +707,7 @@ class AddLocation extends React.Component {
                                     <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
                                 </ImageContainer>
                                 <Container2>
-                                    <Title>Thank's!</Title>
+                                    <Title>Thank you!</Title>
                                 </Container2>
                                 <Container3>
                                     <ButtonContainerSpinnerAddLocation>
@@ -876,7 +876,7 @@ class AddLocation extends React.Component {
                                     <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
                                 </ImageContainer>
                                 <Container2>
-                                    <Title>Thank's!</Title>
+                                    <Title>Thank you!</Title>
                                 </Container2>
                                 <Container3>
                                     <ButtonContainerSpinnerAddLocation>
