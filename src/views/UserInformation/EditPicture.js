@@ -85,7 +85,8 @@ class EditPicture extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            chosenAvatar: this.props.avatarNr
+            chosenAvatar: this.props.avatarNr,
+            pictureChosen: false
         }
     }
 
@@ -108,7 +109,8 @@ class EditPicture extends React.Component {
 
     handleClick(n){
         this.setState({
-            chosenAvatar: n
+            chosenAvatar: n,
+            pictureChosen: true
         });
     }
 
@@ -136,7 +138,7 @@ class EditPicture extends React.Component {
                 </PictureContainer>
                 <ButtonContainer>
                     <Button
-                        disabled={}
+                        disabled={this.state.pictureChosen===false}
                         width="100%"
                         onClick={() => {
                             this.savePicture();
