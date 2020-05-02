@@ -12,7 +12,7 @@ import FilterIconComplete from "../Filter/FilterIconComplete.svg"
 import PlusIconComplete from "../Map/PlusIconComplete.svg"
 import Profile from "../UserInformation/Profile";
 import Filter from "../../components/maps/Filter";
-import AddLocation from "../../components/LocationManagement/AddLocation";
+import AddLocation from "../../components/AddLocation/AddLocation";
 import { withRouter } from 'react-router-dom';
 import LogoutIcon from "../variables/LogoutIcon.svg"
 import Popover from "react-bootstrap/Popover";

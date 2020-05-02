@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Redirect, Route, withRouter} from "react-router-dom";
 import Maps from "../../maps/Maps";
 import Game from "../../game/Game";
-import AddLocation from "../../LocationManagement/AddLocation";
+import AddLocation from "../../AddLocation/AddLocation";
 import {MapGuard} from "../routeProtectors/MapGuard";
 import LocationInformationPage from "../../LocationInformationPage/LocationInformationPage";
 import {api, handleError} from "../../../helpers/api";

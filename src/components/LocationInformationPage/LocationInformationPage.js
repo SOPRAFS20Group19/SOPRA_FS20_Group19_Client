@@ -32,6 +32,19 @@ const Container =styled.div`
   grid-column-gap: 30px;
 `;
 
+const LoadingContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 0px;
+`;
 const Label = styled.label`
   color: white;
   margin-bottom: 10px;
@@ -102,7 +115,16 @@ class LocationInformationPage extends React.Component {
     render() {
         return (
             <Container>
-                {!this.state.locationToBeShown ? (<Spinner/>) : (
+                {!this.state.locationToBeShown ? (<LoadingContainer><Button variant="primary" disabled>
+                    <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                    />
+                    Loading Location...
+                </Button></LoadingContainer>) : (
                     <Container>
                     <InformationHeader type={this.state.locationToBeShown.locationType}/>
                     <SidebarInfoAndAddLocation avatarNr={localStorage.getItem("userAvatar")}/>
