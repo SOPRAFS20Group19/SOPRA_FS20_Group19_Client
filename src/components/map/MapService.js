@@ -6,7 +6,6 @@ import {
     Marker,
     InfoWindow
 } from "react-google-maps";
-import * as brunnenData from "./data/wvz_brunnen.json";
 import mapStyles from "./mapStyles";
 import {Button} from "../../views/variables/Button";
 import styled from "styled-components";
@@ -92,70 +91,6 @@ const ButtonFountain = {
 
 };
 
-
-
-function Map() {
-    const [selectedBrunnen, setSelectedBrunnen] = useState(null);
-
-    useEffect(() => {
-        const listener = e => {
-            if (e.key === "Escape") {
-                setSelectedBrunnen(null);
-            }
-        };
-        window.addEventListener("keydown", listener);
-
-        return () => {
-            window.removeEventListener("keydown", listener);
-        };
-    }, []);
-
-    return (
-        <GoogleMap
-            defaultZoom={15}
-            defaultCenter={{ lat: 47.366950, lng: 8.547200 }}
-            defaultOptions={{ styles: mapStyles }}
-        >
-
-            {brunnenData.features.map(brunnen => (
-                <Marker
-                    key={brunnen.properties.objectid}
-                    position={{
-                        lat: brunnen.geometry.coordinates[1],
-                        lng: brunnen.geometry.coordinates[0]
-                    }}
-
-                    onClick={() => {
-                        setSelectedBrunnen(brunnen);
-                    }}
-
-                    icon={{
-                        url: '/FountainClipart.png',
-                        scaledSize: new window.google.maps.Size(25, 25)
-                    }}
-                />
-            ))}
-
-            {selectedBrunnen && (
-                <InfoWindow
-                    onCloseClick={() => {
-                        setSelectedBrunnen(null);
-                    }}
-                    position={{
-                        lat: selectedBrunnen.geometry.coordinates[1],
-                        lng: selectedBrunnen.geometry.coordinates[0]
-                    }}
-                >
-                    <div>
-                        <h2>{"Art des Brunnens:" + selectedBrunnen.properties.art_txt}</h2>
-                        <p>{"Baujahr:" + selectedBrunnen.properties.baujahr}</p>
-                    </div>
-                </InfoWindow>
-            )}
-
-        </GoogleMap>
-    );
-}
 
 class MapService extends React.Component {
     constructor(props) {

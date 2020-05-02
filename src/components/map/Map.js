@@ -4,7 +4,6 @@ import Header from "../../views/Map/Header";
 import {Button} from '../../views/variables/Button';
 import { withRouter } from 'react-router-dom';
 import MapService from "./MapService";
-import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
 import Spinner from "react-bootstrap/Spinner";
