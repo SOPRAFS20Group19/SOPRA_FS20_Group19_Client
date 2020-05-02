@@ -136,6 +136,7 @@ class EditPicture extends React.Component {
                 </PictureContainer>
                 <ButtonContainer>
                     <Button
+                        disabled={}
                         width="100%"
                         onClick={() => {
                             this.savePicture();
