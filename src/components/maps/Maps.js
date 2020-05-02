@@ -16,9 +16,6 @@ import MapService from "./MapService";
 import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
-import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
-import {FountainIcon} from "../../views/MapMarkers/FountainIcon.png"
-import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.png"
 import Spinner from "react-bootstrap/Spinner";
 import User from "../shared/models/User"
 

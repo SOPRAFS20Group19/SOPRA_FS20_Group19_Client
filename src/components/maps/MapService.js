@@ -14,14 +14,7 @@ import {Button} from "../../views/variables/Button";
 import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
-import CurentPositionMarker from "../../views/variables/CurentPositionMarker";
 
-
-/*
-import {RecyclingIcon} from "../../views/MapMarkers/RecyclingIcon.png"
-import {FountainIcon} from "../../views/FountainClipart.png"
-import {FireplaceIcon} from "../../views/MapMarkers/FireplaceIcon.css"
- */
 
 import Player from "../../views/variables/Player";
 import Spinner from "react-bootstrap/Spinner";
@@ -391,7 +384,7 @@ class MapService extends React.Component {
 
                             icon={{
                                 url: markerArray[this.props.loggedInUser.avatarNr],
-                                scaledSize: new window.google.maps.Size(70, 100)}}
+                                scaledSize: new window.google.maps.Size(65, 100)}}
                         />
                     </GoogleMap>
                 )}
