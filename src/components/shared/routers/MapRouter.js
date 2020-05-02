@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import {Redirect, Route, withRouter} from "react-router-dom";
-import Maps from "../../maps/Maps";
-import Game from "../../game/Game";
-import AddLocation from "../../AddLocation/AddLocation";
+import Maps from "../../map/Map";
+import AddLocation from "../../addLocation/AddLocation";
 import {MapGuard} from "../routeProtectors/MapGuard";
-import LocationInformationPage from "../../LocationInformationPage/LocationInformationPage";
+import LocationInformationPage from "../../locationInformationPage/LocationInformationPage";
 import {api, handleError} from "../../../helpers/api";
-import {forEach} from "react-bootstrap/cjs/ElementChildren";
 
 const Container = styled.div`
   display: flex;
@@ -37,7 +35,7 @@ class MapRouter extends React.Component {
 
     render() {
       /**
-       * "this.props.base" is "/map" because as been passed as a prop in the parent of GameRouter, i.e., Maps.js
+       * "this.props.base" is "/map" because as been passed as a prop in the parent of GameRouter, i.e., Map.js
        */
       return (
         <Container>

@@ -2,16 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import {BaseContainer} from '../../helpers/layout';
 import {api, handleError} from '../../helpers/api';
-import {Button} from '../../views/variables/Button';
 import {withRouter} from 'react-router-dom';
 import User from "../shared/models/User";
-import Profile from "../../views/UserInformation/Profile";
 import UserHeader from '../../views/UserInformation/UserHeader';
 import UserInformation from '../../views/UserInformation/UserInformation';
 import SidebarUserInformation from "../../views/UserInformation/SidebarUserInformation";
 import SavedLocations from "../../views/UserInformation/SavedLocations";
 import {Spinner} from "../../views/variables/Spinner";
-import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 import TitleProfile from "../../views/UserInformation/TitleProfile";
 
 const BackgroundContainer = styled(BaseContainer)`
@@ -41,7 +38,7 @@ const Container =styled.div`
 `;
 
 // this component is responsible for the user profile
-class ProfileUser extends React.Component {
+class UserProfile extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -103,4 +100,4 @@ class ProfileUser extends React.Component {
     }
 }
 
-export default withRouter(ProfileUser);
+export default withRouter(UserProfile);

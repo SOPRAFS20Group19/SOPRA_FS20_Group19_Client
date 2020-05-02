@@ -1,16 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
 import { Button } from '../../views/variables/Button';
 import { withRouter } from 'react-router-dom';
 import SidebarEditUserInformation from "../../views/UserInformation/SidebarEditUserInformation";
 import UserEditHeader from "../../views/UserInformation/UserEditHeader";
-import InfoEditProfile from "../../views/UserInformation/InfoEditProfile";
 import EditPicture from "../../views/UserInformation/EditPicture";
 import {Spinner} from "../../views/variables/Spinner";
 import User from "../shared/models/User";
-import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 import TitleEdit from "../../views/UserInformation/TitleEdit";
 
 const MainContainer =styled.div`
@@ -65,7 +62,7 @@ const Title = styled.div`
 `;
 
 // This component is responsible for the edit profile page
-class ProfileEdit extends React.Component {
+class EditProfile extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -192,4 +189,4 @@ class ProfileEdit extends React.Component {
     }
 }
 
-export default withRouter(ProfileEdit);
+export default withRouter(EditProfile);

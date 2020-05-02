@@ -1,13 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {
-    withGoogleMap,
-    withScriptjs,
-    GoogleMap,
-    Marker,
-    InfoWindow
-} from "react-google-maps";
-import * as brunnenData from "./data/wvz_brunnen.json";
-import mapStyles from "./mapStyles";
 import Sidebar from "../../views/Map/Sidebar";
 import Header from "../../views/Map/Header";
 import {Button} from '../../views/variables/Button';
@@ -33,7 +24,7 @@ const Container = styled.div`
   padding-top: 0px;
 `;
 
-class Maps extends React.Component{
+class Map extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -182,4 +173,4 @@ class Maps extends React.Component{
         );
     }
 }
-export default withRouter(Maps);
+export default withRouter(Map);

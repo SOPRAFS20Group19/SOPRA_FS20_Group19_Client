@@ -8,19 +8,11 @@ import {
 } from "react-google-maps";
 import * as brunnenData from "./data/wvz_brunnen.json";
 import mapStyles from "./mapStyles";
-import Sidebar from "../../views/Map/Sidebar";
-import Header from "../../views/Map/Header";
 import {Button} from "../../views/variables/Button";
-import Popover from "react-bootstrap/Popover";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
-
-
-import Player from "../../views/variables/Player";
 import Spinner from "react-bootstrap/Spinner";
 import {withRouter} from "react-router-dom";
-import {ButtonForRecycling} from "../../views/variables/ButtonForRecycling";
-import {ButtonForFireplace} from "../../views/variables/ButtonForFireplace";
 import coderWoman from "../../views/Avatar/markers/coder-woman-marker.svg";
 import coderWomanColor from "../../views/Avatar/markers/coder-woman-color-marker.svg";
 import coderMan from "../../views/Avatar/markers/coder-man-marker.svg";

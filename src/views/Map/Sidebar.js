@@ -13,8 +13,8 @@ import UserIconComplete from "../UserInformation/UserIconComplete.svg"
 import FilterIconComplete from "../Filter/FilterIconComplete.svg"
 import PlusIconComplete from "./PlusIconComplete.svg"
 import Profile from "../UserInformation/Profile";
-import Filter from "../../components/maps/Filter";
-import AddLocation from "../../components/AddLocation/AddLocation";
+import Filter from "../../components/map/Filter";
+import AddLocation from "../../components/addLocation/AddLocation";
 import { withRouter } from 'react-router-dom';
 import LogoutIcon from "../variables/LogoutIcon.svg"
 import Popover from "react-bootstrap/Popover";

@@ -5,11 +5,8 @@ import { ProfileGuard } from "../routeProtectors/ProfileGuard";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Registration from "../../registration/Registration";
-import Maps from "../../maps/Maps";
-import UserProfile from "../../userprofile/UserProfile";
-import {Game} from "../../game/Game";
-import ProfileUser from "../../ProfileUser/ProfileUser";
-import ProfileEdit from "../../ProfileEdit/ProfileEdit"
+import ProfileUser from "../../userProfile/UserProfile";
+import ProfileEdit from "../../editProfile/EditProfile"
 
 /**
  * Main router of your application.

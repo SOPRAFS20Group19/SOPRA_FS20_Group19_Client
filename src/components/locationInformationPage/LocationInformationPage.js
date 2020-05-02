@@ -9,7 +9,6 @@ import LocationInformation from "../../views/InformationPage/LocationInformation
 import LocationRating from "../../views/InformationPage/LocationRating";
 import Chatbox from "../../views/InformationPage/Chatbox";
 import InformationPageFavourite from "../../views/InformationPage/InformationPageFavourite";
-import LocationPictures from "../../views/InformationPage/LocationPictures";
 import Location from "../shared/models/Location";
 import InformationHeader from "../../views/InformationPage/InformationHeader";
 import Spinner from "react-bootstrap/Spinner";

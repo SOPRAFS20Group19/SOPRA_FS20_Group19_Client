@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import { Button } from '../../views/variables/Button';
 import '../../views/Map/BackgroundMap.css';
 import '../../views/variables/ZurichEmblem.css';
-import Header from "../../views/Map/Header";
 import {ButtonForLogin} from "../../views/variables/ButtonForLogin";
 import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 
