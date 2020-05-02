@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import {withRouter} from "react-router-dom";
-import avatarArray from "../AvatarArray"
+import avatarArray from "../Avatar/AvatarArray"
 
 
 const Container = styled.div`

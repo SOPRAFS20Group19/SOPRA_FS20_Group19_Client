@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import React from "react";
-import {RoundButton} from "../design/RoundButton";
-import UserIconComplete from "../UserIconComplete.svg";
-import LogoutIcon from "../LogoutIcon.svg";
+import {RoundButton} from "../variables/RoundButton";
+import UserIconComplete from "./UserIconComplete.svg";
+import LogoutIcon from "../variables/LogoutIcon.svg";
 import {withRouter} from "react-router-dom";
 
 //Sidebar for UserInformationPage

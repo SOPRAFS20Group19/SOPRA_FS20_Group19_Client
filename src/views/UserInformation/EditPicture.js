@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import {Button} from "../../views/design/Button";
+import {Button} from "../variables/Button";
 import maleCoder from "../../views/UserInformation/coder-man.svg";
 import femaleCoder from "../../views/UserInformation/coder-woman.svg";
 import maleScientist from "../../views/UserInformation/scientist-man.svg";

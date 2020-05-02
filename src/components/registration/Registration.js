@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { api, handleError } from '../../helpers/api';
 import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
-import { Button } from '../../views/design/Button';
-import '../../views/BackgroundMap.css';
-import '../../views/ZurichEmblem.css';
-import Header from "../../views/Header";
-import { ButtonForLogin } from '../../views/design/ButtonForLogin';
-import HeaderForLogin from "../../views/HeaderForLogin";
+import { Button } from '../../views/variables/Button';
+import '../../views/Map/BackgroundMap.css';
+import '../../views/variables/ZurichEmblem.css';
+import Header from "../../views/Map/Header";
+import { ButtonForLogin } from '../../views/variables/ButtonForLogin';
+import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 
 
 const BackgroundContainer = styled.div`

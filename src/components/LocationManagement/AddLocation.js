@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
-import { Button } from '../../views/design/Button';
+import { Button } from '../../views/variables/Button';
 import { withRouter } from 'react-router-dom';
-import Header from "../../views/Header";
+import Header from "../../views/Map/Header";
 import SidebarInfoAndAddLocation from "../../views/InformationPage/SidebarInfoAndAddLocation";
 import TitleEdit from "../../views/UserInformation/TitleEdit";
 import AddFountain from "../../views/AddLocation/AddFountain";
@@ -12,8 +12,8 @@ import Location from "../shared/models/Location";
 import FireplaceCircle from "../../views/MapMarkers/FireplaceCircle.png"
 import FountainCircle from "../../views/MapMarkers/FountainCircle.png"
 import RecyclingCircle from "../../views/MapMarkers/RecyclingCircle.png"
-import {ButtonForRecycling} from "../../views/design/ButtonForRecycling";
-import {RoundButton} from "../../views/design/RoundButton";
+import {ButtonForRecycling} from "../../views/variables/ButtonForRecycling";
+import {RoundButton} from "../../views/variables/RoundButton";
 import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo"
 import Spinner from "react-bootstrap/Spinner";
 import SidebarAddLocation from "../../views/AddLocation/SidebarAddLocation";

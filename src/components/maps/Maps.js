@@ -8,9 +8,9 @@ import {
 } from "react-google-maps";
 import * as brunnenData from "./data/wvz_brunnen.json";
 import mapStyles from "./mapStyles";
-import Sidebar from "../../views/Sidebar";
-import Header from "../../views/Header";
-import {Button} from '../../views/design/Button';
+import Sidebar from "../../views/Map/Sidebar";
+import Header from "../../views/Map/Header";
+import {Button} from '../../views/variables/Button';
 import { withRouter } from 'react-router-dom';
 import MapService from "./MapService";
 import Popover from "react-bootstrap/Popover";

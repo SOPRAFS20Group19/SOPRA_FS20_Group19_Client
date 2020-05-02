@@ -8,7 +8,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import {api, handleError} from "../../helpers/api";
 import Location from "../../components/shared/models/Location";
 import Message from "./Message";
-import Player from "../Player";
+import Player from "../variables/Player";
 
 const Container = styled.div`
   height: 260px;

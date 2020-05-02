@@ -4,7 +4,7 @@ import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
 import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
-import { Button } from '../../views/design/Button';
+import { Button } from '../../views/variables/Button';
 import Popover from "react-bootstrap/Popover";
 import Form from "react-bootstrap/Form";
 import {Checkbox} from '../../views/Filter/Checkbox';

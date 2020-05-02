@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
-import { Button } from '../../views/design/Button';
+import { Button } from '../../views/variables/Button';
 import { withRouter } from 'react-router-dom';
 import SidebarEditUserInformation from "../../views/UserInformation/SidebarEditUserInformation";
 import UserEditHeader from "../../views/UserInformation/UserEditHeader";
 import InfoEditProfile from "../../views/UserInformation/InfoEditProfile";
 import EditPicture from "../../views/UserInformation/EditPicture";
-import {Spinner} from "../../views/design/Spinner";
+import {Spinner} from "../../views/variables/Spinner";
 import User from "../shared/models/User";
-import HeaderForLogin from "../../views/HeaderForLogin";
+import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 import TitleEdit from "../../views/UserInformation/TitleEdit";
 
 const MainContainer =styled.div`

@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import {BaseContainer} from '../../helpers/layout';
 import {api, handleError} from '../../helpers/api';
-import {Button} from '../../views/design/Button';
+import {Button} from '../../views/variables/Button';
 import {withRouter} from 'react-router-dom';
 import User from "../shared/models/User";
-import Profile from "../../views/Profile";
+import Profile from "../../views/UserInformation/Profile";
 import UserHeader from '../../views/UserInformation/UserHeader';
 import UserInformation from '../../views/UserInformation/UserInformation';
 import SidebarUserInformation from "../../views/UserInformation/SidebarUserInformation";
 import SavedLocations from "../../views/UserInformation/SavedLocations";
-import {Spinner} from "../../views/design/Spinner";
-import HeaderForLogin from "../../views/HeaderForLogin";
+import {Spinner} from "../../views/variables/Spinner";
+import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 import TitleProfile from "../../views/UserInformation/TitleProfile";
 
 const BackgroundContainer = styled(BaseContainer)`

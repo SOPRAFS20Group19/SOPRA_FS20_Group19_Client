@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import {Button as Button1} from "../design/Button";
-import StarEmpty from "../StarEmpty.svg";
-import StarFull from "../StarFilled.svg";
+import {Button as Button1} from "../variables/Button";
+import StarEmpty from "../variables/StarEmpty.svg";
+import StarFull from "../variables/StarFilled.svg";
 import {api, handleError} from "../../helpers/api";
 import Location from "../../components/shared/models/Location";
 

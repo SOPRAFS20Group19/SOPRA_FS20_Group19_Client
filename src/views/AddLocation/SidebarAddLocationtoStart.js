@@ -1,25 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import {BaseContainer} from "../../helpers/layout";
-import {Button} from "../design/Button";
-import {RoundButton} from "../design/RoundButton";
+import {Button} from "../variables/Button";
+import {RoundButton} from "../variables/RoundButton";
 import {Nav} from "react-bootstrap";
-import {UserIcon} from "../design/UserIcon";
-import {FilterIcon} from "../design/FilterIcon";
-import {PlusIcon} from "../design/PlusIcon";
-import UserIconComplete from "../UserIconComplete.svg"
+import {UserIcon} from "../variables/UserIcon";
+import {FilterIcon} from "../variables/FilterIcon";
+import {PlusIcon} from "../variables/PlusIcon";
+import UserIconComplete from "../UserInformation/UserIconComplete.svg"
 import FilterIconComplete from "../Filter/FilterIconComplete.svg"
-import PlusIconComplete from "../PlusIconComplete.svg"
-import Profile from "../Profile";
+import PlusIconComplete from "../Map/PlusIconComplete.svg"
+import Profile from "../UserInformation/Profile";
 import Filter from "../../components/maps/Filter";
 import AddLocation from "../../components/LocationManagement/AddLocation";
 import { withRouter } from 'react-router-dom';
-import LogoutIcon from "../LogoutIcon.svg"
+import LogoutIcon from "../variables/LogoutIcon.svg"
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import {ButtonForLogin} from "../design/ButtonForLogin";
+import {ButtonForLogin} from "../variables/ButtonForLogin";
 import {api, handleError} from "../../helpers/api";
-import avatarArray from "../AvatarArray";
+import avatarArray from "../Avatar/AvatarArray";
 
 //Sidebar for Information Page and Add Location
 

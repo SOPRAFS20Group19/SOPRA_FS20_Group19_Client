@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import HeartEmpty from "../HeartEmpty.svg";
-import HeartFull from "../HeartFull.svg";
+import HeartEmpty from "../variables/HeartEmpty.svg";
+import HeartFull from "../variables/HeartFull.svg";
 import HeartUnfilled from "./HeartUnfilled.png"
 import HeartRed from "./HeartRed.png"
 import {api, handleError} from "../../helpers/api";
