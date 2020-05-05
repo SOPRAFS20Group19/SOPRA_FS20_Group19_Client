@@ -7,9 +7,12 @@ import {Button} from "../variables/Button";
 import styled from "styled-components";
 import SidebarAddLocation from "./SidebarAddLocation";
 import {RoundButton} from "../variables/RoundButton";
-import FountainCircle from "../MapMarkers/FountainCircle.png";
-import FireplaceCircle from "../MapMarkers/FireplaceCircle.png";
-import RecyclingCircle from "../MapMarkers/RecyclingCircle.png";
+import FireplaceCircle from "../MapMarkers/FireplaceCircle.png"
+import RecyclingCircle from "../MapMarkers/RecyclingCircle.png"
+import FountainCircle from "../MapMarkers/FountainCircle.png"
+import TableTennisCircle from "../MapMarkers/Ping Pong Circle.png"
+import ToiletCircle from "../MapMarkers/Public Toilet Circle.png"
+import BenchCircle from "../MapMarkers/Bench Circle.png"
 
 const MainContainer =styled.div`
   color: black;
@@ -66,11 +69,45 @@ const ButtonContainerRecyclingCircle = styled.div`
   width: 100%;
 `;
 
+const ButtonContainerToiletCircle = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: 15px;
+  width: 100%;
+`;
+const ButtonContainerTableTennisCircle = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 15px;
+  width: 100%;
+`;
+const ButtonContainerBenchCircle = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 15px;
+  width: 100%;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   grid-column: 1;
   grid-row: 3;
+  margin-top: 15px;
+  width: 100%;
+`;
+
+const ButtonContainer2 = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 4;
   margin-top: 15px;
   width: 100%;
 `;
@@ -107,6 +144,26 @@ class ChooseAddLocationType extends React.Component {
                         </RoundButton>
                     </ButtonContainerRecyclingCircle>
                 </ButtonContainer>
+                <ButtonContainer2>
+                <ButtonContainerToiletCircle>
+                    <RoundButton>
+                        <img src={ToiletCircle} alt={"TOILET"} width="96px" height="96px"
+                             onClick={() => {this.props.setLocationType("TOILET");}}/>
+                    </RoundButton>
+                    </ButtonContainerToiletCircle>
+                    <ButtonContainerTableTennisCircle>
+                        <RoundButton>
+                            <img src={TableTennisCircle} alt={"TABLE_TENNIS"} width="96px" height="96px"
+                                 onClick={() => {this.props.setLocationType("TABLE_TENNIS");}}/>
+                        </RoundButton>
+                    </ButtonContainerTableTennisCircle>
+                    <ButtonContainerBenchCircle>
+                        <RoundButton>
+                            <img src={BenchCircle} alt={"BENCH"} width="96px" height="96px"
+                                 onClick={() => {this.props.setLocationType("BENCH");}}/>
+                        </RoundButton>
+                    </ButtonContainerBenchCircle>
+                </ButtonContainer2>
             </MainContainer>)
     }
 }

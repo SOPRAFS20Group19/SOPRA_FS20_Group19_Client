@@ -555,6 +555,64 @@ class AddLocation extends React.Component {
         this.setState({setCoordinates: true})
     }
 
+
+    // when the save changes button is clicked, the new data is sent to the server via put request
+    saveChanges() {
+        try {
+            const requestBody = JSON.stringify({
+                username: this.state.username,
+                birthDate: this.state.birthDate
+            });
+
+            const url = '/users/' + this.state.loggedInUserId;
+            api.put(url, requestBody);
+
+            // after successfully saving the changes, the user is redirected to his profile page
+            this.props.history.push('/game/dashboard/user');
+        } catch (e) {
+            alert(`Something went wrong while editing the profile: \n${handleError(e)}`);
+        }
+    }
+
+    // this method handles the given user input and changes the component's state
+    handleInputChange(key, value) {
+        // Example: if the key is username, this statement is the equivalent to the following one:
+        // this.setState({'username': value});
+        this.setState({[key]: value});
+    }
+
+    getCoordinates(position) {
+        this.setState({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        })
+    }
+
+    getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    handleLocationError(error){
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert ("User denied the request for Geolocation.")
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert ("Location information is unavailable.")
+                break;
+            case error.TIMEOUT:
+                alert ("The request to get user location timed out.")
+                break;
+            case error.UNKNOWN_ERROR:
+                alert ("An unknown error occurred.")
+                break;
+        }
+    }
+
     // renders the page
     render() {
         return (
@@ -632,65 +690,6 @@ class AddLocation extends React.Component {
 
             </MainContainer>
         );
-    }
-
-
-
-    // when the save changes button is clicked, the new data is sent to the server via put request
-    saveChanges() {
-        try {
-            const requestBody = JSON.stringify({
-                username: this.state.username,
-                birthDate: this.state.birthDate
-            });
-
-            const url = '/users/' + this.state.loggedInUserId;
-            api.put(url, requestBody);
-
-            // after successfully saving the changes, the user is redirected to his profile page
-            this.props.history.push('/game/dashboard/user');
-        } catch (e) {
-            alert(`Something went wrong while editing the profile: \n${handleError(e)}`);
-        }
-    }
-
-    // this method handles the given user input and changes the component's state
-    handleInputChange(key, value) {
-        // Example: if the key is username, this statement is the equivalent to the following one:
-        // this.setState({'username': value});
-        this.setState({[key]: value});
-    }
-
-    getCoordinates(position) {
-        this.setState({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-        })
-    }
-
-    getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-    }
-
-    handleLocationError(error){
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                alert ("User denied the request for Geolocation.")
-                break;
-            case error.POSITION_UNAVAILABLE:
-                alert ("Location information is unavailable.")
-                break;
-            case error.TIMEOUT:
-                alert ("The request to get user location timed out.")
-                break;
-            case error.UNKNOWN_ERROR:
-                alert ("An unknown error occurred.")
-                break;
-        }
     }
 }
 
