@@ -13,10 +13,10 @@ import AddBench from "../../views/AddLocation/AddBench";
 import Location from "../shared/models/Location";
 import FireplaceCircle from "../../views/MapMarkers/FireplaceCircle.png"
 import RecyclingCircle from "../../views/MapMarkers/RecyclingCircle.png"
-import ToiletCircle from "../../views/MapMarkers/Public Toilet Circle.png"
+import ToiletCircle from "../../views/MapMarkers/PublicToiletCircle.png"
 import FountainCircle from "../../views/MapMarkers/FountainCircle.png"
-import TableTennisCircle from "../../views/MapMarkers/Ping Pong Circle.png"
-import BenchCircle from "../../views/MapMarkers/Bench Circle.png"
+import TableTennisCircle from "../../views/MapMarkers/PingPongCircle.png"
+import BenchCircle from "../../views/MapMarkers/BenchCircle.png"
 import {ButtonForRecycling} from "../../views/variables/ButtonForRecycling";
 import {RoundButton} from "../../views/variables/RoundButton";
 import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo"

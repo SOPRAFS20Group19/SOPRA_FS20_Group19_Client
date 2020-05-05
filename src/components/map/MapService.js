@@ -25,6 +25,9 @@ import yogiWomanColor from "../../views/Avatar/markers/yogi-woman-color-marker.s
 import yogiMan from "../../views/Avatar/markers/yogi-man-marker.svg";
 import yogiManColor from "../../views/Avatar/markers/yogi-man-color-marker.svg";
 import unknownMarker from "../../views/Avatar/markers/unknown-marker.svg";
+import BenchIcon from "../../views/MapMarkers/BenchIcon.png";
+import ToiletIcon from "../../views/MapMarkers/PublicToiletIcon.png";
+import PingPongIcon from "../../views/MapMarkers/PingPongIcon.png";
 
 const markerArray = [unknownMarker, coderWoman, coderWomanColor, coderMan, coderManColor, scientistWoman, scientistWomanColor, scientistMan, scientistManColor, yogiWoman, yogiWomanColor, yogiMan, yogiManColor]
 
@@ -154,8 +157,17 @@ class MapService extends React.Component {
         else if (location.locationType === "FIREPLACE"){
             return '/FireplaceIcon.png'
         }
-        else {
+        else if (location.locationType === "RECYCLING_STATION") {
             return '/RecyclingIcon.png'
+        }
+        else if (location.locationType === "TOILET") {
+            return '/PublicToiletIcon.png'
+        }
+        else if (location.locationType === "TABLE_TENNIS") {
+            return '/PingPongIcon.png'
+        }
+        else{
+            return '/BenchIcon.png'
         }
     }
 

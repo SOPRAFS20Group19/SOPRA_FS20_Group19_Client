@@ -80,7 +80,10 @@ class Map extends React.Component{
             const requestBody = JSON.stringify({
                 fountains: localStorage.getItem('showFountains'),
                 fireplaces: localStorage.getItem('showFireplaces'),
-                recyclingStations: localStorage.getItem('showRecyclingStations')
+                recyclingStations: localStorage.getItem('showRecyclingStations'),
+                toilets: localStorage.getItem('showToilets'),
+                tableTennis: localStorage.getItem('showTableTennis'),
+                bench: localStorage.getItem('showBenches')
             });
 
             const response = await api.post('/locations/filter', requestBody);

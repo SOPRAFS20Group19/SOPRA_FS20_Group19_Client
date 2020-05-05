@@ -43,7 +43,10 @@ class Filter extends React.Component{
         this.state = {
             checkedFountains: null,
             checkedFireplaces: null,
-            checkedRecyclingStations: null
+            checkedRecyclingStations: null,
+            checkedToilets: null,
+            checkedBenches: null,
+            checkedTableTennis: null
         };
         this.setCheckboxes();
     }
@@ -60,12 +63,18 @@ class Filter extends React.Component{
         this.setState({ checkedFountains: localStorage.getItem('showFountains')});
         this.setState({ checkedFireplaces: localStorage.getItem('showFireplaces')});
         this.setState({ checkedRecyclingStations: localStorage.getItem('showRecyclingStations')});
+        this.setState({ checkedToilets: localStorage.getItem('showToilets')});
+        this.setState({ checkedTableTennis: localStorage.getItem('showTableTennis')});
+        this.setState({ checkedBenches: localStorage.getItem('showBenches')});
     }
 
     changeLocalStorage(){
         localStorage.setItem('showFountains', this.state.checkedFountains);
         localStorage.setItem('showFireplaces', this.state.checkedFireplaces);
         localStorage.setItem('showRecyclingStations', this.state.checkedRecyclingStations);
+        localStorage.setItem('showToilets', this.state.checkedToilets);
+        localStorage.setItem('showTableTennis', this.state.checkedTableTennis);
+        localStorage.setItem('showBenches', this.state.checkedBenches);
         this.applyFilter();
     }
 
@@ -86,6 +95,21 @@ class Filter extends React.Component{
     handleCheckboxChangeRecyclingStations() {
         const currentState = this.state.checkedRecyclingStations;
         this.setState({checkedRecyclingStations: !currentState});
+    }
+
+    handleCheckboxChangeToilets() {
+        const currentState = this.state.checkedToilets;
+        this.setState({checkedToilets: !currentState});
+    }
+
+    handleCheckboxChangeTableTennis() {
+        const currentState = this.state.checkedTableTennis;
+        this.setState({checkedTableTennis: !currentState});
+    }
+
+    handleCheckboxChangeBenches() {
+        const currentState = this.state.checkedBenches;
+        this.setState({checkedBenches: !currentState});
     }
 
     render(){
@@ -112,6 +136,27 @@ class Filter extends React.Component{
                         onChange={this.handleCheckboxChangeRecyclingStations.bind(this)}
                     />
                     <span>Recycling Stations</span>
+                </label>
+                <label style={{color: 'white'}}>
+                    <Checkbox
+                        checked={this.state.checkedToilets}
+                        onChange={this.handleCheckboxChangeToilets.bind(this)}
+                    />
+                    <span>Public Toilets</span>
+                </label>
+                <label style={{color: 'white'}}>
+                    <Checkbox
+                        checked={this.state.checkedTableTennis}
+                        onChange={this.handleCheckboxChangeTableTennis.bind(this)}
+                    />
+                    <span>Table Tennis</span>
+                </label>
+                <label style={{color: 'white'}}>
+                    <Checkbox
+                        checked={this.state.checkedBenches}
+                        onChange={this.handleCheckboxChangeBenches.bind(this)}
+                    />
+                    <span>Benches</span>
                 </label>
                 <ButtonContainer>
                     <Button onClick={() => {this.changeLocalStorage()}}>Apply Filter</Button>

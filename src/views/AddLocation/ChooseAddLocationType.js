@@ -10,9 +10,9 @@ import {RoundButton} from "../variables/RoundButton";
 import FireplaceCircle from "../MapMarkers/FireplaceCircle.png"
 import RecyclingCircle from "../MapMarkers/RecyclingCircle.png"
 import FountainCircle from "../MapMarkers/FountainCircle.png"
-import TableTennisCircle from "../MapMarkers/Ping Pong Circle.png"
-import ToiletCircle from "../MapMarkers/Public Toilet Circle.png"
-import BenchCircle from "../MapMarkers/Bench Circle.png"
+import TableTennisCircle from "../MapMarkers/PingPongCircle.png"
+import ToiletCircle from "../MapMarkers/PublicToiletCircle.png"
+import BenchCircle from "../MapMarkers/BenchCircle.png"
 
 const MainContainer =styled.div`
   color: black;
