@@ -137,7 +137,6 @@ class Chatbox extends React.Component {
 
             const response = await api.get(url);
 
-            //const oldMessages = response.data.map((message) => <Message sender={message.senderId} content={message.content} timestamp={message.timestamp}/>);
             this.setState({oldMessages: response.data.reverse()});
         } catch (e) {
             alert(`Something went wrong while getting the chat: \n${handleError(e)}`);
@@ -154,9 +153,6 @@ class Chatbox extends React.Component {
         this.setState({ [key]: value });
     }
 
-    /*componentDidUpdate(){
-        this.getChat();
-    }*/
 
     async sendMessage(){
         try {
@@ -189,7 +185,15 @@ class Chatbox extends React.Component {
                         {this.state.oldMessages.map(message => {
                             return (
                                 <MessageContainer>
-                                    <Message sender={message.senderId} content={message.content} timestamp={message.timestamp}/>
+                                    <Message
+                                        senderId={message.senderId}
+                                        senderUsername={message.senderUsername}
+                                        content={message.content}
+                                        timestamp={message.timestamp}
+                                        messageId={message.messageId}
+                                        locationId={this.props.locationId}
+                                        getChat={this.getChat.bind(this)}
+                                    />
                                 </MessageContainer>
                             );
                         })}
