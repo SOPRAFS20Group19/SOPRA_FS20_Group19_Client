@@ -157,7 +157,7 @@ class AddCoordinates extends React.Component{
             <ButtonContainerCoordinatesManually>
                 <Button
                     disabled={!this.props.latitude || !this.props.longitude}
-                    onClick={() => {this.setCoordinatesSuccessfully();}}>Set coordinates manually</Button>
+                    onClick={() => {this.props.setCoordinatesSuccessfully();}}>Set coordinates manually</Button>
             </ButtonContainerCoordinatesManually>
 
         </MainContainer>)
