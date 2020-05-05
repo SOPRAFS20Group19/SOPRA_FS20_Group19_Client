@@ -9,6 +9,7 @@ import SidebarInfoAndAddLocation from "../../views/InformationPage/SidebarInfoAn
 import TitleEdit from "../../views/UserInformation/TitleEdit";
 import AddFountain from "../../views/AddLocation/AddFountain";
 import AddToilet from "../../views/AddLocation/AddToilet";
+import AddBench from "../../views/AddLocation/AddBench";
 import Location from "../shared/models/Location";
 import FireplaceCircle from "../../views/MapMarkers/FireplaceCircle.png"
 import RecyclingCircle from "../../views/MapMarkers/RecyclingCircle.png"
@@ -387,7 +388,11 @@ class AddLocation extends React.Component {
             cost: null,
             openinghours: null,
             net: null,
-            slabQuality: null
+            slabQuality: null,
+            view: null,
+            peace: null,
+            romantics: null,
+            comfort: null
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
@@ -427,7 +432,11 @@ class AddLocation extends React.Component {
             cost: null,
             category: null,
             net: null,
-            slabQuality: null
+            slabQuality: null,
+            view: null,
+            peace: null,
+            romantics: null,
+            comfort: null
         })
     }
 
@@ -463,6 +472,34 @@ class AddLocation extends React.Component {
             return "TABLE TENNIS";
         }else if (this.state.locationType  === 'BENCH'){
             return "BENCH";
+        }
+    }
+
+    // when the save changes button is clicked, the new data is sent to the server via put request
+    async saveChangesBench() {
+        try {
+            this.setState({savingLocation: true})
+
+            const requestBody = JSON.stringify({
+                locationType: "BENCH",
+                longitude: this.state.longitude,
+                latitude: this.state.latitude,
+                view: this.state.view,
+                peace: this.state.peace,
+                romantics: this.state.romantics,
+                comfort: this.state.comfort
+            });
+
+            const url = '/locations';
+            //api.post(url, requestBody);
+            const response = await api.post(url, requestBody);
+            const location = new Location(response.data);
+            const locationUrl = '/map/informationpage/' + location.id;
+
+            // after successfully saving the changes, the user is redirected to his profile page
+            this.props.history.push(locationUrl);
+        } catch (e) {
+            alert(`Something went wrong while adding the new location: \n${handleError(e)}`);
         }
     }
 
@@ -804,21 +841,19 @@ class AddLocation extends React.Component {
                             </MainContainer>)) : (this.state.savingLocation ? (<MainContainer>
                                 <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
                             </MainContainer>): (<MainContainer>
-                                <AddToilet
+                                <AddBench
                                     latitude={this.state.latitude}
                                     longitude={this.state.longitude}
                                     handleInputChange={this.handleInputChange.bind(this)}
                                     setState={this.setState.bind(this)}
-                                    saveChangesRecycling={this.saveChangesRecycling.bind(this)}
+                                    saveChangesBench={this.saveChangesBench.bind(this)}
                                     setToNullState={this.setToNullState.bind(this)}
                                     getImage={this.getImage.bind(this)}
                                     getTypeAsString={this.getTypeAsString.bind(this)}
-                                    glas={this.state.glas}
-                                    oel={this.state.oel}
-                                    metall={this.state.metall}
-                                    adresse={this.state.adresse}
-                                    plz={this.state.plz}
-                                    ort={this.state.ort}
+                                    view={this.state.view}
+                                    peace={this.state.peace}
+                                    romantics={this.state.romantics}
+                                    comfort={this.state.comfort}
                                 />
                             </MainContainer>))))))))}
             </MainContainer>
