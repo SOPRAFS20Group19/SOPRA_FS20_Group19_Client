@@ -8,6 +8,9 @@ import {Spinner} from "../variables/Spinner";
 import FireplaceCircle from "../MapMarkers/FireplaceCircle.png"
 import RecyclingCircle from "../MapMarkers/RecyclingCircle.png"
 import FountainCircle from "../MapMarkers/FountainCircle.png"
+import TableTennisCircle from "../MapMarkers/Ping Pong Circle.png"
+import ToiletCircle from "../MapMarkers/Public Toilet Circle.png"
+import BenchCircle from "../MapMarkers/Bench Circle.png"
 import HeartUnfilled from "../InformationPage/HeartUnfilled.png"
 import HeartRed from "../InformationPage/HeartRed.png"
 import ListGroupItem from "react-bootstrap/ListGroupItem";
@@ -73,22 +76,38 @@ export default class LocationListItem extends React.Component{
         };
     }
 
+    //returns the image to be rendered according to the type
     getImage(){
         if (this.props.location.locationType === 'FIREPLACE'){
             return FireplaceCircle;
         }else if (this.props.location.locationType === 'FOUNTAIN'){
             return FountainCircle;
+        } else if (this.props.location.locationType === 'RECYCLING_STATION'){
+            return RecyclingCircle;
+        }else if (this.props.location.locationType === 'TOILET'){
+            return ToiletCircle;
+        }else if (this.props.location.locationType === 'TABLE_TENNIS'){
+            return TableTennisCircle;
+        }else if (this.props.location.locationType === 'BENCH'){
+            return BenchCircle;
         }
-        return RecyclingCircle;
     }
 
+    //returns the string to be rendered according to the type
     getTypeAsString(){
         if (this.props.location.locationType === 'FIREPLACE'){
             return "FIREPLACE";
         }else if (this.props.location.locationType === 'FOUNTAIN'){
             return "FOUNTAIN";
+        }else if (this.props.location.locationType  === 'RECYCLING_STATION'){
+            return "RECYCLING";
+        }else if (this.props.location.locationType  === 'TOILET'){
+            return "TOILET";
+        }else if (this.props.location.locationType  === 'TABLE_TENNIS'){
+            return "TABLE TENNIS";
+        }else if (this.props.location.locationType  === 'BENCH'){
+            return "BENCH";
         }
-        return "RECYCLING";
     }
 
     //Changes the color of the heart and saves favourite

@@ -7,6 +7,9 @@ import FountainClipart from "../Map/FountainClipart.png";
 import FireplaceCircle from "../MapMarkers/FireplaceCircle.png"
 import RecyclingCircle from "../MapMarkers/RecyclingCircle.png"
 import FountainCircle from "../MapMarkers/FountainCircle.png"
+import TableTennisCircle from "../MapMarkers/Ping Pong Circle.png"
+import ToiletCircle from "../MapMarkers/Public Toilet Circle.png"
+import BenchCircle from "../MapMarkers/Bench Circle.png"
 import {api, handleError} from "../../helpers/api";
 import {Spinner} from "../variables/Spinner";
 
@@ -49,8 +52,15 @@ class InformationHeader extends React.Component {
             return FireplaceCircle;
         }else if (this.props.type === 'FOUNTAIN'){
             return FountainCircle;
+        } else if (this.props.type === 'RECYCLING_STATION'){
+            return RecyclingCircle;
+        }else if (this.props.type === 'TOILET'){
+            return ToiletCircle;
+        }else if (this.props.type === 'TABLE_TENNIS'){
+            return TableTennisCircle;
+        }else if (this.props.type === 'BENCH'){
+            return BenchCircle;
         }
-        return RecyclingCircle;
     }
 
     //returns the string to be rendered according to the type
@@ -59,8 +69,15 @@ class InformationHeader extends React.Component {
             return "FIREPLACE";
         }else if (this.props.type === 'FOUNTAIN'){
             return "FOUNTAIN";
+        }else if (this.props.type === 'RECYCLING_STATION'){
+            return "RECYCLING";
+        }else if (this.props.type === 'TOILET'){
+            return "TOILET";
+        }else if (this.props.type === 'TABLE_TENNIS'){
+            return "TABLE TENNIS";
+        }else if (this.props.type === 'BENCH'){
+            return "BENCH";
         }
-        return "RECYCLING";
     }
 
     render(){
