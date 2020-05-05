@@ -27,6 +27,7 @@ import CreatingLocation from "../../views/AddLocation/CreatingLocation";
 import AddFireplace from "../../views/AddLocation/AddFireplace";
 import AddRecycling from "../../views/AddLocation/AddRecycling";
 import ChooseAddLocationType from "../../views/AddLocation/ChooseAddLocationType";
+import AddTableTennis from "../../views/AddLocation/AddTableTennis";
 
 
 const MainContainer =styled.div`
@@ -384,7 +385,9 @@ class AddLocation extends React.Component {
             kinderwagen: null,
             category: null,
             cost: null,
-            openinghours: null
+            openinghours: null,
+            net: null,
+            slabQuality: null
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
@@ -422,7 +425,9 @@ class AddLocation extends React.Component {
             kinderwagen: null,
             openinghours: null,
             cost: null,
-            category: null
+            category: null,
+            net: null,
+            slabQuality: null
         })
     }
 
@@ -458,6 +463,38 @@ class AddLocation extends React.Component {
             return "TABLE TENNIS";
         }else if (this.state.locationType  === 'BENCH'){
             return "BENCH";
+        }
+    }
+
+    // when the save changes button is clicked, the new data is sent to the server via put request
+    async saveChangesTableTennis() {
+        try {
+            this.setState({savingLocation: true})
+            if (this.state.net==="X"){
+                this.state.net = "Yes";
+            }
+            else{
+                this.state.net = "No";
+            }
+
+            const requestBody = JSON.stringify({
+                locationType: "TABLE_TENNIS",
+                longitude: this.state.longitude,
+                latitude: this.state.latitude,
+                slabQuality: this.state.slabQuality,
+                net: this.state.net
+            });
+
+            const url = '/locations';
+            //api.post(url, requestBody);
+            const response = await api.post(url, requestBody);
+            const location = new Location(response.data);
+            const locationUrl = '/map/informationpage/' + location.id;
+
+            // after successfully saving the changes, the user is redirected to his profile page
+            this.props.history.push(locationUrl);
+        } catch (e) {
+            alert(`Something went wrong while adding the new location: \n${handleError(e)}`);
         }
     }
 
@@ -752,21 +789,17 @@ class AddLocation extends React.Component {
                                 </MainContainer>)) : (this.state.locationType==="TABLE_TENNIS" ? (this.state.savingLocation ? (<MainContainer>
                                 <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
                             </MainContainer>): (<MainContainer>
-                                <AddToilet
+                                <AddTableTennis
                                     latitude={this.state.latitude}
                                     longitude={this.state.longitude}
                                     handleInputChange={this.handleInputChange.bind(this)}
                                     setState={this.setState.bind(this)}
-                                    saveChangesRecycling={this.saveChangesRecycling.bind(this)}
+                                    saveChangesTableTennis={this.saveChangesTableTennis.bind(this)}
                                     setToNullState={this.setToNullState.bind(this)}
                                     getImage={this.getImage.bind(this)}
                                     getTypeAsString={this.getTypeAsString.bind(this)}
-                                    glas={this.state.glas}
-                                    oel={this.state.oel}
-                                    metall={this.state.metall}
-                                    adresse={this.state.adresse}
-                                    plz={this.state.plz}
-                                    ort={this.state.ort}
+                                    net={this.state.net}
+                                    slabQuality={this.state.slabQuality}
                                 />
                             </MainContainer>)) : (this.state.savingLocation ? (<MainContainer>
                                 <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
