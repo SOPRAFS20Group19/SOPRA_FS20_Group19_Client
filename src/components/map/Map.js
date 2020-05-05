@@ -104,6 +104,9 @@ class Map extends React.Component{
             localStorage.setItem('showFountains', true);
             localStorage.setItem('showFireplaces', true);
             localStorage.setItem('showRecyclingStations', true);
+            localStorage.setItem('showBenches', true);
+            localStorage.setItem('showToilets', true);
+            localStorage.setItem('showTableTennis', true);
         }
     }
 

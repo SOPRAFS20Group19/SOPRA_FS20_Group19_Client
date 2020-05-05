@@ -12,6 +12,7 @@ import { api, handleError } from '../../helpers/api';
 import UserIconComplete from "../UserInformation/UserIconComplete.svg"
 import FilterIconComplete from "../Filter/FilterIconComplete.svg"
 import PlusIconComplete from "./PlusIconComplete.svg"
+import UsersIcon from "./UsersIcon.svg"
 import Profile from "../UserInformation/Profile";
 import Filter from "../../components/map/Filter";
 import AddLocation from "../../components/addLocation/AddLocation";
@@ -33,7 +34,7 @@ const Container = styled.div`
     background: #003068;
   }
   height: 55%;
-  min-height: 375px;
+  min-height: 500px;
   width: 10%;
   background: #66A3E0;
   display: flex;
@@ -80,7 +81,7 @@ class Sidebar extends React.Component{
             showUserHover: false,
             showFilterHover: false,
             showAddHover: false,
-            
+            showAllUsersHover: false
         }
     }
 
@@ -118,6 +119,10 @@ class Sidebar extends React.Component{
 
     toggleShowAddHover(value){
         this.setState({showAddHover: value})
+    }
+
+    toggleShowAllUsersHover(value){
+        this.setState({showAllUsersHover: value})
     }
 
     render() {
@@ -308,6 +313,26 @@ class Sidebar extends React.Component{
                         {this.state.showAddHover ? <HoverContainer>Add new location</HoverContainer> : null}
                         </div>
                     </OverlayTrigger>
+                }
+
+                {localStorage.getItem("userId") != null ?
+                    <div>
+                        <ButtonContainer>
+                            <RoundButton
+                                width="75%"
+                                onMouseOver={() => this.toggleShowAllUsersHover(true)}
+                                onMouseLeave={() => this.toggleShowAllUsersHover(false)}
+                                onClick={() => {
+                                    this.props.history.push(`/users`);
+                                }}
+                            >
+                                <img src={UsersIcon}/>
+                            </RoundButton>
+                        </ButtonContainer>
+                        {this.state.showAllUsersHover ? <HoverContainer>All users</HoverContainer> : null}
+                    </div>
+                    :
+                    null
                 }
 
             </Container>
