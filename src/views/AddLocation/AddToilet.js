@@ -1,0 +1,301 @@
+import React from "react";
+import {withRouter} from "react-router-dom";
+import SidebarAddLocationtoStart from "./SidebarAddLocationtoStart";
+import Spinner from "react-bootstrap/Spinner";
+import {ButtonYesNo} from "./ButtonYesNo";
+import {Button} from "../variables/Button";
+import styled from "styled-components";
+
+const MainContainer =styled.div`
+  color: black;
+  flex-direction: row;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto auto auto;
+  justify-content: center;
+`;
+
+const QuestionContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 2;
+  margin-top: 15px;
+  width: 100%;
+`;
+
+const Question = styled.div`
+  font-weight: bolder;
+  font-size: 30px;
+  margin-left: 0px;
+  letter-spacing: 0.2em;
+  line-height: 1.1em;
+  margin-top: 15px;
+`;
+
+const ImageContainer = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 15px;
+`;
+
+const Container2 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 4;
+  margin-top: 15px;
+`;
+const Container3 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 6;
+  margin-top: 15px;
+`;
+const Container4 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 7;
+  margin-top: 15px;
+`;
+
+const Container5 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 8;
+  margin-top: 15px;
+`;
+
+const Container6 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 9;
+  margin-top: 15px;
+`;
+const Container7 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 10;
+  margin-top: 15px;
+`;
+const Container8 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 11;
+  margin-top: 15px;
+`;
+
+const Container9 = styled.div`
+  height: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 12;
+  margin-top: 15px;
+`;
+
+
+const Title = styled.div`
+  font-weight: bold;
+  font-size: x-large;
+  flex-direction: row;
+`;
+
+const InputFieldBaujahr = styled.input`
+  &::placeholder {
+    color: black;
+  }
+  height: 35px;
+  width: 35%;
+  border: 2px solid #003068;
+  border-color: #66A3E0;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+`;
+
+const InfoSchrift = styled.div`
+  font-weight: normal;
+  font-size: large;
+  flex-direction: row;
+`;
+
+const ButtonContainerYesNo = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 10px;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 15px;
+  width: 100%;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 15px;
+  width: 100%;
+`;
+
+class AddToilet extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render(){
+        return(
+            <MainContainer>
+                <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
+                <QuestionContainer>
+                    <Question>Location information: </Question>
+                </QuestionContainer>
+                <ImageContainer>
+                    <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="96px" height="96px"/>
+                </ImageContainer>
+                <Container2>
+                    <Title>Coordinates</Title>
+                    {!this.props.latitude && !this.props.longitude ? (<Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>) : (
+                        <InfoSchrift>{this.props.latitude}, {this.props.longitude}</InfoSchrift>)}
+                </Container2>
+                <Container3>
+                    <Title>Address: </Title>
+                    <InputFieldBaujahr
+                        placeholder="enter address here"
+                        onChange={e => {
+                            this.props.handleInputChange('adresse', e.target.value);
+                        }}
+                    />
+                </Container3>
+                <Container4>
+                    <Title>Zip code: </Title>
+                    <InputFieldBaujahr
+                        placeholder="enter zip code here"
+                        onChange={e => {
+                            this.props.handleInputChange('plz', e.target.value);
+                        }}
+                    />
+                </Container4>
+                <Container5>
+                    <Title>City: </Title>
+                    <InputFieldBaujahr
+                        placeholder="enter city here"
+                        onChange={e => {
+                            this.props.handleInputChange('ort', e.target.value);
+                        }}
+                    />
+                </Container5>
+                <Container6>
+                    <Title>Opening hours (optional): </Title>
+                    <InputFieldBaujahr
+                        placeholder="enter openinghours here"
+                        onChange={e => {
+                            this.props.handleInputChange('openinghours', e.target.value);
+                        }}
+                    />
+                </Container6>
+                <Container7>
+                    <Title>Cost (optional): </Title>
+                    <InputFieldBaujahr
+                        placeholder="enter cost here"
+                        onChange={e => {
+                            this.props.handleInputChange('cost', e.target.value);
+                        }}
+                    />
+                </Container7>
+                <Container8>
+                    <Title>Suitable for disabled people? </Title>
+                    <ButtonContainerYesNo>
+                        <ButtonYesNo
+                            disabled={this.props.category === "X"}
+                            onClick={() => {this.props.setState({category: "X"});}}>Yes
+                        </ButtonYesNo>
+                        <ButtonYesNo
+                            disabled={this.props.category === "Y"}
+                            onClick={() => {this.props.setState({category: "Y"});}}>No
+                        </ButtonYesNo>
+                    </ButtonContainerYesNo>
+                </Container8>
+                <Container9>
+                    <ButtonContainer>
+                        <Button
+                            disabled={!this.props.adresse || !this.props.plz || !this.props.ort || !this.props.category}
+                            onClick={() => {this.props.saveChangesToilet()}}>Save Location
+                        </Button>
+                    </ButtonContainer>
+                    <ButtonContainer>
+                        <Button
+                            onClick={() => {this.props.setToNullState();}}>Cancel
+                        </Button>
+                    </ButtonContainer>
+                </Container9>
+            </MainContainer>)
+    }
+}
+
+export default withRouter(AddToilet);

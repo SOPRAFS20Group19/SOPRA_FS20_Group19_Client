@@ -8,6 +8,7 @@ import Header from "../../views/Map/Header";
 import SidebarInfoAndAddLocation from "../../views/InformationPage/SidebarInfoAndAddLocation";
 import TitleEdit from "../../views/UserInformation/TitleEdit";
 import AddFountain from "../../views/AddLocation/AddFountain";
+import AddToilet from "../../views/AddLocation/AddToilet";
 import Location from "../shared/models/Location";
 import FireplaceCircle from "../../views/MapMarkers/FireplaceCircle.png"
 import RecyclingCircle from "../../views/MapMarkers/RecyclingCircle.png"
@@ -381,6 +382,9 @@ class AddLocation extends React.Component {
             baden: null,
             hunde: null,
             kinderwagen: null,
+            category: null,
+            cost: null,
+            openinghours: null
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
@@ -415,7 +419,11 @@ class AddLocation extends React.Component {
             parkplatz: null,
             baden: null,
             hunde: null,
-            kinderwagen: null})
+            kinderwagen: null,
+            openinghours: null,
+            cost: null,
+            category: null
+        })
     }
 
     //returns the image to be rendered according to the type
@@ -450,6 +458,42 @@ class AddLocation extends React.Component {
             return "TABLE TENNIS";
         }else if (this.state.locationType  === 'BENCH'){
             return "BENCH";
+        }
+    }
+
+    // when the save changes button is clicked, the new data is sent to the server via put request
+    async saveChangesToilet() {
+        try {
+            this.setState({savingLocation: true})
+            if (this.state.category==="X"){
+                this.state.category = "WC (rollstuhlgängig)";
+            }
+            else{
+                this.state.category = "WC (nicht rollstuhlgängig)";
+            }
+
+            const requestBody = JSON.stringify({
+                locationType: "TOILET",
+                longitude: this.state.longitude,
+                latitude: this.state.latitude,
+                adresse: this.state.adresse,
+                plz: this.state.plz,
+                ort: this.state.ort,
+                openingHours: this.state.openinghours,
+                cost: this.state.cost,
+                category: this.state.category
+            });
+
+            const url = '/locations';
+            //api.post(url, requestBody);
+            const response = await api.post(url, requestBody);
+            const location = new Location(response.data);
+            const locationUrl = '/map/informationpage/' + location.id;
+
+            // after successfully saving the changes, the user is redirected to his profile page
+            this.props.history.push(locationUrl);
+        } catch (e) {
+            alert(`Something went wrong while adding the new location: \n${handleError(e)}`);
         }
     }
 
@@ -666,7 +710,7 @@ class AddLocation extends React.Component {
                                               kinderwagen={this.state.kinderwagen}
                                 />
                         </MainContainer>))
-                            : (this.state.savingLocation ? (<MainContainer>
+                            : (this.state.locationType==="RECYCLING" ? (this.state.savingLocation ? (<MainContainer>
                                 <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
                             </MainContainer>) : (
                                 <MainContainer>
@@ -686,8 +730,64 @@ class AddLocation extends React.Component {
                                         plz={this.state.plz}
                                         ort={this.state.ort}
                                     />
-                            </MainContainer>)))))}
-
+                            </MainContainer>)) : (this.state.locationType==="TOILET" ? (this.state.savingLocation ? (<MainContainer>
+                                    <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
+                                </MainContainer>) : (<MainContainer>
+                                    <AddToilet
+                                        latitude={this.state.latitude}
+                                        longitude={this.state.longitude}
+                                        handleInputChange={this.handleInputChange.bind(this)}
+                                        setState={this.setState.bind(this)}
+                                        saveChangesToilet={this.saveChangesToilet.bind(this)}
+                                        setToNullState={this.setToNullState.bind(this)}
+                                        getImage={this.getImage.bind(this)}
+                                        getTypeAsString={this.getTypeAsString.bind(this)}
+                                        openinghours={this.state.openinghours}
+                                        cost={this.state.cost}
+                                        category={this.state.category}
+                                        adresse={this.state.adresse}
+                                        plz={this.state.plz}
+                                        ort={this.state.ort}
+                                    />
+                                </MainContainer>)) : (this.state.locationType==="TABLE_TENNIS" ? (this.state.savingLocation ? (<MainContainer>
+                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
+                            </MainContainer>): (<MainContainer>
+                                <AddToilet
+                                    latitude={this.state.latitude}
+                                    longitude={this.state.longitude}
+                                    handleInputChange={this.handleInputChange.bind(this)}
+                                    setState={this.setState.bind(this)}
+                                    saveChangesRecycling={this.saveChangesRecycling.bind(this)}
+                                    setToNullState={this.setToNullState.bind(this)}
+                                    getImage={this.getImage.bind(this)}
+                                    getTypeAsString={this.getTypeAsString.bind(this)}
+                                    glas={this.state.glas}
+                                    oel={this.state.oel}
+                                    metall={this.state.metall}
+                                    adresse={this.state.adresse}
+                                    plz={this.state.plz}
+                                    ort={this.state.ort}
+                                />
+                            </MainContainer>)) : (this.state.savingLocation ? (<MainContainer>
+                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
+                            </MainContainer>): (<MainContainer>
+                                <AddToilet
+                                    latitude={this.state.latitude}
+                                    longitude={this.state.longitude}
+                                    handleInputChange={this.handleInputChange.bind(this)}
+                                    setState={this.setState.bind(this)}
+                                    saveChangesRecycling={this.saveChangesRecycling.bind(this)}
+                                    setToNullState={this.setToNullState.bind(this)}
+                                    getImage={this.getImage.bind(this)}
+                                    getTypeAsString={this.getTypeAsString.bind(this)}
+                                    glas={this.state.glas}
+                                    oel={this.state.oel}
+                                    metall={this.state.metall}
+                                    adresse={this.state.adresse}
+                                    plz={this.state.plz}
+                                    ort={this.state.ort}
+                                />
+                            </MainContainer>))))))))}
             </MainContainer>
         );
     }
