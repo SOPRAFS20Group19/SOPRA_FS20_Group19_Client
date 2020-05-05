@@ -10,14 +10,22 @@ import TitleEdit from "../../views/UserInformation/TitleEdit";
 import AddFountain from "../../views/AddLocation/AddFountain";
 import Location from "../shared/models/Location";
 import FireplaceCircle from "../../views/MapMarkers/FireplaceCircle.png"
-import FountainCircle from "../../views/MapMarkers/FountainCircle.png"
 import RecyclingCircle from "../../views/MapMarkers/RecyclingCircle.png"
+import ToiletCircle from "../../views/MapMarkers/Public Toilet Circle.png"
+import FountainCircle from "../../views/MapMarkers/FountainCircle.png"
+import TableTennisCircle from "../../views/MapMarkers/Ping Pong Circle.png"
+import BenchCircle from "../../views/MapMarkers/Bench Circle.png"
 import {ButtonForRecycling} from "../../views/variables/ButtonForRecycling";
 import {RoundButton} from "../../views/variables/RoundButton";
 import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo"
 import Spinner from "react-bootstrap/Spinner";
 import SidebarAddLocation from "../../views/AddLocation/SidebarAddLocation";
 import SidebarAddLocationtoStart from "../../views/AddLocation/SidebarAddLocationtoStart";
+import AddCoordinates from "../../views/AddLocation/AddCoordinates";
+import CreatingLocation from "../../views/AddLocation/CreatingLocation";
+import AddFireplace from "../../views/AddLocation/AddFireplace";
+import AddRecycling from "../../views/AddLocation/AddRecycling";
+import ChooseAddLocationType from "../../views/AddLocation/ChooseAddLocationType";
 
 
 const MainContainer =styled.div`
@@ -416,9 +424,17 @@ class AddLocation extends React.Component {
             return FireplaceCircle;
         }else if (this.state.locationType === 'FOUNTAIN'){
             return FountainCircle;
+        } else if (this.state.locationType === 'RECYCLING_STATION'){
+            return RecyclingCircle;
+        }else if (this.state.locationType === 'TOILET'){
+            return ToiletCircle;
+        }else if (this.state.locationType === 'TABLE_TENNIS'){
+            return TableTennisCircle;
+        }else if (this.state.locationType === 'BENCH'){
+            return BenchCircle;
         }
-        return RecyclingCircle;
     }
+
 
     //returns the string to be rendered according to the type
     getTypeAsString(){
@@ -426,27 +442,21 @@ class AddLocation extends React.Component {
             return "FIREPLACE";
         }else if (this.state.locationType === 'FOUNTAIN'){
             return "FOUNTAIN";
+        }else if (this.state.locationType  === 'RECYCLING_STATION'){
+            return "RECYCLING";
+        }else if (this.state.locationType  === 'TOILET'){
+            return "TOILET";
+        }else if (this.state.locationType  === 'TABLE_TENNIS'){
+            return "TABLE TENNIS";
+        }else if (this.state.locationType  === 'BENCH'){
+            return "BENCH";
         }
-        return "RECYCLING";
     }
 
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesFireplace() {
         try {
             this.setState({savingLocation: true})
-            /*
-            if(this.state.holz==="X"){
-                const newAusstattung = {...this.state.ausstattung};
-                newAusstattung["holz_string"] = "Holz, ";
-                this.setState({ausstattung: newAusstattung});
-            }
-            if(this.state.rost==="X"){
-                const newAusstattung = {...this.state.ausstattung};
-                newAusstattung["rost_string"] = "Rost, ";
-                this.setState({ausstattung: newAusstattung});
-            }
-
-             */
 
             const requestBody = JSON.stringify({
                 locationType: "FIREPLACE",
@@ -552,442 +562,72 @@ class AddLocation extends React.Component {
             <TitleEdit/>
                 {!this.state.locationType ?
                     (<MainContainer>
-                            <SidebarAddLocation avatarNr={localStorage.getItem("userAvatar")}/>
-                        <QuestionContainer>
-                <Question>What location type do you want to add?</Question>
-            </QuestionContainer>
-                <ButtonContainer>
-                    <ButtonContainerFountainCircle>
-                    <RoundButton>
-                        <img src={FountainCircle} alt={"FOUNTAIN"} width="96px" height="96px"
-                                             onClick={() => {this.setLocationType("FOUNTAIN");}}/>
-                    </RoundButton>
-                    </ButtonContainerFountainCircle>
-                    <ButtonContainerFireplaceCircle>
-                    <RoundButton>
-                        <img src={FireplaceCircle} alt={"FIREPLACE"} width="96px" height="96px"
-                             onClick={() => {this.setLocationType("FIREPLACE");}}/>
-                    </RoundButton>
-                    </ButtonContainerFireplaceCircle>
-                    <ButtonContainerRecyclingCircle>
-                    <RoundButton>
-                        <img src={RecyclingCircle} alt={"RECYCLING_STATION"} width="96px" height="96px"
-                             onClick={() => {this.setLocationType("RECYCLING_STATION");}}/>
-                    </RoundButton>
-                    </ButtonContainerRecyclingCircle>
-                </ButtonContainer>
+                            <ChooseAddLocationType
+                                setLocationType={this.setLocationType.bind(this)}
+                            />
                     </MainContainer>)
                     : (!this.state.setCoordinates ? (<MainContainer>
-                        <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
-                        <QuestionContainer>
-                            <Question>Set the coordinates:</Question>
-                        </QuestionContainer>
-                        <ImageContainer>
-                        <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
-                        </ImageContainer>
-                        <ButtonContainerCoordinates>
-                            <Button
-                                disabled={this.state.latitude || this.state.longitude}
-                                onClick={() => {this.getLocation();
-                                this.setCoordinatesSuccessfully();}}>Get current Coordinates</Button>
-                        </ButtonContainerCoordinates>
-                        <Container3>
-                            <Title>Latitude: </Title>
-                            <InputField
-                                placeholder="enter latitude here"
-                                onChange={e => {
-                                    this.handleInputChange('latitude', e.target.value);
-                                }}
-                            />
-                        </Container3>
-                        <Container4>
-                            <Title>Longitude: </Title>
-                            <InputField
-                                placeholder="enter longitude here"
-                                onChange={e => {
-                                    this.handleInputChange('longitude', e.target.value);
-                                }}
-                            />
-                        </Container4>
-                        <ButtonContainerCoordinatesManually>
-                            <Button
-                                disabled={!this.state.latitude || !this.state.longitude}
-                                onClick={() => {this.setCoordinatesSuccessfully();}}>Set coordinates manually</Button>
-                        </ButtonContainerCoordinatesManually>
-
+                        <AddCoordinates getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)} handleInputChange={this.handleInputChange.bind(this)} latitude={this.state.latitude} longitude={this.state.longitude} getLocation={this.getLocation.bind(this)} setCoordinatesSuccessfully={this.setCoordinatesSuccessfully.bind(this)} locationType={this.state.locationType}/>
                     </MainContainer>) : (this.state.locationType==="FOUNTAIN" ?
                         (this.state.savingLocation ? (
                             <MainContainer>
-                                <ImageContainer>
-                                <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
-                            </ImageContainer>
-                            <Container2>
-                                <Title>Thank you!</Title>
-                            </Container2>
-                            <Container3>
-                                <ButtonContainerSpinnerAddLocation>
-                                    <Button variant="primary" disabled
-                                            width="200px">
-                                        <Spinner
-                                            as="span"
-                                            animation="border"
-                                            size="sm"
-                                            role="status"
-                                            aria-hidden="true"
-                                        />
-                                        Creating...
-                                    </Button>
-                                </ButtonContainerSpinnerAddLocation>
-                            </Container3>
+                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
                         </MainContainer>) : (<MainContainer>
-                            <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
-                            <QuestionContainer>
-                                <Question>Location information: </Question>
-                            </QuestionContainer>
-                            <ImageContainer>
-                                <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
-                            </ImageContainer>
-                            <Container2>
-                                <Title>Coordinates</Title>
-                                {!this.state.latitude && !this.state.longitude ? (<Spinner animation="border" role="status">
-                                    <span className="sr-only">Loading...</span>
-                                </Spinner>) : (
-                                    <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>)}
-                            </Container2>
-                            <Container3>
-                                <Title>Year of construction (optional): </Title>
-                                <InputFieldBaujahr
-                                    placeholder="enter Baujahr here"
-                                    onChange={e => {
-                                        this.handleInputChange('baujahr', e.target.value);
-                                    }}
-                                />
-                            </Container3>
-                            <Container4>
-                                <Title>Potable water (optional)? </Title>
-                                <ButtonContainerYesNo>
-                                    <ButtonYesNo
-                                        disabled={this.state.art_txt === "Trinkwasserbrunnen"}
-                                        onClick={() => {this.setState({art_txt: "Trinkwasserbrunnen"});}}>Yes
-                                    </ButtonYesNo>
-                                    <ButtonYesNo
-                                        disabled={this.state.art_txt === "Kein Trinkwasser"}
-                                        onClick={() => {this.setState({art_txt: "Kein Trinkwasser"});}}>No
-                                    </ButtonYesNo>
-                                </ButtonContainerYesNo>
-                            </Container4>
-                            <Container5>
-                                <Title>Public access (optional)? </Title>
-                                <ButtonContainerYesNo>
-                                    <ButtonYesNo
-                                        disabled={this.state.brunnenart_txt === "öffentlicher Brunnen"}
-                                        onClick={() => {this.setState({brunnenart_txt: "öffentlicher Brunnen"});}}>Yes
-                                    </ButtonYesNo>
-                                    <ButtonYesNo
-                                        disabled={this.state.brunnenart_txt === "privater Brunnen"}
-                                        onClick={() => {this.setState({brunnenart_txt: "privater Brunnen"});}}>No
-                                    </ButtonYesNo>
-                                </ButtonContainerYesNo>
-                            </Container5>
-                            <Container6>
-                                <ButtonContainer>
-                                    <Button
-                                        onClick={() => {this.saveChangesFountain()}}>Save Location
-                                    </Button>
-                                </ButtonContainer>
-                                <ButtonContainer>
-                                    <Button
-                                        onClick={() => {this.setToNullState();}}>Cancel
-                                    </Button>
-                                </ButtonContainer>
-                            </Container6>
+                            <AddFountain latitude={this.state.latitude}
+                                         longitude={this.state.longitude}
+                                         handleInputChange={this.handleInputChange.bind(this)}
+                                         art_txt={this.state.art_txt}
+                                         brunnenart_txt={this.state.brunnenart_txt}
+                                         setState={this.setState.bind(this)}
+                                         saveChangesFountain={this.saveChangesFountain.bind(this)}
+                                         setToNullState={this.setToNullState.bind(this)}
+                                         getImage={this.getImage.bind(this)}
+                                         getTypeAsString={this.getTypeAsString.bind(this)}
+                            />
                         </MainContainer>)) :
                         (this.state.locationType==="FIREPLACE" ? (this.state.savingLocation ? (<MainContainer>
-                                <ImageContainer>
-                                    <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
-                                </ImageContainer>
-                                <Container2>
-                                    <Title>Thank you!</Title>
-                                </Container2>
-                                <Container3>
-                                    <ButtonContainerSpinnerAddLocation>
-                                        <Button variant="primary" disabled
-                                                width="200px">
-                                            <Spinner
-                                                as="span"
-                                                animation="border"
-                                                size="sm"
-                                                role="status"
-                                                aria-hidden="true"
-                                            />
-                                            Creating...
-                                        </Button>
-                                    </ButtonContainerSpinnerAddLocation>
-                                </Container3>
+                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
                             </MainContainer>) : (
                             <MainContainer>
-                                <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
-                                <QuestionContainer>
-                                    <Question>Location information: </Question>
-                                </QuestionContainer>
-                                <ImageContainer>
-                                    <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
-                                </ImageContainer>
-                                <Container2>
-                                    <Title>Coordinates</Title>
-                                    {!this.state.latitude && !this.state.longitude ? (<Spinner animation="border" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </Spinner>) : (
-                                    <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>)}
-                                </Container2>
-                                <Container3>
-                                    <Title>Firewood available? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.holz === "X"}
-                                            onClick={() => {this.setState({holz: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.holz === "Y"}
-                                            onClick={() => {this.setState({holz: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container3>
-                                <Container4>
-                                    <Title>Cooking grate available? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.rost === "X"}
-                                            onClick={() => {this.setState({rost: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.rost === "Y"}
-                                            onClick={() => {this.setState({rost: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container4>
-                                <Container5>
-                                    <Title>Table available? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.tisch === "X"}
-                                            onClick={() => {this.setState({tisch: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.tisch === "Y"}
-                                            onClick={() => {this.setState({tisch: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container5>
-                                <Container6>
-                                    <Title>Water available? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.trinkwasser === "X"}
-                                            onClick={() => {this.setState({trinkwasser: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.trinkwasser === "Y"}
-                                            onClick={() => {this.setState({trinkwasser: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container6>
-                                <Container7>
-                                    <Title>Trash can available? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.abfall === "X"}
-                                            onClick={() => {this.setState({abfall: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.abfall === "Y"}
-                                            onClick={() => {this.setState({abfall: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container7>
-                                <Container8>
-                                    <Title>Parking available? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.parkplatz === "X"}
-                                            onClick={() => {this.setState({parkplatz: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.parkplatz === "Y"}
-                                            onClick={() => {this.setState({parkplatz: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container8>
-                                <Container9>
-                                    <Title>Swimming possible? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.baden === "X"}
-                                            onClick={() => {this.setState({baden: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.baden === "Y"}
-                                            onClick={() => {this.setState({baden: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container9>
-                                <Container10>
-                                    <Title>Dogs allowed? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.hunde === "X"}
-                                            onClick={() => {this.setState({hunde: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.hunde === "Y"}
-                                            onClick={() => {this.setState({hunde: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container10>
-                                <Container11>
-                                    <Title>Stroller-friendly? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.kinderwagen === "X"}
-                                            onClick={() => {this.setState({kinderwagen: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.kinderwagen === "Y"}
-                                            onClick={() => {this.setState({kinderwagen: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container11>
-                                <Container12>
-                                    <ButtonContainer>
-                                        <Button
-                                            disabled={!this.state.holz || !this.state.rost || !this.state.tisch || !this.state.trinkwasser || !this.state.abfall || !this.state.parkplatz || !this.state.baden || !this.state.hunde || !this.state.kinderwagen}
-                                            onClick={() => {this.saveChangesFireplace()}}>Save Location
-                                        </Button>
-                                    </ButtonContainer>
-                                    <ButtonContainer>
-                                        <Button
-                                            onClick={() => {this.setToNullState();}}>Cancel
-                                        </Button>
-                                    </ButtonContainer>
-                                </Container12>
+                                <AddFireplace latitude={this.state.latitude}
+                                              longitude={this.state.longitude}
+                                              handleInputChange={this.handleInputChange.bind(this)}
+                                              setState={this.setState.bind(this)}
+                                              saveChangesFireplace={this.saveChangesFireplace.bind(this)}
+                                              setToNullState={this.setToNullState.bind(this)}
+                                              getImage={this.getImage.bind(this)}
+                                              getTypeAsString={this.getTypeAsString.bind(this)}
+                                              holz={this.state.holz}
+                                              rost={this.state.rost}
+                                              tisch={this.state.tisch}
+                                              trinkwasser={this.state.trinkwasser}
+                                              abfall={this.state.abfall}
+                                              parkplatz={this.state.parkplatz}
+                                              baden={this.state.baden}
+                                              hunde={this.state.hunde}
+                                              kinderwagen={this.state.kinderwagen}
+                                />
                         </MainContainer>))
                             : (this.state.savingLocation ? (<MainContainer>
-                                <ImageContainer>
-                                    <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
-                                </ImageContainer>
-                                <Container2>
-                                    <Title>Thank you!</Title>
-                                </Container2>
-                                <Container3>
-                                    <ButtonContainerSpinnerAddLocation>
-                                        <Button variant="primary" disabled
-                                                width="200px">
-                                <Spinner
-                                    as="span"
-                                    animation="border"
-                                    size="sm"
-                                    role="status"
-                                    aria-hidden="true"
-                                />
-                                Creating...
-                            </Button>
-                                    </ButtonContainerSpinnerAddLocation>
-                                </Container3>
+                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
                             </MainContainer>) : (
                                 <MainContainer>
-                                    <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
-                                    <QuestionContainer>
-                                    <Question>Location information: </Question>
-                                </QuestionContainer>
-                                <ImageContainer>
-                                    <img src={this.getImage()} alt={this.getTypeAsString()} width="96px" height="96px"/>
-                                </ImageContainer>
-                                <Container2>
-                                    <Title>Coordinates</Title>
-                                    {!this.state.latitude && !this.state.longitude ? (<Spinner animation="border" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </Spinner>) : (
-                                        <InfoSchrift>{this.state.latitude}, {this.state.longitude}</InfoSchrift>)}
-                                </Container2>
-                                <Container3>
-                                    <Title>Address: </Title>
-                                    <InputFieldBaujahr
-                                        placeholder="enter address here"
-                                        onChange={e => {
-                                            this.handleInputChange('adresse', e.target.value);
-                                        }}
+                                    <AddRecycling
+                                        latitude={this.state.latitude}
+                                        longitude={this.state.longitude}
+                                        handleInputChange={this.handleInputChange.bind(this)}
+                                        setState={this.setState.bind(this)}
+                                        saveChangesRecycling={this.saveChangesRecycling.bind(this)}
+                                        setToNullState={this.setToNullState.bind(this)}
+                                        getImage={this.getImage.bind(this)}
+                                        getTypeAsString={this.getTypeAsString.bind(this)}
+                                        glas={this.state.glas}
+                                        oel={this.state.oel}
+                                        metall={this.state.metall}
+                                        adresse={this.state.adresse}
+                                        plz={this.state.plz}
+                                        ort={this.state.ort}
                                     />
-                                </Container3>
-                                <Container4>
-                                    <Title>Zip code: </Title>
-                                    <InputFieldBaujahr
-                                        placeholder="enter zip code here"
-                                        onChange={e => {
-                                            this.handleInputChange('plz', e.target.value);
-                                        }}
-                                    />
-                                </Container4>
-                                <Container5>
-                                    <Title>City: </Title>
-                                    <InputFieldBaujahr
-                                        placeholder="enter city here"
-                                        onChange={e => {
-                                            this.handleInputChange('ort', e.target.value);
-                                        }}
-                                    />
-                                </Container5>
-                                <Container6>
-                                    <Title>Metal disposable? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.metall === "X"}
-                                            onClick={() => {this.setState({metall: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.metall === "Y"}
-                                            onClick={() => {this.setState({metall: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container6>
-                                <Container7>
-                                    <Title>Glass disposable? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.glas === "X"}
-                                            onClick={() => {this.setState({glas: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.glas === "Y"}
-                                            onClick={() => {this.setState({glas: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container7>
-                                <Container8>
-                                    <Title>Oil disposable? </Title>
-                                    <ButtonContainerYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.oel === "X"}
-                                            onClick={() => {this.setState({oel: "X"});}}>Yes
-                                        </ButtonYesNo>
-                                        <ButtonYesNo
-                                            disabled={this.state.oel === "Y"}
-                                            onClick={() => {this.setState({oel: "Y"});}}>No
-                                        </ButtonYesNo>
-                                    </ButtonContainerYesNo>
-                                </Container8>
-                                <Container9>
-                                    <ButtonContainer>
-                                        <Button
-                                            disabled={!this.state.adresse || !this.state.plz || !this.state.ort || !this.state.metall || !this.state.glas || !this.state.oel}
-                                            onClick={() => {this.saveChangesRecycling()}}>Save Location
-                                        </Button>
-                                    </ButtonContainer>
-                                    <ButtonContainer>
-                                        <Button
-                                            onClick={() => {this.setToNullState();}}>Cancel
-                                        </Button>
-                                    </ButtonContainer>
-                                </Container9>
                             </MainContainer>)))))}
 
             </MainContainer>
