@@ -33,8 +33,8 @@ const Container = styled.div`
     opacity: 0.9;
     background: #003068;
   }
-  height: 55%;
-  min-height: 500px;
+  height: 73%;
+  min-height: 600px;
   width: 10%;
   background: #66A3E0;
   display: flex;
@@ -81,7 +81,8 @@ class Sidebar extends React.Component{
             showUserHover: false,
             showFilterHover: false,
             showAddHover: false,
-            showAllUsersHover: false
+            showAllUsersHover: false,
+            centerMapHover: false
         }
     }
 
@@ -123,6 +124,10 @@ class Sidebar extends React.Component{
 
     toggleShowAllUsersHover(value){
         this.setState({showAllUsersHover: value})
+    }
+
+    toggleCenterMap(value){
+        this.setState({centerMapHover: value})
     }
 
     render() {
@@ -330,6 +335,26 @@ class Sidebar extends React.Component{
                             </RoundButton>
                         </ButtonContainer>
                         {this.state.showAllUsersHover ? <HoverContainer>All users</HoverContainer> : null}
+                    </div>
+                    :
+                    null
+                }
+
+                {localStorage.getItem("userId") != null ?
+                    <div>
+                        <ButtonContainer>
+                            <RoundButton
+                                width="75%"
+                                onMouseOver={() => this.toggleCenterMap(true)}
+                                onMouseLeave={() => this.toggleCenterMap(false)}
+                                onClick={() => {
+                                    this.props.centerMapAtCurrentLocation();
+                                }}
+                            >
+                                <img src={UsersIcon}/>
+                            </RoundButton>
+                        </ButtonContainer>
+                        {this.state.centerMapHover ? <HoverContainer>Current location</HoverContainer> : null}
                     </div>
                     :
                     null

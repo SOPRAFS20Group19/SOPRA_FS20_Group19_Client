@@ -110,11 +110,28 @@ class Map extends React.Component{
         }
     }
 
+    centerMapAtCurrentLocation (){
+        this.setState({currentCenter: [this.state.currentPosition[0], this.state.currentPosition[1]]});
+        localStorage.setItem("wantsCurrentLocation", true);
+        window.location.reload(false);
+    }
+
     getCoordinates(position) {
         this.setState({
-            currentPosition: [position.coords.latitude, position.coords.longitude],
-            currentCenter: [position.coords.latitude, position.coords.longitude]
+            currentPosition: [position.coords.latitude, position.coords.longitude]
         })
+        if (position.coords.longitude > 8.4680486289
+            && position.coords.longitude < 8.6191027275
+            && position.coords.latitude > 47.3232261256
+            && position.coords.latitude < 47.4308197123){
+            this.setState({  currentCenter: [position.coords.latitude, position.coords.longitude]
+        })
+        }
+        if(localStorage.getItem("wantsCurrentLocation")){
+            this.setState({   currentCenter: [position.coords.latitude, position.coords.longitude]});
+            localStorage.removeItem("wantsCurrentLocation");
+        }
+
     }
 
     getLocation() {
@@ -173,7 +190,7 @@ class Map extends React.Component{
             </MapService>
             </div>)}
             <Header/>
-            <Sidebar getFilteredLocations={this.getFilteredLocations.bind(this)} avatarNr={this.state.loggedInUser.avatarNr}/>
+            <Sidebar centerMapAtCurrentLocation={this.centerMapAtCurrentLocation.bind(this)} getFilteredLocations={this.getFilteredLocations.bind(this)} avatarNr={this.state.loggedInUser.avatarNr}/>
         </div>
         );
     }
