@@ -10,6 +10,7 @@ import SidebarUserInformation from "../../views/UserInformation/SidebarUserInfor
 import SavedLocations from "../../views/UserInformation/SavedLocations";
 import {Spinner} from "../../views/variables/Spinner";
 import TitleProfile from "../../views/UserInformation/TitleProfile";
+import FriendsUser from "../../views/UserInformation/FriendsUser";
 
 const BackgroundContainer = styled(BaseContainer)`
   min-height: 620px;
@@ -93,6 +94,7 @@ class UserProfile extends React.Component {
                                 creationDate={this.state.loggedInUser.creationDate}
                             />
                             <SavedLocations userId={this.state.loggedInUserId}/>
+                            <FriendsUser userId={this.state.loggedInUserId}/>
                         </MainContainer>
                 ) }
             </BaseContainer>

@@ -123,6 +123,18 @@ class Users extends React.Component{
         }
     }
 
+    async getFriends(){
+        try {
+            const url = '/users/friends/' + localStorage.getItem('userId');
+
+            const response = await api.get(url);
+
+            this.setState({users: response.data});
+        } catch (e) {
+            alert(`Something went wrong while getting the friends: \n${handleError(e)}`);
+        }
+    }
+
     goToProfile(userId){
         this.props.history.push(`/user/` + userId);
     }
@@ -133,8 +145,14 @@ class Users extends React.Component{
         this.setState({ [key]: value });
     }
 
-    filterFriends(){
-        this.setState({ filterFriends: !this.state.filterFriends });
+    filterFriends(value){
+        this.setState({ filterFriends: value });
+        if (value){
+            this.getFriends();
+        }
+        else {
+            this.getUsers();
+        }
     }
 
     // DO NOT CHANGE != to !==
@@ -150,14 +168,25 @@ class Users extends React.Component{
                         onChange={e => {this.handleInputChange('searchValue', e.target.value);}}
                     />
                     <ButtonContainer>
-                        <Button
-                            variant="outline-secondary"
-                            height="100%"
-                            onClick={() => {
-                                this.filterFriends();
-                            }}
-                        >
-                            Show your friends only</Button>
+                        {this.state.filterFriends ?
+                            <Button
+                                variant="outline-secondary"
+                                height="100%"
+                                onClick={() => {
+                                    this.filterFriends(false);
+                                }}
+                            >
+                                Show all users</Button>
+                            :
+                            <Button
+                                variant="outline-secondary"
+                                height="100%"
+                                onClick={() => {
+                                    this.filterFriends(true);
+                                }}
+                            >
+                                Show your friends</Button>
+                        }
                     </ButtonContainer>
                 </SearchContainer>
                 {!this.state.users ? (

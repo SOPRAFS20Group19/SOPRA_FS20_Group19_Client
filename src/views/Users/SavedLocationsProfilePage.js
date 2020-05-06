@@ -11,8 +11,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   grid-column: 1 / span 2;
-  grid-row: 4;
-  margin-top: 20px;
+  grid-row: 5;
+  margin-top: 0px;
   margin-left: 20px;
   align-content: left;
 `;

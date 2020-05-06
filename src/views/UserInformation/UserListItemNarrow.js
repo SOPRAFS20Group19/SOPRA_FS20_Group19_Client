@@ -8,8 +8,8 @@ import LogoutIcon from "../variables/LogoutIcon.svg";
 import HeartUnfilled from "../InformationPage/HeartUnfilled.png";
 import HeartRed from "../InformationPage/HeartRed.png";
 import {api, handleError} from "../../helpers/api";
-import AddFriend from "./AddFriend.png";
-import FriendAdded from "./FriendAdded.png";
+import AddFriend from "../Users/AddFriend.png";
+import FriendAdded from "../Users/FriendAdded.png";
 
 const Container = styled.div`
   display: grid;
@@ -35,7 +35,7 @@ const Title = styled.div`
   line-height: 1.1em;
   grid-column: 2;
   grid-row: 1;
-  min-width: 400px;
+  width: 200px;
 `;
 
 const ButtonContainer = styled.div`
@@ -77,30 +77,14 @@ const imgStyle = {
  * https://reactjs.org/docs/components-and-props.html
  * @FunctionalComponent
  */
-class UserListItem extends React.Component{
+class UserListItemNarrow extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             showUser: false,
             showUserHover: false,
             showReturnHover: false,
-            isFriend: false
-        }
-    }
-
-    componentDidMount(): void {
-        this.checkFriend();
-    }
-
-    async checkFriend() {
-        try {
-            const url = '/users/friends/' + localStorage.getItem('userId') + '/' + this.props.user.id;
-
-            const response = await api.get(url);
-
-            this.setState({isFriend: response.data});
-        } catch (e) {
-            alert(`Something went wrong while checking if this user is a friend: \n${handleError(e)}`);
+            isFriend: true
         }
     }
 
@@ -122,7 +106,7 @@ class UserListItem extends React.Component{
 
             this.setState({isFriend: false});
 
-            //this.props.refresh();
+            this.props.refresh();
         } catch (e) {
             alert(`Something went wrong while deleting this friend: \n${handleError(e)}`);
         }
@@ -136,7 +120,7 @@ class UserListItem extends React.Component{
 
             this.setState({isFriend: true});
 
-            //this.props.refresh();
+            this.props.refresh();
         } catch (e) {
             alert(`Something went wrong while adding this friend: \n${handleError(e)}`);
         }
@@ -178,4 +162,4 @@ class UserListItem extends React.Component{
 }
 
 
-export default UserListItem;
+export default UserListItemNarrow;

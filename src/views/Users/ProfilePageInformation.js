@@ -8,7 +8,7 @@ import {Button} from "../variables/Button";
 const Container = styled.div`
   height: flex;
   width: 100%;
-  min-width: 750px;
+  min-width: 500px;
   display: grid;
   justify-content: top;
   align-items: left;

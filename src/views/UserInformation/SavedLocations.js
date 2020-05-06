@@ -10,7 +10,7 @@ import Spinner from "react-bootstrap/Spinner";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  grid-column: 1 / span 2;
+  grid-column: 1;
   grid-row: 4;
   margin-top: 20px;
   margin-left: 20px;
