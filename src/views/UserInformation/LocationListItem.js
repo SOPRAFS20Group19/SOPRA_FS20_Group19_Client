@@ -23,13 +23,25 @@ const Container = styled.div`
   grid-column-gap: 20px;
   align-content: left;
   margin-top: 15px;
+  marign-bottom: 15px;
   justify-content: left;
+  @media only screen and (max-width: 700px){
+    grid-column-gap: 8px
+  }
+  
+  
 `;
 
 const IconContainer = styled.div`
   grid-column: 1;
   grid-row: 1 / span 2;
-`;
+  height: 60px;
+  width: 60px;
+  @media only screen and (max-width: 500px){
+    height: 45px;
+    width:45px;
+  }
+  `;
 
 const Title = styled.div`
   font-weight: bolder;
@@ -39,6 +51,14 @@ const Title = styled.div`
   grid-column: 2;
   grid-row: 1;
   min-width: 400px;
+  @media only screen and (max-width: 700px){
+    font-size: 13px
+    min-width: 300px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 11px
+    min-width: 200px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -65,6 +85,9 @@ const InfoPageButton = styled(Button)`
   color: black;
   padding-left: 0px;
   text-align: left;
+  @media only screen and (max-width: 500px){
+    font-size: 10px
+  }
 `;
 
 export default class LocationListItem extends React.Component{
@@ -144,7 +167,7 @@ export default class LocationListItem extends React.Component{
         return (
             <Container>
                 <IconContainer>
-                    <img src={this.getImage()} alt={this.getTypeAsString()} width="60px" height="60px"/>
+                    <img src={this.getImage()} alt={this.getTypeAsString()} width="100%" height="100%"/>
                 </IconContainer>
                 <Title>{this.getTypeAsString()} - {this.props.location.address}</Title>
                 <ButtonContainer>

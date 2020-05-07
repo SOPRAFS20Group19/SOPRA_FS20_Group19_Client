@@ -25,6 +25,17 @@ const MainContainer =styled.div`
   grid-template-rows: auto auto auto auto;
   justify-content: center;
   grid-column-gap: 30px;
+  @media only screen and (max-width: 1215px){
+    grid-column-gap: 20px;
+  }
+  
+  @media only screen and (max-width: 900px){
+    max-width: 800;
+  }
+  @media only screen and (max-width: 500px){
+    max-width: 600;
+    display: block;
+  }
 `;
 
 const Container =styled.div`

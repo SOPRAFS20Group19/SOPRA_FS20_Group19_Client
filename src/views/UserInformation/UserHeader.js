@@ -21,6 +21,19 @@ const PictureContainer = styled.div`
   flex-direction: row;
 `;
 
+const Picture = styled.div`
+  height: 120px;
+  width: 120px;
+  @media only screen and (max-width: 700px){
+    height: 100px;
+    width: 100px;
+  }
+  @media only screen and (max-width: 500px){
+    height: 80px;
+    width: 80px;
+  }
+`;
+
 
 const Title = styled.div`
   font-weight: bolder;
@@ -30,6 +43,12 @@ const Title = styled.div`
   margin-top: 30px;
   margin-left: 20px;
   text-transform: uppercase;
+  @media only screen and (max-width: 700px){
+    font-size: 20px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 
@@ -51,7 +70,9 @@ class UserHeader extends React.Component {
         return (
             <Container>
                 <PictureContainer>
-                    <img src={this.getProfileImage(this.props.avatarNr)} alt="User icon" width="120px" height="120px"/>
+                    <Picture>
+                        <img src={this.getProfileImage(this.props.avatarNr)} alt="User icon" width="100%" height="100%"/>
+                    </Picture>
                     <Title>
                         {this.props.username}, that's you:
                     </Title>

@@ -19,6 +19,13 @@ const Container = styled.div`
   align-content: left;
   margin-top: 15px;
   justify-content: left;
+  vertical-align: middle;
+  @media only screen and (max-width: 1220px){
+    grid-column-gap: 10px;
+  }
+  @media only screen and (max-width: 500px){
+    grid-column-gap: 8px;
+  }
 `;
 
 const AvatarContainer = styled.div`
@@ -26,6 +33,11 @@ const AvatarContainer = styled.div`
   grid-row: 1 / span 2;
   width: 70px;
   height: 70px;
+  
+  @media only screen and (max-width: 500px){
+      width: 45px;
+      height: 45px;
+  }
 `;
 
 const Title = styled.div`
@@ -36,6 +48,14 @@ const Title = styled.div`
   grid-column: 2;
   grid-row: 1;
   width: 200px;
+  @media only screen and (max-width: 700px){
+    font-size: 13px
+    min-width: 300px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 11px
+    min-width: 200px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -44,6 +64,8 @@ const ButtonContainer = styled.div`
   width: 100%;
   grid-column: 2;
   grid-row: 2;
+  
+  }
 `;
 
 const ImageContainer= styled.div`
@@ -51,6 +73,11 @@ const ImageContainer= styled.div`
   align-items: right;
   grid-column: 3;
   grid-row: 1 / span 2;
+  height: 72px;
+  width: 72px;
+  @media only screen and (max-width: 500px){
+    height: 45px;
+    width: 45px;
 `;
 
 const ProfilePageButton = styled(Button)`
@@ -62,6 +89,8 @@ const ProfilePageButton = styled(Button)`
   color: black;
   padding-left: 0px;
   text-align: left;
+  @media only screen and (max-width: 500px){
+    font-size: 10px
 `;
 
 const imgStyle = {
@@ -143,13 +172,13 @@ class UserListItemNarrow extends React.Component{
                 </ButtonContainer>
                 <ImageContainer>
                     {this.state.isFriend === false ?
-                        <img src={AddFriend} alt="Add Friend" height="72px" width="72px"
+                        <img src={AddFriend} alt="Add Friend" height="100%" width="100%"
                              onClick={() => {
                                  this.changeColor(true);
                              }}
                         />
                         :
-                        <img src={FriendAdded} alt="FriendAdded" height="72px" width="72px"
+                        <img src={FriendAdded} alt="FriendAdded" height="100%" width="100%"
                              onClick={() => {
                                  this.changeColor(false);
                              }}

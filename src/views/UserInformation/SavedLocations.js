@@ -23,6 +23,12 @@ const Title = styled.div`
   letter-spacing: 0.2em;
   line-height: 1.1em;
   margin-top: 30px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const Text = styled.div`
@@ -37,6 +43,7 @@ const ListContainer = styled.div`
   max-height: 225px;
   overflow: scroll;
   width: 100%;
+  
 `;
 
 

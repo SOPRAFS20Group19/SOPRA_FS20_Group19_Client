@@ -17,6 +17,10 @@ const Container = styled.div`
   margin-top: 20px;
   margin-left: 20px;
   align-content: left;
+  @media only screen and (max-width: 1100px){
+      grid-column: 1
+      grid-row: 5
+  }
 `;
 
 const Title = styled.div`
@@ -25,6 +29,12 @@ const Title = styled.div`
   letter-spacing: 0.2em;
   line-height: 1.1em;
   margin-top: 30px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const Text = styled.div`
@@ -65,7 +75,7 @@ class FriendsUser extends React.Component {
         //this.getFriends();
     }
 
-    componentDidMount(): void {
+    componentDidMount() {
         this.getFriends();
     }
 
