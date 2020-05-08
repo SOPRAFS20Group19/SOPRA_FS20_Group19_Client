@@ -22,7 +22,7 @@ const Container = styled.div`
   grid-template-rows: auto auto auto auto auto;
 `;
 
-const GridContainerName =styled.div`
+const GridContainer =styled.div`
   color: black;
   width: 100%;
   display: grid;
@@ -32,122 +32,36 @@ const GridContainerName =styled.div`
   align-content: center;
   grid-column-gap: 20px;
   grid-column: 1;
-  grid-row: 1;
+  grid-row: ${props => props.row};
+  font-size: x-large;
+  @media only screen and (max-width: 700px){
+    font-size: 22px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 14px;
+  }
 `;
 
-const GridContainerUsername =styled.div`
-  color: black;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto;
-  justify-content: left;
-  align-content: center;
-  grid-column-gap: 20px;
-  grid-column: 1;
-  grid-row: 2;
-`;
 
-const GridContainerCreationDate =styled.div`
-  color: black;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto;
-  justify-content: left;
-  align-content: center;
-  grid-column-gap: 20px;
-  grid-column: 1;
-  grid-row: 3;
-`;
 
-const GridContainerBirthDate =styled.div`
-  color: black;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto;
-  justify-content: left;
-  align-content: center;
-  grid-column-gap: 20px;
-  grid-column: 1;
-  grid-row: 4;
-`;
 
-const TitleName = styled.div`
+const Title = styled.div`
   font-weight: bold;
-  font-size: x-large;
   width: 100%;
   grid-column: 1;
-  grid-row: 1;
+
 `;
 
 
-const TextName = styled.div`
+const Text = styled.div`
   font-weight: normal;
-  font-size: x-large;
   width: 100%;
   list-style-type: none;
   grid-column: 2;
-  grid-row: 1;
-`;
-
-const TitleUsername = styled.div`
-  font-weight: bold;
-  font-size: x-large;
-  width: 100%;
-  grid-column: 1;
-  grid-row: 1;
 `;
 
 
-const TextUsername = styled.div`
-  font-weight: normal;
-  font-size: x-large;
-  width: 100%;
-  list-style-type: none;
-  grid-column: 2;
-  grid-row: 1;
 
-`;
-
-const TitleCreationDate = styled.div`
-  font-weight: bold;
-  font-size: x-large;
-  width: 100%;
-  grid-column: 1;
-  grid-row: 1;
-`;
-
-
-const TextCreationDate = styled.div`
-  font-weight: normal;
-  font-size: x-large;
-  width: 100%;
-  list-style-type: none;
-  grid-column: 2;
-  grid-row: 1;
-
-`;
-
-const TitleBirthDate = styled.div`
-  font-weight: bold;
-  font-size: x-large;
-  width: 100%;
-  grid-column: 1;
-  grid-row: 1;
-`;
-
-
-const TextBirthDate = styled.div`
-  font-weight: normal;
-  font-size: x-large;
-  width: 100%;
-  list-style-type: none;
-  grid-column: 2;
-  grid-row: 1;
-
-`;
 
 const ButtonContainer = styled.div`
   justify-content: left;
@@ -176,18 +90,18 @@ class UserInformation extends React.Component{
         return (
             <Container>
                 {!this.props.username ? (<Spinner/>) :(<div>
-                        <GridContainerName>
-                            <TitleName>Name:</TitleName>
-                            <TextName>{this.props.name}</TextName>
-                        </GridContainerName>
-                        <GridContainerUsername>
-                            <TitleUsername>Username:</TitleUsername>
-                            <TextUsername>{this.props.username}</TextUsername>
-                        </GridContainerUsername>
-                        <GridContainerCreationDate>
-                            <TitleCreationDate>KYC-user since:</TitleCreationDate>
-                            <TextCreationDate>{this.props.creationDate}</TextCreationDate>
-                        </GridContainerCreationDate>
+                        <GridContainer row={1}>
+                            <Title>Name:</Title>
+                            <Text>{this.props.name}</Text>
+                        </GridContainer >
+                        <GridContainer row={2}>
+                            <Title>Username:</Title>
+                            <Text>{this.props.username}</Text>
+                        </GridContainer>
+                        <GridContainer row={3}>
+                            <Title>KYC-user since:</Title>
+                            <Text>{this.props.creationDate}</Text>
+                        </GridContainer>
                     </div>
                 )}
                 <ButtonContainer>

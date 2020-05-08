@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { api, handleError } from '../../helpers/api';
 import User from '../shared/models/User';
+import {Button} from "../../views/variables/Button";
 import { withRouter } from 'react-router-dom';
 import '../../views/Map/BackgroundMap.css';
 import '../../views/variables/ZurichEmblem.css';
@@ -75,7 +76,7 @@ const SearchBar = styled.input`
   color: #000000;
 `;
 
-const Button = styled.button`
+const Button2 = styled.button`
   padding: 6px;
   font-weight: 700;
   text-transform: uppercase;
@@ -190,7 +191,11 @@ class Users extends React.Component{
                     </ButtonContainer>
                 </SearchContainer>
                 {!this.state.users ? (
-                    <Spinner />
+                    <ScrollContainer>
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                    </ScrollContainer>
                 ) : (
                     <ScrollContainer>
                         <UsersList>

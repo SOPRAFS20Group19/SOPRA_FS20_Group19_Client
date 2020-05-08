@@ -75,10 +75,36 @@ const BorderRecycling = {
     padding: 10,
 };
 
+const BorderToilet = {
+    color: '#000000',
+    border: '3px solid #A9A9A9',
+    borderRadius: 7,
+    margin: 4,
+    padding: 10,
+};
+
+const BorderTableTennis = {
+    color: '#8f193f',
+    border: '3px solid #FFC0CB',
+    borderRadius: 7,
+    margin: 4,
+    padding: 10,
+};
+
+const BorderBench = {
+    color: '#2D150A',
+    border: '3px solid #A58A72',
+    borderRadius: 7,
+    margin: 4,
+    padding: 10,
+};
+
+
+
 const ButtonRecycling = {
     color: '#228B22',
     border: '2px solid #228B22',
-    background: '#013220',
+    background: '#000000',
 };
 
 const ButtonFirePlace = {
@@ -91,6 +117,27 @@ const ButtonFountain = {
     color: '#66A3E0',
     border: '2px solid #66A3E0',
     background: '#003068',
+
+};
+
+const ButtonToilet = {
+    color: '#A9A9A9',
+    border: '2px solid #A9A9A9',
+    background: '#000000',
+
+};
+
+const ButtonTableTennis = {
+    color: '#FFC0CB',
+    border: '2px solid #FFC0CB',
+    background: '#8f193f',
+
+};
+
+const ButtonBench = {
+    color: '#A58A72',
+    border: '2px solid #A58A72',
+    background: '#2D150A',
 
 };
 
@@ -190,8 +237,18 @@ class MapService extends React.Component {
     getTypeAsString(location){
         if (this.state.selectedLocation.locationType === 'FIREPLACE'){
             return 'FIREPLACE';
-        }else if (this.state.selectedLocation.locationType === 'FOUNTAIN'){
+        }
+        else if (this.state.selectedLocation.locationType === 'FOUNTAIN'){
             return 'FOUNTAIN';
+        }
+        else if (this.state.selectedLocation.locationType === 'TOILET'){
+            return 'PUBLIC TOILET';
+        }
+        else if (this.state.selectedLocation.locationType === 'TABLE_TENNIS'){
+            return 'TABLE TENNIS';
+        }
+        else if (this.state.selectedLocation.locationType === 'BENCH'){
+            return 'BENCH';
         }
         return 'RECYCLING';
     }
@@ -204,6 +261,15 @@ class MapService extends React.Component {
         else if (this.state.selectedLocation.locationType === 'FIREPLACE'){
             return BorderFireplace;
         }
+        else if (this.state.selectedLocation.locationType === 'TOILET'){
+            return BorderToilet;
+        }
+        else if (this.state.selectedLocation.locationType === 'TABLE_TENNIS'){
+            return BorderTableTennis;
+        }
+        else if (this.state.selectedLocation.locationType === 'BENCH'){
+            return BorderBench;
+        }
 
         return BorderRecycling;
     }
@@ -211,10 +277,19 @@ class MapService extends React.Component {
     getStyleOfButton() {
         if (this.state.selectedLocation.locationType === 'FOUNTAIN') {
             return ButtonFountain;
-        } else if (this.state.selectedLocation.locationType === 'FIREPLACE') {
+        }
+        else if (this.state.selectedLocation.locationType === 'FIREPLACE') {
             return ButtonFirePlace;
         }
-
+        else if (this.state.selectedLocation.locationType === 'TOILET') {
+            return ButtonToilet;
+        }
+        else if (this.state.selectedLocation.locationType === 'TABLE_TENNIS') {
+            return ButtonTableTennis;
+        }
+        else if (this.state.selectedLocation.locationType === 'BENCH') {
+            return ButtonBench;
+        }
         return ButtonRecycling;
     }
 
