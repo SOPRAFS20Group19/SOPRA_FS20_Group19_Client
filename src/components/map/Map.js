@@ -7,7 +7,8 @@ import MapService from "./MapService";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
 import Spinner from "react-bootstrap/Spinner";
-import User from "../shared/models/User"
+import User from "../shared/models/User";
+import Weather from "../../views/variables/Weather";
 
 const Container = styled.div`
   height: 100%;
@@ -21,6 +22,7 @@ const Container = styled.div`
   top: 0;
   right: 0;
   padding-top: 0px;
+  flex-direction: column;
 `;
 
 class Map extends React.Component{
@@ -159,7 +161,8 @@ class Map extends React.Component{
                     aria-hidden="true"
                 />
                 Loading Map...
-            </Button></Container>) : (<div style={{ width: "100vw", height: "100vh" }}>
+            </Button>
+            <Weather/></Container>) : (<div style={{ width: "100vw", height: "100vh" }}>
             <MapService
                 currentLocation = {this.state.currentPosition}
                 currentCenter = {this.state.currentCenter}
