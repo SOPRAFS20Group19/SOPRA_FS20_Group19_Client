@@ -9,7 +9,14 @@ import '../../views/variables/ZurichEmblem.css';
 import { ButtonForLogin } from '../../views/variables/ButtonForLogin';
 import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 
-
+const TextContainer = styled.div`
+  font-weight: normal;
+  font-size: 13px;
+  margin-left: 0px;
+  letter-spacing: 0.1em;
+  margin-top: 0px;
+  color: red;
+`;
 const BackgroundContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,6 +99,16 @@ const ButtonContainer = styled.div`
  * https://reactjs.org/docs/react-component.html
  * @Class
  */
+
+function ValidationMessage(props) {
+    if (!props.valid) {
+        return(
+            <TextContainer className='error-msg'>{props.message}</TextContainer>
+        )
+    }
+    return null;
+}
+
 class Registration extends React.Component {
     /**
      * If you don’t initialize the state and you don’t bind methods, you don’t need to implement a constructor for your React component.
@@ -102,9 +119,16 @@ class Registration extends React.Component {
     constructor() {
         super();
         this.state = {
-            username: null,
-            name: null,
-            password: null
+            username: "",
+            name: "",
+            password: "",
+            passwordConfirm: '',
+            errorMsg: {},
+            formValid: false,
+            usernameValid: false,
+            passwordValid: false,
+            nameValid: false,
+            passwordConfirmValid: false
         };
     }
     /**
@@ -136,10 +160,29 @@ class Registration extends React.Component {
      * @param key (the key of the state for identifying the field that needs to be updated)
      * @param value (the value that gets assigned to the identified state key)
      */
+
+    updatePassword = (password) => {
+        this.setState({password}, this.validatePassword);
+    }
+
+    updateUsername = (username) => {
+        this.setState({username}, this.validateUsername)
+    }
+
+    updateName = (name) => {
+        this.setState({name}, this.validateName)
+    }
+
+    updatePasswordConfirm = (passwordConfirm) => {
+        this.setState({passwordConfirm}, this.validatePasswordConfirm)
+    }
+
     handleInputChange(key, value) {
         // Example: if the key is username, this statement is the equivalent to the following one:
         // this.setState({'username': value});
         this.setState({ [key]: value });
+        this.validateUsername();
+
     }
 
     /**
@@ -151,6 +194,63 @@ class Registration extends React.Component {
      */
     componentDidMount() {}
 
+    validateForm = () => {
+        const {usernameValid, nameValid, passwordValid, passwordConfirmValid} = this.state;
+        this.setState({
+            formValid: usernameValid && nameValid && passwordValid && passwordConfirmValid
+        })
+    }
+
+    validateUsername = () => {
+        const {username} = this.state;
+        let usernameValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (username.length < 4) {
+            usernameValid = false;
+            errorMsg.username = 'Must be at least 4 characters long'
+        }
+        this.setState({usernameValid, errorMsg}, this.validateForm)
+    }
+
+    validateName = () => {
+        const {name} = this.state;
+        let nameValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (name.length < 4) {
+            nameValid = false;
+            errorMsg.password = 'Must be at least 4 characters long';
+        }
+        this.setState({nameValid, errorMsg}, this.validateForm);
+    }
+
+    validatePassword = () => {
+        const {password} = this.state;
+        let passwordValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (password.length < 6) {
+            passwordValid = false;
+            errorMsg.password = 'Must be at least 6 characters long';
+        }
+        this.setState({passwordValid, errorMsg}, this.validateForm);
+    }
+
+    validatePasswordConfirm = () => {
+        const {passwordConfirm, password} = this.state;
+        let passwordConfirmValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (password !== passwordConfirm) {
+            passwordConfirmValid = false;
+            errorMsg.passwordConfirm = 'Passwords do not match'
+        }
+
+        this.setState({passwordConfirmValid, errorMsg}, this.validateForm);
+    }
+
+
 
     render() {
         return (
@@ -161,26 +261,38 @@ class Registration extends React.Component {
                         <FormContainer>
                             <Form>
                                 <InputField
-                                    placeholder="Enter your username here"
+                                    placeholder="Enter username here"
                                     onChange={e => {
-                                        this.handleInputChange('username', e.target.value);
+                                        this.updateUsername(e.target.value);
                                     }}
                                 />
+                                <ValidationMessage valid={this.state.usernameValid} message={this.state.errorMsg.username}/>
                                 <InputField
-                                    placeholder="Enter your name here"
+                                    placeholder="Enter name here"
                                     onChange={e => {
-                                        this.handleInputChange('name', e.target.value);
+                                        this.updateName(e.target.value);
                                     }}
                                 />
-                                <InputFieldPassword
-                                    placeholder="Enter your password here"
+                                <ValidationMessage valid={this.state.nameValid} message={this.state.errorMsg.name}/>
+                                <InputField
+                                    type="password"
+                                    placeholder="Enter password here"
                                     onChange={e => {
-                                        this.handleInputChange('password', e.target.value);
+                                        this.updatePassword(e.target.value);
                                     }}
                                 />
+                                <ValidationMessage valid={this.state.passwordValid} message={this.state.errorMsg.password}/>
+                                <InputField
+                                    type="password"
+                                    placeholder="Enter password again"
+                                    onChange={e => {
+                                        this.updatePasswordConfirm(e.target.value);
+                                    }}
+                                />
+                                <ValidationMessage valid={this.state.passwordConfirmValid} message={this.state.errorMsg.passwordConfirm}/>
                                 <ButtonContainer>
                                     <Button
-                                        disabled={!this.state.username || !this.state.password || !this.state.name}
+                                        disabled={!this.state.formValid}
                                         width="75%"
                                         onClick={() => {
                                             this.registration();
@@ -188,6 +300,16 @@ class Registration extends React.Component {
                                     >
                                         Register
                                     </Button>
+                                </ButtonContainer>
+                                <ButtonContainer>
+                                    <ButtonForLogin
+                                        width="75%"
+                                        onClick={() => {
+                                            this.props.history.push(`/map`);
+                                        }}
+                                    >
+                                        Continue as a guest
+                                    </ButtonForLogin>
                                 </ButtonContainer>
                                 <ButtonContainer>
                                     <ButtonForLogin

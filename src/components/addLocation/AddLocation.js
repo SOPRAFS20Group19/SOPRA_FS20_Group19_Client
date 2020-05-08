@@ -353,11 +353,18 @@ const InfoSchrift = styled.div`
 `;
 
 
+
+
 // This component is responsible for the edit profile page
 class AddLocation extends React.Component {
     constructor() {
         super();
         this.state = {
+            errorMsgCoordinates: "",
+            coordinatesValid: false,
+            errorMsg: {},
+            latitudeValid: false,
+            longitudeValid: false,
             savingLocation: null,
             setCoordinates: null,
             locationType: null,
@@ -396,7 +403,10 @@ class AddLocation extends React.Component {
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
+        this.getCoordinatesAddLocation = this.getCoordinatesAddLocation.bind(this);
+        this.getLocationAddLocation = this.getLocationAddLocation.bind(this);
     }
+
 
 
 
@@ -706,6 +716,81 @@ class AddLocation extends React.Component {
         })
     }
 
+    updateLongitude = (longitude) => {
+        this.setState({longitude}, this.validateLongitude);
+    }
+
+    updateLatitude = (latitude) => {
+        this.setState({latitude}, this.validateLatitude)
+    }
+
+    validateCoordinates = () => {
+        const {longitudeValid, latitudeValid} = this.state;
+        this.setState({
+            coordinatesValid: longitudeValid && latitudeValid
+        })
+    }
+
+    validateLongitude = () => {
+        const {longitude} = this.state;
+        let longitudeValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (longitude < 8.4680486289  || longitude > 8.6191027275) {
+            longitudeValid = false;
+            errorMsg.longitude = "The location must be in Zurich!"
+        }
+        else if(isNaN(longitude)){
+            longitudeValid = false;
+            errorMsg.longitude = "That's not a valid number."
+        }
+        this.setState({longitudeValid, errorMsg}, this.validateCoordinates)
+    }
+
+    validateLatitude = () => {
+        const {latitude} = this.state;
+        let latitudeValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (latitude < 47.3232261256  || latitude > 47.4308197123) {
+            latitudeValid = false;
+            errorMsg.latitude = "The location must be in Zurich!"
+        }
+        else if(isNaN(latitude)){
+            latitudeValid = false;
+            errorMsg.latitude = "That's not a valid number."
+        }
+        this.setState({latitudeValid, errorMsg}, this.validateCoordinates)
+    }
+
+    getCoordinatesAddLocation(position) {
+        let latitudeValid = true;
+        let longitudeValid = true;
+        if (position.coords.latitude < 47.3232261256 || position.coords.latitude > 47.4308197123){
+            latitudeValid = false;
+            this.setState({errorMsgCoordinates : "You're not in Zurich! Type in the coordinates."});
+        }
+        this.setState({latitude: position.coords.latitude})
+        this.setState({latitudeValid})
+        if (position.coords.longitude < 8.4680486289 || position.coords.longitude > 8.6191027275){
+            longitudeValid = false;
+            this.setState({errorMsgCoordinates : "You're not in Zurich! Type in the coordinates."});
+        }
+        this.setState({longitude: position.coords.longitude})
+        this.setState({longitudeValid})
+        if (latitudeValid && longitudeValid){
+            this.setState({coordinatesValid: true})
+        }
+    }
+
+    getLocationAddLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.getCoordinatesAddLocation, this.handleLocationError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
     getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
@@ -743,7 +828,23 @@ class AddLocation extends React.Component {
                             />
                     </MainContainer>)
                     : (!this.state.setCoordinates ? (<MainContainer>
-                        <AddCoordinates getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)} handleInputChange={this.handleInputChange.bind(this)} latitude={this.state.latitude} longitude={this.state.longitude} getLocation={this.getLocation.bind(this)} setCoordinatesSuccessfully={this.setCoordinatesSuccessfully.bind(this)} locationType={this.state.locationType}/>
+                        <AddCoordinates errorMsgCoordinates={this.state.errorMsgCoordinates}
+                                        updateLongitude={this.updateLongitude.bind(this)}
+                                        updateLatitude={this.updateLatitude.bind(this)}
+                                        coordinatesValid={this.state.coordinatesValid}
+                                        latitudeValid={this.state.latitudeValid}
+                                        longitudeValid={this.state.longitudeValid}
+                                        getImage={this.getImage.bind(this)}
+                                        getTypeAsString={this.getTypeAsString.bind(this)}
+                                        handleInputChange={this.handleInputChange.bind(this)}
+                                        latitude={this.state.latitude}
+                                        longitude={this.state.longitude}
+                                        getLocation={this.getLocation.bind(this)}
+                                        setCoordinatesSuccessfully={this.setCoordinatesSuccessfully.bind(this)}
+                                        locationType={this.state.locationType}
+                                        errorMsg={this.state.errorMsg}
+                                        getLocationAddLocation={this.getLocationAddLocation.bind(this)}
+                        />
                     </MainContainer>) : (this.state.locationType==="FOUNTAIN" ?
                         (this.state.savingLocation ? (
                             <MainContainer>
@@ -759,6 +860,7 @@ class AddLocation extends React.Component {
                                          setToNullState={this.setToNullState.bind(this)}
                                          getImage={this.getImage.bind(this)}
                                          getTypeAsString={this.getTypeAsString.bind(this)}
+
                             />
                         </MainContainer>)) :
                         (this.state.locationType==="FIREPLACE" ? (this.state.savingLocation ? (<MainContainer>
