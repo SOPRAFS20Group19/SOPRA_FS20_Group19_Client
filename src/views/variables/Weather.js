@@ -18,14 +18,28 @@ export default class Weather extends React.Component{
             date: null,
             time: null,
             dateGet: null,
-            pulled: true
+            icon: null,
         };
+        this.checkSession();
+    }
+
+    checkSession(){
+        const dateUnix = sessionStorage.getItem("timestampTime");
+        const oldTimestampAddedTime = new Date(dateUnix * 1000 + 10*60000);
+        if (dateUnix ==  null){
+            this.getWeather2();
+        }
+        else if (oldTimestampAddedTime <= new Date()){
+            this.getWeather2();
+        }
+        else {
+            this.setState({temp: sessionStorage.getItem("temp"), humidity: sessionStorage.getItem("humidity"), description: sessionStorage.getItem("description"), icon: sessionStorage.getItem("icon"), dateGet: sessionStorage.getItem("timestampUTC"), date: sessionStorage.getItem("date")});
+            //this.setState({temp: JSON.parse(sessionStorage.getItem("weatherData")).main.temp - 273.15, humidity: JSON.parse(sessionStorage.getItem("weatherData")).main.humidity, description: JSON.parse(sessionStorage.getItem("weatherData")).weather[0].description});
+        }
     }
 
     componentDidMount(): void {
-        if (!this.state.pulled){
-            this.getWeather2();
-        }
+        this.checkSession();
     }
 
     async getWeather(){
@@ -54,30 +68,29 @@ export default class Weather extends React.Component{
 
             const dateUnix = response.data.dt;
             const date = new Date(dateUnix * 1000).toUTCString();
-            //const hours = date.getHours();
-            //const minutes = date.getMinutes();
+
             this.setState({date: date});
             this.setState({dateGet: new Date().toUTCString()});
-            //this.setState({time: hours + ':' + minutes.substr(-2)});
 
-            this.setState({temp: response.data.main.temp - 273.15, humidity: response.data.main.humidity, description: response.data.weather[0].description});
-            this.changePulledState();
+            sessionStorage.setItem("weatherData", JSON.stringify(response.data));
+            sessionStorage.setItem("temp", Math.round(response.data.main.temp - 273.15));
+            sessionStorage.setItem("humidity", response.data.main.humidity);
+            sessionStorage.setItem("description", response.data.weather[0].description);
+            sessionStorage.setItem("icon", response.data.weather[0].icon);
+            sessionStorage.setItem("timestampTime", dateUnix);
+            sessionStorage.setItem("timestampUTC", this.state.dateGet);
+            sessionStorage.setItem("date", date);
+
+            this.setState({temp: Math.round(response.data.main.temp - 273.15), humidity: response.data.main.humidity, description: response.data.weather[0].description, icon: response.data.weather[0].icon});
         } catch (error) {
             alert(`Something went wrong while getting the weather: \n${handleError(error)}`);
         }
     }
 
-    changePulledState(){
-        this.setState({pulled: true});
-        setTimeout(function(){
-            this.setState({pulled:false});
-        }.bind(this),60000);
-    }
-
     render() {
         return (
             <div>
-            {!this.state.temp ? null :
+                {!this.state.temp ? <div>its null</div> :
             <div>
                 The weather in Zurich is {this.state.description}
                 <br/>
@@ -88,6 +101,9 @@ export default class Weather extends React.Component{
                 Data received on {this.state.date}
                 <br/>
                 Data pulled on {this.state.dateGet}
+                <br/>
+                <img src ={`http://openweathermap.org/img/wn/${this.state.icon}@2x.png`}
+                     alt="wthr img" />
             </div>}
             </div>
         );
