@@ -780,6 +780,7 @@ class AddLocation extends React.Component {
         this.setState({longitudeValid})
         if (latitudeValid && longitudeValid){
             this.setState({coordinatesValid: true})
+            this.setCoordinatesSuccessfully();
         }
     }
 
