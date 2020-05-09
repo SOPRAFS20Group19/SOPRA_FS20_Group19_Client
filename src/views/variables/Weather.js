@@ -29,7 +29,7 @@ export default class Weather extends React.Component{
         if (dateUnix ==  null){
             this.getWeather2();
         }
-        else if (oldTimestampAddedTime <= new Date()){
+        else if (oldTimestampAddedTime.getTime() <= new Date().getTime()){
             this.getWeather2();
         }
         else {
