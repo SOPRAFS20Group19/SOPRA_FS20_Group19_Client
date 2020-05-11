@@ -12,6 +12,8 @@ import MessageFriends from "./MessageFriends";
 
 const Container = styled.div`
   height: 260px;
+  max-width: 400px;
+  min-width: 325px;
   width: 90%;
   display: grid;
   grid-template-rows: 40px 175px 35px;
@@ -23,6 +25,7 @@ const Container = styled.div`
   grid-column: 2;
   grid-row: 3 / span 2;
   margin-top: 30px;
+  margin-left: 20px;
 `;
 
 const Text = styled.div`
@@ -202,7 +205,7 @@ class ChatboxFriends extends React.Component {
                 </ChatContainer>}
                 <UserChatContainer>
                     <InputField
-                        placeholder="Enter your message here"
+                        placeholder="Enter your message"
                         value={this.state.message}
                         onChange={e => {
                             this.handleInputChange('message', e.target.value);

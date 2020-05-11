@@ -23,14 +23,31 @@ const Container = styled.div`
   grid-column: 2;
   grid-row: 3/ span 2;
   margin-top: 30px;
+  margin-left: 20px;
+  max-width: 400px;
+  min-width: 325px;
+  @media only screen and (max-width: 500px){
+    min-width: 225px;
+  }
 `;
 
 const Text = styled.div`
   font-weight: bold;
   font-size: 25px;
-  padding-left: 15px;
+  padding-left: 10px;
+  padding-top: 5px;
   grid-row: 1;
   background: #66A3E066;
+  font-size: 25px;
+  letter-spacing: 0.15em;
+  line-height: 1em;
+  text-transform: uppercase;
+  @media only screen and (max-width: 700px){
+    font-size: 20px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 20px
+  }
 `;
 
 const ChatContainer = styled.div`

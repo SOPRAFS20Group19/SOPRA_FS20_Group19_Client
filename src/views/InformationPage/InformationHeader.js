@@ -29,13 +29,33 @@ const PictureContainer = styled.div`
   flex-direction: row;
 `;
 
+const Picture = styled.div`
+  height: 120px;
+  width: 120px;
+  @media only screen and (max-width: 700px){
+    height: 100px;
+    width: 100px;
+  }
+  @media only screen and (max-width: 500px){
+    height: 80px;
+    width: 80px;
+  }
+`;
+
 
 const Title = styled.div`
-  font-weight: bolder;
-  font-size: 50px;
+  font-size: 40px;
   margin-left: 30px;
-  letter-spacing: 0.25em;
+  font-weight: bolder;
+  letter-spacing: 0.2em;
   line-height: 1.1em;
+  text-transform: uppercase;
+  @media only screen and (max-width: 700px){
+    font-size: 30px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 25px
+  }
 `;
 
 class InformationHeader extends React.Component {
@@ -84,7 +104,9 @@ class InformationHeader extends React.Component {
         return (
                     <Container>
                         <PictureContainer>
-                            <img src={this.getImage()} alt={this.getTypeAsString()} width="120px" height="120px"/>
+                            <Picture>
+                            <img src={this.getImage()} alt={this.getTypeAsString()} width="100%" height="100%"/>
+                            </Picture>
                             <Title>
                                 {this.getTypeAsString()}
                             </Title>

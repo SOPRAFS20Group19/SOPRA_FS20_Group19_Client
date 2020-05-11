@@ -46,18 +46,34 @@ const GridContainer =styled.div`
 
 
 const Title = styled.div`
-  font-weight: bold;
   width: 100%;
   grid-column: 1;
-
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  flex-direction: row;
+  @media only screen and (max-width: 700px){
+    font-size: 15px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 
 const Text = styled.div`
+  grid-column: 2;
   font-weight: normal;
+  font-size: 20px;
   width: 100%;
   list-style-type: none;
-  grid-column: 2;
+  @media only screen and (max-width: 700px){
+    font-size: 15px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 

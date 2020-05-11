@@ -25,10 +25,22 @@ const Container =styled.div`
   flex-direction: row;
   width: 100%;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto 10%;
   grid-template-rows: auto auto auto auto auto;
   justify-content: left;
   grid-column-gap: 30px;
+  @media only screen and (max-width: 1215px){
+    grid-column-gap: 10px;
+  }
+  
+  @media only screen and (max-width: 900px){
+    max-width: 800;
+    display: block;
+  }
+  @media only screen and (max-width: 500px){
+    max-width: 500;
+    display: block;
+  }
 `;
 
 const LoadingContainer = styled.div`
@@ -126,7 +138,8 @@ class LocationInformationPage extends React.Component {
                 </Button></LoadingContainer>) : (
                     <Container>
                     <InformationHeader type={this.state.locationToBeShown.locationType}/>
-                    <SidebarInfoAndAddLocation avatarNr={localStorage.getItem("userAvatar")}/>
+                    <InformationPageFavourite locationId={this.props.match.params.locationId}/>
+                    <SidebarInfoAndAddLocation avatarNr={localStorage.getItem("userAvatar")} column={3}/>
                     <LocationInformation
                         location={this.state.location}
                         id={this.state.locationToBeShown.id}
@@ -138,7 +151,7 @@ class LocationInformationPage extends React.Component {
                     />
                     <LocationRating locationId={this.props.match.params.locationId}/>
                     <Chatbox locationId={this.props.match.params.locationId}/>
-                    <InformationPageFavourite locationId={this.props.match.params.locationId}/>
+
                     </Container>
                     )}
             </Container>

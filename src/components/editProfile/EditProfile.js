@@ -14,7 +14,7 @@ const MainContainer =styled.div`
   color: black;
   width: 100%;
   display:grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
   grid-template-rows: auto auto auto auto auto auto auto;
   justify-content: center;
   grid-column-gap: 30px;
@@ -130,7 +130,7 @@ class EditProfile extends React.Component {
                     <MainContainer>
                         <TitleEdit/>
                         <UserEditHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
-                <SidebarEditUserInformation/>
+                <SidebarEditUserInformation column={3}/>
                 <Container column={1}>
                     <Title>Name: </Title>
                     <InputField

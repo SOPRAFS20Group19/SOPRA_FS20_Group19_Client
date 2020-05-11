@@ -18,6 +18,7 @@ import Filter from "../../components/map/Filter";
 import AddLocation from "../../components/addLocation/AddLocation";
 import { withRouter } from 'react-router-dom';
 import LogoutIcon from "../variables/LogoutIcon.svg"
+import CurrentLocationIcon from "./CurrentLocationIcon.svg"
 import Popover from "react-bootstrap/Popover";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
@@ -50,7 +51,7 @@ const Container = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 
 const HoverContainer = styled.div`
@@ -351,7 +352,7 @@ class Sidebar extends React.Component{
                                     this.props.centerMapAtCurrentLocation();
                                 }}
                             >
-                                <img src={UsersIcon}/>
+                                <img src={CurrentLocationIcon}/>
                             </RoundButton>
                         </ButtonContainer>
                         {this.state.centerMapHover ? <HoverContainer>Current location</HoverContainer> : null}

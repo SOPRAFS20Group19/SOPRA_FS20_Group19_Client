@@ -21,7 +21,7 @@ const MainContainer =styled.div`
   flex-direction: row;
   width: 100%;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
   grid-template-rows: auto auto auto auto;
   justify-content: center;
   grid-column-gap: 30px;
@@ -98,7 +98,7 @@ class UserProfile extends React.Component {
                         <MainContainer>
                             <TitleProfile/>
                             <UserHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
-                            <SidebarUserInformation/>
+                            <SidebarUserInformation column={3}/>
                             <UserInformation
                                 username={this.state.loggedInUser.username}
                                 name={this.state.loggedInUser.name}

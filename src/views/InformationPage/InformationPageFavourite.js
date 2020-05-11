@@ -14,19 +14,28 @@ import {Checkbox} from "../Filter/Checkbox";
 
 const Container2 = styled.div`
   display: grid;
-  height: 100px;
-  grid-template-columns: 100px 475px;
+  height: 60px;
+  grid-template-columns: 70px auto;
   grid-template-rows: auto;
   justify-content: left;
   align-items: left;
   grid-column: 1;
   grid-row: 1;
   margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  @media only screen and (max-width: 700px){
+    grid-template-columns: 60px auto;
+    height: 50px;
+  }
+  @media only screen and (max-width: 500px){
+    grid-template-columns: 50px auto;
+    height: 40px;
+  }
 `;
 
 const Container = styled.div`
   display: grid;
-  height: 100px;
   grid-template-columns: auto;
   grid-template-rows: auto;
   justify-content: left;
@@ -38,23 +47,40 @@ const Container = styled.div`
 `;
 
 const ImageContainer= styled.div`
-  height: 10%;
-  width: 10%;
+  height: 56.5px;
+  width: 63.1px;
   justify-content: top;
   align-items: left;
   grid-column: 1;
   grid-row: 1;
+  margin-right: 20px;
+  @media only screen and (max-width: 700px){
+    height: 47px;
+    width: 52.6px;
+    margin-right: 10px;
+  }
+  @media only screen and (max-width: 500px){
+    height: 37.6px;
+    width: 42px;
+    margin-right: 7.5px;
+  }
 `;
 
 const TextContainer= styled.div`
   font-weight: normal;
-  font-size: large;
+  font-size: 20px;
   display: flex;
   justify-content: top;
   align-items: left;
   flex-direction: column;
   grid-column: 2;
   grid-row: 1;
+  @media only screen and (max-width: 700px){
+    font-size: 15px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 10px
+  }
 `;
 
 
@@ -124,7 +150,7 @@ class InformationPageFavourite extends React.Component {
                 {this.state.locationId == this.props.locationId ? (
                     <Container2>
                     <ImageContainer>
-                        <img src={HeartRed} alt="Heart Full" height="56.5px" width="63.1px"
+                        <img src={HeartRed} alt="Heart Full" height="100%" width="100%"
                              onClick={() => {
                                  this.changeColor(false);
                              }}
@@ -138,13 +164,13 @@ class InformationPageFavourite extends React.Component {
                     <Container2>
                 <ImageContainer>
                     {this.state.liked === false ?
-                        <img src={HeartUnfilled} alt="Heart Empty" height="56.5px" width="63.1px"
+                        <img src={HeartUnfilled} alt="Heart Empty" height="100%" width="100%"
                              onClick={() => {
                                  this.changeColor(true);
                              }}
                         />
                         :
-                        <img src={HeartRed} alt="Heart Full" height="56.5px" width="63.1px"
+                        <img src={HeartRed} alt="Heart Full" height="100%" width="100%"
                              onClick={() => {
                                  this.changeColor(false);
                              }}

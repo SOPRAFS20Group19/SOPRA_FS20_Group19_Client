@@ -25,16 +25,49 @@ const Container = styled.div`
 
 const ID = styled.div`
   font-weight: bold;
-  font-size: x-large;
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  line-height: 1.1em;
+  text-transform: uppercase;
   margin-bottom: 0.25%;
   flex-direction: row;
+  @media only screen and (max-width: 700px){
+    font-size: 15px
+  }
+`;
+
+const Title = styled.div`
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 0.15em;
+  line-height: 1.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.25%;
+  margin-top: 0.25%;
+  flex-direction: row;
+  @media only screen and (max-width: 700px){
+    font-size: 15px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const Address = styled.div`
   font-weight: bold;
-  font-size: x-large;
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  line-height: 1.1em;
+  text-transform: uppercase;
   margin-bottom: 0.25%;
   flex-direction: row;
+  @media only screen and (max-width: 700px){
+    font-size: 15px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 10px
+  }
+  
 `;
 
 const AdditionalInformation = styled.div`
@@ -53,11 +86,17 @@ const Coordinates = styled.div`
 
 const Text = styled.div`
   font-weight: normal;
-  font-size: large;
+  font-size: 17.5px;
   margin-left: 0;
   width: 100%;
   text-align: left;
   list-style-type: none;
+  @media only screen and (max-width: 700px){
+    font-size: 12.5px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 12.5px
+  }
 `;
 
 
@@ -83,12 +122,10 @@ class LocationInformation extends React.Component{
             <Container>
                 {!this.props.location ? (<Spinner/>) :(
                     <div>
-                        <ID>ID: <Text>{this.props.id}</Text> </ID>
-                        <Address>Address: <Text>{this.props.address}</Text></Address>
-                        <AdditionalInformation>Additional Information:
-                            <Text>{this.props.information}</Text>
-                        </AdditionalInformation>
-                        <Coordinates>Coordinates: <Text>{this.props.latitude}, {this.props.longitude}</Text></Coordinates>
+                        <Title>ID:  </Title><Text>{this.props.id}</Text>
+                        <Title>Address: </Title><Text>{this.props.address}</Text>
+                        <Title>Additional Information:</Title><Text>{this.props.information}</Text>
+                        <Title>Coordinates: </Title><Text>{this.props.latitude}, {this.props.longitude}</Text>
                     </div>
                     )}
             </Container>

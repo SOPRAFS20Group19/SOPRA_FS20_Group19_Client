@@ -39,12 +39,13 @@ const Container = styled.div`
   top: 0;
   right: 0;
   flex-direction: column;
+  grid-column: ${props => props.column};
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 
 const HoverContainer = styled.div`

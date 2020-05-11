@@ -44,7 +44,7 @@ const Container = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 
 const HoverContainer = styled.div`

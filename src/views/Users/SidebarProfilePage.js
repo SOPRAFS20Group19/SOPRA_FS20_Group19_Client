@@ -1,28 +1,17 @@
-import React from "react";
 import styled from "styled-components";
-import {BaseContainer} from "../../helpers/layout";
-import {Button} from "../variables/Button";
+import React from "react";
 import {RoundButton} from "../variables/RoundButton";
-import {Nav} from "react-bootstrap";
-import {UserIcon} from "../variables/UserIcon";
-import {FilterIcon} from "../variables/FilterIcon";
-import {PlusIcon} from "../variables/PlusIcon";
-import UserIconComplete from "../UserInformation/UserIconComplete.svg"
-import FilterIconComplete from "../Filter/FilterIconComplete.svg"
-import PlusIconComplete from "../Map/PlusIconComplete.svg"
-import Profile from "../UserInformation/Profile";
-import Filter from "../../components/map/Filter";
-import AddLocation from "../../components/addLocation/AddLocation";
-import { withRouter } from 'react-router-dom';
-import LogoutIcon from "../variables/LogoutIcon.svg"
+import UserIconComplete from "../UserInformation/UserIconComplete.svg";
+import LogoutIcon from "../variables/LogoutIcon.svg";
+import {withRouter} from "react-router-dom";
 import Popover from "react-bootstrap/Popover";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import {Button} from "../variables/Button";
 import {ButtonForLogin} from "../variables/ButtonForLogin";
-import {api, handleError} from "../../helpers/api";
 import avatarArray from "../Avatar/AvatarArray";
+import {api, handleError} from "../../helpers/api";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
-//Sidebar for Information Page and Add Location
-
+//Sidebar for UserInformationPage
 const Container = styled.div`
   &:hover {
     opacity: 0.9;
@@ -39,6 +28,7 @@ const Container = styled.div`
   top: 0;
   right: 0;
   flex-direction: column;
+  grid-row: ${props => props.column};
 `;
 
 const ButtonContainer = styled.div`
@@ -65,11 +55,10 @@ const imgStyle = {
     "width": "100%"
 };
 
-class SidebarAddLocationtoStart extends React.Component{
+class SidebarProfilePage extends React.Component{
     constructor() {
         super();
         this.state = {
-            showUser: false,
             showUserHover: false,
             showReturnHover: false
         }
@@ -80,10 +69,13 @@ class SidebarAddLocationtoStart extends React.Component{
         this.props.history.push('/userprofile');
     }
 
-
     //Return to previous Page
     returnToPage() {
-        window.location.reload(false);
+        this.props.history.push(`/map`);
+    }
+
+    toggleShowReturnHover(value){
+        this.setState({showReturnHover: value})
     }
 
     logout() {
@@ -104,9 +96,6 @@ class SidebarAddLocationtoStart extends React.Component{
         this.setState({showUserHover: value})
     }
 
-    toggleShowReturnHover(value){
-        this.setState({showReturnHover: value})
-    }
 
     render() {
         return (
@@ -146,24 +135,22 @@ class SidebarAddLocationtoStart extends React.Component{
                         {this.state.showUserHover ? <HoverContainer>Profile options</HoverContainer> : null}
                     </div>
                 </OverlayTrigger>
-                <div>
-                    <ButtonContainer>
-                        <RoundButton
-                            width="75%"
-                            onMouseOver={() => this.toggleShowReturnHover(true)}
-                            onMouseLeave={() => this.toggleShowReturnHover(false)}
-                            onClick={() => {
-                                this.returnToPage();
-                            }}
-                        >
-                            <img src={LogoutIcon}/>
-                        </RoundButton>
-                    </ButtonContainer>
-                    {this.state.showReturnHover ? <HoverContainer>Back</HoverContainer> : null}
-                </div>
+                <ButtonContainer>
+                    <RoundButton
+                        width="75%"
+                        onMouseOver={() => this.toggleShowReturnHover(true)}
+                        onMouseLeave={() => this.toggleShowReturnHover(false)}
+                        onClick={() => {
+                            this.returnToPage();
+                        }}
+                    >
+                        <img src={LogoutIcon}/>
+                    </RoundButton>
+                </ButtonContainer>
+                {this.state.showReturnHover ? <HoverContainer>Return to map</HoverContainer> : null}
             </Container>
         );
     }
 }
 
-export default withRouter(SidebarAddLocationtoStart);
+export default withRouter(SidebarProfilePage);

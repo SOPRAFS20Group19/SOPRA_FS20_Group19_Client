@@ -21,6 +21,7 @@ import FriendAdded from "../../views/Users/FriendAdded.png";
 import FriendsUser from "../../views/UserInformation/FriendsUser";
 import FriendsProfilePage from "../../views/Users/FriendsProfilePage";
 import ChatboxFriends from "../../views/Users/ChatboxFriends";
+import SidebarProfilePage from "../../views/Users/SidebarProfilePage";
 
 const BackgroundContainer = styled(BaseContainer)`
   min-height: 620px;
@@ -31,10 +32,22 @@ const MainContainer =styled.div`
   flex-direction: row;
   width: 100%;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto 10%;
   grid-template-rows: auto auto auto auto;
   justify-content: center;
   grid-column-gap: 30px;
+  @media only screen and (max-width: 1215px){
+    grid-column-gap: 20px;
+  }
+  
+  @media only screen and (max-width: 900px){
+    max-width: 800;
+    display: block;
+  }
+  @media only screen and (max-width: 500px){
+    max-width: 500;
+    display: block;
+  }
 `;
 
 const Container =styled.div`
@@ -163,11 +176,8 @@ class ProfilePage extends React.Component {
             else {
                 window.location.reload();
             }
-            //this.checkIfOwnProfile();
         }
     }
-
-    // when the page is updated the user data is requested again so the changes from the edit profile page are immediately displayed
 
     render(){
         return(
@@ -178,35 +188,36 @@ class ProfilePage extends React.Component {
                     <MainContainer>
                         <TitleProfile/>
                         <ProfilePageHeader username={this.state.shownUser.username} avatarNr={this.state.shownUser.avatarNr}/>
-                        <SidebarUserInformation/>
+                        <SidebarProfilePage avatarNr={localStorage.getItem("userAvatar")} column={3}/>
                         <ProfilePageInformation
                             user={this.state.shownUser}
                             username={this.state.shownUser.username}
                             name={this.state.shownUser.name}
                             creationDate={this.state.shownUser.creationDate}
                         />
-                        <SavedLocationsProfilePage userId={this.state.shownUser.id}/>
-                        <FriendsProfilePage userId={this.state.shownUser.id}/>
-                        {this.state.isFriend ? <ChatboxFriends friendId={this.state.shownUser.id}/> : null}
                         <ImageContainer>
                             {this.state.isFriend === false ?
                                 <div>
-                                <img src={AddFriend} alt="Add Friend" height="72px" width="72px"
-                                     onClick={() => {
-                                         this.changeColor(true);
-                                     }}
-                                /> Add this user as a friend
+                                    <img src={AddFriend} alt="Add Friend" height="72px" width="72px"
+                                         onClick={() => {
+                                             this.changeColor(true);
+                                         }}
+                                    /> Add this user as a friend
                                 </div>
                                 :
                                 <div>
-                                <img src={FriendAdded} alt="FriendAdded" height="72px" width="72px"
-                                     onClick={() => {
-                                         this.changeColor(false);
-                                     }}
-                                /> Unfriend this user
+                                    <img src={FriendAdded} alt="FriendAdded" height="72px" width="72px"
+                                         onClick={() => {
+                                             this.changeColor(false);
+                                         }}
+                                    /> Unfriend this user
                                 </div>
                             }
                         </ImageContainer>
+                        <SavedLocationsProfilePage userId={this.state.shownUser.id}/>
+                        <FriendsProfilePage userId={this.state.shownUser.id}/>
+                        {this.state.isFriend ? <ChatboxFriends friendId={this.state.shownUser.id}/> : null}
+
                     </MainContainer>
                 ) }
             </div>
