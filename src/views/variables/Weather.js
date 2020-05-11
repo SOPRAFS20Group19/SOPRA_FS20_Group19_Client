@@ -24,9 +24,12 @@ export default class Weather extends React.Component{
     }
 
     checkSession(){
+        if (sessionStorage.length === 0){
+            this.getWeather2();
+        }
         const dateUnix = sessionStorage.getItem("timestampTime");
         const oldTimestampAddedTime = new Date(dateUnix * 1000 + 10*60000);
-        if (dateUnix ==  null){
+        if (dateUnix ===  null){
             this.getWeather2();
         }
         else if (oldTimestampAddedTime.getTime() <= new Date().getTime()){
@@ -40,21 +43,6 @@ export default class Weather extends React.Component{
 
     componentDidMount(): void {
         this.checkSession();
-    }
-
-    async getWeather(){
-        try {
-            const apiWeather = axios.create({
-                baseURL: "http://api.geonames.org",
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            const response = await apiWeather.get('/findNearByWeatherJSON?lat=47.3655284699&lng=8.5456086698&username=soprafs20group19');
-
-            this.setState({temp: response.data.weatherObservation.temperature, humidity: response.data.weatherObservation.humidity});
-        } catch (error) {
-            alert(`Something went wrong while getting the weather: \n${handleError(error)}`);
-        }
     }
 
     async getWeather2(){

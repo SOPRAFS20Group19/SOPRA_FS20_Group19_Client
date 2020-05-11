@@ -167,6 +167,7 @@ class Map extends React.Component{
         }
     }
 
+    // insert <Weather/> after Spinner Button
     render(){
         return (<div>
             {!this.state.locationsShown ? (<Container><Button variant="primary" disabled>
@@ -179,7 +180,7 @@ class Map extends React.Component{
                 />
                 Loading Map...
             </Button>
-            <Weather/></Container>) : (<div style={{ width: "100vw", height: "100vh" }}>
+            </Container>) : (<div style={{ width: "100vw", height: "100vh" }}>
             <MapService
                 currentLocation = {this.state.currentPosition}
                 currentCenter = {this.state.currentCenter}
