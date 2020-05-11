@@ -10,6 +10,7 @@ import HeartRed from "../InformationPage/HeartRed.png";
 import {api, handleError} from "../../helpers/api";
 import AddFriend from "../Users/AddFriend.png";
 import FriendAdded from "../Users/FriendAdded.png";
+import RedCircle from "../Users/RedCircle.png";
 
 const Container = styled.div`
   display: grid;
@@ -33,6 +34,10 @@ const AvatarContainer = styled.div`
   grid-row: 1 / span 2;
   width: 70px;
   height: 70px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  grid-column-gap: 0px;
   
   @media only screen and (max-width: 500px){
       width: 45px;
@@ -80,6 +85,19 @@ const ImageContainer= styled.div`
     width: 45px;
 `;
 
+const NotificationContainer= styled.div`
+  justify-content: end;
+  align-items: top;
+  grid-column: 2;
+  height: 20px;
+  width: 20px;
+  margin-left: -20px;
+  margin-top: -5px;
+  @media only screen and (max-width: 500px){
+    height: 15px;
+    width: 15px;
+`;
+
 const ProfilePageButton = styled(Button)`
   background: transparent;
   font-weight: normal;
@@ -113,7 +131,25 @@ class UserListItemNarrow extends React.Component{
             showUser: false,
             showUserHover: false,
             showReturnHover: false,
-            isFriend: true
+            isFriend: true,
+            isUnread: false,
+        }
+    }
+
+    componentDidMount(): void {
+        this.checkIfUnreadMessages()
+    }
+
+    async checkIfUnreadMessages(){
+        try {
+            const url = '/users/chats/news/' + localStorage.getItem('userId') + '/' + this.props.user.id;
+
+            const response = await api.get(url);
+
+            this.setState({isUnread: response.data});
+            setTimeout(() => {this.checkIfUnreadMessages()}, 5000);
+        } catch (e) {
+            alert(`Something went wrong while checking for unread messages: \n${handleError(e)}`);
         }
     }
 
@@ -160,6 +196,11 @@ class UserListItemNarrow extends React.Component{
             <Container>
                 <AvatarContainer>
                     <img src={avatarArray[this.props.user.avatarNr]} style={imgStyle} />
+                    {this.state.isFriend && this.state.isUnread ?
+                        <NotificationContainer>
+                        <img src={RedCircle} height="100%" width="100%" />
+                        </NotificationContainer>
+                        : null}
                 </AvatarContainer>
                 <Title>{this.props.user.username}</Title>
                 <ButtonContainer>

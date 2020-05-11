@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   grid-column: 2;
-  grid-row: 2 / span 3;
+  grid-row: 2;
   margin-top: 20px;
   margin-left: 20px;
   align-content: left;
@@ -35,7 +35,7 @@ const Text = styled.div`
 `;
 
 const ListContainer = styled.div`
-  max-height: 500px;
+  max-height: 300px;
   overflow: scroll;
   width: 100%;
 `;

@@ -20,6 +20,7 @@ import AddFriend from "../../views/Users/AddFriend.png";
 import FriendAdded from "../../views/Users/FriendAdded.png";
 import FriendsUser from "../../views/UserInformation/FriendsUser";
 import FriendsProfilePage from "../../views/Users/FriendsProfilePage";
+import ChatboxFriends from "../../views/Users/ChatboxFriends";
 
 const BackgroundContainer = styled(BaseContainer)`
   min-height: 620px;
@@ -186,6 +187,7 @@ class ProfilePage extends React.Component {
                         />
                         <SavedLocationsProfilePage userId={this.state.shownUser.id}/>
                         <FriendsProfilePage userId={this.state.shownUser.id}/>
+                        {this.state.isFriend ? <ChatboxFriends friendId={this.state.shownUser.id}/> : null}
                         <ImageContainer>
                             {this.state.isFriend === false ?
                                 <div>

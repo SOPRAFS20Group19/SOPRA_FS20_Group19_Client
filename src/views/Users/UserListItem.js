@@ -10,6 +10,7 @@ import HeartRed from "../InformationPage/HeartRed.png";
 import {api, handleError} from "../../helpers/api";
 import AddFriend from "./AddFriend.png";
 import FriendAdded from "./FriendAdded.png";
+import RedCircle from "./RedCircle.png"
 
 const Container = styled.div`
   display: grid;
@@ -26,6 +27,10 @@ const AvatarContainer = styled.div`
   grid-row: 1 / span 2;
   width: 70px;
   height: 70px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  grid-column-gap: 0px;
 `;
 
 const Title = styled.div`
@@ -64,6 +69,19 @@ const ProfilePageButton = styled(Button)`
   text-align: left;
 `;
 
+const NotificationContainer= styled.div`
+  justify-content: end;
+  align-items: top;
+  grid-column: 2;
+  height: 20px;
+  width: 20px;
+  margin-left: -20px;
+  margin-top: -5px;
+  @media only screen and (max-width: 500px){
+    height: 15px;
+    width: 15px;
+`;
+
 const imgStyle = {
     "height": "100%",
     "width": "100%"
@@ -84,7 +102,8 @@ class UserListItem extends React.Component{
             showUser: false,
             showUserHover: false,
             showReturnHover: false,
-            isFriend: false
+            isFriend: false,
+            isUnread: false
         }
     }
 
@@ -99,8 +118,24 @@ class UserListItem extends React.Component{
             const response = await api.get(url);
 
             this.setState({isFriend: response.data});
+            if (this.state.isFriend){
+                this.checkIfUnreadMessages();
+            }
         } catch (e) {
             alert(`Something went wrong while checking if this user is a friend: \n${handleError(e)}`);
+        }
+    }
+
+    async checkIfUnreadMessages(){
+        try {
+            const url = '/users/chats/news/' + localStorage.getItem('userId') + '/' + this.props.user.id;
+
+            const response = await api.get(url);
+
+            this.setState({isUnread: response.data});
+            setTimeout(() => {this.checkIfUnreadMessages()}, 5000);
+        } catch (e) {
+            alert(`Something went wrong while checking for unread messages: \n${handleError(e)}`);
         }
     }
 
@@ -121,8 +156,6 @@ class UserListItem extends React.Component{
             await api.delete(url);
 
             this.setState({isFriend: false});
-
-            //this.props.refresh();
         } catch (e) {
             alert(`Something went wrong while deleting this friend: \n${handleError(e)}`);
         }
@@ -147,8 +180,13 @@ class UserListItem extends React.Component{
             <Container>
                 <AvatarContainer>
                     <img src={avatarArray[this.props.user.avatarNr]} style={imgStyle} />
+                    {this.state.isFriend && this.state.isUnread ?
+                        <NotificationContainer>
+                            <img src={RedCircle} height="100%" width="100%" />
+                        </NotificationContainer>
+                    : null}
                 </AvatarContainer>
-                <Title>{this.props.user.username}</Title>
+                <Title>{this.props.user.username} </Title>
                 <ButtonContainer>
                     <ProfilePageButton
                         variant="primary"
