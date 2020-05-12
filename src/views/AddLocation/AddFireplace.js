@@ -244,6 +244,8 @@ const ButtonContainer = styled.div`
   width: 100%;
 `;
 
+
+
 class AddFireplace extends React.Component {
     constructor(props) {
         super(props);

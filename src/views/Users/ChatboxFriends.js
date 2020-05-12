@@ -10,6 +10,24 @@ import Location from "../../components/shared/models/Location";
 import Player from "../variables/Player";
 import MessageFriends from "./MessageFriends";
 
+const ButtonBlue = styled.button`
+  padding: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  color: #003068;
+  width: 150px;
+  height: 35px;
+  border-bottom: 2px solid #003068;
+  border: 2px transparent;
+  border-radius: 5px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  background: #66A3E0;
+  transition: all 0.3s ease;
+`;
+
 const Container = styled.div`
   height: 260px;
   max-width: 400px;
@@ -216,9 +234,14 @@ class ChatboxFriends extends React.Component {
                         onChange={e => {
                             this.handleInputChange('message', e.target.value);
                         }}
+                        onKeyPress={e => {if (e.key === 'Enter'){
+                            if (this.state.message){
+                                this.handleClick();
+                            }
+                        }}}
                     />
                     <ButtonContainer>
-                    <Button
+                    <ButtonBlue
                         disabled={!this.state.message}
                         variant="outline-secondary"
                             height="100%"
@@ -226,7 +249,7 @@ class ChatboxFriends extends React.Component {
                                 this.handleClick();
                             }}
                     >
-                        Send Message</Button>
+                        Send Message</ButtonBlue>
                     </ButtonContainer>
                 </UserChatContainer>
                 </Container>

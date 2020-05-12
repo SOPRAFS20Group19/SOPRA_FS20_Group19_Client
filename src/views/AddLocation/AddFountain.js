@@ -159,11 +159,28 @@ const ButtonContainer = styled.div`
   margin-top: 15px;
   width: 100%;
 `;
+const ErrorMessage = styled.div`
+  font-weight: normal;
+  font-size: medium;
+  flex-direction: row;
+  color: red;
+  margin-top: 5px;
+`;
+
+function ValidationMessage(props) {
+    if (!props.valid) {
+        return(
+            <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
+        )
+    }
+    return null;
+}
 
 class AddFountain extends React.Component {
     constructor(props) {
         super(props);
     }
+
 
     render(){
         return(
@@ -187,9 +204,10 @@ class AddFountain extends React.Component {
             <InputFieldBaujahr
                 placeholder="enter Baujahr here"
                 onChange={e => {
-                    this.props.handleInputChange('baujahr', e.target.value);
+                    this.props.updateBaujahr(e.target.value);
                 }}
             />
+            <ValidationMessage valid={this.props.baujahrValid} message={this.props.errorMsg.baujahr}/>
         </Container3>
         <Container4>
             <Title>Potable water (optional)? </Title>
@@ -220,6 +238,7 @@ class AddFountain extends React.Component {
         <Container6>
             <ButtonContainer>
                 <Button
+                    disabled={this.props.baujahrValid===false}
                     onClick={() => {this.props.saveChangesFountain()}}>Save Location
                 </Button>
             </ButtonContainer>

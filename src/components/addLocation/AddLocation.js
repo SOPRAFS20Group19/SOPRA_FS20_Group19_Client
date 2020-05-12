@@ -399,16 +399,17 @@ class AddLocation extends React.Component {
             view: null,
             peace: null,
             romantics: null,
-            comfort: null
+            comfort: null,
+            baujahrValid: null,
+            adresseValid: null,
+            plzValid: null,
+            ortValid: null,
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.getCoordinatesAddLocation = this.getCoordinatesAddLocation.bind(this);
         this.getLocationAddLocation = this.getLocationAddLocation.bind(this);
     }
-
-
-
 
     setLocationType(type){
         this.setState({locationType: type});
@@ -763,6 +764,74 @@ class AddLocation extends React.Component {
         this.setState({latitudeValid, errorMsg}, this.validateCoordinates)
     }
 
+    updateBaujahr = (baujahr) => {
+        this.setState({baujahr}, this.validateBaujahr)
+    }
+
+    validateBaujahr = () => {
+        const {baujahr} = this.state;
+        let baujahrValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (baujahr < 500  || baujahr > 2021) {
+            baujahrValid = false;
+            errorMsg.baujahr = "That's not a valid year."
+        }
+        else if(isNaN(baujahr)){
+            baujahrValid = false;
+            errorMsg.baujahr = "That's not a valid number."
+        }
+        this.setState({baujahrValid, errorMsg})
+    }
+
+    updateAdresse = (adresse) => {
+        this.setState({adresse}, this.validateAdresse);
+    }
+
+    validateAdresse = () => {
+        const {adresse} = this.state;
+        let adresseValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (adresse.length < 5) {
+            adresseValid = false;
+            errorMsg.adresse = "That's not a valid adress."
+        }
+        this.setState({adresseValid, errorMsg})
+    }
+
+    updatePlz = (plz) => {
+        this.setState({plz}, this.validatePlz);
+    }
+
+    validatePlz= () => {
+        const {plz} = this.state;
+        let plzValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (plz < 8000 || plz > 8150) {
+            plzValid = false;
+            errorMsg.plz = "That's not a valid Zip code."
+        }
+        this.setState({plzValid, errorMsg})
+    }
+
+    updateOrt = (ort) => {
+        this.setState({ort}, this.validateOrt);
+    }
+
+    validateOrt= () => {
+        const {ort} = this.state;
+        let ortValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (ort.length < 4) {
+            ortValid = false;
+            errorMsg.ort = "That's not a valid city."
+        }
+        this.setState({ortValid, errorMsg})
+    }
+
     getCoordinatesAddLocation(position) {
         let latitudeValid = true;
         let longitudeValid = true;
@@ -861,7 +930,9 @@ class AddLocation extends React.Component {
                                          setToNullState={this.setToNullState.bind(this)}
                                          getImage={this.getImage.bind(this)}
                                          getTypeAsString={this.getTypeAsString.bind(this)}
-
+                                         baujahrValid={this.state.baujahrValid}
+                                         updateBaujahr={this.updateBaujahr.bind(this)}
+                                         errorMsg={this.state.errorMsg}
                             />
                         </MainContainer>)) :
                         (this.state.locationType==="FIREPLACE" ? (this.state.savingLocation ? (<MainContainer>
@@ -887,7 +958,7 @@ class AddLocation extends React.Component {
                                               kinderwagen={this.state.kinderwagen}
                                 />
                         </MainContainer>))
-                            : (this.state.locationType==="RECYCLING" ? (this.state.savingLocation ? (<MainContainer>
+                            : (this.state.locationType==="RECYCLING_STATION" ? (this.state.savingLocation ? (<MainContainer>
                                 <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
                             </MainContainer>) : (
                                 <MainContainer>
@@ -906,6 +977,13 @@ class AddLocation extends React.Component {
                                         adresse={this.state.adresse}
                                         plz={this.state.plz}
                                         ort={this.state.ort}
+                                        adresseValid={this.state.adresseValid}
+                                        plzValid={this.state.plzValid}
+                                        ortValid={this.state.ortValid}
+                                        updateOrt={this.updateOrt.bind(this)}
+                                        updateAdresse={this.updateAdresse.bind(this)}
+                                        updatePlz={this.updatePlz.bind(this)}
+                                        errorMsg={this.state.errorMsg}
                                     />
                             </MainContainer>)) : (this.state.locationType==="TOILET" ? (this.state.savingLocation ? (<MainContainer>
                                     <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>

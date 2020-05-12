@@ -177,6 +177,11 @@ class AddCoordinates extends React.Component{
                     onChange={e => {
                         this.props.updateLatitude(e.target.value);
                     }}
+                    onKeyPress={e => {if (e.key === 'Enter'){
+                        if (this.props.coordinatesValid){
+                            this.props.setCoordinatesSuccessfully();
+                        }
+                    }}}
                 />
                 <ValidationMessage valid={this.props.latitudeValid} message={this.props.errorMsg.latitude}/>
             </Container3>
@@ -187,6 +192,11 @@ class AddCoordinates extends React.Component{
                     onChange={e => {
                         this.props.updateLongitude(e.target.value);
                     }}
+                    onKeyPress={e => {if (e.key === 'Enter'){
+                        if (this.props.coordinatesValid){
+                            this.props.setCoordinatesSuccessfully();
+                        }
+                    }}}
                 />
                 <ValidationMessage valid={this.props.longitudeValid} message={this.props.errorMsg.longitude}/>
             </Container4>
