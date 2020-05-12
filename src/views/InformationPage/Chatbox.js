@@ -9,6 +9,43 @@ import {api, handleError} from "../../helpers/api";
 import Location from "../../components/shared/models/Location";
 import Message from "./Message";
 import Player from "../variables/Player";
+import {Button as Button1} from "../../views/variables/Button";
+
+const ButtonBlue = styled.button`
+  padding: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  color: #003068;
+  width: 150px;
+  height: 35px;
+  border-bottom: 2px solid #003068;
+  border: 2px transparent;
+  border-radius: 5px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  background: #66A3E0;
+  transition: all 0.3s ease;
+`;
+
+const Button = styled.button`
+  padding: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  color: black;
+  width: 150px;
+  height: 35px;
+  border-bottom: 2px solid black;
+  border: 2px transparent;
+  border-radius: 0px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  background: white;
+  transition: all 0.3s ease;
+`;
 
 const Container = styled.div`
   height: 260px;
@@ -120,24 +157,6 @@ const ButtonContainer = styled.div`
   width: 150px;
 `;
 
-const Button = styled.button`
-  padding: 6px;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 13px;
-  text-align: center;
-  color: black;
-  width: 150px;
-  height: 35px;
-  border-bottom: 2px solid black;
-  border: 2px transparent;
-  border-radius: 0px;
-  cursor: ${props => (props.disabled ? "default" : "pointer")};
-  opacity: ${props => (props.disabled ? 0.4 : 1)};
-  background: white;
-  transition: all 0.3s ease;
-`;
-
 
 class Chatbox extends React.Component {
     constructor() {
@@ -223,9 +242,14 @@ class Chatbox extends React.Component {
                         onChange={e => {
                             this.handleInputChange('message', e.target.value);
                         }}
+                        onKeyPress={e => {if (e.key === 'Enter'){
+                            if (this.state.message){
+                                this.handleClick();
+                            }
+                        }}}
                     />
                     <ButtonContainer>
-                    <Button
+                    <ButtonBlue
                         disabled={!this.state.message}
                         variant="outline-secondary"
                             height="100%"
@@ -233,7 +257,7 @@ class Chatbox extends React.Component {
                                 this.handleClick();
                             }}
                     >
-                        Send Message</Button>
+                        Send Message</ButtonBlue>
                     </ButtonContainer>
                 </UserChatContainer>
                 </Container>
