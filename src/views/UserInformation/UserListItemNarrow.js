@@ -132,7 +132,7 @@ class UserListItemNarrow extends React.Component{
             showUserHover: false,
             showReturnHover: false,
             isFriend: true,
-            isUnread: false,
+            isUnread: null,
         }
     }
 
@@ -147,10 +147,17 @@ class UserListItemNarrow extends React.Component{
             const response = await api.get(url);
 
             this.setState({isUnread: response.data});
-            setTimeout(() => {this.checkIfUnreadMessages()}, 5000);
+            if (!this.state.isUnread){
+                this.timeout = setTimeout(() => {this.checkIfUnreadMessages()}, 10000);
+            }
         } catch (e) {
             alert(`Something went wrong while checking for unread messages: \n${handleError(e)}`);
         }
+    }
+
+    componentWillUnmount(): void {
+        console.log("I am unmounting");
+        clearTimeout(this.timeout);
     }
 
     changeColor(value){

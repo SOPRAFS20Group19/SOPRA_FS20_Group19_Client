@@ -130,7 +130,8 @@ class ChatboxFriends extends React.Component {
         super();
         this.state = {
             oldMessages: null,
-            message: null
+            message: null,
+            interval: null
         };
     }
 
@@ -141,7 +142,7 @@ class ChatboxFriends extends React.Component {
             const response = await api.get(url);
 
             this.setState({oldMessages: response.data.reverse()});
-            setTimeout(() => {this.getChat()}, 5000);
+            this.timeout = setTimeout(() => {this.getChat()}, 5000);
         } catch (e) {
             alert(`Something went wrong while getting the chat: \n${handleError(e)}`);
         }
@@ -149,6 +150,11 @@ class ChatboxFriends extends React.Component {
 
     componentDidMount(){
         this.getChat();
+    }
+
+    componentWillUnmount(): void {
+        console.log("I am unmounting");
+        clearTimeout(this.timeout);
     }
 
     handleInputChange(key, value) {
