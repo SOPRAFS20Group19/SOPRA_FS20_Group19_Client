@@ -11,6 +11,7 @@
     "react-dom": "^16.12.0",
     "react-google-maps": "^9.4.5",
     "react-native": "^0.62.2",
+    "react-responsive-carousel": "^3.2.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.4.0",
     "react-scrollable-list": "^1.2.0",

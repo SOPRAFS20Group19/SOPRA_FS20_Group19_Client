@@ -8,6 +8,7 @@ import Registration from "../../registration/Registration";
 import ProfileUser from "../../userProfile/UserProfile";
 import ProfileEdit from "../../editProfile/EditProfile";
 import Users from "../../users/Users";
+import AboutUs from "../../AboutUs/AboutUs";
 import {MapGuard} from "../routeProtectors/MapGuard";
 import LocationInformationPage from "../../locationInformationPage/LocationInformationPage";
 import ProfilePage from "../../userProfile/ProfilePage";
@@ -82,6 +83,13 @@ class AppRouter extends React.Component {
                 render={() => (
                     <Registration />
                     )}
+              />
+              <Route
+                  path="/aboutUs"
+                  exact
+                  render={() => (
+                      <AboutUs />
+                  )}
               />
             <Route path="/" exact render={() => <Redirect to={"/login"} />} /> 
           </div>
