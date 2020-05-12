@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { api, handleError } from '../../helpers/api';
+import {api, handleError} from '../../helpers/api';
 import User from '../shared/models/User';
-import { withRouter } from 'react-router-dom';
-import { Button } from '../../views/variables/Button';
+import {withRouter} from 'react-router-dom';
+import {Button} from '../../views/variables/Button';
 import '../../views/Map/BackgroundMap.css';
 import '../../views/variables/ZurichEmblem.css';
 import {ButtonForLogin} from "../../views/variables/ButtonForLogin";
@@ -87,129 +87,145 @@ const ButtonContainer = styled.div`
  * @Class
  */
 class Login extends React.Component {
-  /**
-   * If you don’t initialize the state and you don’t bind methods, you don’t need to implement a constructor for your React component.
-   * The constructor for a React component is called before it is mounted (rendered).
-   * In this case the initial state is defined in the constructor. The state is a JS object containing two fields: name and username
-   * These fields are then handled in the onChange() methods in the resp. InputFields
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: null,
-      username: null,
-      password: null,
-      loggedInUser: null
-    };
-  }
-  /**
-   * HTTP POST request is sent to the backend.
-   * If the request is successful, a new user is returned to the front-end
-   * and its token is stored in the localStorage.
-   */
-  async login() {
-    try {
-      const requestBody = JSON.stringify({
-        username: this.state.username,
-        password: this.state.password
-      });
-      const response = await api.put('/login', requestBody);
-
-      // Get the returned user and update a new object.
-      const user = new User(response.data);
-
-      //check whether there already was a user in the local storage, if yes, logout this user
-      if (localStorage.getItem('userId')){
-        api.put('/logout/' + localStorage.getItem('userId'));
-      }
-
-      // Store the id into the local storage.
-      localStorage.setItem('userId', user.id);
-
-      // Login successfully worked --> navigate to the the route /map in the GameRouter
-      this.props.history.push(`/map`);
-    } catch (error) {
-      alert(`Something went wrong during the login: \n${handleError(error)}`);
+    /**
+     * If you don’t initialize the state and you don’t bind methods, you don’t need to implement a constructor for your React component.
+     * The constructor for a React component is called before it is mounted (rendered).
+     * In this case the initial state is defined in the constructor. The state is a JS object containing two fields: name and username
+     * These fields are then handled in the onChange() methods in the resp. InputFields
+     */
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: null,
+            username: null,
+            password: null,
+            loggedInUser: null
+        };
     }
-  }
 
-  /**
-   *  Every time the user enters something in the input field, the state gets updated.
-   * @param key (the key of the state for identifying the field that needs to be updated)
-   * @param value (the value that gets assigned to the identified state key)
-   */
-  handleInputChange(key, value) {
-    // Example: if the key is username, this statement is the equivalent to the following one:
-    // this.setState({'username': value});
-    this.setState({ [key]: value });
-  }
+    /**
+     * HTTP POST request is sent to the backend.
+     * If the request is successful, a new user is returned to the front-end
+     * and its token is stored in the localStorage.
+     */
+    async login() {
+        try {
+            const requestBody = JSON.stringify({
+                username: this.state.username,
+                password: this.state.password
+            });
+            const response = await api.put('/login', requestBody);
 
-  /**
-   * componentDidMount() is invoked immediately after a component is mounted (inserted into the tree).
-   * Initialization that requires DOM nodes should go here.
-   * If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
-   * You may call setState() immediately in componentDidMount().
-   * It will trigger an extra rendering, but it will happen before the browser updates the screen.
-   */
-  componentDidMount() {}
+            // Get the returned user and update a new object.
+            const user = new User(response.data);
 
-  render() {
-    return (
-        <BackgroundContainer className={'html'}>
-          <HeaderForLogin/>
-          <EmblemContainer className={'container'}>
-        <FormContainer>
-          <Form>
-            <InputField
-              placeholder="Enter your username here"
-              onChange={e => {
-                this.handleInputChange('username', e.target.value);
-              }}
-            />
-            <InputField
-              placeholder="Enter your password here"
-              type="password"
-              onChange={e => {
-                this.handleInputChange('password', e.target.value);
-              }}
-            />
-            <ButtonContainer>
-              <Button
-                disabled={!this.state.username || !this.state.password}
-                width="75%"
-                onClick={() => {
-                  this.login();
-                }}
-              >
-                Login
-              </Button>
-            </ButtonContainer>
-            <ButtonContainer>
-              <ButtonForLogin
-                  width="75%"
-                  onClick={() => {
-                    this.props.history.push(`/map`);
-                  }}
-              >
-                Continue as a guest
-              </ButtonForLogin>
-            </ButtonContainer>
-            <ButtonContainer>
-              <ButtonForLogin
-                  width="75%"
-                  onClick={() => {
-                    this.props.history.push(`/registration`);
-                  }}
-              >
-                Register here
-              </ButtonForLogin>
-            </ButtonContainer>
-          </Form>
-        </FormContainer>
-          </EmblemContainer>
-        </BackgroundContainer>
-    );
-  }
+            //check whether there already was a user in the local storage, if yes, logout this user
+            if (localStorage.getItem('userId')) {
+                api.put('/logout/' + localStorage.getItem('userId'));
+            }
+
+            // Store the id into the local storage.
+            localStorage.setItem('userId', user.id);
+
+            // Login successfully worked --> navigate to the the route /map in the GameRouter
+            this.props.history.push(`/map`);
+        } catch (error) {
+            alert(`Something went wrong during the login: \n${handleError(error)}`);
+        }
+    }
+
+    /**
+     *  Every time the user enters something in the input field, the state gets updated.
+     * @param key (the key of the state for identifying the field that needs to be updated)
+     * @param value (the value that gets assigned to the identified state key)
+     */
+    handleInputChange(key, value) {
+        // Example: if the key is username, this statement is the equivalent to the following one:
+        // this.setState({'username': value});
+        this.setState({[key]: value});
+    }
+
+    /**
+     * componentDidMount() is invoked immediately after a component is mounted (inserted into the tree).
+     * Initialization that requires DOM nodes should go here.
+     * If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
+     * You may call setState() immediately in componentDidMount().
+     * It will trigger an extra rendering, but it will happen before the browser updates the screen.
+     */
+    componentDidMount() {
+    }
+
+    render() {
+        return (
+            <BackgroundContainer className={'html'}>
+                <HeaderForLogin/>
+                <EmblemContainer className={'container'}>
+                    <FormContainer>
+                        <Form>
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.username && this.state.password) {
+                                            this.login();
+                                        }
+                                    }
+                                }}
+                                placeholder="Enter your username here"
+                                onChange={e => {
+                                    this.handleInputChange('username', e.target.value);
+                                }}
+                            />
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.username && this.state.password) {
+                                            this.login();
+                                        }
+                                    }
+                                }}
+                                placeholder="Enter your password here"
+                                type="password"
+                                onChange={e => {
+                                    this.handleInputChange('password', e.target.value);
+                                }}
+                            />
+                            <ButtonContainer>
+                                <Button
+                                    disabled={!this.state.username || !this.state.password}
+                                    width="75%"
+                                    onClick={() => {
+                                        this.login();
+                                    }}
+                                >
+                                    Login
+                                </Button>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <ButtonForLogin
+                                    width="75%"
+                                    onClick={() => {
+                                        this.props.history.push(`/map`);
+                                    }}
+                                >
+                                    Continue as a guest
+                                </ButtonForLogin>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <ButtonForLogin
+                                    width="75%"
+                                    onClick={() => {
+                                        this.props.history.push(`/registration`);
+                                    }}
+                                >
+                                    Register here
+                                </ButtonForLogin>
+                            </ButtonContainer>
+                        </Form>
+                    </FormContainer>
+                </EmblemContainer>
+            </BackgroundContainer>
+        );
+    }
 }
 
 /**

@@ -9,7 +9,7 @@ import '../../views/variables/ZurichEmblem.css';
 import { ButtonForLogin } from '../../views/variables/ButtonForLogin';
 import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 
-const TextContainer = styled.div`
+const ErrorMessage = styled.div`
   font-weight: normal;
   font-size: 13px;
   margin-left: 0px;
@@ -103,7 +103,7 @@ const ButtonContainer = styled.div`
 function ValidationMessage(props) {
     if (!props.valid) {
         return(
-            <TextContainer className='error-msg'>{props.message}</TextContainer>
+            <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
         )
     }
     return null;
@@ -220,7 +220,7 @@ class Registration extends React.Component {
 
         if (name.length < 4) {
             nameValid = false;
-            errorMsg.password = 'Must be at least 4 characters long';
+            errorMsg.name = 'Must be at least 4 characters long';
         }
         this.setState({nameValid, errorMsg}, this.validateForm);
     }
@@ -261,6 +261,11 @@ class Registration extends React.Component {
                         <FormContainer>
                             <Form>
                                 <InputField
+                                    onKeyPress={e => {if (e.key === 'Enter'){
+                                        if (this.state.formValid === true){
+                                            this.registration();
+                                        }
+                                    }}}
                                     placeholder="Enter username here"
                                     onChange={e => {
                                         this.updateUsername(e.target.value);
@@ -268,6 +273,11 @@ class Registration extends React.Component {
                                 />
                                 <ValidationMessage valid={this.state.usernameValid} message={this.state.errorMsg.username}/>
                                 <InputField
+                                    onKeyPress={e => {if (e.key === 'Enter'){
+                                        if (this.state.formValid === true){
+                                            this.registration();
+                                        }
+                                    }}}
                                     placeholder="Enter name here"
                                     onChange={e => {
                                         this.updateName(e.target.value);
@@ -275,6 +285,11 @@ class Registration extends React.Component {
                                 />
                                 <ValidationMessage valid={this.state.nameValid} message={this.state.errorMsg.name}/>
                                 <InputField
+                                    onKeyPress={e => {if (e.key === 'Enter'){
+                                        if (this.state.formValid === true){
+                                            this.registration();
+                                        }
+                                    }}}
                                     type="password"
                                     placeholder="Enter password here"
                                     onChange={e => {
@@ -283,6 +298,11 @@ class Registration extends React.Component {
                                 />
                                 <ValidationMessage valid={this.state.passwordValid} message={this.state.errorMsg.password}/>
                                 <InputField
+                                    onKeyPress={e => {if (e.key === 'Enter'){
+                                        if (this.state.formValid === true){
+                                            this.registration();
+                                        }
+                                    }}}
                                     type="password"
                                     placeholder="Enter password again"
                                     onChange={e => {

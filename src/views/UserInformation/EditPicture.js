@@ -144,7 +144,6 @@ class EditPicture extends React.Component {
                             this.savePicture();
                         }}>
                         Save Picture
-
                     </Button>
                 </ButtonContainer>
             </Container>

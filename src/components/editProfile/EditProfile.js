@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { api, handleError } from '../../helpers/api';
-import { Button } from '../../views/variables/Button';
-import { withRouter } from 'react-router-dom';
+import {api, handleError} from '../../helpers/api';
+import {Button} from '../../views/variables/Button';
+import {withRouter} from 'react-router-dom';
 import SidebarEditUserInformation from "../../views/UserInformation/SidebarEditUserInformation";
 import UserEditHeader from "../../views/UserInformation/UserEditHeader";
 import EditPicture from "../../views/UserInformation/EditPicture";
@@ -10,7 +10,7 @@ import {Spinner} from "../../views/variables/Spinner";
 import User from "../shared/models/User";
 import TitleEdit from "../../views/UserInformation/TitleEdit";
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   width: 100%;
   display:grid;
@@ -31,8 +31,6 @@ flex-direction: column;
 margin-left: 20px;
 grid-column: ${props => props.column};
 `;
-
-
 
 
 const InputField = styled.input`
@@ -61,6 +59,24 @@ const Title = styled.div`
   flex-direction: row;
 `;
 
+const ErrorMessage = styled.div`
+  font-weight: normal;
+  font-size: 13px;
+  margin-left: 0px;
+  letter-spacing: 0.1em;
+  margin-top: 0px;
+  color: red;
+`;
+
+function ValidationMessage(props) {
+    if (!props.valid) {
+        return (
+            <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
+        )
+    }
+    return null;
+}
+
 // This component is responsible for the edit profile page
 class EditProfile extends React.Component {
     constructor() {
@@ -70,14 +86,21 @@ class EditProfile extends React.Component {
             loggedInUser: null,
             name: null,
             username: null,
-            birthDate: null,
+            password: null,
+            passwordConfirm: null,
             changesSaved: false,
             testThing: false,
-            password: null
+            formValid: false,
+            usernameValid: null,
+            nameValid: null,
+            passwordValid: null,
+            passwordConfirmValid: null,
+            errorMsg: {},
         };
         this.getUser();
 
     }
+
     // this method sends a get request to the server and saves the received user data in the component's state
     async getUser() {
         try {
@@ -119,7 +142,100 @@ class EditProfile extends React.Component {
         this.setState({[key]: value});
     }
 
-    async componentDidMount() {}
+    async componentDidMount() {
+    }
+
+    validateForm = () => {
+        const {usernameValid, nameValid, passwordValid, passwordConfirmValid} = this.state;
+        if (passwordValid === null && passwordConfirmValid === null) {
+            if (usernameValid === null){
+                this.setState({
+                    formValid: nameValid
+                })
+            }
+            else if (nameValid === null){
+                this.setState({formValid: usernameValid})
+            }
+            else{
+                this.setState({formValid: nameValid && usernameValid})
+            }
+
+        }
+        else{
+            if ((usernameValid===true || usernameValid ===null) && (nameValid===true || nameValid ===null))
+                this.setState({
+                    formValid: passwordConfirmValid && passwordValid
+                })
+            else{
+                this.setState({formValid: false})
+            }
+        }
+    }
+
+    validateUsername = () => {
+        const {username} = this.state;
+        let usernameValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (username.length < 4) {
+            usernameValid = false;
+            errorMsg.username = 'Must be at least 4 characters long'
+        }
+        this.setState({usernameValid, errorMsg}, this.validateForm)
+    }
+
+    validateName = () => {
+        const {name} = this.state;
+        let nameValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (name.length < 4) {
+            nameValid = false;
+            errorMsg.name = 'Must be at least 4 characters long';
+        }
+        this.setState({nameValid, errorMsg}, this.validateForm);
+    }
+
+    validatePassword = () => {
+        const {password} = this.state;
+        let passwordValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (password.length < 6) {
+            passwordValid = false;
+            errorMsg.password = 'Must be at least 6 characters long';
+        }
+        this.setState({passwordValid, errorMsg}, this.validateForm);
+    }
+
+    validatePasswordConfirm = () => {
+        const {passwordConfirm, password} = this.state;
+        let passwordConfirmValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (password !== passwordConfirm) {
+            passwordConfirmValid = false;
+            errorMsg.passwordConfirm = 'Passwords do not match'
+        }
+
+        this.setState({passwordConfirmValid, errorMsg}, this.validateForm);
+    }
+
+    updatePassword = (password) => {
+        this.setState({password}, this.validatePassword);
+    }
+
+    updateUsername = (username) => {
+        this.setState({username}, this.validateUsername)
+    }
+
+    updateName = (name) => {
+        this.setState({name}, this.validateName)
+    }
+
+    updatePasswordConfirm = (passwordConfirm) => {
+        this.setState({passwordConfirm}, this.validatePasswordConfirm)
+    }
 
     // renders the page
     render() {
@@ -129,61 +245,106 @@ class EditProfile extends React.Component {
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                     <MainContainer>
                         <TitleEdit/>
-                        <UserEditHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
-                <SidebarEditUserInformation column={3}/>
-                <Container column={1}>
-                    <Title>Name: </Title>
-                    <InputField
-                        placeholder="enter your new name here"
-                        onChange={e => {
-                            this.handleInputChange('name', e.target.value);
-                        }}
-                    />
-                </Container>
-                <Container column={1}>
-                <Title>Username: </Title>
-                    <InputField
-                        placeholder="enter your new username here"
-                        onChange={e => {
-                            this.handleInputChange('username', e.target.value);
-                        }}
-                    />
-                </Container>
-                <Container column={1}>
-                    <Title>Password: </Title>
-                    <InputField
-                        placeholder="enter your new password here"
-                        onChange={e => {
-                            this.handleInputChange('password', e.target.value);
-                        }}
-                    />
-                </Container>
-                <Container column={1}>
-                        <ButtonContainer>
-                            <Button
-                                disabled={!this.state.name && !this.state.username && !this.state.password}
-                                width="100%"
-                                onClick={() => {
-                                    this.saveChanges();
+                        <UserEditHeader username={this.state.loggedInUser.username}
+                                        avatarNr={this.state.loggedInUser.avatarNr}/>
+                        <SidebarEditUserInformation column={3}/>
+                        <Container column={1}>
+                            <Title>Username: </Title>
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.formValid === true) {
+                                            this.saveChanges();
+                                        }
+                                    }
                                 }}
-                            >
-                                Save Changes
-                            </Button>
-                        </ButtonContainer>
-                        <ButtonContainer>
-                            <Button
-                                width="100%"
-                                onClick={() => {
-                                    this.props.history.push('/userprofile');
+                                placeholder="Enter new username here"
+                                onChange={e => {
+                                    this.updateUsername(e.target.value);
                                 }}
-                            >
-                                Cancel
-                            </Button>
-                        </ButtonContainer>
-                </Container>
-                <EditPicture user={this.state.loggedInUser} loggedInUserId={this.state.loggedInUserId}/>
+                            />
+                            <ValidationMessage valid={this.state.usernameValid} message={this.state.errorMsg.username}/>
+                        </Container>
+                        <Container column={1}>
+                            <Title>Name: </Title>
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.formValid === true) {
+                                            this.saveChanges();
+                                        }
+                                    }
+                                }}
+                                placeholder="Enter new name here"
+                                onChange={e => {
+                                    this.updateName(e.target.value);
+                                }}
+                            />
+                            <ValidationMessage valid={this.state.nameValid} message={this.state.errorMsg.name}/>
+                        </Container>
+                        <Container column={1}>
+                            <Title>Password: </Title>
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.formValid === true) {
+                                            this.saveChanges();
+                                        }
+                                    }
+                                }}
+                                type="password"
+                                placeholder="Enter new password here"
+                                onChange={e => {
+                                    this.updatePassword(e.target.value);
+                                }}
+                            />
+                            <ValidationMessage valid={this.state.passwordValid} message={this.state.errorMsg.password}/>
+                        </Container>
+                        <Container column={1}>
+                            <Title>Password: </Title>
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.formValid === true) {
+                                            this.saveChanges();
+                                        }
+                                    }
+                                }}
+                                type="password"
+                                placeholder="Enter new password again"
+                                onChange={e => {
+                                    this.updatePasswordConfirm(e.target.value);
+                                }}
+                            />
+                            <ValidationMessage valid={this.state.passwordConfirmValid}
+                                               message={this.state.errorMsg.passwordConfirm}/>
+                        </Container>
+                        <Container column={1}>
+                            <ButtonContainer>
+                                <Button
+                                    disabled={!this.state.formValid}
+                                    width="100%"
+                                    onClick={() => {
+                                        this.saveChanges();
+                                    }}
+                                >
+                                    Save Changes
+                                </Button>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <Button
+                                    width="100%"
+                                    onClick={() => {
+                                        this.props.history.push('/userprofile');
+                                    }}
+                                >
+                                    Cancel
+                                </Button>
+                            </ButtonContainer>
+                        </Container>
+                        <EditPicture user={this.state.loggedInUser} loggedInUserId={this.state.loggedInUserId}/>
                     </MainContainer>
-                    )}
+                )}
             </MainContainer>
         );
     }
