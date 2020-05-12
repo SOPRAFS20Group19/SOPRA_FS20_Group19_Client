@@ -146,6 +146,23 @@ const ButtonContainer = styled.div`
   width: 100%;
 `;
 
+const ErrorMessage = styled.div`
+  font-weight: normal;
+  font-size: medium;
+  flex-direction: row;
+  color: red;
+  margin-top: 5px;
+`;
+
+function ValidationMessage(props) {
+    if (!props.valid) {
+        return(
+            <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
+        )
+    }
+    return null;
+}
+
 class AddTableTennis extends React.Component {
     constructor(props) {
         super(props);
@@ -173,9 +190,10 @@ class AddTableTennis extends React.Component {
                     <InputFieldBaujahr
                         placeholder="enter number between 1 and 5"
                         onChange={e => {
-                            this.props.handleInputChange('slabQuality', e.target.value);
+                            this.props.updateSlabQuality(e.target.value);
                         }}
                     />
+                    <ValidationMessage valid={this.props.slabQualityValid} message={this.props.errorMsg.slabQuality}/>
                 </Container3>
                 <Container4>
                     <Title>Permanent net? </Title>
@@ -193,7 +211,7 @@ class AddTableTennis extends React.Component {
                 <Container5>
                     <ButtonContainer>
                         <Button
-                            disabled={!this.props.net || !this.props.slabQuality || !this.props.latitude || !this.props.longitude}
+                            disabled={!this.props.net || this.props.slabQualityValid===false || !this.props.latitude || !this.props.longitude}
                             onClick={() => {this.props.saveChangesTableTennis()}}>Save Location
                         </Button>
                     </ButtonContainer>

@@ -173,6 +173,23 @@ const ButtonContainer = styled.div`
   width: 100%;
 `;
 
+const ErrorMessage = styled.div`
+  font-weight: normal;
+  font-size: medium;
+  flex-direction: row;
+  color: red;
+  margin-top: 5px;
+`;
+
+function ValidationMessage(props) {
+    if (!props.valid) {
+        return(
+            <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
+        )
+    }
+    return null;
+}
+
 class AddBench extends React.Component {
     constructor(props) {
         super(props);
@@ -200,41 +217,45 @@ class AddBench extends React.Component {
                     <InputFieldBaujahr
                         placeholder="enter number between 1 and 5"
                         onChange={e => {
-                            this.props.handleInputChange('view', e.target.value);
+                            this.props.updateView(e.target.value);
                         }}
                     />
+                    <ValidationMessage valid={this.props.viewValid} message={this.props.errorMsg.view}/>
                 </Container3>
                 <Container4>
                     <Title>Peace (1-5)? </Title>
                     <InputFieldBaujahr
                         placeholder="enter number between 1 and 5"
                         onChange={e => {
-                            this.props.handleInputChange('peace', e.target.value);
+                            this.props.updatePeace(e.target.value);
                         }}
                     />
+                    <ValidationMessage valid={this.props.peaceValid} message={this.props.errorMsg.peace}/>
                 </Container4>
                 <Container5>
                     <Title>Romantics (1-5)? </Title>
                     <InputFieldBaujahr
                         placeholder="enter number between 1 and 5"
                         onChange={e => {
-                            this.props.handleInputChange('romantics', e.target.value);
+                            this.props.updateRomantics(e.target.value);
                         }}
                     />
+                    <ValidationMessage valid={this.props.romanticsValid} message={this.props.errorMsg.romantics}/>
                 </Container5>
                 <Container6>
                     <Title>Comfort (1-5)? </Title>
                     <InputFieldBaujahr
                         placeholder="enter number between 1 and 5"
                         onChange={e => {
-                            this.props.handleInputChange('comfort', e.target.value);
+                            this.props.updateComfort(e.target.value);
                         }}
                     />
+                    <ValidationMessage valid={this.props.comfortValid} message={this.props.errorMsg.comfort}/>
                 </Container6>
                 <Container7>
                     <ButtonContainer>
                         <Button
-                            disabled={!this.props.view || !this.props.peace || !this.props.romantics || !this.props.comfort}
+                            disabled={this.props.viewValid===false || this.props.peaceValid===false || this.props.romanticsValid===false || this.props.comfortValid===false}
                             onClick={() => {this.props.saveChangesBench()}}>Save Location
                         </Button>
                     </ButtonContainer>

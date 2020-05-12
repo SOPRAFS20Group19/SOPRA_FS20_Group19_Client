@@ -404,6 +404,11 @@ class AddLocation extends React.Component {
             adresseValid: null,
             plzValid: null,
             ortValid: null,
+            slabQualityValid: null,
+            viewValid: null,
+            peaceValid: null,
+            romanticsValid: null,
+            comfortValid: null
         };
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
@@ -832,6 +837,104 @@ class AddLocation extends React.Component {
         this.setState({ortValid, errorMsg})
     }
 
+    updateSlabQuality = (slabQuality) => {
+        this.setState({slabQuality}, this.validateSlabQuality);
+    }
+
+    validateSlabQuality = () => {
+        const {slabQuality} = this.state;
+        let slabQualityValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (slabQuality > 5  ||  slabQuality < 1) {
+            slabQualityValid = false;
+            errorMsg.slabQuality = "Must be number between 1 and 5."
+        }
+        else if(isNaN(slabQuality)){
+            slabQualityValid = false;
+            errorMsg.slabQuality = "That's not a valid number."
+        }
+        this.setState({slabQualityValid, errorMsg})
+    }
+
+    updateView = (view) => {
+        this.setState({view}, this.validateView);
+    }
+
+    validateView = () => {
+        const {view} = this.state;
+        let viewValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (view > 5  ||  view < 1) {
+            viewValid = false;
+            errorMsg.view = "Must be number between 1 and 5."
+        }
+        else if(isNaN(view)){
+            viewValid = false;
+            errorMsg.view = "That's not a valid number."
+        }
+        this.setState({viewValid, errorMsg})
+    }
+
+    updatePeace = (peace) => {
+        this.setState({peace}, this.validatePeace);
+    }
+
+    validatePeace = () => {
+        const {peace} = this.state;
+        let peaceValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (peace > 5  ||  peace < 1) {
+            peaceValid = false;
+            errorMsg.peace = "Must be number between 1 and 5."
+        }
+        else if(isNaN(peace)){
+            peaceValid = false;
+            errorMsg.peace = "That's not a valid number."
+        }
+        this.setState({peaceValid, errorMsg})
+    }
+
+    updateRomantics = (romantics) => {
+        this.setState({romantics}, this.validateRomantics);
+    }
+
+    validateRomantics = () => {
+        const {romantics} = this.state;
+        let romanticsValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (romantics > 5  ||  romantics < 1) {
+            romanticsValid = false;
+            errorMsg.romantics = "Must be number between 1 and 5."
+        }
+        else if(isNaN(romantics)) {
+            romanticsValid = false;
+            errorMsg.romantics = "That's not a valid number."
+        }
+        this.setState({romanticsValid, errorMsg})
+    }
+
+    updateComfort = (comfort) => {
+        this.setState({comfort}, this.validateComfort);
+    }
+
+    validateComfort = () => {
+        const {comfort} = this.state;
+        let comfortValid = true;
+        let errorMsg = {...this.state.errorMsg}
+
+        if (comfort > 5  ||  comfort < 1) {
+            comfortValid = false;
+            errorMsg.comfort = "Must be number between 1 and 5."
+        }
+        this.setState({comfortValid, errorMsg})
+    }
+
+
+
     getCoordinatesAddLocation(position) {
         let latitudeValid = true;
         let longitudeValid = true;
@@ -1003,6 +1106,13 @@ class AddLocation extends React.Component {
                                         adresse={this.state.adresse}
                                         plz={this.state.plz}
                                         ort={this.state.ort}
+                                        adresseValid={this.state.adresseValid}
+                                        plzValid={this.state.plzValid}
+                                        ortValid={this.state.ortValid}
+                                        updateOrt={this.updateOrt.bind(this)}
+                                        updateAdresse={this.updateAdresse.bind(this)}
+                                        updatePlz={this.updatePlz.bind(this)}
+                                        errorMsg={this.state.errorMsg}
                                     />
                                 </MainContainer>)) : (this.state.locationType==="TABLE_TENNIS" ? (this.state.savingLocation ? (<MainContainer>
                                 <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
@@ -1018,6 +1128,9 @@ class AddLocation extends React.Component {
                                     getTypeAsString={this.getTypeAsString.bind(this)}
                                     net={this.state.net}
                                     slabQuality={this.state.slabQuality}
+                                    slabQualityValid={this.state.slabQualityValid}
+                                    updateSlabQuality={this.updateSlabQuality.bind(this)}
+                                    errorMsg={this.state.errorMsg}
                                 />
                             </MainContainer>)) : (this.state.savingLocation ? (<MainContainer>
                                 <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
@@ -1035,6 +1148,15 @@ class AddLocation extends React.Component {
                                     peace={this.state.peace}
                                     romantics={this.state.romantics}
                                     comfort={this.state.comfort}
+                                    viewValid={this.state.viewValid}
+                                    peaceValid={this.state.peaceValid}
+                                    romanticsValid={this.state.romanticsValid}
+                                    comfortValid={this.state.comfortValid}
+                                    updateView={this.updateView.bind(this)}
+                                    updateComfort={this.updateComfort.bind(this)}
+                                    updateRomantics={this.updateRomantics.bind(this)}
+                                    updatePeace={this.updatePeace.bind(this)}
+                                    errorMsg={this.state.errorMsg}
                                 />
                             </MainContainer>))))))))}
             </MainContainer>

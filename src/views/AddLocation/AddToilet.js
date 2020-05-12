@@ -201,6 +201,24 @@ const ButtonContainer = styled.div`
   width: 100%;
 `;
 
+
+const ErrorMessage = styled.div`
+  font-weight: normal;
+  font-size: medium;
+  flex-direction: row;
+  color: red;
+  margin-top: 5px;
+`;
+
+function ValidationMessage(props) {
+    if (!props.valid) {
+        return(
+            <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
+        )
+    }
+    return null;
+}
+
 class AddToilet extends React.Component {
     constructor(props) {
         super(props);
@@ -228,27 +246,30 @@ class AddToilet extends React.Component {
                     <InputFieldBaujahr
                         placeholder="enter address here"
                         onChange={e => {
-                            this.props.handleInputChange('adresse', e.target.value);
+                            this.props.updateAdresse(e.target.value);
                         }}
                     />
+                    <ValidationMessage valid={this.props.adresseValid} message={this.props.errorMsg.adresse}/>
                 </Container3>
                 <Container4>
                     <Title>Zip code: </Title>
                     <InputFieldBaujahr
                         placeholder="enter zip code here"
                         onChange={e => {
-                            this.props.handleInputChange('plz', e.target.value);
+                            this.props.updatePlz(e.target.value);
                         }}
                     />
+                    <ValidationMessage valid={this.props.plzValid} message={this.props.errorMsg.plz}/>
                 </Container4>
                 <Container5>
                     <Title>City: </Title>
                     <InputFieldBaujahr
                         placeholder="enter city here"
                         onChange={e => {
-                            this.props.handleInputChange('ort', e.target.value);
+                            this.props.updateOrt(e.target.value);
                         }}
                     />
+                    <ValidationMessage valid={this.props.ortValid} message={this.props.errorMsg.ort}/>
                 </Container5>
                 <Container6>
                     <Title>Opening hours (optional): </Title>
@@ -284,7 +305,7 @@ class AddToilet extends React.Component {
                 <Container9>
                     <ButtonContainer>
                         <Button
-                            disabled={!this.props.adresse || !this.props.plz || !this.props.ort || !this.props.category}
+                            disabled={this.props.adresseValid===false || this.props.plzValid===false || this.props.ortValid===false || !this.props.category}
                             onClick={() => {this.props.saveChangesToilet()}}>Save Location
                         </Button>
                     </ButtonContainer>
