@@ -34,24 +34,36 @@ const Container = styled.div`
     opacity: 0.9;
     background: #003068;
   }
-  height: 73%;
-  min-height: 600px;
-  width: 10%;
+  padding: 10px;
+  padding-bottom: 15px;
+  min-width: 10%;
   background: #66A3E0;
   display: flex;
   justify-content: top;
   align-items: center;
   opacity: 0.4;
   position: absolute;
-  top: 0;
   right: 0;
   flex-direction: column;
+  @media only screen and (max-width: 801px){
+    width: 100%;
+    height: 25%;
+    postion: fixed;
+    bottom: 0%;
+    flex-direction: row;
+    
+  }
+  @media only screen and (min-width: 800px){
+    top: 0;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 15px;
+  @media only screen and (max-width: 800px){
+      margin-top: 0px;
 `;
 
 const HoverContainer = styled.div`
@@ -143,13 +155,13 @@ class Sidebar extends React.Component{
                         placement="left"
                         overlay={<Popover id="popover-basic">
                         <Popover.Content>
-                            <ButtonContainer>
+                            <ButtonContainer >
                                 <Button
                                     width="100%"
                                     onClick={() => {this.openUserProfile();}}>Go to your profile
                                 </Button>
                             </ButtonContainer>
-                            <ButtonContainer>
+                            <ButtonContainer >
                                 <ButtonForLogin
                                     width="100%"
                                     onClick={() => {this.logout();}}>Logout
@@ -158,7 +170,7 @@ class Sidebar extends React.Component{
                         </Popover.Content>
                     </Popover>}>
                         <div>
-                    <ButtonContainer>
+                    <ButtonContainer >
                         <RoundButton
                             width="75%"
                             onMouseOver={() => this.toggleShowUserHover(true)}
@@ -180,13 +192,13 @@ class Sidebar extends React.Component{
                         overlay={<Popover id="popover-basic">
                             <Popover.Content>
                                 Create a profile or login below.
-                                <ButtonContainer>
+                                <ButtonContainer >
                                     <Button
                                         width="75%"
                                         onClick={() => {this.props.history.push(`/registration`);}}>Register here
                                     </Button>
                                 </ButtonContainer>
-                                <ButtonContainer>
+                                <ButtonContainer >
                                     <ButtonForLogin
                                         width="75%"
                                         onClick={() => {this.props.history.push(`/login`);}}>Login here
@@ -195,7 +207,7 @@ class Sidebar extends React.Component{
                             </Popover.Content>
                         </Popover>}>
                         <div>
-                            <ButtonContainer>
+                            <ButtonContainer >
                                 <RoundButton
                                     width="75%"
                                     onMouseOver={() => this.toggleShowUserHover(true)}
