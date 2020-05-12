@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 2 / span 2;
   margin-top: 20px;
   margin-left: 20px;
   align-content: left;

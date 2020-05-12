@@ -156,7 +156,6 @@ class UserListItemNarrow extends React.Component{
     }
 
     componentWillUnmount(): void {
-        console.log("I am unmounting");
         clearTimeout(this.timeout);
     }
 

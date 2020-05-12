@@ -6,6 +6,7 @@ import {api, handleError} from "../../helpers/api";
 import User from "../../components/shared/models/User";
 import Spinner from "react-bootstrap/Spinner";
 import LocationListItemProfilePage from "./LocationListItemProfilePage";
+import LocationListItem from "../UserInformation/LocationListItem";
 
 const Container = styled.div`
   display: flex;
@@ -39,6 +40,17 @@ const ListContainer = styled.div`
   width: 100%;
 `;
 
+const LocationsList = styled.ul`
+  list-style: none;
+  padding-left: 0;
+`;
+
+const LocationContainer = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  justify-content: center;
+`;
 
 class SavedLocationsProfilePage extends React.Component {
     constructor(props) {
@@ -59,8 +71,8 @@ class SavedLocationsProfilePage extends React.Component {
 
             const response = await api.get(url);
 
-            const locationsList = response.data.map((location) => <LocationListItemProfilePage location={location} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>);
-            this.setState({favoriteLocations: locationsList});
+            //const locationsList = response.data.map((location) => <LocationListItemProfilePage location={location} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>);
+            this.setState({favoriteLocations: response.data});
         } catch (e) {
             alert(`Something went wrong while getting the favorite locations: \n${handleError(e)}`);
         }
@@ -80,7 +92,15 @@ class SavedLocationsProfilePage extends React.Component {
                     <span className="sr-only">Loading...</span>
                 </Spinner>) : (
                     <ListContainer>
-                        {this.state.favoriteLocations}
+                        <LocationsList>
+                            {this.state.favoriteLocations.map(location => {
+                                return (
+                                    <LocationContainer key={location.id}>
+                                        <LocationListItemProfilePage location={location} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>
+                                    </LocationContainer>
+                                );
+                            })}
+                        </LocationsList>
                     </ListContainer>
                 )}
             </Container>

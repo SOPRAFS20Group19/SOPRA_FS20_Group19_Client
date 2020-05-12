@@ -133,10 +133,16 @@ class UserListItem extends React.Component{
             const response = await api.get(url);
 
             this.setState({isUnread: response.data});
-            setTimeout(() => {this.checkIfUnreadMessages()}, 5000);
+            if (!this.state.isUnread){
+                this.timeout = setTimeout(() => {this.checkIfUnreadMessages()}, 10000);
+            }
         } catch (e) {
             alert(`Something went wrong while checking for unread messages: \n${handleError(e)}`);
         }
+    }
+
+    componentWillUnmount(): void {
+        clearTimeout(this.timeout);
     }
 
     changeColor(value){

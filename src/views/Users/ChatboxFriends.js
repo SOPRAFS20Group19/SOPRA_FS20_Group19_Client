@@ -41,7 +41,7 @@ const Container = styled.div`
   align-content: top;
   flex-direction: column;
   grid-column: 2;
-  grid-row: 3 / span 2;
+  grid-row: 4 / span 3;
   margin-top: 30px;
   margin-left: 20px;
 `;

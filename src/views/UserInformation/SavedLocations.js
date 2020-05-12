@@ -6,6 +6,7 @@ import {api, handleError} from "../../helpers/api";
 import User from "../../components/shared/models/User";
 import LocationListItem from "./LocationListItem";
 import Spinner from "react-bootstrap/Spinner";
+import UserListItem from "../Users/UserListItem";
 
 const Container = styled.div`
   display: flex;
@@ -43,7 +44,18 @@ const ListContainer = styled.div`
   max-height: 225px;
   overflow: scroll;
   width: 100%;
-  
+`;
+
+const LocationsList = styled.ul`
+  list-style: none;
+  padding-left: 0;
+`;
+
+const LocationContainer = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  justify-content: center;
 `;
 
 
@@ -66,8 +78,8 @@ class SavedLocations extends React.Component {
 
             const response = await api.get(url);
 
-            const locationsList = response.data.map((location) => <LocationListItem location={location} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>);
-            this.setState({favoriteLocations: locationsList});
+            //const locationsList = response.data.map((location) => <LocationListItem location={location} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>);
+            this.setState({favoriteLocations: response.data});
         } catch (e) {
             alert(`Something went wrong while getting the favorite locations: \n${handleError(e)}`);
         }
@@ -87,7 +99,15 @@ class SavedLocations extends React.Component {
                     <span className="sr-only">Loading...</span>
                 </Spinner>) : (
                     <ListContainer>
-                        {this.state.favoriteLocations}
+                        <LocationsList>
+                            {this.state.favoriteLocations.map(location => {
+                                    return (
+                                        <LocationContainer key={location.id}>
+                                            <LocationListItem location={location} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>
+                                        </LocationContainer>
+                                    );
+                            })}
+                        </LocationsList>
                     </ListContainer>
                 )}
             </Container>
