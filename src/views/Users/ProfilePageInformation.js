@@ -191,6 +191,60 @@ const ButtonContainer = styled.div`
   grid-row: 5;
 `;
 
+const GridContainer =styled.div`
+  color: black;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  justify-content: left;
+  align-content: center;
+  grid-column-gap: 20px;
+  grid-column: 1;
+  grid-row: ${props => props.row};
+  font-size: x-large;
+  @media only screen and (max-width: 700px){
+    font-size: 22px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 14px;
+  }
+`;
+
+
+
+
+const Title = styled.div`
+  width: 100%;
+  grid-column: 1;
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  flex-direction: row;
+  @media only screen and (max-width: 700px){
+    font-size: 15px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
+`;
+
+
+const Text = styled.div`
+  grid-column: 2;
+  font-weight: normal;
+  font-size: 20px;
+  width: 100%;
+  list-style-type: none;
+  @media only screen and (max-width: 700px){
+    font-size: 15px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
+`;
+
 
 class ProfilePageInformation extends React.Component{
     constructor(props) {
@@ -205,22 +259,22 @@ class ProfilePageInformation extends React.Component{
         return (
             <Container>
                 {!this.props.user ? (<Spinner/>) :(<div>
-                        <GridContainerName>
-                            <TitleName>Name:</TitleName>
-                            <TextName>{this.props.user.name}</TextName>
-                        </GridContainerName>
-                        <GridContainerUsername>
-                            <TitleUsername>Username:</TitleUsername>
-                            <TextUsername>{this.props.user.username}</TextUsername>
-                        </GridContainerUsername>
-                        <GridContainerStatus>
-                            <TitleStatus>Status:</TitleStatus>
-                            <TextStatus>{this.props.user.status}</TextStatus>
-                        </GridContainerStatus>
-                        <GridContainerCreationDate>
-                            <TitleCreationDate>KYC-user since:</TitleCreationDate>
-                            <TextCreationDate>{this.props.user.creationDate}</TextCreationDate>
-                        </GridContainerCreationDate>
+                        <GridContainer row={1}>
+                            <Title>Name:</Title>
+                            <Text>{this.props.user.name}</Text>
+                        </GridContainer>
+                        <GridContainer row={2}>
+                            <Title>Username:</Title>
+                            <Text>{this.props.user.username}</Text>
+                        </GridContainer>
+                        <GridContainer row={3}>
+                            <Title>Status:</Title>
+                            <Text>{this.props.user.status}</Text>
+                        </GridContainer>
+                        <GridContainer row={4}>
+                            <Title>KYC-user since:</Title>
+                            <Text>{this.props.user.creationDate}</Text>
+                        </GridContainer>
                     </div>
                 )}
             </Container>

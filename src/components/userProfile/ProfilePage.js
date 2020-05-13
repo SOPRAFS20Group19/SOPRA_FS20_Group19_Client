@@ -40,9 +40,10 @@ const MainContainer =styled.div`
     grid-column-gap: 20px;
   }
   
-  @media only screen and (max-width: 900px){
-    max-width: 800;
+  @media only screen and (max-width: 1100px){
+    max-width: 1000;
     display: block;
+    justify-content: center;
   }
   @media only screen and (max-width: 500px){
     max-width: 500;
@@ -63,8 +64,9 @@ const Container =styled.div`
 
 const ImageContainer= styled.div`
   justify-content: start;
+  flex-direction: row;
   color: black;
-  align-items: center;
+  align-content: center;
   grid-row: 4;
   grid-column: 1;
   font-weight: bold;
@@ -72,6 +74,38 @@ const ImageContainer= styled.div`
   letter-spacing: 0.2em;
   line-height: 1.1em;
   text-transform: uppercase;
+  margin-left: 10px;
+`;
+
+const ImageContainer2= styled.div`
+  display: grid;
+  justify-content: start;
+  align-content: left;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+`;
+
+const Text = styled.div`
+  grid-column: 2;
+  align-self: center;
+  font-size: 15px;
+  @media only screen and (max-width: 700px){
+    font-size: 12px;
+  }
+`;
+
+const Picture= styled.div`
+  height: 70px;
+  width: 70px;
+  grid-column: 1;
+  @media only screen and (max-width: 700px){
+    width: 55px;
+    height: 55px;
+  }
+  @media only screen and (max-width: 500px){
+    width: 45px;
+    height: 45px;
+  }
 `;
 
 // this component is responsible for the user profile
@@ -147,8 +181,6 @@ class ProfilePage extends React.Component {
             await api.put(url);
 
             this.setState({isFriend: true});
-
-            //this.props.refresh();
         } catch (e) {
             alert(`Something went wrong while adding this friend: \n${handleError(e)}`);
         }
@@ -197,21 +229,31 @@ class ProfilePage extends React.Component {
                         />
                         <ImageContainer>
                             {this.state.isFriend === false ?
-                                <div>
-                                    <img src={AddFriend} alt="Add Friend" height="72px" width="72px"
+                                <ImageContainer2>
+                                    <Picture>
+                                    <img src={AddFriend} alt="Add Friend" height="100%" width="100%"
                                          onClick={() => {
                                              this.changeColor(true);
                                          }}
-                                    /> Add this user as a friend
-                                </div>
+                                    />
+                                    </Picture>
+                                    <Text>
+                                    Add this user as a friend
+                                    </Text>
+                                </ImageContainer2>
                                 :
-                                <div>
-                                    <img src={FriendAdded} alt="FriendAdded" height="72px" width="72px"
+                                <ImageContainer2>
+                                    <Picture>
+                                    <img src={FriendAdded} alt="FriendAdded" height="100%" width="100%"
                                          onClick={() => {
                                              this.changeColor(false);
                                          }}
-                                    /> Unfriend this user
-                                </div>
+                                    />
+                                    </Picture>
+                                    <Text>
+                                    Unfriend this user
+                                    </Text>
+                                </ImageContainer2>
                             }
                         </ImageContainer>
                         <SavedLocationsProfilePage userId={this.state.shownUser.id}/>

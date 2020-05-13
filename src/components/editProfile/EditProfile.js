@@ -13,12 +13,12 @@ import TitleEdit from "../../views/UserInformation/TitleEdit";
 const MainContainer = styled.div`
   color: black;
   width: 100%;
-  display:grid;
-  grid-template-columns: auto auto auto;
+  display: grid;
+  grid-template-columns: auto auto 10%;
   grid-template-rows: auto auto auto auto auto auto auto;
-  justify-content: center;
+  justify-content: space-between;
   grid-column-gap: 30px;
-    @media only screen and (max-width: 1215px){
+  @media only screen and (max-width: 1215px){
     grid-column-gap: 10px;
   }
   
@@ -67,17 +67,21 @@ const InputField = styled.input`
 
 const ButtonContainer = styled.div`
   justify-content: center;
+  align-items: center;
   grid-column: 1;
   margin-top: 10px;
-  width: 90%;
+  width: 100%;
 `;
 
 const Title = styled.div`
+  width: 100%;
+  font-size: 20px;
   font-weight: bold;
-  font-size: large;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   flex-direction: row;
   @media only screen and (max-width: 700px){
-    font-size: 20px
+    font-size: 15px
   }
   @media only screen and (max-width: 500px){
     font-size: 15px
@@ -190,12 +194,12 @@ class EditProfile extends React.Component {
             if ((usernameValid===true || usernameValid ===null) && (nameValid===true || nameValid ===null))
                 this.setState({
                     formValid: passwordConfirmValid && passwordValid
-                })
+                });
             else{
                 this.setState({formValid: false})
             }
         }
-    }
+    };
 
     validateUsername = () => {
         const {username} = this.state;
@@ -207,7 +211,7 @@ class EditProfile extends React.Component {
             errorMsg.username = 'Must be at least 4 characters long'
         }
         this.setState({usernameValid, errorMsg}, this.validateForm)
-    }
+    };
 
     validateName = () => {
         const {name} = this.state;
@@ -219,19 +223,19 @@ class EditProfile extends React.Component {
             errorMsg.name = 'Must be at least 4 characters long';
         }
         this.setState({nameValid, errorMsg}, this.validateForm);
-    }
+    };
 
     validatePassword = () => {
         const {password} = this.state;
         let passwordValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (password.length < 6) {
             passwordValid = false;
             errorMsg.password = 'Must be at least 6 characters long';
         }
         this.setState({passwordValid, errorMsg}, this.validateForm);
-    }
+    };
 
     validatePasswordConfirm = () => {
         const {passwordConfirm, password} = this.state;
@@ -244,29 +248,29 @@ class EditProfile extends React.Component {
         }
 
         this.setState({passwordConfirmValid, errorMsg}, this.validateForm);
-    }
+    };
 
     updatePassword = (password) => {
         this.setState({password}, this.validatePassword);
-    }
+    };
 
     updateUsername = (username) => {
         this.setState({username}, this.validateUsername)
-    }
+    };
 
     updateName = (name) => {
         this.setState({name}, this.validateName)
-    }
+    };
 
     updatePasswordConfirm = (passwordConfirm) => {
         this.setState({passwordConfirm}, this.validatePasswordConfirm)
-    }
+    };
 
     // renders the page
     render() {
         return (
 
-            <MainContainer>
+            <div>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                     <MainContainer>
                         <TitleEdit/>
@@ -348,7 +352,7 @@ class EditProfile extends React.Component {
                             <ButtonContainer>
                                 <Button
                                     disabled={!this.state.formValid}
-                                    width="100%"
+                                    width="80%"
                                     onClick={() => {
                                         this.saveChanges();
                                     }}
@@ -358,7 +362,7 @@ class EditProfile extends React.Component {
                             </ButtonContainer>
                             <ButtonContainer>
                                 <Button
-                                    width="100%"
+                                    width="80%"
                                     onClick={() => {
                                         this.props.history.push('/userprofile');
                                     }}
@@ -370,7 +374,7 @@ class EditProfile extends React.Component {
                         <EditPicture user={this.state.loggedInUser} loggedInUserId={this.state.loggedInUserId}/>
                     </MainContainer>
                 )}
-            </MainContainer>
+            </div>
         );
     }
 }

@@ -16,7 +16,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  grid-column: 1;
+  grid-column: 1 / span 3;
   grid-row: 1;
   margin-top: 20px;
   margin-left: 0px;
@@ -32,7 +32,7 @@ const Title = styled.h1`
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 5px;
-  opacity: 0.9;
+  opacity: 1;
   @media only screen and (max-width: 700px){
     font-size: 30px
   }

@@ -21,11 +21,14 @@ const ButtonBlue = styled.button`
   height: 35px;
   border-bottom: 2px solid #003068;
   border: 2px transparent;
-  border-radius: 5px;
+  border-radius: 0px;
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   opacity: ${props => (props.disabled ? 0.4 : 1)};
   background: #66A3E0;
   transition: all 0.3s ease;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+  }
 `;
 
 const Container = styled.div`
@@ -41,17 +44,38 @@ const Container = styled.div`
   align-content: top;
   flex-direction: column;
   grid-column: 2;
-  grid-row: 4 / span 3;
+  grid-row: 5 / span 2;
   margin-top: 30px;
   margin-left: 20px;
+  max-width: 400px;
+  min-width: 325px;
+  @media only screen and (max-width: 1100px){
+      grid-column: 1;
+      grid-row: 7;
+  }
+  @media only screen and (max-width: 500px){
+    min-width: 225px;
+  }
 `;
 
 const Text = styled.div`
   font-weight: bold;
   font-size: 25px;
-  padding-left: 15px;
+  padding-left: 10px;
+  padding-top: 5px;
   grid-row: 1;
   background: #66A3E066;
+  font-size: 25px;
+  letter-spacing: 0.15em;
+  line-height: 1em;
+  text-transform: uppercase;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+    padding-top: 10px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 20px
+  }
 `;
 
 const ChatContainer = styled.div`
@@ -229,7 +253,7 @@ class ChatboxFriends extends React.Component {
                 </ChatContainer>}
                 <UserChatContainer>
                     <InputField
-                        placeholder="Enter your message"
+                        placeholder="Enter your message..."
                         value={this.state.message}
                         onChange={e => {
                             this.handleInputChange('message', e.target.value);

@@ -16,7 +16,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   grid-row: 1;
   margin-top: 20px;
   margin-left: 20px;

@@ -19,6 +19,12 @@ const Container = styled.div`
   align-content: left;
   margin-top: 15px;
   justify-content: left;
+  @media only screen and (max-width: 1220px){
+    grid-column-gap: 10px;
+  }
+  @media only screen and (max-width: 500px){
+    grid-column-gap: 8px;
+  }
 `;
 
 const AvatarContainer = styled.div`
@@ -26,6 +32,10 @@ const AvatarContainer = styled.div`
   grid-row: 1 / span 2;
   width: 70px;
   height: 70px;
+  @media only screen and (max-width: 500px){
+      width: 45px;
+      height: 45px;
+  }
 `;
 
 const Title = styled.div`
@@ -36,6 +46,14 @@ const Title = styled.div`
   grid-column: 2;
   grid-row: 1;
   width: 200px;
+  @media only screen and (max-width: 700px){
+    font-size: 13px
+    min-width: 300px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 11px
+    min-width: 200px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -51,17 +69,42 @@ const ImageContainer= styled.div`
   align-items: right;
   grid-column: 3;
   grid-row: 1 / span 2;
+  height: 70px;
+  width: 70px;
+  @media only screen and (max-width: 700px){
+    width: 55px;
+    height: 55px;
+  }
+  @media only screen and (max-width: 500px){
+    width: 45px;
+    height: 45px;
+  }
 `;
 
-const ProfilePageButton = styled(Button)`
+const ProfilePageButton = styled.button`
   background: transparent;
   font-weight: normal;
-  font-size: normal;
-  border: 0px solid black;
+  font-size: 13px;
+  border: 0px solid transparent;
   border-radius: 1px;
   color: black;
   padding-left: 0px;
   text-align: left;
+  max-width: 200px;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+    border: 0px solid transparent;
+  }
+  &:hover {
+    transform: translateY(-2px);
+  }
+  text-transform: uppercase;
+  width: ${props => props.width || null};
+  height: 35px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  transition: all 0.3s ease;
 `;
 
 const imgStyle = {
@@ -104,7 +147,7 @@ class ProfilePageListItemNarrow extends React.Component{
                     </ProfilePageButton>
                 </ButtonContainer>
                 <ImageContainer>
-                        <img src={FriendAdded} alt="FriendAdded" height="72px" width="72px"/>
+                        <img src={FriendAdded} alt="FriendAdded" height="100%" width="100%"/>
                 </ImageContainer>
             </Container>
         )

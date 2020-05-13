@@ -24,11 +24,20 @@ const Container = styled.div`
   align-content: left;
   margin-top: 15px;
   justify-content: left;
+  @media only screen and (max-width: 700px){
+    grid-column-gap: 8px
+  }
 `;
 
 const IconContainer = styled.div`
   grid-column: 1;
   grid-row: 1 / span 2;
+  height: 70px;
+  width: 70px;
+  @media only screen and (max-width: 500px){
+    height: 45px;
+    width:45px;
+  }
 `;
 
 const Title = styled.div`
@@ -38,7 +47,15 @@ const Title = styled.div`
   line-height: 1.1em;
   grid-column: 2;
   grid-row: 1;
-  min-width: 400px;
+  min-width: 350px;
+  @media only screen and (max-width: 700px){
+    font-size: 13px
+    min-width: 250px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 11px
+    min-width: 200px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -54,17 +71,40 @@ const ImageContainer= styled.div`
   align-items: right;
   grid-column: 3;
   grid-row: 1 / span 2;
+  height: 42.375px;
+  width: 47.325px;
+  @media only screen and (max-width: 500px){
+    height: 31.8px;
+    width: 35.5px;
+  }
 `;
 
-const InfoPageButton = styled(Button)`
+const InfoPageButton = styled.button`
   background: transparent;
   font-weight: normal;
-  font-size: normal;
-  border: 0px solid black;
+  font-size: 13px;
+  border: 0px solid transparent;
   border-radius: 1px;
   color: black;
   padding-left: 0px;
   text-align: left;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+    border: 0px solid transparent;
+  }
+  @media only screen and (max-width: 400px){
+    font-size: 8px;
+  }
+  &:hover {
+    transform: translateY(-2px);
+  }
+  text-transform: uppercase;
+  width: ${props => props.width || null};
+  height: 35px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  transition: all 0.3s ease;
 `;
 
 export default class LocationListItemProfilePage extends React.Component{
@@ -114,7 +154,7 @@ export default class LocationListItemProfilePage extends React.Component{
         return (
             <Container>
                 <IconContainer>
-                    <img src={this.getImage()} alt={this.getTypeAsString()} width="60px" height="60px"/>
+                    <img src={this.getImage()} alt={this.getTypeAsString()} width="100%" height="100%"/>
                 </IconContainer>
                 <Title>{this.getTypeAsString()} - {this.props.location.address}</Title>
                 <ButtonContainer>
@@ -126,7 +166,7 @@ export default class LocationListItemProfilePage extends React.Component{
                     </InfoPageButton>
                 </ButtonContainer>
                 <ImageContainer>
-                        <img src={HeartRed} alt="Heart Full" height="42.375px" width="47.325px"/>
+                        <img src={HeartRed} alt="Heart Full" height="100%" width="100%"/>
                 </ImageContainer>
             </Container>
         )

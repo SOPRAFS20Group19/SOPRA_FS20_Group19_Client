@@ -34,6 +34,12 @@ const Title = styled.h1`
   text-transform: uppercase;
   letter-spacing: 5px;
   opacity: 0.9;
+  @media only screen and (max-width: 900px){
+    font-size: 30px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 20px
+  }
 `;
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.

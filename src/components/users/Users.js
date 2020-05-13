@@ -48,11 +48,20 @@ const MainContainer = styled.div`
 
 const Title = styled.div`
   font-weight: bolder;
-  font-size: 30px;
+  font-size: 25px;
   letter-spacing: 0.1em;
   line-height: 1.1em;
   grid-column: 1;
   grid-row: 1;
+  text-align: center;
+  @media only screen and (max-width: 900px){
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -74,6 +83,17 @@ const SearchBar = styled.input`
   border: 2px solid #003068;
   background: white;
   color: #000000;
+  @media only screen and (max-width: 700px){
+    font-size: 15px;
+    margin-left: 15px;
+    max-width: 300px;
+    height: 25px;
+    padding-left: 5px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 12px;
+    max-width: 200px;
+  }
 `;
 
 const Button2 = styled.button`
@@ -165,7 +185,7 @@ class Users extends React.Component{
                 <Title>Find other people to get to Know Your City with!</Title>
                 <SearchContainer>
                     <SearchBar
-                        placeholder="Search other users by their username"
+                        placeholder="Search other users..."
                         onChange={e => {this.handleInputChange('searchValue', e.target.value);}}
                     />
                     <ButtonContainer>
@@ -207,12 +227,14 @@ class Users extends React.Component{
                                         </UserContainer>
                                     );
                                 }
-                                else if (user.username.includes(this.state.searchValue) && user.id != localStorage.getItem("userId")){
-                                    return (
-                                        <UserContainer key={user.id}>
-                                            <UserListItem user={user} goToProfile={this.goToProfile.bind(this)}/>
-                                        </UserContainer>
-                                    );
+                                else if (this.state.searchValue !== null){
+                                    if (user.username.toLowerCase().includes(this.state.searchValue.toLowerCase()) && user.id != localStorage.getItem("userId")){
+                                        return (
+                                            <UserContainer key={user.id}>
+                                                <UserListItem user={user} goToProfile={this.goToProfile.bind(this)}/>
+                                            </UserContainer>
+                                        );
+                                    }
                                 }
                             })}
                         </UsersList>

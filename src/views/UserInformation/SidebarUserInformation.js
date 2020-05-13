@@ -23,12 +23,28 @@ const Container = styled.div`
   right: 0;
   flex-direction: column;
   grid-row: ${props => props.column};
+  @media only screen and (max-width: 800px){
+    width: 100%;
+    height: 10%;
+    position: absolute;
+    top: 90%;
+    flex-direction: row;
+    background: white;
+    opacity: 1;
+    &:hover {
+    opacity: 1;
+    background: white;
+  }
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 15px;
+  @media only screen and (max-width: 800px){
+      margin-top: 0px;
+      margin-left: 15px;
 `;
 
 const HoverContainer = styled.div`
@@ -42,6 +58,9 @@ const HoverContainer = styled.div`
   padding-left: 5px;
   padding-right: 5px;
   width: 100%;
+  @media only screen and (max-width: 800px){
+    color: black;
+  }
 `;
 
 class Sidebar extends React.Component{

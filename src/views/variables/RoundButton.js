@@ -18,4 +18,17 @@ export const RoundButton = styled.button`
   opacity: ${props => (props.disabled ? 0.4 : 1)};
   background: rgb(16, 89, 255);
   transition: all 0.3s ease;
+  @media only screen and (max-width: 900px){
+    font-size: 10px;
+    width: 80px;
+    height: 80px;
+  }
+  @media only screen and (max-width: 800px){
+    width: 70px;
+    height: 70px;
+  }
+  @media only screen and (max-width: 500px){
+    width: 60px;
+    height: 60px;
+  }
 `;

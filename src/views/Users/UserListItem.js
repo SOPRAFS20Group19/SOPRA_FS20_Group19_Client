@@ -20,6 +20,9 @@ const Container = styled.div`
   align-content: left;
   margin-top: 15px;
   justify-content: left;
+  @media only screen and (max-width: 700px){
+    max-width: 90%;
+  }
 `;
 
 const AvatarContainer = styled.div`
@@ -31,6 +34,14 @@ const AvatarContainer = styled.div`
   grid-template-columns: auto auto;
   grid-template-rows: auto;
   grid-column-gap: 0px;
+  @media only screen and (max-width: 700px){
+    width: 55px;
+    height: 55px;
+  }
+  @media only screen and (max-width: 500px){
+    width: 45px;
+    height: 45px;
+  }
 `;
 
 const Title = styled.div`
@@ -40,15 +51,27 @@ const Title = styled.div`
   line-height: 1.1em;
   grid-column: 2;
   grid-row: 1;
-  min-width: 400px;
+  min-width: 350px;
+  @media only screen and (max-width: 700px){
+    min-width: 250px;
+    font-size: 12.5px;
+  }
+  @media only screen and (max-width: 500px){
+    min-width: 150px;
+  }
 `;
 
 const ButtonContainer = styled.div`
   font-weight: normal;
-  font-size: normal;
-  width: 100%;
+  max-width: 350px;
   grid-column: 2;
   grid-row: 2;
+  @media only screen and (max-width: 700px){
+    max-width: 250px;
+  }
+  @media only screen and (max-width: 500px){
+    max-width: 150px;
+  }
 `;
 
 const ImageContainer= styled.div`
@@ -56,17 +79,41 @@ const ImageContainer= styled.div`
   align-items: right;
   grid-column: 3;
   grid-row: 1 / span 2;
+  height: 70px;
+  width: 70px;
+  @media only screen and (max-width: 700px){
+    width: 55px;
+    height: 55px;
+  }
+  @media only screen and (max-width: 500px){
+    width: 45px;
+    height: 45px;
+  }
 `;
 
-const ProfilePageButton = styled(Button)`
+const ProfilePageButton = styled.button`
   background: transparent;
   font-weight: normal;
-  font-size: normal;
-  border: 0px solid black;
+  font-size: 13px;
+  border: 0px solid transparent;
   border-radius: 1px;
   color: black;
   padding-left: 0px;
   text-align: left;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+    border: 0px solid transparent;
+  }
+  &:hover {
+    transform: translateY(-2px);
+  }
+  text-transform: uppercase;
+  width: ${props => props.width || null};
+  height: 35px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  transition: all 0.3s ease;
 `;
 
 const NotificationContainer= styled.div`
@@ -80,6 +127,7 @@ const NotificationContainer= styled.div`
   @media only screen and (max-width: 500px){
     height: 15px;
     width: 15px;
+  }
 `;
 
 const imgStyle = {
@@ -203,13 +251,13 @@ class UserListItem extends React.Component{
                 </ButtonContainer>
                 <ImageContainer>
                     {this.state.isFriend === false ?
-                        <img src={AddFriend} alt="Add Friend" height="72px" width="72px"
+                        <img src={AddFriend} alt="Add Friend" height="100%" width="100%"
                              onClick={() => {
                                  this.changeColor(true);
                              }}
                         />
                         :
-                        <img src={FriendAdded} alt="FriendAdded" height="72px" width="72px"
+                        <img src={FriendAdded} alt="FriendAdded" height="100%" width="100%"
                              onClick={() => {
                                  this.changeColor(false);
                              }}

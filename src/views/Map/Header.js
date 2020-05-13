@@ -10,7 +10,7 @@ import { ReactLogo } from "../variables/ReactLogo";
  */
 const Container = styled.div`
   height: 10%;
-  width: 100%;
+  width: 50%;
   background: transparent;
   display: flex;
   justify-content: center;
@@ -18,8 +18,12 @@ const Container = styled.div`
   opacity: 1;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 25%;
   padding-top: 10px;
+  @media only screen and (max-width: 700px){
+    width: 75%;
+    left: 12.5%;
+  }
 `;
 
 const Title = styled.h1`
@@ -29,6 +33,12 @@ const Title = styled.h1`
   text-transform: uppercase;
   letter-spacing: 5px;
   opacity: 0.9;
+  @media only screen and (max-width: 900px){
+    font-size: 30px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 20px
+  }
 `;
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.

@@ -26,19 +26,33 @@ const Container = styled.div`
   grid-column: 2;
   grid-row: 3 /span 4;
   margin-top: 10px;
+  @media only screen and (max-width: 900px){
+    margin-left: 20px;
+  }
   @media only screen and (max-width: 700px){
     width: 90%;
+    margin-left: 20px;
   }
   @media only screen and (max-width: 500px){
-    width: 80%
+    width: 80%;
+    margin-left: 20px;
   }
 
 `;
 
 const Text = styled.div`
-  font-weight: bold;
-  font-size: large;
   flex-direction: row;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  @media only screen and (max-width: 700px){
+    font-size: 15px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const PictureContainer = styled.div`

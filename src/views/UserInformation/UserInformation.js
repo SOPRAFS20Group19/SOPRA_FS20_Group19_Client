@@ -20,6 +20,10 @@ const Container = styled.div`
   margin-top: 20px;
   grid-template-columns: auto;
   grid-template-rows: auto auto auto auto auto;
+  @media only screen and (max-width: 800px){
+    min-width: 0px;
+    max-width: 90%;
+  }
 `;
 
 const GridContainer =styled.div`
@@ -30,7 +34,7 @@ const GridContainer =styled.div`
   grid-template-rows: auto;
   justify-content: left;
   align-content: center;
-  grid-column-gap: 20px;
+  grid-column-gap: 0px;
   grid-column: 1;
   grid-row: ${props => props.row};
   font-size: x-large;
@@ -75,9 +79,6 @@ const Text = styled.div`
     font-size: 15px
   }
 `;
-
-
-
 
 const ButtonContainer = styled.div`
   justify-content: left;

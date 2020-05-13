@@ -22,11 +22,14 @@ const ButtonBlue = styled.button`
   height: 35px;
   border-bottom: 2px solid #003068;
   border: 2px transparent;
-  border-radius: 5px;
+  border-radius: 0px;
   cursor: ${props => (props.disabled ? "default" : "pointer")};
   opacity: ${props => (props.disabled ? 0.4 : 1)};
   background: #66A3E0;
   transition: all 0.3s ease;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+  }
 `;
 
 const Button = styled.button`
@@ -80,7 +83,8 @@ const Text = styled.div`
   line-height: 1em;
   text-transform: uppercase;
   @media only screen and (max-width: 700px){
-    font-size: 20px
+    font-size: 20px;
+    padding-top: 10px;
   }
   @media only screen and (max-width: 500px){
     font-size: 20px
@@ -237,7 +241,7 @@ class Chatbox extends React.Component {
                 </ChatContainer>}
                 <UserChatContainer>
                     <InputField
-                        placeholder="Enter your message here"
+                        placeholder="Enter your message..."
                         value={this.state.message}
                         onChange={e => {
                             this.handleInputChange('message', e.target.value);

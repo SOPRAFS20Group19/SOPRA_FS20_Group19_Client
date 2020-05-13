@@ -32,6 +32,9 @@ const Username = styled.div`
   font-weight: bold;
   font-size: 15px;
   letter-spacing: 0.2em;
+  @media only screen and (max-width: 500px){
+    font-size: 12.5px
+  }
 `;
 
 const Text = styled.div`
@@ -39,6 +42,9 @@ const Text = styled.div`
   font-size: 15px;
   grid-column: 1;
   grid-row: 2;
+  @media only screen and (max-width: 500px){
+    font-size: 12.5px
+  }
 `;
 
 const Timestamp = styled.div`
@@ -48,6 +54,9 @@ const Timestamp = styled.div`
   grid-column: 2;
   grid-row: 2;
   padding-right: 15px;
+  @media only screen and (max-width: 500px){
+    font-size: 12.5px
+  }
 `;
 
 const Delete = styled.div`

@@ -39,6 +39,19 @@ const Container = styled.div`
   top: 0;
   right: 0;
   flex-direction: column;
+  @media only screen and (max-width: 800px){
+    width: 100%;
+    height: 10%;
+    position: absolute;
+    bottom: 0%;
+    flex-direction: row;
+    background: white;
+    opacity: 1;
+    &:hover {
+    opacity: 1;
+    background: white;
+  }
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -58,6 +71,9 @@ const HoverContainer = styled.div`
   padding-left: 5px;
   padding-right: 5px;
   width: 100%;
+  @media only screen and (max-width: 800px){
+    color: black;
+  }
 `;
 
 const imgStyle = {

@@ -21,7 +21,7 @@ const MainContainer =styled.div`
   flex-direction: row;
   width: 100%;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto 10%;
   grid-template-rows: auto auto auto auto;
   justify-content: center;
   grid-column-gap: 30px;
@@ -31,6 +31,13 @@ const MainContainer =styled.div`
   
   @media only screen and (max-width: 900px){
     max-width: 800;
+    display: block;
+  }
+  @media only screen and (max-width: 800px){
+    height: 90%
+    position: absolute;
+    top: 0;
+    overflow: scroll;
   }
   @media only screen and (max-width: 500px){
     max-width: 600;
@@ -93,12 +100,11 @@ class UserProfile extends React.Component {
 
     render(){
         return(
-            <BaseContainer>
+            <div>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                         <MainContainer>
                             <TitleProfile/>
                             <UserHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
-                            <SidebarUserInformation column={3}/>
                             <UserInformation
                                 username={this.state.loggedInUser.username}
                                 name={this.state.loggedInUser.name}
@@ -108,7 +114,8 @@ class UserProfile extends React.Component {
                             <FriendsUser userId={this.state.loggedInUserId}/>
                         </MainContainer>
                 ) }
-            </BaseContainer>
+                <SidebarUserInformation column={3}/>
+            </div>
         )
     }
 }

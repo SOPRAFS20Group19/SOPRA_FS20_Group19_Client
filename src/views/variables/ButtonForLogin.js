@@ -19,4 +19,10 @@ export const ButtonForLogin = styled.button`
   opacity: ${props => (props.disabled ? 0.4 : 1)};
   background: #003068;
   transition: all 0.3s ease;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+    padding: 3px;
+    border: 1.5px solid #003068;
+  }
 `;

@@ -25,6 +25,15 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
+const MapContainer = styled.div`
+  height: 100vh;
+  width: 100vm;
+  @media only screen and (max-width: 800px){
+    height: 90vh;
+    width: 100vm;
+  }
+`;
+
 class Map extends React.Component{
     constructor(props){
         super(props);
@@ -180,7 +189,7 @@ class Map extends React.Component{
                 />
                 Loading Map...
             </Button>
-            </Container>) : (<div style={{ width: "100vw", height: "100vh" }}>
+            </Container>) : (<MapContainer>
             <MapService
                 currentLocation = {this.state.currentPosition}
                 currentCenter = {this.state.currentCenter}
@@ -192,7 +201,7 @@ class Map extends React.Component{
                 loggedInUser={this.state.loggedInUser}
             >
             </MapService>
-            </div>)}
+            </MapContainer>)}
             <Header/>
             <Sidebar centerMapAtCurrentLocation={this.centerMapAtCurrentLocation.bind(this)} getFilteredLocations={this.getFilteredLocations.bind(this)} avatarNr={this.state.loggedInUser.avatarNr}/>
         </div>
