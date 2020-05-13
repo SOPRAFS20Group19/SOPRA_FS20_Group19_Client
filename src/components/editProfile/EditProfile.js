@@ -18,18 +18,37 @@ const MainContainer = styled.div`
   grid-template-rows: auto auto auto auto auto auto auto;
   justify-content: center;
   grid-column-gap: 30px;
+    @media only screen and (max-width: 1215px){
+    grid-column-gap: 10px;
+  }
+  
+  @media only screen and (max-width: 900px){
+    max-width: 800;
+    display: block;
+  }
+  @media only screen and (max-width: 500px){
+    max-width: 500;
+    display: block;
+  }
 `;
 
 
 const Container = styled.div`
-margin-top: 10px;
-width: 100%;
-display: flex;
-justify-content: top;
-align-items: left;
-flex-direction: column;
-margin-left: 20px;
-grid-column: ${props => props.column};
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: top;
+  align-items: left;
+  flex-direction: column;
+  margin-left: 20px;
+  grid-column: ${props => props.column};
+  @media only screen and (max-width: 700px){
+    width: 90%;
+  }
+  @media only screen and (max-width: 500px){
+    width: 80%
+  }
+
 `;
 
 
@@ -57,6 +76,12 @@ const Title = styled.div`
   font-weight: bold;
   font-size: large;
   flex-direction: row;
+  @media only screen and (max-width: 700px){
+    font-size: 20px
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const ErrorMessage = styled.div`

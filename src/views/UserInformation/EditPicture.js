@@ -26,6 +26,12 @@ const Container = styled.div`
   grid-column: 2;
   grid-row: 3 /span 4;
   margin-top: 10px;
+  @media only screen and (max-width: 700px){
+    width: 90%;
+  }
+  @media only screen and (max-width: 500px){
+    width: 80%
+  }
 
 `;
 
