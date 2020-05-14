@@ -66,6 +66,9 @@ const Container = styled.div`
   margin-left: 20px;
   max-width: 400px;
   min-width: 325px;
+  @media only screen and (max-width: 900px){
+    margin-bottom: 15px;
+  }
   @media only screen and (max-width: 500px){
     min-width: 225px;
   }
@@ -178,6 +181,7 @@ class Chatbox extends React.Component {
             const response = await api.get(url);
 
             this.setState({oldMessages: response.data.reverse()});
+            this.timeout = setTimeout(() => {this.getChat()}, 5000);
         } catch (e) {
             alert(`Something went wrong while getting the chat: \n${handleError(e)}`);
         }
@@ -185,6 +189,10 @@ class Chatbox extends React.Component {
 
     componentDidMount(){
         this.getChat();
+    }
+
+    componentWillUnmount(): void {
+        clearTimeout(this.timeout);
     }
 
     handleInputChange(key, value) {
@@ -218,7 +226,7 @@ class Chatbox extends React.Component {
 
     render() {
         return ( <Container>
-            <Text>Comments</Text>
+            <Text>Chat</Text>
                 {!this.state.oldMessages ? <EmptyChatContainer/> :
                 <ChatContainer>
                     <MessagesList>

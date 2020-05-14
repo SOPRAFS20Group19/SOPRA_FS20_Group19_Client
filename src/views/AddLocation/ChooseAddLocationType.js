@@ -22,6 +22,9 @@ const MainContainer =styled.div`
   grid-template-columns: auto;
   grid-template-rows: auto auto auto auto auto;
   justify-content: center;
+  @media only screen and (max-width: 800px){
+    overflow: scroll;
+  }
 `;
 
 const QuestionContainer = styled.div`
@@ -34,12 +37,21 @@ const QuestionContainer = styled.div`
 `;
 
 const Question = styled.div`
+  margin-top: 15px;
   font-weight: bolder;
   font-size: 30px;
-  margin-left: 0px;
   letter-spacing: 0.2em;
   line-height: 1.1em;
-  margin-top: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const ButtonContainerFountainCircle = styled.div`
@@ -119,27 +131,28 @@ class ChooseAddLocationType extends React.Component {
 
     render(){
         return(
+            <div>
+            <SidebarAddLocation avatarNr={localStorage.getItem("userAvatar")}/>
             <MainContainer>
-                <SidebarAddLocation avatarNr={localStorage.getItem("userAvatar")}/>
                 <QuestionContainer>
                     <Question>What location type do you want to add?</Question>
                 </QuestionContainer>
                 <ButtonContainer>
                     <ButtonContainerFountainCircle>
                         <RoundButton>
-                            <img src={FountainCircle} alt={"FOUNTAIN"} width="96px" height="96px"
+                            <img src={FountainCircle} alt={"FOUNTAIN"} width="100%" height="100%"
                                  onClick={() => {this.props.setLocationType("FOUNTAIN");}}/>
                         </RoundButton>
                     </ButtonContainerFountainCircle>
                     <ButtonContainerFireplaceCircle>
                         <RoundButton>
-                            <img src={FireplaceCircle} alt={"FIREPLACE"} width="96px" height="96px"
+                            <img src={FireplaceCircle} alt={"FIREPLACE"} width="100%" height="100%"
                                  onClick={() => {this.props.setLocationType("FIREPLACE");}}/>
                         </RoundButton>
                     </ButtonContainerFireplaceCircle>
                     <ButtonContainerRecyclingCircle>
                         <RoundButton>
-                            <img src={RecyclingCircle} alt={"RECYCLING_STATION"} width="96px" height="96px"
+                            <img src={RecyclingCircle} alt={"RECYCLING_STATION"} width="100%" height="100%"
                                  onClick={() => {this.props.setLocationType("RECYCLING_STATION");}}/>
                         </RoundButton>
                     </ButtonContainerRecyclingCircle>
@@ -147,24 +160,25 @@ class ChooseAddLocationType extends React.Component {
                 <ButtonContainer2>
                 <ButtonContainerToiletCircle>
                     <RoundButton>
-                        <img src={ToiletCircle} alt={"TOILET"} width="96px" height="96px"
+                        <img src={ToiletCircle} alt={"TOILET"} width="100%" height="100%"
                              onClick={() => {this.props.setLocationType("TOILET");}}/>
                     </RoundButton>
                     </ButtonContainerToiletCircle>
                     <ButtonContainerTableTennisCircle>
                         <RoundButton>
-                            <img src={TableTennisCircle} alt={"TABLE_TENNIS"} width="96px" height="96px"
+                            <img src={TableTennisCircle} alt={"TABLE_TENNIS"} width="100%" height="100%"
                                  onClick={() => {this.props.setLocationType("TABLE_TENNIS");}}/>
                         </RoundButton>
                     </ButtonContainerTableTennisCircle>
                     <ButtonContainerBenchCircle>
                         <RoundButton>
-                            <img src={BenchCircle} alt={"BENCH"} width="96px" height="96px"
+                            <img src={BenchCircle} alt={"BENCH"} width="100%" height="100%"
                                  onClick={() => {this.props.setLocationType("BENCH");}}/>
                         </RoundButton>
                     </ButtonContainerBenchCircle>
                 </ButtonContainer2>
-            </MainContainer>)
+            </MainContainer>
+            </div>)
     }
 }
 

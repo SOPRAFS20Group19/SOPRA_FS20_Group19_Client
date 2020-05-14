@@ -5,15 +5,26 @@ import Spinner from "react-bootstrap/Spinner";
 import {ButtonYesNo} from "./ButtonYesNo";
 import {Button} from "../variables/Button";
 import styled from "styled-components";
+import {RoundButton} from "../variables/RoundButton";
 
 const MainContainer =styled.div`
   color: black;
-  flex-direction: row;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto auto;
+  flex-direction: column;
+  max-height: 93%;
+  overflow: scroll;
+  width: 80%;
+  left: 10%;
+  display: block;
   justify-content: center;
+  position: absolute;
+  top: 7%;
+  @media only screen and (max-width: 800px){
+    display: block;
+    max-height: 83%;
+    overflow: scroll;
+    width: 100%;
+    left: 0%;
+  }
 `;
 
 const QuestionContainer = styled.div`
@@ -26,12 +37,21 @@ const QuestionContainer = styled.div`
 `;
 
 const Question = styled.div`
+  margin-top: 15px;
   font-weight: bolder;
   font-size: 30px;
-  margin-left: 0px;
   letter-spacing: 0.2em;
   line-height: 1.1em;
-  margin-top: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -46,6 +66,34 @@ const ImageContainer = styled.div`
   grid-column: 1;
   grid-row: 3;
   margin-top: 15px;
+`;
+
+const Picture = styled.div`
+  height: 110px;
+  width: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 15px;
+  @media only screen and (max-width: 900px){
+    font-size: 10px;
+    width: 95px;
+    height: 95px;
+  }
+  @media only screen and (max-width: 800px){
+    width: 90px;
+    height: 90px;
+  }
+  @media only screen and (max-width: 500px){
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 const Container2 = styled.div`
@@ -133,24 +181,45 @@ const Title = styled.div`
   font-weight: bold;
   font-size: x-large;
   flex-direction: row;
+  letter-spacing: 0.2em;
+  line-height: 1.1em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
-const InputFieldBaujahr = styled.input`
+const InputField = styled.input`
   &::placeholder {
     color: black;
   }
   height: 35px;
-  width: 35%;
+  width: 40%;
   border: 2px solid #003068;
   border-color: #66A3E0;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+  }
 `;
 
 const InfoSchrift = styled.div`
   font-weight: normal;
-  font-size: large;
+  font-size: 20px;
   flex-direction: row;
+  @media only screen and (max-width: 700px){
+    font-size: 15px;
+  }
 `;
 
 const ButtonContainerYesNo = styled.div`
@@ -179,6 +248,9 @@ const ErrorMessage = styled.div`
   flex-direction: row;
   color: red;
   margin-top: 5px;
+  @media only screen and (max-width: 700px){
+    font-size: small;
+  }
 `;
 
 function ValidationMessage(props) {
@@ -197,13 +269,16 @@ class AddBench extends React.Component {
 
     render(){
         return(
+            <div>
+            <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
             <MainContainer>
-                <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
                 <QuestionContainer>
                     <Question>Location information: </Question>
                 </QuestionContainer>
                 <ImageContainer>
-                    <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="96px" height="96px"/>
+                    <Picture>
+                    <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%" height="100%"/>
+                    </Picture>
                 </ImageContainer>
                 <Container2>
                     <Title>Coordinates</Title>
@@ -214,8 +289,8 @@ class AddBench extends React.Component {
                 </Container2>
                 <Container3>
                     <Title>View (1-5)? </Title>
-                    <InputFieldBaujahr
-                        placeholder="enter number between 1 and 5"
+                    <InputField
+                        placeholder="Enter number between 1-5"
                         onChange={e => {
                             this.props.updateView(e.target.value);
                         }}
@@ -224,8 +299,8 @@ class AddBench extends React.Component {
                 </Container3>
                 <Container4>
                     <Title>Peace (1-5)? </Title>
-                    <InputFieldBaujahr
-                        placeholder="enter number between 1 and 5"
+                    <InputField
+                        placeholder="Enter number between 1-5"
                         onChange={e => {
                             this.props.updatePeace(e.target.value);
                         }}
@@ -234,8 +309,8 @@ class AddBench extends React.Component {
                 </Container4>
                 <Container5>
                     <Title>Romantics (1-5)? </Title>
-                    <InputFieldBaujahr
-                        placeholder="enter number between 1 and 5"
+                    <InputField
+                        placeholder="Enter number between 1-5"
                         onChange={e => {
                             this.props.updateRomantics(e.target.value);
                         }}
@@ -244,8 +319,8 @@ class AddBench extends React.Component {
                 </Container5>
                 <Container6>
                     <Title>Comfort (1-5)? </Title>
-                    <InputFieldBaujahr
-                        placeholder="enter number between 1 and 5"
+                    <InputField
+                        placeholder="Enter number between 1-5"
                         onChange={e => {
                             this.props.updateComfort(e.target.value);
                         }}
@@ -265,7 +340,8 @@ class AddBench extends React.Component {
                         </Button>
                     </ButtonContainer>
                 </Container7>
-            </MainContainer>)
+            </MainContainer>
+            </div>)
     }
 }
 export default withRouter(AddBench);

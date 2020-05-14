@@ -18,4 +18,10 @@ export const ButtonYesNo = styled.button`
   opacity: 1;
   background: ${props => (props.disabled ? "#003068" : "#66A3E0")};
   transition: all 0.3s ease;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+    padding: 3px;
+    border: ${props => (props.disabled ? "1.5px solid #66A3E0" : "1.5px solid #003068")};
+  }
 `;

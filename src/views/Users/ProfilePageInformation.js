@@ -199,7 +199,7 @@ const GridContainer =styled.div`
   grid-template-rows: auto;
   justify-content: left;
   align-content: center;
-  grid-column-gap: 20px;
+  grid-column-gap: 10px;
   grid-column: 1;
   grid-row: ${props => props.row};
   font-size: x-large;

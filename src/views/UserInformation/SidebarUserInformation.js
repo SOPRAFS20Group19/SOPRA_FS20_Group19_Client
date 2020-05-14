@@ -11,23 +11,57 @@ const Container = styled.div`
     opacity: 0.9;
     background: #003068;
   }
-  height: 100%;
+  padding: 10px;
+  padding-bottom: 15px;
   width: 10%;
+  height: 100%;
   background: #66A3E0;
   display: flex;
   justify-content: top;
   align-items: center;
   opacity: 0.4;
   position: absolute;
-  top: 0;
   right: 0;
   flex-direction: column;
-  grid-row: ${props => props.column};
   @media only screen and (max-width: 800px){
     width: 100%;
-    height: 10%;
+    height: 12%;
     position: absolute;
-    top: 90%;
+    bottom: 0%;
+    flex-direction: row;
+    background: white;
+    opacity: 0;
+    &:hover {
+    opacity: 0;
+    background: white;
+  }
+  }
+  @media only screen and (min-width: 800px){
+    top: 0;
+  }
+`;
+
+const Container2 = styled.div`
+  &:hover {
+    opacity: 0;
+    background: #003068;
+  }
+  padding: 10px;
+  padding-bottom: 15px;
+  min-width: 10%;
+  background: #66A3E0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0;
+  position: absolute;
+  bottom: 0%;
+  flex-direction: column;
+  @media only screen and (max-width: 800px){
+    width: 100%;
+    height: 12%;
+    position: absolute;
+    bottom: 0%;
     flex-direction: row;
     background: white;
     opacity: 1;
@@ -35,6 +69,9 @@ const Container = styled.div`
     opacity: 1;
     background: white;
   }
+  }
+  @media only screen and (min-width: 800px){
+    top: 0;
   }
 `;
 
@@ -44,7 +81,15 @@ const ButtonContainer = styled.div`
   margin-top: 15px;
   @media only screen and (max-width: 800px){
       margin-top: 0px;
-      margin-left: 15px;
+      margin-left: 0px;
+`;
+
+const ButtonContainerPopup = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  @media only screen and (max-width: 800px){
+      margin-top: 10px;
 `;
 
 const HoverContainer = styled.div`
@@ -58,8 +103,11 @@ const HoverContainer = styled.div`
   padding-left: 5px;
   padding-right: 5px;
   width: 100%;
+  align-self: center;
   @media only screen and (max-width: 800px){
     color: black;
+    margin-bottom: 20px;
+    font-size: 10px;
   }
 `;
 
@@ -81,6 +129,7 @@ class Sidebar extends React.Component{
 
     render() {
         return (
+            <div>
             <Container>
                 <ButtonContainer>
                     <RoundButton
@@ -96,6 +145,24 @@ class Sidebar extends React.Component{
                 </ButtonContainer>
                 {this.state.showReturnHover ? <HoverContainer>Return to map</HoverContainer> : null}
             </Container>
+                <Container2>
+                    <div>
+                    <ButtonContainer>
+                        <RoundButton
+                            width="75%"
+                            onMouseOver={() => this.toggleShowReturnHover(true)}
+                            onMouseLeave={() => this.toggleShowReturnHover(false)}
+                            onClick={() => {
+                                this.returnToPage();
+                            }}
+                        >
+                            <img src={LogoutIcon}/>
+                        </RoundButton>
+                    </ButtonContainer>
+                    {this.state.showReturnHover ? <HoverContainer>Return to map</HoverContainer> : null}
+                    </div>
+                </Container2>
+            </div>
         );
     }
 }

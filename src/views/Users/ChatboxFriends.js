@@ -52,6 +52,7 @@ const Container = styled.div`
   @media only screen and (max-width: 1100px){
       grid-column: 1;
       grid-row: 7;
+      margin-bottom: 15px;
   }
   @media only screen and (max-width: 500px){
     min-width: 225px;
@@ -195,7 +196,6 @@ class ChatboxFriends extends React.Component {
     }
 
     componentWillUnmount(): void {
-        console.log("I am unmounting");
         clearTimeout(this.timeout);
     }
 

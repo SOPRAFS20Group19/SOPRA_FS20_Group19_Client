@@ -50,14 +50,14 @@ const Title = styled.div`
   line-height: 1.1em;
   grid-column: 2;
   grid-row: 1;
-  min-width: 400px;
+  width: 350px;
   @media only screen and (max-width: 700px){
     font-size: 13px
-    min-width: 300px;
+    width: 250px;
   }
   @media only screen and (max-width: 500px){
     font-size: 11px
-    min-width: 200px;
+    width: 200px;
   }
 `;
 

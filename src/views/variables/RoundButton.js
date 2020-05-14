@@ -26,6 +26,9 @@ export const RoundButton = styled.button`
   @media only screen and (max-width: 800px){
     width: 70px;
     height: 70px;
+    &:hover {
+    transform: translateY(0px);
+  }
   }
   @media only screen and (max-width: 500px){
     width: 60px;

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../../views/variables/Button';
 import {Checkbox} from '../../views/Filter/Checkbox';
+import {ButtonForLogin} from "../../views/variables/ButtonForLogin";
 
 const Container = styled.div`
   height: flex;
@@ -15,12 +16,33 @@ const Container = styled.div`
   top: 18%;
   right: 10%;
   flex-direction: column;
+  @media only screen and (max-width: 800px){
+    height: 50%;
+    width: 100%
+    overflow: scroll;
+    position: absolute;
+    top: 38%;
+    right: 0%;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: left;
   margin-bottom: 10px;
+  flex-direction: column;
+  @media only screen and (max-width: 800px){
+    flex-direction: row;
+    margin-right: 10px;
+  }
+`;
+
+const FilterButton= styled(Button)`
+  margin-bottom: 5px;
+  @media only screen and (max-width: 800px){
+    margin-bottom: 0px;
+    margin-right: 5px;
+  }
 `;
 
 const Title = styled.h1`
@@ -76,6 +98,24 @@ class Filter extends React.Component{
         localStorage.setItem('showTableTennis', this.state.checkedTableTennis);
         localStorage.setItem('showBenches', this.state.checkedBenches);
         this.applyFilter();
+    }
+
+    clearFilter(){
+        this.setState({checkedFountains: false});
+        this.setState({ checkedFireplaces: false});
+        this.setState({checkedRecyclingStations: false});
+        this.setState({checkedToilets: false});
+        this.setState({checkedTableTennis: false});
+        this.setState({checkedBenches: false});
+    }
+
+    selectAll(){
+        this.setState({checkedFountains: true});
+        this.setState({ checkedFireplaces: true});
+        this.setState({checkedRecyclingStations: true});
+        this.setState({checkedToilets: true});
+        this.setState({checkedTableTennis: true});
+        this.setState({checkedBenches: true});
     }
 
     applyFilter(){
@@ -159,7 +199,9 @@ class Filter extends React.Component{
                     <span>Benches</span>
                 </label>
                 <ButtonContainer>
-                    <Button onClick={() => {this.changeLocalStorage()}}>Apply Filter</Button>
+                    <FilterButton width="75%" onClick={() => {this.changeLocalStorage()}}>Apply Filter</FilterButton>
+                    <FilterButton width="75%" onClick={() => {this.clearFilter()}}>Clear Filter</FilterButton>
+                    <FilterButton width="75%" onClick={() => {this.selectAll()}}>Select All</FilterButton>
                 </ButtonContainer>
             </Container>
         )

@@ -13,14 +13,13 @@ import {Checkbox} from "../Filter/Checkbox";
 
 
 const Container2 = styled.div`
-  display: grid;
+  display: flex;
   height: 60px;
   grid-template-columns: 70px auto;
   grid-template-rows: auto;
-  justify-content: left;
+  justify-content: start;
   align-items: left;
-  grid-column: 1;
-  grid-row: 1;
+  
   margin-top: 10px;
   margin-left: 20px;
   margin-bottom: 10px;
@@ -39,10 +38,12 @@ const Container = styled.div`
   grid-template-columns: auto;
   grid-template-rows: auto;
   justify-content: left;
+  grid-column: 2;
+  grid-row: 2;
   align-items: left;
   grid-column: 2;
   grid-row: 1;
-  margin-top: 10px;
+  margin-top: 0px;
  
 `;
 
@@ -54,6 +55,7 @@ const ImageContainer= styled.div`
   grid-column: 1;
   grid-row: 1;
   margin-right: 20px;
+  margin-left: 10px;
   @media only screen and (max-width: 700px){
     height: 47px;
     width: 52.6px;
@@ -156,9 +158,6 @@ class InformationPageFavourite extends React.Component {
                              }}
                         />
                     </ImageContainer>
-                    <TextContainer>
-                    Press the heart to delete this location from your favourites
-                    </TextContainer>
                     </Container2>
                 ) : (
                     <Container2>
@@ -177,15 +176,6 @@ class InformationPageFavourite extends React.Component {
                         />
                     }
                 </ImageContainer>
-                    {this.state.liked === false ?
-                        <TextContainer>
-                        Press the heart to save this location to your favourites
-                        </TextContainer>
-                        :
-                        <TextContainer>
-                        Press the heart to delete this location from your favourites
-                        </TextContainer>
-                    }
                     </Container2>
                     )}
             </Container>

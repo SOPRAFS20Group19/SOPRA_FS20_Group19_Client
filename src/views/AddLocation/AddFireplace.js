@@ -8,12 +8,22 @@ import styled from "styled-components";
 
 const MainContainer =styled.div`
   color: black;
-  flex-direction: row;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto auto;
+  flex-direction: column;
+  max-height: 93%;
+  overflow: scroll;
+  width: 80%;
+  left: 10%;
+  display: block;
   justify-content: center;
+  position: absolute;
+  top: 7%;
+  @media only screen and (max-width: 800px){
+    display: block;
+    max-height: 83%;
+    overflow: scroll;
+    width: 100%;
+    left: 0%;
+  }
 `;
 
 const QuestionContainer = styled.div`
@@ -26,12 +36,21 @@ const QuestionContainer = styled.div`
 `;
 
 const Question = styled.div`
+  margin-top: 15px;
   font-weight: bolder;
   font-size: 30px;
-  margin-left: 0px;
   letter-spacing: 0.2em;
   line-height: 1.1em;
-  margin-top: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -48,8 +67,37 @@ const ImageContainer = styled.div`
   margin-top: 15px;
 `;
 
+const Picture = styled.div`
+  height: 110px;
+  width: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 15px;
+  @media only screen and (max-width: 900px){
+    font-size: 10px;
+    width: 95px;
+    height: 95px;
+  }
+  @media only screen and (max-width: 800px){
+    width: 90px;
+    height: 90px;
+  }
+  @media only screen and (max-width: 500px){
+    width: 80px;
+    height: 80px;
+  }
+`;
+
 const Container2 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -62,7 +110,8 @@ const Container2 = styled.div`
   margin-top: 15px;
 `;
 const Container3 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -75,7 +124,8 @@ const Container3 = styled.div`
   margin-top: 15px;
 `;
 const Container4 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -89,7 +139,8 @@ const Container4 = styled.div`
 `;
 
 const Container5 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -103,7 +154,8 @@ const Container5 = styled.div`
 `;
 
 const Container6 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -117,7 +169,8 @@ const Container6 = styled.div`
 `;
 
 const Container7 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -131,7 +184,8 @@ const Container7 = styled.div`
 `;
 
 const Container8 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -145,7 +199,8 @@ const Container8 = styled.div`
 `;
 
 const Container9 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -159,7 +214,8 @@ const Container9 = styled.div`
 `;
 
 const Container10 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -173,7 +229,8 @@ const Container10 = styled.div`
 `;
 
 const Container11 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -187,7 +244,8 @@ const Container11 = styled.div`
 `;
 
 const Container12 = styled.div`
-  height: flex;
+  height: 100%;
+  overflow: scroll;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -204,24 +262,45 @@ const Title = styled.div`
   font-weight: bold;
   font-size: x-large;
   flex-direction: row;
+  letter-spacing: 0.2em;
+  line-height: 1.1em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
-const InputFieldBaujahr = styled.input`
+const InputField = styled.input`
   &::placeholder {
     color: black;
   }
   height: 35px;
-  width: 35%;
+  width: 40%;
   border: 2px solid #003068;
   border-color: #66A3E0;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+  }
 `;
 
 const InfoSchrift = styled.div`
   font-weight: normal;
-  font-size: large;
+  font-size: 20px;
   flex-direction: row;
+  @media only screen and (max-width: 700px){
+    font-size: 15px;
+  }
 `;
 
 const ButtonContainerYesNo = styled.div`
@@ -253,13 +332,16 @@ class AddFireplace extends React.Component {
 
     render(){
         return(
-            <MainContainer>
+            <div>
                 <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
+            <MainContainer>
                 <QuestionContainer>
                     <Question>Location information: </Question>
                 </QuestionContainer>
                 <ImageContainer>
-                    <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="96px" height="96px"/>
+                    <Picture>
+                        <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%" height="100%"/>
+                    </Picture>
                 </ImageContainer>
                 <Container2>
                     <Title>Coordinates</Title>
@@ -398,7 +480,8 @@ class AddFireplace extends React.Component {
                         </Button>
                     </ButtonContainer>
                 </Container12>
-            </MainContainer>)
+            </MainContainer>
+            </div>)
     }
 }
 

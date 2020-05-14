@@ -28,20 +28,55 @@ const Container = styled.div`
     opacity: 0.9;
     background: #003068;
   }
-  height: 100%;
+  padding: 10px;
+  padding-bottom: 15px;
   width: 10%;
+  height: 100%;
   background: #66A3E0;
   display: flex;
   justify-content: top;
   align-items: center;
   opacity: 0.4;
   position: absolute;
-  top: 0;
   right: 0;
   flex-direction: column;
   @media only screen and (max-width: 800px){
     width: 100%;
-    height: 10%;
+    height: 12%;
+    position: absolute;
+    bottom: 0%;
+    flex-direction: row;
+    background: white;
+    opacity: 0;
+    &:hover {
+    opacity: 0;
+    background: white;
+  }
+  }
+  @media only screen and (min-width: 800px){
+    top: 0;
+  }
+`;
+
+const Container2 = styled.div`
+  &:hover {
+    opacity: 0;
+    background: #003068;
+  }
+  padding: 10px;
+  padding-bottom: 15px;
+  min-width: 10%;
+  background: #66A3E0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0;
+  position: absolute;
+  bottom: 0%;
+  flex-direction: column;
+  @media only screen and (max-width: 800px){
+    width: 100%;
+    height: 12%;
     position: absolute;
     bottom: 0%;
     flex-direction: row;
@@ -52,12 +87,26 @@ const Container = styled.div`
     background: white;
   }
   }
+  @media only screen and (min-width: 800px){
+    top: 0;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 15px;
+  @media only screen and (max-width: 800px){
+      margin-top: 0px;
+      margin-left: 0px;
+`;
+
+const ButtonContainerPopup = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  @media only screen and (max-width: 800px){
+      margin-top: 10px;
 `;
 
 const HoverContainer = styled.div`
@@ -71,8 +120,11 @@ const HoverContainer = styled.div`
   padding-left: 5px;
   padding-right: 5px;
   width: 100%;
+  align-self: center;
   @media only screen and (max-width: 800px){
     color: black;
+    margin-bottom: 20px;
+    font-size: 10px;
   }
 `;
 
@@ -126,6 +178,7 @@ class SidebarAddLocationtoStart extends React.Component{
 
     render() {
         return (
+            <div>
             <Container>
                 <OverlayTrigger
                     rootClose={true}
@@ -178,6 +231,59 @@ class SidebarAddLocationtoStart extends React.Component{
                     {this.state.showReturnHover ? <HoverContainer>Back</HoverContainer> : null}
                 </div>
             </Container>
+                <Container2>
+                    <OverlayTrigger
+                        rootClose={true}
+                        show={this.state.showUser}
+                        onHide={() => this.setState({ showUser: false })}
+                        trigger="click"
+                        placement="top"
+                        overlay={<Popover id="popover-basic">
+                            <Popover.Content>
+                                <ButtonContainerPopup>
+                                    <Button
+                                        width="100%"
+                                        onClick={() => {this.openUserProfile();}}>Go to your profile
+                                    </Button>
+                                </ButtonContainerPopup>
+                                <ButtonContainerPopup>
+                                    <ButtonForLogin
+                                        width="100%"
+                                        onClick={() => {this.logout();}}>Logout
+                                    </ButtonForLogin>
+                                </ButtonContainerPopup>
+                            </Popover.Content>
+                        </Popover>}>
+                        <div>
+                            <ButtonContainer>
+                                <RoundButton
+                                    width="75%"
+                                    onMouseOver={() => this.toggleShowUserHover(true)}
+                                    onMouseLeave={() => this.toggleShowUserHover(false)}
+                                >
+                                    <img src={avatarArray[this.props.avatarNr]} style={imgStyle} />
+                                </RoundButton>
+                            </ButtonContainer>
+                            {this.state.showUserHover ? <HoverContainer>Profile options</HoverContainer> : null}
+                        </div>
+                    </OverlayTrigger>
+                    <div>
+                        <ButtonContainer>
+                            <RoundButton
+                                width="75%"
+                                onMouseOver={() => this.toggleShowReturnHover(true)}
+                                onMouseLeave={() => this.toggleShowReturnHover(false)}
+                                onClick={() => {
+                                    this.returnToPage();
+                                }}
+                            >
+                                <img src={LogoutIcon}/>
+                            </RoundButton>
+                        </ButtonContainer>
+                        {this.state.showReturnHover ? <HoverContainer>Back</HoverContainer> : null}
+                    </div>
+                </Container2>
+            </div>
         );
     }
 }

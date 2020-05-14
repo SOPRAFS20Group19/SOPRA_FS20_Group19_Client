@@ -9,6 +9,7 @@ import {api, handleError} from "../../helpers/api";
 import Spinner from "react-bootstrap/Spinner";
 import User from "../shared/models/User";
 import Weather from "../../views/variables/Weather";
+import HeaderMap from "../../views/Map/HeaderMap";
 
 const Container = styled.div`
   height: 100%;
@@ -29,7 +30,7 @@ const MapContainer = styled.div`
   height: 100vh;
   width: 100vm;
   @media only screen and (max-width: 800px){
-    height: 90vh;
+    height: 83vh;
     width: 100vm;
   }
 `;
@@ -202,7 +203,7 @@ class Map extends React.Component{
             >
             </MapService>
             </MapContainer>)}
-            <Header/>
+            <HeaderMap/>
             <Sidebar centerMapAtCurrentLocation={this.centerMapAtCurrentLocation.bind(this)} getFilteredLocations={this.getFilteredLocations.bind(this)} avatarNr={this.state.loggedInUser.avatarNr}/>
         </div>
         );

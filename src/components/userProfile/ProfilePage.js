@@ -30,7 +30,13 @@ const BackgroundContainer = styled(BaseContainer)`
 const MainContainer =styled.div`
   color: black;
   flex-direction: row;
-  width: 100%;
+  width: 80%;
+  height: 93%;
+  position: absolute;
+  top: 0%;
+  left: 10%
+  align-content: flex-start;
+  margin-top: 5%;
   display: grid;
   grid-template-columns: auto auto 10%;
   grid-template-rows: auto auto auto auto;
@@ -44,6 +50,15 @@ const MainContainer =styled.div`
     max-width: 1000;
     display: block;
     justify-content: center;
+  }
+  @media only screen and (max-width: 800px){
+    height: 81%
+    position: absolute;
+    top: 7%;
+    overflow: scroll;
+    width: 100%;
+    left: 0%;
+    margin-top: 0%;
   }
   @media only screen and (max-width: 500px){
     max-width: 500;
@@ -217,10 +232,11 @@ class ProfilePage extends React.Component {
                 {!this.state.shownUser ? (<Spinner animation="border" role="status">
                     <span className="sr-only">Loading...</span>
                 </Spinner>) : (
-                    <MainContainer>
-                        <TitleProfile/>
-                        <ProfilePageHeader username={this.state.shownUser.username} avatarNr={this.state.shownUser.avatarNr}/>
+                    <div>
                         <SidebarProfilePage avatarNr={localStorage.getItem("userAvatar")} column={3}/>
+                        <TitleProfile/>
+                    <MainContainer>
+                        <ProfilePageHeader username={this.state.shownUser.username} avatarNr={this.state.shownUser.avatarNr}/>
                         <ProfilePageInformation
                             user={this.state.shownUser}
                             username={this.state.shownUser.username}
@@ -261,6 +277,7 @@ class ProfilePage extends React.Component {
                         {this.state.isFriend ? <ChatboxFriends friendId={this.state.shownUser.id}/> : null}
 
                     </MainContainer>
+                    </div>
                 ) }
             </div>
         )

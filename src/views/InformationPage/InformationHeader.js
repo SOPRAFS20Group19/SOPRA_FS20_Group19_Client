@@ -12,15 +12,19 @@ import ToiletCircle from "../MapMarkers/PublicToiletCircle.png"
 import BenchCircle from "../MapMarkers/BenchCircle.png"
 import {api, handleError} from "../../helpers/api";
 import {Spinner} from "../variables/Spinner";
+import InformationPageFavourite from "./InformationPageFavourite";
 
 const Container = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  justify-content: start;
   flex-direction: row;
   grid-column: 1;
   grid-row: 1;
   margin-top: 10px;
   margin-left: 20px;
-  align-content: left;
+  align-content: center;
 `;
 
 const PictureContainer = styled.div`
@@ -32,6 +36,9 @@ const PictureContainer = styled.div`
 const Picture = styled.div`
   height: 120px;
   width: 120px;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  margin-top: 10px
   @media only screen and (max-width: 700px){
     height: 100px;
     width: 100px;
@@ -46,12 +53,16 @@ const Picture = styled.div`
 const Title = styled.div`
   font-size: 40px;
   margin-left: 30px;
+  margin-top: 5px;
   font-weight: bolder;
   letter-spacing: 0.2em;
   line-height: 1.1em;
   text-transform: uppercase;
+  grid-column: 2;
+  grid-row: 1;
   @media only screen and (max-width: 700px){
-    font-size: 30px
+    font-size: 30px;
+    margin-top: 8px;
   }
   @media only screen and (max-width: 500px){
     font-size: 25px
@@ -103,14 +114,13 @@ class InformationHeader extends React.Component {
     render(){
         return (
                     <Container>
-                        <PictureContainer>
                             <Picture>
                             <img src={this.getImage()} alt={this.getTypeAsString()} width="100%" height="100%"/>
                             </Picture>
                             <Title>
                                 {this.getTypeAsString()}
                             </Title>
-                        </PictureContainer>
+                        <InformationPageFavourite locationId={this.props.locationId}/>
                     </Container>
         
                 )

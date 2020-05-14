@@ -16,14 +16,16 @@ const Container = styled.div`
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
   align-items: center;
+  margin-top: -10px;
   flex-direction: row;
   margin-left: 20px;
-  margin-top: 0px;
   padding-left: 0.5%;
   grid-column: 2;
   grid-row: 2;
   @media only screen and (max-width: 1150px){
     display: block;
+    align-items: top;
+    margin-top: 0px;
   }
   
   @media only screen and (max-width: 900px){

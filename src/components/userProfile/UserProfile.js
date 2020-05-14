@@ -19,12 +19,18 @@ const BackgroundContainer = styled(BaseContainer)`
 const MainContainer =styled.div`
   color: black;
   flex-direction: row;
-  width: 100%;
+  width: 80%;
+  left: 10%
+  height: 93%;
+  position: absolute;
+  top: 0%;
   display: grid;
   grid-template-columns: auto auto 10%;
   grid-template-rows: auto auto auto auto;
   justify-content: center;
   grid-column-gap: 30px;
+  align-content: flex-start;
+  margin-top: 5%;
   @media only screen and (max-width: 1215px){
     grid-column-gap: 20px;
   }
@@ -34,10 +40,13 @@ const MainContainer =styled.div`
     display: block;
   }
   @media only screen and (max-width: 800px){
-    height: 90%
+    height: 81%
     position: absolute;
-    top: 0;
+    top: 7%;
     overflow: scroll;
+    margin-top: 0%;
+    width: 100%;
+    left: 0%;
   }
   @media only screen and (max-width: 500px){
     max-width: 600;
@@ -103,7 +112,7 @@ class UserProfile extends React.Component {
             <div>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                         <MainContainer>
-                            <TitleProfile/>
+
                             <UserHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
                             <UserInformation
                                 username={this.state.loggedInUser.username}
@@ -114,6 +123,7 @@ class UserProfile extends React.Component {
                             <FriendsUser userId={this.state.loggedInUserId}/>
                         </MainContainer>
                 ) }
+                <TitleProfile/>
                 <SidebarUserInformation column={3}/>
             </div>
         )

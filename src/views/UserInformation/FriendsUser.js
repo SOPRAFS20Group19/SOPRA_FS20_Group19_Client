@@ -46,7 +46,7 @@ const Text = styled.div`
 `;
 
 const ListContainer = styled.div`
-  max-height: 500px;
+  max-height: 400px;
   overflow: scroll;
   width: 100%;
 `;

@@ -13,12 +13,22 @@ import BenchCircle from "../MapMarkers/BenchCircle.png";
 
 const MainContainer =styled.div`
   color: black;
-  flex-direction: row;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto auto;
+  flex-direction: column;
+  max-height: 93%;
+  overflow: scroll;
+  width: 80%;
+  left: 10%;
+  display: block;
   justify-content: center;
+  position: absolute;
+  top: 7%;
+  @media only screen and (max-width: 800px){
+    display: block;
+    max-height: 83%;
+    overflow: scroll;
+    width: 100%;
+    left: 0%;
+  }
 `;
 
 const QuestionContainer = styled.div`
@@ -31,12 +41,21 @@ const QuestionContainer = styled.div`
 `;
 
 const Question = styled.div`
+  margin-top: 15px;
   font-weight: bolder;
   font-size: 30px;
-  margin-left: 0px;
   letter-spacing: 0.2em;
   line-height: 1.1em;
-  margin-top: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -51,6 +70,34 @@ const ImageContainer = styled.div`
   grid-column: 1;
   grid-row: 3;
   margin-top: 15px;
+`;
+
+const Picture = styled.div`
+  height: 110px;
+  width: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  padding: 0.5%
+  flex-direction: column;
+  margin-left: 0px;
+  grid-column: 1;
+  grid-row: 3;
+  margin-top: 15px;
+  @media only screen and (max-width: 900px){
+    font-size: 10px;
+    width: 95px;
+    height: 95px;
+  }
+  @media only screen and (max-width: 800px){
+    width: 90px;
+    height: 90px;
+  }
+  @media only screen and (max-width: 500px){
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 const Container3 = styled.div`
@@ -107,6 +154,19 @@ const Title = styled.div`
   font-weight: bold;
   font-size: x-large;
   flex-direction: row;
+  letter-spacing: 0.2em;
+  line-height: 1.1em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
 `;
 
 const ErrorMessage = styled.div`
@@ -115,6 +175,9 @@ const ErrorMessage = styled.div`
   flex-direction: row;
   color: red;
   margin-top: 5px;
+  @media only screen and (max-width: 700px){
+    font-size: small;
+  }
 `;
 
 
@@ -124,11 +187,16 @@ const InputField = styled.input`
     color: black;
   }
   height: 35px;
-  width: 54%;
+  width: 40%;
   border: 2px solid #003068;
   border-color: #66A3E0;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+  }
 `;
 
 const ButtonContainerCoordinates = styled.div`
@@ -156,13 +224,17 @@ class AddCoordinates extends React.Component{
 
 
     render(){
-        return(<MainContainer>
-            <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
+        return(
+            <div>
+                <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
+            <MainContainer>
             <QuestionContainer>
                 <Question>Set the coordinates:</Question>
             </QuestionContainer>
             <ImageContainer>
-                <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="96px" height="96px"/>
+                <Picture>
+                    <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%" height="100%"/>
+                </Picture>
             </ImageContainer>
             <ButtonContainerCoordinates>
                 <Button
@@ -173,7 +245,7 @@ class AddCoordinates extends React.Component{
             <Container3>
                 <Title>Latitude: </Title>
                 <InputField
-                    placeholder="enter latitude here"
+                    placeholder="Enter latitude here"
                     onChange={e => {
                         this.props.updateLatitude(e.target.value);
                     }}
@@ -188,7 +260,7 @@ class AddCoordinates extends React.Component{
             <Container4>
                 <Title>Longitude: </Title>
                 <InputField
-                    placeholder="enter longitude here"
+                    placeholder="Enter longitude here"
                     onChange={e => {
                         this.props.updateLongitude(e.target.value);
                     }}
@@ -206,7 +278,8 @@ class AddCoordinates extends React.Component{
                     onClick={() => {this.props.setCoordinatesSuccessfully();}}>Continue</Button>
             </ButtonContainerCoordinatesManually>
 
-        </MainContainer>)
+        </MainContainer>
+            </div>)
     }
 }
 export default withRouter(AddCoordinates);

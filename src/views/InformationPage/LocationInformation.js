@@ -12,7 +12,7 @@ import {Spinner} from "../variables/Spinner";
 
 const Container = styled.div`
   height: flex;
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: top;
   align-items: left;

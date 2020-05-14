@@ -28,18 +28,27 @@ const Container =styled.div`
   grid-template-columns: auto auto 10%;
   grid-template-rows: auto auto auto auto auto;
   justify-content: left;
-  grid-column-gap: 30px;
+  grid-column-gap: 50px;
+  margin-left: 20px;
   @media only screen and (max-width: 1215px){
-    grid-column-gap: 10px;
+    grid-column-gap: 25px;
   }
   
   @media only screen and (max-width: 900px){
     max-width: 800;
     display: block;
+    margin-left: 15px;
+  }
+  @media only screen and (max-width: 800px){
+    max-height: 90%;
+    overflow: scroll;
+    position: absolute;
+    top: 0%;
   }
   @media only screen and (max-width: 500px){
     max-width: 500;
     display: block;
+    margin-left: 0px;
   }
 `;
 
@@ -116,16 +125,10 @@ class LocationInformationPage extends React.Component {
         }
     }
 
-
-
-    // Get the chat box for the current Location
-    getchat() {
-    }
-
     // renders the page
     render() {
         return (
-            <Container>
+            <div>
                 {!this.state.locationToBeShown ? (<LoadingContainer><Button variant="primary" disabled>
                     <Spinner
                         as="span"
@@ -136,10 +139,10 @@ class LocationInformationPage extends React.Component {
                     />
                     Loading Location...
                 </Button></LoadingContainer>) : (
+                    <div>
+                        <SidebarInfoAndAddLocation avatarNr={localStorage.getItem("userAvatar")} column={3}/>
                     <Container>
-                    <InformationHeader type={this.state.locationToBeShown.locationType}/>
-                    <InformationPageFavourite locationId={this.props.match.params.locationId}/>
-                    <SidebarInfoAndAddLocation avatarNr={localStorage.getItem("userAvatar")} column={3}/>
+                    <InformationHeader type={this.state.locationToBeShown.locationType} locationId={this.props.match.params.locationId}/>
                     <LocationInformation
                         location={this.state.location}
                         id={this.state.locationToBeShown.id}
@@ -153,8 +156,9 @@ class LocationInformationPage extends React.Component {
                     <Chatbox locationId={this.props.match.params.locationId}/>
 
                     </Container>
+                    </div>
                     )}
-            </Container>
+            </div>
         );
     }
 }

@@ -33,12 +33,12 @@ import AddTableTennis from "../../views/AddLocation/AddTableTennis";
 
 const MainContainer =styled.div`
   color: black;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto auto;
+  display: block;
   justify-content: center;
+  height: 100%;
+  overflow: scroll;
 `;
 
 const ImageContainer = styled.div`
@@ -929,6 +929,10 @@ class AddLocation extends React.Component {
         if (comfort > 5  ||  comfort < 1) {
             comfortValid = false;
             errorMsg.comfort = "Must be number between 1 and 5."
+        }
+        else if(isNaN(comfort)) {
+            comfortValid = false;
+            errorMsg.comfort = "That's not a valid number."
         }
         this.setState({comfortValid, errorMsg})
     }
