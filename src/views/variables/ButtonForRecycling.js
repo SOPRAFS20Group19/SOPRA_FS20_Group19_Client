@@ -18,10 +18,11 @@ export const ButtonForRecycling = styled.button`
   opacity: ${props => (props.disabled ? 0.4 : 1)};
   background: #228B22;
   transition: all 0.3s ease;
-  @media only screen and (max-width: 700px){
+  @media only screen and (max-width: 500px){
     font-size: 10px;
     height: 25px;
     padding: 3px;
     border: 1.5px solid #003068;
+    
   }
 `;

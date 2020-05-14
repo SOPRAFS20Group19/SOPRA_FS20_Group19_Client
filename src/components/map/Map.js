@@ -125,6 +125,9 @@ class Map extends React.Component{
     centerMapAtCurrentLocation (){
         this.setState({currentCenter: [this.state.currentPosition[0], this.state.currentPosition[1]]});
         localStorage.setItem("wantsCurrentLocation", true);
+        localStorage.removeItem("currentLocationInformation");
+        localStorage.removeItem("currentLocationInformationLat");
+        localStorage.removeItem("currentLocationInformationLon");
         window.location.reload(false);
     }
 
@@ -139,10 +142,16 @@ class Map extends React.Component{
             this.setState({  currentCenter: [position.coords.latitude, position.coords.longitude]
         })
         }
+        if(localStorage.getItem("currentLocationInformationLat") && localStorage.getItem("currentLocationInformationLon")){
+            this.setState({currentCenter:
+                    [parseFloat(localStorage.getItem("currentLocationInformationLat")),
+                    parseFloat(localStorage.getItem("currentLocationInformationLon"))]})
+        }
         if(localStorage.getItem("wantsCurrentLocation")){
             this.setState({   currentCenter: [position.coords.latitude, position.coords.longitude]});
             localStorage.removeItem("wantsCurrentLocation");
         }
+
 
     }
 

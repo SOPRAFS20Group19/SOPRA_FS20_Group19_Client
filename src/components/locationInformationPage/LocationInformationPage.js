@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BaseContainer } from '../../helpers/layout';
-import { api, handleError } from '../../helpers/api';
-import { Button } from '../../views/variables/Button';
-import { withRouter } from 'react-router-dom';
+import {BaseContainer} from '../../helpers/layout';
+import {api, handleError} from '../../helpers/api';
+import {Button} from '../../views/variables/Button';
+import {withRouter} from 'react-router-dom';
 import SidebarInfoAndAddLocation from "../../views/InformationPage/SidebarInfoAndAddLocation";
 import LocationInformation from "../../views/InformationPage/LocationInformation";
 import LocationRating from "../../views/InformationPage/LocationRating";
@@ -20,7 +20,7 @@ const Container1 = styled(BaseContainer)`
   flex-direction: row;
 `;
 
-const Container =styled.div`
+const Container = styled.div`
   color: black;
   flex-direction: row;
   width: 100%;
@@ -33,7 +33,7 @@ const Container =styled.div`
   @media only screen and (max-width: 1215px){
     grid-column-gap: 25px;
   }
-  
+
   @media only screen and (max-width: 900px){
     max-width: 800;
     display: block;
@@ -115,8 +115,8 @@ class LocationInformationPage extends React.Component {
             const location = new Location(response.data);
             const additionalInformation = response.data.additionalInformation.map((textLine) => <li>{textLine}</li>);
             // Get the returned location and update the state.
-            this.setState({ locationToBeShown: location});
-            this.setState({ location: response.data, additionalInformation: additionalInformation});
+            this.setState({locationToBeShown: location});
+            this.setState({location: response.data, additionalInformation: additionalInformation});
 
             // See here to get more data.
             console.log(response);

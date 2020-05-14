@@ -125,6 +125,8 @@ class EditProfile extends React.Component {
             passwordValid: null,
             passwordConfirmValid: null,
             errorMsg: {},
+            hasNoErrorMessage: true,
+            errorMsgError: "",
         };
         this.getUser();
 
@@ -145,8 +147,29 @@ class EditProfile extends React.Component {
         }
     }
 
+    handleErrorDesigned(error){
+
+        const response = error.response;
+
+        // catch 4xx and 5xx status codes
+
+        if (response && !!`${response.status}`.match(/^[4|5]\d{2}$/)) {
+            if (response.data.status) {
+                this.setState({errorMessageError: response.data.message})
+            } else {
+                this.setState({errorMessageError: response.data})
+            }
+        }
+        else {
+            if (error.message.match(/Network Error/)) {
+                alert('The server cannot be reached. Did you start it?');
+            }
+            console.log('Something else happened.', error);
+        }
+    }
+
     // when the save changes button is clicked, the new data is sent to the server via put request
-    saveChanges() {
+    async saveChanges() {
         try {
             const requestBody = JSON.stringify({
                 name: this.state.name,
@@ -155,12 +178,14 @@ class EditProfile extends React.Component {
             });
 
             const url = '/users/' + this.state.loggedInUserId;
-            api.put(url, requestBody);
+            await api.put(url, requestBody);
 
             // after successfully saving the changes, the user is redirected to his profile page
             this.props.history.push('/userprofile');
         } catch (e) {
-            alert(`Something went wrong while editing the profile: \n${handleError(e)}`);
+            this.handleErrorDesigned(e);
+            this.setState({hasNoErrorMessage: false});
+            //alert(`Something went wrong while editing the profile: \n${handleError(e)}`);
         }
     }
 
@@ -347,6 +372,7 @@ class EditProfile extends React.Component {
                             />
                             <ValidationMessage valid={this.state.passwordConfirmValid}
                                                message={this.state.errorMsg.passwordConfirm}/>
+                            <ValidationMessage valid={this.state.hasNoErrorMessage} message={this.state.errorMessageError}/>
                         </Container>
                         <Container column={1}>
                             <ButtonContainer>

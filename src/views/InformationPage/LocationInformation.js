@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import FormControl from "react-bootstrap/FormControl";
 import Player from "../variables/Player";
-import {Button} from "../variables/Button";
+import {Button as Button1, Button} from "../variables/Button";
 import {Spinner} from "../variables/Spinner";
 
 
@@ -126,6 +126,15 @@ class LocationInformation extends React.Component{
                         <Title>Address: </Title><Text>{this.props.address}</Text>
                         <Title>Additional Information:</Title><Text>{this.props.information}</Text>
                         <Title>Coordinates: </Title><Text>{this.props.latitude}, {this.props.longitude}</Text>
+                        <Button
+                            onClick={() => {
+                                localStorage.setItem("currentLocationInformationLat", this.props.latitude);
+                                localStorage.setItem("currentLocationInformationLon", this.props.longitude);
+                                //localStorage.setItem("com")
+                                //localStorage.setItem("currentLocationInformation", JSON.stringify(this.props.location));
+                                this.props.history.push(`/map`);
+                        }}>
+                            Show Location on Map</Button>
                     </div>
                     )}
             </Container>

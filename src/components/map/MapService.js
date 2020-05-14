@@ -99,8 +99,6 @@ const BorderBench = {
     padding: 10,
 };
 
-
-
 const ButtonRecycling = {
     color: '#228B22',
     border: '2px solid #228B22',
@@ -151,6 +149,22 @@ class MapService extends React.Component {
             currCenter: null
         };
         //this.setCenter();
+    }
+
+    async componentDidMount() {
+        if (localStorage.getItem("currentLocationInformation")){
+            this.setSelectedLocation(JSON.parse(localStorage.getItem("currentLocationInformation")))
+        }
+        /*if (localStorage.getItem("currentLocationInfo")){
+            this.setSelectedLocation(JSON.parse(localStorage.getItem("currentLocationInfo")))
+        }*/
+    }
+
+    setSelectedLocationFromLocationInformation(location){
+        this.setState({selectedLocation: location})
+        if (location != null){
+            this.showAverageRating(location.id)
+        }
     }
 
     setSelectedLocation(location) {
@@ -323,6 +337,9 @@ class MapService extends React.Component {
                                             }}
 
                                             onClick={() => {
+                                                localStorage.setItem("currentLocationInformationLat", location.coordinates[1]);
+                                                localStorage.setItem("currentLocationInformationLon", location.coordinates[0]);
+                                                localStorage.setItem("currentLocationInformation", JSON.stringify(location));
                                                 this.setSelectedLocation(location);
                                             }}
                                             icon={{
@@ -338,6 +355,7 @@ class MapService extends React.Component {
                             <InfoWindow
                                 onCloseClick={() => {
                                     this.setSelectedLocation(null);
+                                    localStorage.removeItem("currentLocationInformation");
                                 }}
                                 position={{
                                     lat: this.state.selectedLocation.coordinates[1],
@@ -377,6 +395,9 @@ class MapService extends React.Component {
                                     ) : (
                                         <Button style={this.getStyleOfButton()}
                                             onClick={() => {
+                                                localStorage.setItem("currentLocationInformationLat", this.state.selectedLocation.latitude);
+                                                localStorage.setItem("currentLocationInformationLon", this.state.selectedLocation.longitude);
+                                                localStorage.setItem("currentLocationInformation", JSON.stringify(this.state.selectedLocation));
                                                 this.props.history.push(`/map/informationpage/` + this.state.selectedLocation.id);
                                             }}
                                         >
