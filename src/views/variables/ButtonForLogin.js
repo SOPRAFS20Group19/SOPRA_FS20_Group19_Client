@@ -25,4 +25,11 @@ export const ButtonForLogin = styled.button`
     padding: 3px;
     border: 1.5px solid #003068;
   }
+  @media only screen and (max-width: 500px){
+    font-size: 10px;
+    height: 25px;
+    padding: 3px;
+    border: 1.5px solid #003068;
+    width: 130px;
+  }
 `;

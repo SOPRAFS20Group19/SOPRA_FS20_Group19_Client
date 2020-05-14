@@ -8,6 +8,9 @@ import '../../views/Map/BackgroundMap.css';
 import '../../views/variables/ZurichEmblem.css';
 import {ButtonForLogin} from "../../views/variables/ButtonForLogin";
 import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
+import {RoundButton} from "../../views/variables/RoundButton";
+import avatarArray from "../../views/Avatar/AvatarArray";
+import AboutUsQuestion1 from '../../views/AboutUs/AboutUsQuestion1.png';
 
 const Container = styled.div`
   display: flex;
@@ -22,6 +25,23 @@ const BackgroundContainer = styled.div`
   align-items: center;
   min-height: 620px;
   justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 768px;
+  min-width: 1366px;
+  margin-bottom: fill;
+  @media only screen and (max-width: 1215px){
+    
+  }
+  
+  @media only screen and (max-width: 900px){
+    min-width: 700px;
+  }
+  @media only screen and (max-width: 500px){
+    min-width: 300px;
+    min-height: 100px;
+  }
 `;
 
 const EmblemContainer = styled.div`
@@ -30,6 +50,25 @@ const EmblemContainer = styled.div`
   align-items: center;
   min-height: 620px;
   justify-content: center;
+  background-repeat: no-repeat;
+  background-size: 400px;
+  background-position: center;
+  @media only screen and (max-width: 1215px){
+    max-width: 1000;
+    display: center;
+  }
+    
+  @media only screen and (max-width: 900px){
+    max-width: 800;
+    display: center;
+  }
+  
+  @media only screen and (max-width: 500px){
+    max-width: 300;
+    background-size: 320px;
+    display: center;
+   
+  }
 `;
 
 
@@ -76,6 +115,28 @@ const ButtonContainer = styled.div`
   margin-top: 20px;
   min-width: 240px;
 `;
+
+const AboutUsButton = styled.div`
+  &:hover {
+    transform: translateY(-2px);
+  }
+  padding: 0px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  transition: all 0.3s ease;
+`;
+
+/*const TextHover = styled.p`
+    color: #000;
+    :hover {
+        color: pink;
+        cursor: mouse; 
+    }
+`*/
 
 /**
  * Classes in React allow you to have an internal state within the class and to have the React life-cycle for your component.
@@ -132,6 +193,10 @@ class Login extends React.Component {
         } catch (error) {
             alert(`Something went wrong during the login: \n${handleError(error)}`);
         }
+    }
+
+    toggleShowAboutUsHover(value){
+        this.setState({showAboutUsHover: value})
     }
 
     /**
@@ -219,6 +284,15 @@ class Login extends React.Component {
                                 >
                                     Register here
                                 </ButtonForLogin>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <AboutUsButton
+                                    onClick={() => {
+                                        this.props.history.push(`/aboutus`);
+                                    }}
+                                >
+                                    <img src={AboutUsQuestion1} width="40%" heigth= "40%"/>
+                                </AboutUsButton>
                             </ButtonContainer>
                         </Form>
                     </FormContainer>

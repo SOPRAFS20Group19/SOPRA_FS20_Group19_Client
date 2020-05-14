@@ -8,13 +8,15 @@ import '../../views/Map/BackgroundMap.css';
 import '../../views/variables/ZurichEmblem.css';
 import { ButtonForLogin } from '../../views/variables/ButtonForLogin';
 import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
+import AboutUsQuestion1 from "../../views/AboutUs/AboutUsQuestion1.png";
 
 const ErrorMessage = styled.div`
   font-weight: normal;
   font-size: 13px;
   margin-left: 0px;
-  letter-spacing: 0.1em;
-  margin-top: 0px;
+  letter-spacing: 0.05em;
+  margin-top:0px;
+  padding-bottom: 5px;
   color: red;
 `;
 const BackgroundContainer = styled.div`
@@ -23,6 +25,23 @@ const BackgroundContainer = styled.div`
   align-items: center;
   min-height: 200px;
   justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 768px;
+  min-width: 1366px;
+  margin-bottom: fill;
+  @media only screen and (max-width: 1215px){
+    
+  }
+  
+  @media only screen and (max-width: 900px){
+    min-width: 700px;
+  }
+  @media only screen and (max-width: 500px){
+    min-width: 300px;
+    min-height: 100px;
+  }
 `;
 
 const EmblemContainer = styled.div`
@@ -31,6 +50,24 @@ const EmblemContainer = styled.div`
   align-items: center;
   min-height: 620px;
   justify-content: center;
+  background-repeat: no-repeat;
+  background-size: 450px;
+  background-position: center;
+  @media only screen and (max-width: 1215px){
+    max-width: 1000;
+    display: center;
+  }
+    
+  @media only screen and (max-width: 900px){
+    max-width: 800;
+    display: center;
+  }
+  
+  @media only screen and (max-width: 500px){
+    max-width: 300;
+    background-size: 320px;
+    display: center;
+  }
 `;
 
 
@@ -66,9 +103,12 @@ const InputField = styled.input`
   padding-left: 15px;
   margin-left: -4px;
   border: 2px solid #003068;
-  margin-bottom: 20px;
+  margin-bottom: 9px;
   background: white;
   color: #000000;
+  @media only screen and (max-width: 500px){
+    margin-bottom: 4px;
+  }
 `;
 
 const InputFieldPassword = styled.input`
@@ -88,6 +128,23 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  @media only screen and (max-width: 500px){
+    margin-top: 10px;
+  }
+`;
+
+const AboutUsButton = styled.div`
+  &:hover {
+    transform: translateY(-2px);
+  }
+  padding: 0px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  transition: all 0.3s ease;
 `;
 
 /**
@@ -340,6 +397,15 @@ class Registration extends React.Component {
                                     >
                                         Login here
                                     </ButtonForLogin>
+                                </ButtonContainer>
+                                <ButtonContainer>
+                                    <AboutUsButton
+                                        onClick={() => {
+                                            this.props.history.push(`/aboutus`);
+                                        }}
+                                    >
+                                        <img src={AboutUsQuestion1} width="40%" heigth= "40%"/>
+                                    </AboutUsButton>
                                 </ButtonContainer>
                             </Form>
                         </FormContainer>

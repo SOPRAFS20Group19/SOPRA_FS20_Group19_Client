@@ -99,8 +99,6 @@ const BorderBench = {
     padding: 10,
 };
 
-
-
 const ButtonRecycling = {
     color: '#228B22',
     border: '2px solid #228B22',
