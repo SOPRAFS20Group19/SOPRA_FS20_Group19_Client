@@ -191,6 +191,7 @@ class Map extends React.Component{
     render(){
         return (<div>
             {!this.state.locationsShown ? (<Container><Button variant="primary" disabled>
+                <Weather />
                 <Spinner
                     as="span"
                     animation="border"
