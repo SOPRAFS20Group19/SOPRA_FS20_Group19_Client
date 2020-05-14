@@ -131,7 +131,7 @@ class LocationInformation extends React.Component{
                                 localStorage.setItem("currentLocationInformationLat", this.props.latitude);
                                 localStorage.setItem("currentLocationInformationLon", this.props.longitude);
                                 //localStorage.setItem("com")
-                                //localStorage.setItem("currentLocationInfo", JSON.stringify(this.props.location));
+                                //localStorage.setItem("currentLocationInformation", JSON.stringify(this.props.location));
                                 this.props.history.push(`/map`);
                         }}>
                             Show Location on Map</Button>

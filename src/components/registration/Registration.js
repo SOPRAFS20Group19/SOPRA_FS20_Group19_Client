@@ -111,6 +111,8 @@ const InputField = styled.input`
   }
 `;
 
+
+
 const InputFieldPassword = styled.input`
   &::placeholder {
     color: black;
@@ -122,6 +124,16 @@ const InputFieldPassword = styled.input`
   margin-bottom: 20px;
   background: white;
   color: #000000;
+`;
+
+const ContainerError = styled.div`
+  display: flex;
+  max-width: 300px;
+  justify-content: center;
+  margin-top: 20px;
+  @media only screen and (max-width: 500px){
+    margin-top: 10px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -185,7 +197,9 @@ class Registration extends React.Component {
             usernameValid: false,
             passwordValid: false,
             nameValid: false,
-            passwordConfirmValid: false
+            passwordConfirmValid: false,
+            hasNoErrorMessage: true,
+            errorMsgError: "",
         };
     }
     /**
@@ -208,7 +222,9 @@ class Registration extends React.Component {
             // Registration successfully worked --> navigate to the route /login in the AppRouter
             this.props.history.push(`/login`);
         } catch (error) {
-            alert(`Something went wrong during the registration: \n${handleError(error)}`);
+            this.handleErrorDesigned(error);
+            this.setState({hasNoErrorMessage: false});
+            //alert(`Something went wrong during the registration: \n${handleError(error)}`);
         }
     }
 
@@ -217,6 +233,27 @@ class Registration extends React.Component {
      * @param key (the key of the state for identifying the field that needs to be updated)
      * @param value (the value that gets assigned to the identified state key)
      */
+
+    handleErrorDesigned(error){
+
+        const response = error.response;
+
+        // catch 4xx and 5xx status codes
+
+        if (response && !!`${response.status}`.match(/^[4|5]\d{2}$/)) {
+            if (response.data.status) {
+                this.setState({errorMessageError: response.data.message})
+            } else {
+                this.setState({errorMessageError: response.data})
+            }
+        }
+        else {
+            if (error.message.match(/Network Error/)) {
+                alert('The server cannot be reached. Did you start it?');
+            }
+            console.log('Something else happened.', error);
+        }
+    }
 
     updatePassword = (password) => {
         this.setState({password}, this.validatePassword);
@@ -367,6 +404,9 @@ class Registration extends React.Component {
                                     }}
                                 />
                                 <ValidationMessage valid={this.state.passwordConfirmValid} message={this.state.errorMsg.passwordConfirm}/>
+                                <ContainerError>
+                                <ValidationMessage valid={this.state.hasNoErrorMessage} message={this.state.errorMessageError}/>
+                                </ContainerError>
                                 <ButtonContainer>
                                     <Button
                                         disabled={!this.state.formValid}

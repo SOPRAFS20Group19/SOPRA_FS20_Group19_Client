@@ -130,6 +130,14 @@ const AboutUsButton = styled.div`
   transition: all 0.3s ease;
 `;
 
+const ErrorMessage = styled.div`
+  font-weight: normal;
+  font-size: medium;
+  flex-direction: row;
+  color: red;
+  margin-top: 5px;
+`;
+
 /*const TextHover = styled.p`
     color: #000;
     :hover {
@@ -137,6 +145,15 @@ const AboutUsButton = styled.div`
         cursor: mouse; 
     }
 `*/
+
+function ValidationMessage(props) {
+    if (props.valid) {
+        return(
+            <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
+        )
+    }
+    return null;
+}
 
 /**
  * Classes in React allow you to have an internal state within the class and to have the React life-cycle for your component.
@@ -160,9 +177,34 @@ class Login extends React.Component {
             name: null,
             username: null,
             password: null,
-            loggedInUser: null
+            loggedInUser: null,
+            hasErrorMessage: false,
+            errorMessage: ""
         };
     }
+
+    handleErrorDesigned(error){
+
+        const response = error.response;
+
+        // catch 4xx and 5xx status codes
+
+        if (response && !!`${response.status}`.match(/^[4|5]\d{2}$/)) {
+            if (response.data.status) {
+                this.setState({errorMessage: response.data.message})
+            } else {
+                this.setState({errorMessage: response.data})
+            }
+        }
+        else {
+            if (error.message.match(/Network Error/)) {
+                alert('The server cannot be reached. Did you start it?');
+            }
+            console.log('Something else happened.', error);
+        }
+    }
+
+
 
     /**
      * HTTP POST request is sent to the backend.
@@ -191,7 +233,9 @@ class Login extends React.Component {
             // Login successfully worked --> navigate to the the route /map in the GameRouter
             this.props.history.push(`/map`);
         } catch (error) {
-            alert(`Something went wrong during the login: \n${handleError(error)}`);
+            this.handleErrorDesigned(error);
+            this.setState({hasErrorMessage: true});
+            //alert(`Something went wrong during the login: \n${handleError2(error)}`);
         }
     }
 
@@ -284,6 +328,9 @@ class Login extends React.Component {
                                 >
                                     Register here
                                 </ButtonForLogin>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <ValidationMessage valid={this.state.hasErrorMessage} message={this.state.errorMessage}/>
                             </ButtonContainer>
                             <ButtonContainer>
                                 <AboutUsButton
