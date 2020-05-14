@@ -4,7 +4,7 @@ import { api, handleError } from '../../helpers/api';
 import { withRouter } from 'react-router-dom';
 import { Button } from '../../views/variables/Button';
 import axios from "axios";
-import {getDomain} from "../../helpers/getDomain";
+import {apiWeather} from "../../helpers/apiWeather";
 import HeaderForLogin from "../UserInformation/HeaderForLogin";
 import {ButtonForLogin} from "./ButtonForLogin";
 
@@ -46,14 +46,11 @@ export default class Weather extends React.Component{
     }
 
     async getWeather2(){
+        
         try {
-            const apiWeather = axios.create({
-                baseURL: "http://api.openweathermap.org",
-                headers: { 'Content-Type': 'application/json' }
-            });
 
             const response = await apiWeather.get('/data/2.5/weather?id=2657896&appid=148df75c67cf715124b95c25cc873565');
-            /*
+            
             const dateUnix = response.data.dt;
             const date = new Date(dateUnix * 1000).toUTCString();
 
@@ -69,7 +66,7 @@ export default class Weather extends React.Component{
             sessionStorage.setItem("timestampUTC", this.state.dateGet);
             sessionStorage.setItem("date", date);
             this.setState({temp: Math.round(response.data.main.temp - 273.15), humidity: response.data.main.humidity, description: response.data.weather[0].description, icon: response.data.weather[0].icon});
-        */} catch (error) {
+        } catch (error) {
             alert(`Something went wrong while getting the weather: \n${handleError(error)}`);
         }
     }
