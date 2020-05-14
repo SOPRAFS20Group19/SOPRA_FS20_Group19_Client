@@ -200,7 +200,6 @@ class Map extends React.Component{
                 />
                 Loading Map...
             </Button>
-                <Weather/>
             </Container>) : (<MapContainer>
             <MapService
                 currentLocation = {this.state.currentPosition}
