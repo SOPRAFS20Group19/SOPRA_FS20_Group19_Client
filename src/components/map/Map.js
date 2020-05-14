@@ -32,6 +32,7 @@ const MapContainer = styled.div`
   @media only screen and (max-width: 800px){
     height: 83vh;
     width: 100vm;
+    margin-bottom: 17%;
   }
 `;
 
@@ -199,6 +200,7 @@ class Map extends React.Component{
                 />
                 Loading Map...
             </Button>
+                <Weather/>
             </Container>) : (<MapContainer>
             <MapService
                 currentLocation = {this.state.currentPosition}

@@ -21,8 +21,8 @@ const Container = styled.div`
   left: 25%;
   padding-top: 10px;
   @media only screen and (max-width: 800px){
-    width: 75%;
-    left: 12.5%;
+    width: 100%;
+    left: 0%;
     top: 95%;
     height: 5%;
     background: white;

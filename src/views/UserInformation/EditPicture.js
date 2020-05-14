@@ -24,7 +24,7 @@ const Container = styled.div`
   justify-content: top;
   flex-direction: column;
   grid-column: 2;
-  grid-row: 3 /span 4;
+  grid-row: 2 /span 5;
   margin-top: 10px;
   @media only screen and (max-width: 900px){
     margin-left: 20px;
@@ -49,11 +49,9 @@ const Text = styled.div`
   text-transform: uppercase;
   @media only screen and (max-width: 700px){
     font-size: 15px;
-    margin-left: 20px;
   }
   @media only screen and (max-width: 500px){
     font-size: 15px;
-    margin-left: 20px;
   }
 `;
 

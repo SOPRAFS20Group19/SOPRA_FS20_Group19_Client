@@ -26,6 +26,15 @@ const MainContainer = styled.div`
     max-width: 800;
     display: block;
   }
+  @media only screen and (max-width: 800px){
+    height: 81%
+    position: absolute;
+    top: 7%;
+    overflow: scroll;
+    margin-top: 0%;
+    width: 100%;
+    left: 0%;
+  }
   @media only screen and (max-width: 500px){
     max-width: 500;
     display: block;
@@ -296,12 +305,12 @@ class EditProfile extends React.Component {
         return (
 
             <div>
+                <TitleEdit/>
+                <SidebarEditUserInformation column={3}/>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                     <MainContainer>
-                        <TitleEdit/>
                         <UserEditHeader username={this.state.loggedInUser.username}
                                         avatarNr={this.state.loggedInUser.avatarNr}/>
-                        <SidebarEditUserInformation column={3}/>
                         <Container column={1}>
                             <Title>Username: </Title>
                             <InputField
