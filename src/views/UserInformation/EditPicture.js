@@ -48,10 +48,12 @@ const Text = styled.div`
   letter-spacing: 0.15em;
   text-transform: uppercase;
   @media only screen and (max-width: 700px){
-    font-size: 15px
+    font-size: 15px;
+    margin-left: 20px;
   }
   @media only screen and (max-width: 500px){
-    font-size: 15px
+    font-size: 15px;
+    margin-left: 20px;
   }
 `;
 
