@@ -8,6 +8,12 @@ import {apiWeather} from "../../helpers/apiWeather";
 import HeaderForLogin from "../UserInformation/HeaderForLogin";
 import {ButtonForLogin} from "./ButtonForLogin";
 
+const Container = styled.div`
+  margin: 10px;
+`;
+
+const phrases = ['Stay hydrated with some water from a public fountain!', 'You better go recycle as long as there is no rain!', 'Take a break on a nice bench!', 'Perfect weather for a grill-party! Go grab your friends and head off to a nice fireplace...', 'No day is too rainy for a table tennis match!']
+
 export default class Weather extends React.Component{
     constructor(props) {
         super(props);
@@ -19,6 +25,7 @@ export default class Weather extends React.Component{
             time: null,
             dateGet: null,
             icon: null,
+            phrase: null,
         };
         this.checkSession();
     }
@@ -45,8 +52,18 @@ export default class Weather extends React.Component{
         this.checkSession();
     }
 
+
+    getPhrase(){
+        let x;
+        if (this.state.temp >= 27){ x = 0;}
+        else if (this.state.description === 'overcast clouds'){x = 1;}
+        else if (this.state.temp > 20 && this.state.temp < 27){x = 3;}
+        else if (this.state.tdescription === 'rain'){x = 4;}
+        else {x = 2;}
+        return phrases[x];
+    }
     async getWeather2(){
-        
+
         try {
 
             const response = await apiWeather.get('/data/2.5/weather?id=2657896&appid=148df75c67cf715124b95c25cc873565');
@@ -73,23 +90,19 @@ export default class Weather extends React.Component{
 
     render() {
         return (
-            <div>
-                {!this.state.temp ? <div>its null</div> :
-            <div>
+                <Container>
                 The weather in Zurich is {this.state.description}
                 <br/>
                 The current temperature is {this.state.temp}°C
                 <br/>
                 The current humidity is {this.state.humidity}%
                 <br/>
-                Data received on {this.state.date}
-                <br/>
-                Data pulled on {this.state.dateGet}
-                <br/>
                 <img src ={`http://openweathermap.org/img/wn/${this.state.icon}@2x.png`}
                      alt="wthr img" />
-            </div>}
-            </div>
+                <br/>
+                {this.getPhrase()}
+                <br/>
+                </Container>
         );
     }
 

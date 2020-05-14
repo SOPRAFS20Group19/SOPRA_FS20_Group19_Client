@@ -14,16 +14,22 @@ import HeaderMap from "../../views/Map/HeaderMap";
 const Container = styled.div`
   height: 100%;
   width: 100%;
-  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   opacity: 1;
-  position: absolute;
-  top: 0;
-  right: 0;
   padding-top: 0px;
   flex-direction: column;
+  position:absolute;
+`;
+
+const WeatherContainer = styled.div`
+    border-style: solid;
+    border-radius: 5px;
+    padding: 15px;
+    color: #003068;
+    background: #E0ECF8;
 `;
 
 const MapContainer = styled.div`
@@ -190,8 +196,12 @@ class Map extends React.Component{
     // insert <Weather/> after Spinner Button
     render(){
         return (<div>
-            {!this.state.locationsShown ? (<Container><Button variant="primary" disabled>
-                <Weather />
+            {!this.state.locationsShown ? (
+            
+            <Container>
+            <WeatherContainer>
+            <Weather />
+            <Button variant="primary" disabled>
                 <Spinner
                     as="span"
                     animation="border"
@@ -201,6 +211,7 @@ class Map extends React.Component{
                 />
                 Loading Map...
             </Button>
+            </WeatherContainer>
             </Container>) : (<MapContainer>
             <MapService
                 currentLocation = {this.state.currentPosition}
