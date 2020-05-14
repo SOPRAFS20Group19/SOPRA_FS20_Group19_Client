@@ -53,7 +53,7 @@ export default class Weather extends React.Component{
             });
 
             const response = await apiWeather.get('/data/2.5/weather?id=2657896&appid=148df75c67cf715124b95c25cc873565');
-
+            /*
             const dateUnix = response.data.dt;
             const date = new Date(dateUnix * 1000).toUTCString();
 
@@ -68,9 +68,8 @@ export default class Weather extends React.Component{
             sessionStorage.setItem("timestampTime", dateUnix);
             sessionStorage.setItem("timestampUTC", this.state.dateGet);
             sessionStorage.setItem("date", date);
-
             this.setState({temp: Math.round(response.data.main.temp - 273.15), humidity: response.data.main.humidity, description: response.data.weather[0].description, icon: response.data.weather[0].icon});
-        } catch (error) {
+        */} catch (error) {
             alert(`Something went wrong while getting the weather: \n${handleError(error)}`);
         }
     }
