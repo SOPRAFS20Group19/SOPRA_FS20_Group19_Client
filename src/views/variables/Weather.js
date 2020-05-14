@@ -41,7 +41,7 @@ export default class Weather extends React.Component{
         }
     }
 
-    componentDidMount(): void {
+    componentDidMount() {
         this.checkSession();
     }
 
