@@ -15,7 +15,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.4.0",
     "react-scrollable-list": "^1.2.0",
-    "react-sidebar": "latest",
+    "react-sidebar": "^3.0.2",
+    "react-sidenav": "^4.0.6",
     "styled-components": "^4.4.1"
   },
   "scripts": {
