@@ -21,7 +21,7 @@ const MainContainer =styled.div`
   flex-direction: row;
   width: 80%;
   left: 10%
-  height: 93%;
+  height: 90%;
   position: absolute;
   top: 0%;
   display: grid;

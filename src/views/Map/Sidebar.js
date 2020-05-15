@@ -79,9 +79,11 @@ const Container2 = styled.div`
   position: absolute;
   bottom: 0%;
   flex-direction: column;
+  margin-left: -10%;
   @media only screen and (max-width: 800px){
     width: 100%;
     height: 12%;
+    margin-left: 0%;
     position: absolute;
     bottom: 5%;
     flex-direction: row;
@@ -145,6 +147,8 @@ class Sidebar extends React.Component{
             showUser: false,
             showFilter: false,
             showAdd: false,
+            showAllUsers: false,
+            showCenterMap: false,
             showUserHover: false,
             showFilterHover: false,
             showAddHover: false,
@@ -405,7 +409,40 @@ class Sidebar extends React.Component{
                         {this.state.showAllUsersHover ? <HoverContainer>All users</HoverContainer> : null}
                     </div>
                     :
-                    null
+                    <OverlayTrigger
+                        rootClose={true}
+                        show={this.state.showAllUsers}
+                        onHide={() => this.setState({ showAllUsers: false })}
+                        trigger="click"
+                        placement="left"
+                        overlay={<Popover id="popover-basic">
+                            <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
+                            <Popover.Content>
+                                Please register or login first to use this feature.
+                                <ButtonContainerPopup>
+                                    <Button width="75%" onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
+                                </ButtonContainerPopup>
+                                <ButtonContainerPopup>
+                                    <ButtonForLogin
+                                        width="75%"
+                                        onClick={() => {this.props.history.push(`/login`);}}>Login here
+                                    </ButtonForLogin>
+                                </ButtonContainerPopup>
+                            </Popover.Content>
+                        </Popover>}>
+                        <div>
+                            <ButtonContainer>
+                                <RoundButton
+                                    width="75%"
+                                    onMouseOver={() => this.toggleShowAllUsersHover(true)}
+                                    onMouseLeave={() => this.toggleShowAllUsersHover(false)}
+                                >
+                                    <img src={UsersIcon}/>
+                                </RoundButton>
+                            </ButtonContainer>
+                            {this.state.showAllUsersHover ? <HoverContainer>All users</HoverContainer> : null}
+                        </div>
+                    </OverlayTrigger>
                 }
 
                 {localStorage.getItem("userId") != null ?
@@ -425,7 +462,40 @@ class Sidebar extends React.Component{
                         {this.state.centerMapHover ? <HoverContainer>Current location</HoverContainer> : null}
                     </div>
                     :
-                    null
+                    <OverlayTrigger
+                        rootClose={true}
+                        show={this.state.showCenterMap}
+                        onHide={() => this.setState({ showCenterMap: false })}
+                        trigger="click"
+                        placement="left"
+                        overlay={<Popover id="popover-basic">
+                            <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
+                            <Popover.Content>
+                                Please register or login first to use this feature.
+                                <ButtonContainerPopup>
+                                    <Button width="75%" onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
+                                </ButtonContainerPopup>
+                                <ButtonContainerPopup>
+                                    <ButtonForLogin
+                                        width="75%"
+                                        onClick={() => {this.props.history.push(`/login`);}}>Login here
+                                    </ButtonForLogin>
+                                </ButtonContainerPopup>
+                            </Popover.Content>
+                        </Popover>}>
+                        <div>
+                            <ButtonContainer>
+                                <RoundButton
+                                    width="75%"
+                                    onMouseOver={() => this.toggleCenterMap(true)}
+                                    onMouseLeave={() => this.toggleCenterMap(false)}
+                                >
+                                    <img src={CurrentLocationIcon}/>
+                                </RoundButton>
+                            </ButtonContainer>
+                            {this.state.centerMapHover ? <HoverContainer>Current location</HoverContainer> : null}
+                        </div>
+                    </OverlayTrigger>
                 }
 
             </Container>
@@ -634,7 +704,40 @@ class Sidebar extends React.Component{
                             {this.state.showAllUsersHover ? <HoverContainer>All users</HoverContainer> : null}
                         </div>
                         :
-                        null
+                        <OverlayTrigger
+                            rootClose={true}
+                            show={this.state.showAllUsers}
+                            onHide={() => this.setState({ showAllUsers: false })}
+                            trigger="click"
+                            placement="top"
+                            overlay={<Popover id="popover-basic">
+                                <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
+                                <Popover.Content>
+                                    Please register or login first to use this feature.
+                                    <ButtonContainerPopup>
+                                        <Button width="75%" onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
+                                    </ButtonContainerPopup>
+                                    <ButtonContainerPopup>
+                                        <ButtonForLogin
+                                            width="75%"
+                                            onClick={() => {this.props.history.push(`/login`);}}>Login here
+                                        </ButtonForLogin>
+                                    </ButtonContainerPopup>
+                                </Popover.Content>
+                            </Popover>}>
+                            <div>
+                                <ButtonContainer>
+                                    <RoundButton
+                                        width="75%"
+                                        onMouseOver={() => this.toggleShowAllUsersHover(true)}
+                                        onMouseLeave={() => this.toggleShowAllUsersHover(false)}
+                                    >
+                                        <img src={UsersIcon}/>
+                                    </RoundButton>
+                                </ButtonContainer>
+                                {this.state.showAllUsersHover ? <HoverContainer>All users</HoverContainer> : null}
+                            </div>
+                        </OverlayTrigger>
                     }
 
                     {localStorage.getItem("userId") != null ?
@@ -654,7 +757,40 @@ class Sidebar extends React.Component{
                             {this.state.centerMapHover ? <HoverContainer>Current location</HoverContainer> : null}
                         </div>
                         :
-                        null
+                        <OverlayTrigger
+                            rootClose={true}
+                            show={this.state.showCenterMap}
+                            onHide={() => this.setState({ showCenterMap: false })}
+                            trigger="click"
+                            placement="top"
+                            overlay={<Popover id="popover-basic">
+                                <Popover.Title as="h3">You cannot access this feature!</Popover.Title>
+                                <Popover.Content>
+                                    Please register or login first to use this feature.
+                                    <ButtonContainerPopup>
+                                        <Button width="75%" onClick={() => {this.props.history.push(`/registration`);}}>Register here</Button>
+                                    </ButtonContainerPopup>
+                                    <ButtonContainerPopup>
+                                        <ButtonForLogin
+                                            width="75%"
+                                            onClick={() => {this.props.history.push(`/login`);}}>Login here
+                                        </ButtonForLogin>
+                                    </ButtonContainerPopup>
+                                </Popover.Content>
+                            </Popover>}>
+                            <div>
+                                <ButtonContainer>
+                                    <RoundButton
+                                        width="75%"
+                                        onMouseOver={() => this.toggleCenterMap(true)}
+                                        onMouseLeave={() => this.toggleCenterMap(false)}
+                                    >
+                                        <img src={CurrentLocationIcon}/>
+                                    </RoundButton>
+                                </ButtonContainer>
+                                {this.state.centerMapHover ? <HoverContainer>Current location</HoverContainer> : null}
+                            </div>
+                        </OverlayTrigger>
                     }
 
                 </Container2>

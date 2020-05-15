@@ -34,6 +34,10 @@ const ScrollContainer = styled.div`
   width: 100%;
   grid-column: 1;
   grid-row: 3;
+  @media only screen and (max-width: 800px){
+    max-height: 60%;
+    overflow: scroll;
+  }
 `;
 
 const MainContainer = styled.div`
@@ -44,6 +48,14 @@ const MainContainer = styled.div`
   align-items: top;
   justify-content: center;
   margin-top: 75px;
+  @media only screen and (max-width: 800px){
+    display: block;
+    max-height: 80%;
+    overflow: scroll;
+    position: absolute;
+    top: 8%;
+    margin-top: 0px;
+  }
 `;
 
 const Title = styled.div`
@@ -59,6 +71,9 @@ const Title = styled.div`
     margin-left: 10px;
     margin-right: 10px;
   }
+  @media only screen and (max-width: 800px){
+    margin-bottom: 7px;
+  }
   @media only screen and (max-width: 500px){
     font-size: 15px
   }
@@ -67,7 +82,7 @@ const Title = styled.div`
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   width: 100%;
   grid-column: 1;
   grid-row: 2;
@@ -83,9 +98,10 @@ const SearchBar = styled.input`
   border: 2px solid #003068;
   background: white;
   color: #000000;
-  @media only screen and (max-width: 700px){
+  @media only screen and (max-width: 800px){
     font-size: 15px;
     margin-left: 15px;
+    margin-right: 15px;
     max-width: 300px;
     height: 25px;
     padding-left: 5px;
@@ -118,6 +134,9 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 250px;
+  @media only screen and (max-width: 800px){
+    width: 200px;
+  }
 `;
 
 class Users extends React.Component{
@@ -179,9 +198,10 @@ class Users extends React.Component{
     // DO NOT CHANGE != to !==
     render() {
         return (
-            <MainContainer>
-                <Header/>
+            <div>
                 <SidebarUsers avatarNr={localStorage.getItem("userAvatar")} />
+                <Header/>
+            <MainContainer>
                 <Title>Find other people to get to Know Your City with!</Title>
                 <SearchContainer>
                     <SearchBar
@@ -241,6 +261,7 @@ class Users extends React.Component{
                     </ScrollContainer>
                 )}
             </MainContainer>
+    </div>
         );
     }
 

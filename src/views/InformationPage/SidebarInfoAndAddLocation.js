@@ -53,9 +53,6 @@ const Container = styled.div`
     background: white;
   }
   }
-  @media only screen and (min-width: 800px){
-    top: 0;
-  }
 `;
 
 const Container2 = styled.div`
@@ -74,10 +71,12 @@ const Container2 = styled.div`
   position: absolute;
   bottom: 0%;
   flex-direction: column;
+  margin-left: -10%;
   @media only screen and (max-width: 800px){
     width: 100%;
     height: 12%;
     position: absolute;
+    margin-left: 0%;
     bottom: 0%;
     flex-direction: row;
     background: white;
@@ -123,7 +122,7 @@ const HoverContainer = styled.div`
   align-self: center;
   @media only screen and (max-width: 800px){
     color: black;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     font-size: 10px;
   }
 `;
