@@ -14,17 +14,21 @@ const Container = styled.div`
 
 const TextContainer = styled.div`
   font-size: 25px;
-  font-weigth: bold;
+  font-weight: bold;
   display: inline-block;
+  vertical-align: middle;
 `;
 
 const ImgContainer = styled.div`
-display: inline-block;
+    display: inline-block;
 `;
 
-const phrases = ['Stay hydrated with some water from a public fountain!', 'You better go recycle as long as there is no rain!', 'Take a break on a nice bench!', 'Perfect weather for a grill-party! Go grab your friends and head off to a nice fireplace...', 'No day is too rainy for a table tennis match!']
-
+const phrasesNiceWeather = ['Stay hydrated with some fresh fountain water!', 'You think Letten is too crowded? Maybe you can find a cozy fountain to take a bath in...', 'Summer in Zurich is cool. It is even cooler when playing some ping pong!', 'Perfect weather for a grill-party! Go grab your friends and head off to a nice fireplace...']
+const phrasesClouds = ['You better go recycle as long as there is no rain!', 'Nice opportunity to play some ping pong!', 'Real grillmasters do not care about the weather. Grab your friends and go to a fireplace!', 'Find yourself a quiet place to relax! How about a public bench?', 'Would it not be nice to play some table tennis now?', 'You could grab the opportunity and go recycle!',  'Take your bicycle and head to some table tennis spot to battle with your friends!']
+const phrasesRain = ['No day is too rainy for a table tennis match!', 'Not even rain holds a real grillmaster off from grilling. Head off to a nearby fireplace!']
+const phrasesSuitableForAll = ['Would it not be nice to play some table tennis now?', 'Find yourself a quiet place to relax! How about a public bench?', 'Find some secret spots today with KnowYourCity!']
 export default class Weather extends React.Component{
+
     constructor(props) {
         super(props);
         this.state = {
@@ -62,15 +66,17 @@ export default class Weather extends React.Component{
         this.checkSession();
     }
 
+    randomChoice(arr) {
+        return arr[Math.floor(arr.length * Math.random())];
+    }
 
     getPhrase(){
         let x;
-        if (this.state.temp >= 27){ x = 0;}
-        else if (this.state.description === 'Clouds'){x = 1;}
-        else if (this.state.temp > 20 && this.state.temp < 27){x = 3;}
-        else if (this.state.tdescription === 'Rain' || this.state.description === 'Extreme' ){x = 4;}
-        else {x = 2;}
-        return phrases[x];
+        if (this.state.temp >= 20){ x = phrasesNiceWeather;}
+        else if (this.state.description === 'Clouds'){x = phrasesClouds;}
+        else if (this.state.description === 'Rain' || this.state.description === 'Extreme' ){x = phrasesRain;}
+        else {x = phrasesSuitableForAll;}
+        return this.randomChoice(x);
     }
     async getWeather2(){
 
@@ -103,7 +109,7 @@ export default class Weather extends React.Component{
                 <Container>
                 <TextContainer>{this.state.temp}°C</TextContainer>
                 <ImgContainer><img src ={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`}
-                     alt="wthr img" /></ImgContainer>
+                     alt="wthr img"/></ImgContainer>
                 <br/>
                 {this.getPhrase()}
                 <br/>

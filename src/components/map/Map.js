@@ -29,7 +29,7 @@ const WeatherContainer = styled.div`
     border-radius: 5px;
     padding: 15px;
     color: #003068;
-    background: #E0ECF8;
+    background-color: rgba(194,218,243,1);
 `;
 
 const MapContainer = styled.div`
