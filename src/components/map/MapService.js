@@ -6,7 +6,7 @@ import {
     Marker,
     InfoWindow
 } from "react-google-maps";
-import mapStyles from "./mapStyles";
+import {mapStyles} from "./mapStyles";
 import {Button} from "../../views/variables/Button";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
@@ -323,7 +323,7 @@ class MapService extends React.Component {
                         lat: this.props.currentCenter[0],
                         lng: this.props.currentCenter[1]
                     }}
-                        defaultOptions={{ styles: mapStyles }}
+                        defaultOptions={ {zoomControl: window.innerWidth > 800, fullscreenControl: false} }
 
                     >
                             {this.props.locationsShown.map(location => {
