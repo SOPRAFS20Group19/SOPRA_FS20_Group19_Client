@@ -36,7 +36,7 @@ const MapContainer = styled.div`
   height: 100vh;
   width: 100vm;
   @media only screen and (max-width: 800px){
-    height: 100vh;
+    height: 70vh;
     width: 100vm;
   }
 `;
