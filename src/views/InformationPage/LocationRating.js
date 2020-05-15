@@ -12,11 +12,9 @@ import Location from "../../components/shared/models/Location";
 const Container = styled.div`
   height: 10%;
   width: 90%;
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto;
+  display: block;
   align-items: center;
-  margin-top: -10px;
+  margin-top: 0px;
   flex-direction: row;
   margin-left: 20px;
   padding-left: 0.5%;
@@ -182,6 +180,10 @@ class LocationRating extends React.Component{
 
     changeColor(number){
         this.setState({ratedStars: number });
+        setTimeout(() => {
+            this.saveRating();
+        }, 10);
+
     }
 
     render() {
@@ -236,15 +238,6 @@ class LocationRating extends React.Component{
                         />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
-                    <ButtonContainer> <Button1
-                        disabled={true}
-                        width="100%"
-                        onClick={() => {
-                            this.saveRating();
-                        }}>
-                        Save Rating
-                    </Button1>{' '}
-                    </ButtonContainer>
                     <Text2>
                         Average Rating: {this.state.averageRating}
                     </Text2>
@@ -301,15 +294,6 @@ class LocationRating extends React.Component{
                         />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
-                    <ButtonContainer> <Button1
-                        variant="primary"
-                        width="100%"
-                        onClick={() => {
-                            this.saveRating();
-                        }}>
-                        Save Rating
-                    </Button1>{' '}
-                    </ButtonContainer>
                     <Text2>
                         Average Rating: {this.state.averageRating}
                     </Text2>
@@ -367,15 +351,6 @@ class LocationRating extends React.Component{
                         />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
-                    <ButtonContainer> <Button1
-                        variant="primary"
-                        width="100%"
-                        onClick={() => {
-                            this.saveRating();
-                        }}>
-                        Save Rating
-                    </Button1>{' '}
-                    </ButtonContainer>
                     <Text2>
                         Average Rating: {this.state.averageRating}
                     </Text2>
@@ -433,15 +408,6 @@ class LocationRating extends React.Component{
                         />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
-                    <ButtonContainer> <Button1
-                        variant="primary"
-                        width="100%"
-                        onClick={() => {
-                            this.saveRating();
-                        }}>
-                        Save Rating
-                    </Button1>{' '}
-                    </ButtonContainer>
                     <Text2>
                         Average Rating: {this.state.averageRating}
                     </Text2>
@@ -499,15 +465,6 @@ class LocationRating extends React.Component{
                         />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
-                    <ButtonContainer> <Button1
-                        variant="primary"
-                        width="100%"
-                        onClick={() => {
-                            this.saveRating();
-                        }}>
-                        Save Rating
-                    </Button1>{' '}
-                    </ButtonContainer>
                     <Text2>
                         Average Rating: {this.state.averageRating}
                     </Text2>
@@ -565,15 +522,6 @@ class LocationRating extends React.Component{
                         />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
-                    <ButtonContainer> <Button1
-                        variant="primary"
-                        width="100%"
-                        onClick={() => {
-                            this.saveRating();
-                        }}>
-                        Save Rating
-                    </Button1>{' '}
-                    </ButtonContainer>
                     <Text2>
                         Average Rating: {this.state.averageRating}
                     </Text2>

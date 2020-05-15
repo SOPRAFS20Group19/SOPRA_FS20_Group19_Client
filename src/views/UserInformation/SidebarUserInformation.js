@@ -57,8 +57,10 @@ const Container2 = styled.div`
   position: absolute;
   bottom: 0%;
   flex-direction: column;
+  margin-left: -10%;
   @media only screen and (max-width: 800px){
     width: 100%;
+    margin-left: 0%;
     height: 12%;
     position: absolute;
     bottom: 0%;

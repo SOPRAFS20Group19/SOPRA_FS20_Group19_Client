@@ -31,7 +31,7 @@ const MainContainer =styled.div`
   color: black;
   flex-direction: row;
   width: 80%;
-  height: 93%;
+  height: 90%;
   position: absolute;
   top: 0%;
   left: 10%
@@ -52,7 +52,7 @@ const MainContainer =styled.div`
     justify-content: center;
   }
   @media only screen and (max-width: 800px){
-    height: 81%
+    height: 79%
     position: absolute;
     top: 7%;
     overflow: scroll;

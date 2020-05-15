@@ -40,7 +40,7 @@ const Container = styled.div`
     margin-left: 15px;
   }
   @media only screen and (max-width: 800px){
-    max-height: 90%;
+    max-height: 88%;
     overflow: scroll;
     position: absolute;
     top: 0%;
