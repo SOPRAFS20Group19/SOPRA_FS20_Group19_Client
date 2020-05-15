@@ -196,7 +196,7 @@ class Map extends React.Component{
     // insert <Weather/> after Spinner Button
     render(){
         return (<div>
-            {!this.state.locationsShown ? (
+            {true ? (
             
             <Container>
             <WeatherContainer>

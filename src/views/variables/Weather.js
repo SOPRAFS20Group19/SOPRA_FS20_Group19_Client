@@ -9,7 +9,17 @@ import HeaderForLogin from "../UserInformation/HeaderForLogin";
 import {ButtonForLogin} from "./ButtonForLogin";
 
 const Container = styled.div`
-  margin: 10px;
+  margin-bottom: 20px;
+`;
+
+const TextContainer = styled.div`
+  font-size: 25px;
+  font-weigth: bold;
+  display: inline-block;
+`;
+
+const ImgContainer = styled.div`
+display: inline-block;
 `;
 
 const phrases = ['Stay hydrated with some water from a public fountain!', 'You better go recycle as long as there is no rain!', 'Take a break on a nice bench!', 'Perfect weather for a grill-party! Go grab your friends and head off to a nice fireplace...', 'No day is too rainy for a table tennis match!']
@@ -56,9 +66,9 @@ export default class Weather extends React.Component{
     getPhrase(){
         let x;
         if (this.state.temp >= 27){ x = 0;}
-        else if (this.state.description === 'overcast clouds'){x = 1;}
+        else if (this.state.description === 'Clouds'){x = 1;}
         else if (this.state.temp > 20 && this.state.temp < 27){x = 3;}
-        else if (this.state.tdescription === 'rain'){x = 4;}
+        else if (this.state.tdescription === 'Rain' || this.state.description === 'Extreme' ){x = 4;}
         else {x = 2;}
         return phrases[x];
     }
@@ -77,7 +87,7 @@ export default class Weather extends React.Component{
             sessionStorage.setItem("weatherData", JSON.stringify(response.data));
             sessionStorage.setItem("temp", Math.round(response.data.main.temp - 273.15));
             sessionStorage.setItem("humidity", response.data.main.humidity);
-            sessionStorage.setItem("description", response.data.weather[0].description);
+            sessionStorage.setItem("description", response.data.weather[0].main);
             sessionStorage.setItem("icon", response.data.weather[0].icon);
             sessionStorage.setItem("timestampTime", dateUnix);
             sessionStorage.setItem("timestampUTC", this.state.dateGet);
@@ -91,14 +101,9 @@ export default class Weather extends React.Component{
     render() {
         return (
                 <Container>
-                The weather in Zurich is {this.state.description}
-                <br/>
-                The current temperature is {this.state.temp}°C
-                <br/>
-                The current humidity is {this.state.humidity}%
-                <br/>
-                <img src ={`http://openweathermap.org/img/wn/${this.state.icon}@2x.png`}
-                     alt="wthr img" />
+                <TextContainer>{this.state.temp}°C</TextContainer>
+                <ImgContainer><img src ={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`}
+                     alt="wthr img" /></ImgContainer>
                 <br/>
                 {this.getPhrase()}
                 <br/>
