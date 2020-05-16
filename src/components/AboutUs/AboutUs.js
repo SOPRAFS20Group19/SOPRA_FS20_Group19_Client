@@ -15,100 +15,23 @@ const BackgroundContainer = styled(BaseContainer)`
 
 const MainContainer = styled.div`
   color: #94BFE9;
+  background: #94BFE9;
   flex-direction: row;
   width: 100%;
-  display: center;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto auto;
+  height: 100vh;
+  display: flex;
   justify-content: center;
-  grid-column-gap: 30px;
-  
-  @media only screen and (max-width: 900px){
-    width: 50%;
-  }
-  @media only screen and (max-width: 500px){
-    grid-template-columns: auto;
-    width: 200%;
-    display: center;
-    grid-column-gap: 0px;
-    justify-content: center;
-  }
 `;
 
-const Container = styled.div`
-  color: #94BFE9;
-  flex-direction: row;
-  width: 80%;
-  height: 20%;
-  display: center;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto auto auto;
-  justify-content: center;
-  grid-column-gap: 30px;
-  margin-left: 10px;
-  margin-right: 10px;
-  @media only screen and (max-width: 1215px){
-    grid-column-gap: 20px;
-  }
-  
-  @media only screen and (max-width: 900px){
-    max-width: 800;
-  }
-  @media only screen and (max-width: 500px){
-    width: 50%;
-    height: 20%;
-    display: center;
-    grid-template-columns: auto;
-  }
-`;
 
 const Container2 = styled.div`
-  height: flex;
-  width: 70%;
-  display: center;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 265px;
-  margin-right: 0px;
-  grid-column: 1;
-  grid-row: 1;
-  margin-top: 5px;
-  @media only screen and (max-width: 1215px){
-    grid-column-gap: 20px;
-  }
-  
-  @media only screen and (max-width: 900px){
-    max-width: 800;
-  }
-  @media only screen and (max-width: 500px){
-    display: center;
-  }
-`;
-
-const Container3 = styled.div`
-  height: flex;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 2;
-  grid-row: 1;
-  margin-top: 15px;
-`;
-
-const FormContainer = styled.div`
-  margin-top: 50em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-height: 300px;
-  justify-content: center;
-  max-width: 100px;
+  position: absolute;
+  padding-top: 2%;
+  padding-left: 15%;
+  padding-right: 15%;
+  left: 0%;
+  background: #94BFE9;
 `;
 
 const BackgroundContainerAboutUs = styled.div`
@@ -116,21 +39,7 @@ const BackgroundContainerAboutUs = styled.div`
    width: 100%;
    height: 100%;
    background-repeat: repeat;
-   display: center;
-   @media only screen and (max-width: 1215px){
-    grid-column-gap: 20px;
-  }
-  
-  @media only screen and (max-width: 900px){
-    max-width: 800;
-  }
-  @media only screen and (max-width: 500px){
-    max-width: 600;
-    display: center;
-    width: 100%;
-    height: 130%;
-  }
-
+   justify-content: center;
 `;
 
 const ButtonContainer = styled.div`
@@ -172,14 +81,12 @@ class AboutUs extends React.Component {
                             this.props.history.push(`/map`);
                         }}
                     >
-                        <img src={LogoutIcon} width="2%" heigth= "2%"/>
+                        <img src={LogoutIcon} width="4%" heigth= "4%"/>
                     </ReturnToMapButton>
                 </ButtonContainer>
-                <Container>
                 <Container2>
-                <Carousel />
+                <Carousel/>
                 </Container2>
-                </Container>
             </BackgroundContainerAboutUs>
             </MainContainer>
 

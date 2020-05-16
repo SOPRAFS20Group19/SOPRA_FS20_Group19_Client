@@ -127,6 +127,7 @@ class LocationInformation extends React.Component{
                         <Title>Additional Information:</Title><Text>{this.props.information}</Text>
                         <Title>Coordinates: </Title><Text>{this.props.latitude}, {this.props.longitude}</Text>
                         <Button
+                            width="200px"
                             onClick={() => {
                                 localStorage.setItem("currentLocationInformationLat", this.props.latitude);
                                 localStorage.setItem("currentLocationInformationLon", this.props.longitude);

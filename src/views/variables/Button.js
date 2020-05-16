@@ -29,6 +29,6 @@ export const Button = styled.button`
     height: 25px;
     padding: 3px;
     border: 1.5px solid #003068;
-    width: 130px;
+    width: ${props => props.width || "130px"};
   }
 `;

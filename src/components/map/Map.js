@@ -28,6 +28,7 @@ const WeatherContainer = styled.div`
     border-style: solid;
     border-radius: 5px;
     padding: 15px;
+    margin: 10px;
     color: #003068;
     background-color: rgba(194,218,243,1);
 `;

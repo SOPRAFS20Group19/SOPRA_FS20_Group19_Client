@@ -386,6 +386,7 @@ class MapService extends React.Component {
                                         {/*<h2>{"URL: " + this.props.match.params.locationId}</h2> only for testing purpose*/}
                                     {!localStorage.getItem('userId') ? (
                                         <Button style={this.getStyleOfButton()}
+                                                width="100%"
                                                 onClick={() => {
                                                     this.props.history.push('/registration');
                                                 }}
@@ -394,6 +395,7 @@ class MapService extends React.Component {
                                         </Button>
                                     ) : (
                                         <Button style={this.getStyleOfButton()}
+                                                width="100%"
                                             onClick={() => {
                                                 localStorage.setItem("currentLocationInformationLat", this.state.selectedLocation.latitude);
                                                 localStorage.setItem("currentLocationInformationLon", this.state.selectedLocation.longitude);
