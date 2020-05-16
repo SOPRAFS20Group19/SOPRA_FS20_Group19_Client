@@ -36,7 +36,7 @@ A SoPra Project at the University of Zurich in FS20.
 
 Idea and realization by Group 19: Lena, Luca, Luis, Maximilian, Tim.
 
-Contact: knowyourcity@gmail.com
+Contact: knowyourcity@gmx.ch
 
 
 ## License 
