@@ -1,4 +1,5 @@
 # KNOW YOUR CITY
+<img width="348" alt="Bildschirmfoto 2020-05-17 um 00 34 39" src="https://user-images.githubusercontent.com/45396540/82131545-91046000-97d6-11ea-8377-6851606d97d3.png">
 A SoPra Project at the University of Zurich in FS20.
 Idea and realization by Group 19: Lena, Luca, Luis, Maximilian, Tim.
 
