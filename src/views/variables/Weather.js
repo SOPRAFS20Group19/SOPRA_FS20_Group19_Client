@@ -23,10 +23,12 @@ const ImgContainer = styled.div`
     display: inline-block;
 `;
 
+
 const phrasesNiceWeather = ['Stay hydrated with some fresh fountain water!', 'You think Letten is too crowded? Maybe you can find a cozy fountain to take a bath in...', 'Summer in Zurich is cool. It is even cooler when playing some ping pong!', 'Perfect weather for a grill-party! Go grab your friends and head off to a nice fireplace...']
 const phrasesClouds = ['You better go recycle as long as there is no rain!', 'Nice opportunity to play some ping pong!', 'Real grillmasters do not care about the weather. Grab your friends and go to a fireplace!', 'Find yourself a quiet place to relax! How about a public bench?', 'Would it not be nice to play some table tennis now?', 'You could grab the opportunity and go recycle!',  'Take your bicycle and head to some table tennis spot to battle with your friends!']
 const phrasesRain = ['No day is too rainy for a table tennis match!', 'Not even rain holds a real grillmaster off from grilling. Head off to a nearby fireplace!']
-const phrasesSuitableForAll = ['Would it not be nice to play some table tennis now?', 'Find yourself a quiet place to relax! How about a public bench?', 'Find some secret spots today with KnowYourCity!']
+const phrasesSuitableForAll = ['Would it not be nice to play some table tennis now?', 'Find yourself a quiet place to relax! How about a public bench?', 'Find some secret spots today with KnowYourCity!', 'Grab your bike and go explore Zurich!', 'Nice day to run down the lakeside. Remember to stay hydrated!']
+let phrase = ''
 export default class Weather extends React.Component{
 
     constructor(props) {
@@ -42,6 +44,7 @@ export default class Weather extends React.Component{
             phrase: null,
         };
         this.checkSession();
+        this.phrase = this.getPhrase()
     }
 
     checkSession(){
@@ -111,7 +114,7 @@ export default class Weather extends React.Component{
                 <ImgContainer><img src ={`https://openweathermap.org/img/wn/${this.state.icon}@2x.png`}
                      alt="wthr img"/></ImgContainer>
                 <br/>
-                {this.getPhrase()}
+                {this.phrase}
                 <br/>
                 </Container>
         );
