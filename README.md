@@ -1,4 +1,6 @@
-# SoPra FS20 - Client Template
+# KNOW YOUR CITY
+A SoPra Project at the University of Zurich in FS20.
+Idea and realization by Group 19: Lena, Luca, Luis, Maximilian, Tim.
 
 ## Getting started with React
 
