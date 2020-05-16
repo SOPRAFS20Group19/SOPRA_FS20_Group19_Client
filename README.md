@@ -34,7 +34,7 @@ dd
 
 A SoPra Project at the University of Zurich in FS20.
 
-Idea and realization by Group 19: Lena, Luca, Luis, Maximilian, Tim.
+Idea and realization by group 19: Lena, Luca, Luis, Maximilian, Tim.
 
 Contact: knowyourcity@gmx.ch
 
