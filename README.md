@@ -41,7 +41,8 @@ Contact: knowyourcity@gmx.ch
 
 ## License 
 
-djdj
+This project is licensed under the Apache 2.0 License - see the [License.md](../../master/LICENSE) file for details
+
 
 - Read the React [Docs](https://reactjs.org/docs/getting-started.html)
 - Do this React [Getting Started](https://reactjs.org/tutorial/tutorial.html) Tutorial (it doesn’t assume any existing React knowledge)
