@@ -1,11 +1,45 @@
-# KNOW YO <img width="348" alt="Bildschirmfoto 2020-05-17 um 00 34 39" src="https://user-images.githubusercontent.com/45396540/82131545-91046000-97d6-11ea-8377-6851606d97d3.png"> UR CITY
+ <img width="348" alt="Bildschirmfoto 2020-05-17 um 00 34 39" src="https://user-images.githubusercontent.com/45396540/82131545-91046000-97d6-11ea-8377-6851606d97d3.png"> 
 
+# KNOW YOUR CITY
 A SoPra Project at the University of Zurich in FS20.
-Idea and realization by Group 19: Lena, Luca, Luis, Maximilian, Tim.
 
-## Getting started with React
+## Introduction
 
 Read and go through those Tutorials, It will make your life easier!
+
+## Technologies
+
+ddd
+
+
+## High-level components
+
+ddd
+
+## Launch & Deployment
+
+dd
+
+## Illustrations (RAUS IM SERVER!)
+
+dd
+
+## Roadmap 
+
+dd
+
+## Authors and acknowledgement
+
+A SoPra Project at the University of Zurich in FS20.
+
+Idea and realization by Group 19: Lena, Luca, Luis, Maximilian, Tim.
+
+Contact: knowyourcity@gmail.com
+
+
+## License 
+
+djdj
 
 - Read the React [Docs](https://reactjs.org/docs/getting-started.html)
 - Do this React [Getting Started](https://reactjs.org/tutorial/tutorial.html) Tutorial (it doesn’t assume any existing React knowledge)
