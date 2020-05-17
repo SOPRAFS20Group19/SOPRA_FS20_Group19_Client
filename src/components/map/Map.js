@@ -53,13 +53,26 @@ class Map extends React.Component{
             loggedInUser: new User(),
             loading: false
         };
-        this.resetFilter();
+        //this.resetFilter();
+        this.firstTimeLoadingMap();
         this.getFilteredLocations();
         this.getFilteredLocations = this.getFilteredLocations.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.getLocation();
         this.getUser();
+    }
+
+    firstTimeLoadingMap(){
+        if (!localStorage.getItem("firstTime")){
+            localStorage.setItem('showFountains', true);
+            localStorage.setItem('showFireplaces', true);
+            localStorage.setItem('showRecyclingStations', true);
+            localStorage.setItem('showToilets', true);
+            localStorage.setItem('showTableTennis', true);
+            localStorage.setItem('showBenches', true);
+            localStorage.setItem("firstTime", true)
+        }
     }
 
     /*componentDidMount(): void {

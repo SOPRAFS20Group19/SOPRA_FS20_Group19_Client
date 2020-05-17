@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Button } from '../../views/variables/Button';
 import {Checkbox} from '../../views/Filter/Checkbox';
 import {ButtonForLogin} from "../../views/variables/ButtonForLogin";
+import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo";
 
 const Container = styled.div`
   height: flex;
@@ -26,31 +27,19 @@ const Container = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: left;
-  margin-bottom: 10px;
-  flex-direction: column;
-  @media only screen and (max-width: 800px){
-    flex-direction: row;
-    margin-right: 10px;
-  }
-`;
-
-const FilterButton= styled(Button)`
-  margin-bottom: 5px;
-  @media only screen and (max-width: 800px){
-    margin-bottom: 0px;
-    margin-right: 5px;
-  }
-`;
-
 const Title = styled.h1`
   color: #ffffff;
-  text-align: left;
+  text-align: center;
   text-transform: uppercase;
   letter-spacing: 5px;
+  font-size: 45px;
   opacity: 1;
+  @media only screen and (max-width: 800px){
+    font-size: 35px;
+  }
+  @media only screen and (max-height: 680px){
+    font-size: 23px;
+  }
 `;
 
 const FilterLabel = styled.label`
@@ -59,97 +48,92 @@ const FilterLabel = styled.label`
   opacity: 1;
 `;
 
+const FilterButton= styled(Button)`
+  margin-bottom: 5px;
+  @media only screen and (max-width: 800px){
+    margin-bottom: 0px;
+    margin-right: 5px;
+  }
+
+`;
+
+const ButtonContainer = styled.div`
+  display: grid;
+  justify-content: center;
+  margin-bottom: 10px;
+  width: 100%;
+  @media only screen and (max-width: 800px){
+    flex-direction: row;
+    margin-right: 10px;
+  }
+`;
+const ButtonContainerYesNo = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-column-gap: 10px;
+  justify-content: center;
+  width: 100%;
+`;
+
+const Name = styled.div`
+  font-weight: normal;
+  font-size: medium;
+  flex-direction: row;
+  letter-spacing: 0.2em;
+  line-height: 1.1em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 20px
+  }
+  @media only screen and (max-height: 680px){
+    font-size: 14px;
+  }
+`;
+
+
 class Filter extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            checkedFountains: null,
-            checkedFireplaces: null,
-            checkedRecyclingStations: null,
-            checkedToilets: null,
-            checkedBenches: null,
-            checkedTableTennis: null
+            checkedFountains: localStorage.getItem("showFountains"),
+            checkedFireplaces: localStorage.getItem('showFireplaces'),
+            checkedRecyclingStations: localStorage.getItem('showRecyclingStations'),
+            checkedToilets: localStorage.getItem('showToilets'),
+            checkedBenches: localStorage.getItem('showBenches'),
+            checkedTableTennis: localStorage.getItem('showTableTennis')
+
         };
-        this.setCheckboxes();
-    }
-
-    componentWillMount(){
-        this.setCheckboxes();
-    }
-
-    componentDidMount() {
-        this.setCheckboxes();
-    }
-
-    setCheckboxes() {
-        this.setState({ checkedFountains: localStorage.getItem('showFountains')});
-        this.setState({ checkedFireplaces: localStorage.getItem('showFireplaces')});
-        this.setState({ checkedRecyclingStations: localStorage.getItem('showRecyclingStations')});
-        this.setState({ checkedToilets: localStorage.getItem('showToilets')});
-        this.setState({ checkedTableTennis: localStorage.getItem('showTableTennis')});
-        this.setState({ checkedBenches: localStorage.getItem('showBenches')});
-    }
-
-    changeLocalStorage(){
-        localStorage.setItem('showFountains', this.state.checkedFountains);
-        localStorage.setItem('showFireplaces', this.state.checkedFireplaces);
-        localStorage.setItem('showRecyclingStations', this.state.checkedRecyclingStations);
-        localStorage.setItem('showToilets', this.state.checkedToilets);
-        localStorage.setItem('showTableTennis', this.state.checkedTableTennis);
-        localStorage.setItem('showBenches', this.state.checkedBenches);
-        this.applyFilter();
-    }
-
-    clearFilter(){
-        this.setState({checkedFountains: false});
-        this.setState({ checkedFireplaces: false});
-        this.setState({checkedRecyclingStations: false});
-        this.setState({checkedToilets: false});
-        this.setState({checkedTableTennis: false});
-        this.setState({checkedBenches: false});
     }
 
     selectAll(){
-        this.setState({checkedFountains: true});
-        this.setState({ checkedFireplaces: true});
-        this.setState({checkedRecyclingStations: true});
-        this.setState({checkedToilets: true});
-        this.setState({checkedTableTennis: true});
-        this.setState({checkedBenches: true});
+        localStorage.setItem('showFountains', true);
+        localStorage.setItem('showFireplaces', true);
+        localStorage.setItem('showRecyclingStations', true);
+        localStorage.setItem('showToilets', true);
+        localStorage.setItem('showTableTennis', true);
+        localStorage.setItem('showBenches', true);
+        this.applyFilter();
+    }
+
+    selectNone(){
+        localStorage.removeItem('showFountains');
+        localStorage.removeItem('showFireplaces');
+        localStorage.removeItem('showRecyclingStations');
+        localStorage.removeItem('showToilets');
+        localStorage.removeItem('showTableTennis');
+        localStorage.removeItem('showBenches');
+        this.applyFilter();
     }
 
     applyFilter(){
         this.props.applyFilterSidebar();
-    }
-
-    handleCheckboxChangeFountains() {
-        const currentState = this.state.checkedFountains;
-        this.setState({checkedFountains: !currentState});
-    }
-
-    handleCheckboxChangeFireplaces(){
-        const currentState = this.state.checkedFireplaces;
-        this.setState({ checkedFireplaces: !currentState});
-    }
-
-    handleCheckboxChangeRecyclingStations() {
-        const currentState = this.state.checkedRecyclingStations;
-        this.setState({checkedRecyclingStations: !currentState});
-    }
-
-    handleCheckboxChangeToilets() {
-        const currentState = this.state.checkedToilets;
-        this.setState({checkedToilets: !currentState});
-    }
-
-    handleCheckboxChangeTableTennis() {
-        const currentState = this.state.checkedTableTennis;
-        this.setState({checkedTableTennis: !currentState});
-    }
-
-    handleCheckboxChangeBenches() {
-        const currentState = this.state.checkedBenches;
-        this.setState({checkedBenches: !currentState});
     }
 
     render(){
@@ -157,51 +141,134 @@ class Filter extends React.Component{
             <Container>
                 <Title>Filter</Title>
                 <label style={{color: 'white'}}>
-                    <Checkbox
-                        checked={this.state.checkedFountains}
-                        onChange={this.handleCheckboxChangeFountains.bind(this)}
-                    />
-                    <span>Fountains</span>
+                    <ButtonContainerYesNo>
+                        <ButtonYesNo
+                            disabled={localStorage.getItem("showFountains")}
+                            onClick={() => {
+                                this.setState({checkedFountains: true});
+                                localStorage.setItem("showFountains", true);
+                                this.applyFilter();
+                            }}>Yes
+                        </ButtonYesNo>
+                        <ButtonYesNo
+                            disabled={!localStorage.getItem("showFountains")}
+                            onClick={() => {
+                                this.setState({checkedFountains: false});
+                                localStorage.removeItem("showFountains");
+                                this.applyFilter();
+                            }}>No
+                        </ButtonYesNo>
+                    </ButtonContainerYesNo>
+                    <Name>Fountains</Name>
                 </label>
                 <label style={{color: 'white'}}>
-                    <Checkbox
-                        checked={this.state.checkedFireplaces}
-                        onChange={this.handleCheckboxChangeFireplaces.bind(this)}
-                    />
-                    <span>Fireplaces</span>
+                    <ButtonContainerYesNo>
+                        <ButtonYesNo
+                            disabled={localStorage.getItem("showFireplaces")}
+                            onClick={() => {
+                                this.setState({checkedFireplaces: true});
+                                localStorage.setItem("showFireplaces", true);
+                                this.applyFilter();
+                            }}>Yes
+                        </ButtonYesNo>
+                        <ButtonYesNo
+                            disabled={!localStorage.getItem("showFireplaces")}
+                            onClick={() => {
+                                this.setState({checkedFireplaces: false});
+                                localStorage.removeItem("showFireplaces");
+                                this.applyFilter();
+                            }}>No
+                        </ButtonYesNo>
+                    </ButtonContainerYesNo>
+                    <Name>Fireplaces</Name>
                 </label>
                 <label style={{color: 'white'}}>
-                    <Checkbox
-                        checked={this.state.checkedRecyclingStations}
-                        onChange={this.handleCheckboxChangeRecyclingStations.bind(this)}
-                    />
-                    <span>Recycling Stations</span>
+                    <ButtonContainerYesNo>
+                        <ButtonYesNo
+                            disabled={localStorage.getItem("showRecyclingStations")}
+                            onClick={() => {
+                                this.setState({checkedRecyclingStations: true});
+                                localStorage.setItem("showRecyclingStations", true);
+                                this.applyFilter();
+                            }}>Yes
+                        </ButtonYesNo>
+                        <ButtonYesNo
+                            disabled={!localStorage.getItem("showRecyclingStations")}
+                            onClick={() => {
+                                this.setState({checkedRecyclingStations: false});
+                                localStorage.removeItem("showRecyclingStations");
+                                this.applyFilter();
+                            }}>No
+                        </ButtonYesNo>
+                    </ButtonContainerYesNo>
+                    <Name>Recycling</Name>
                 </label>
                 <label style={{color: 'white'}}>
-                    <Checkbox
-                        checked={this.state.checkedToilets}
-                        onChange={this.handleCheckboxChangeToilets.bind(this)}
-                    />
-                    <span>Public Toilets</span>
+                    <ButtonContainerYesNo>
+                        <ButtonYesNo
+                            disabled={localStorage.getItem("showToilets")}
+                            onClick={() => {
+                                this.setState({checkedToilets: true});
+                                localStorage.setItem("showToilets", true);
+                                this.applyFilter();
+                            }}>Yes
+                        </ButtonYesNo>
+                        <ButtonYesNo
+                            disabled={!localStorage.getItem("showToilets")}
+                            onClick={() => {
+                                this.setState({checkedToilets: false});
+                                localStorage.removeItem("showToilets");
+                                this.applyFilter();
+                            }}>No
+                        </ButtonYesNo>
+                    </ButtonContainerYesNo>
+                    <Name>Toilets</Name>
                 </label>
                 <label style={{color: 'white'}}>
-                    <Checkbox
-                        checked={this.state.checkedTableTennis}
-                        onChange={this.handleCheckboxChangeTableTennis.bind(this)}
-                    />
-                    <span>Table Tennis</span>
+                    <ButtonContainerYesNo>
+                        <ButtonYesNo
+                            disabled={localStorage.getItem("showTableTennis")}
+                            onClick={() => {
+                                this.setState({checkedTableTennis: true});
+                                localStorage.setItem("showTableTennis", true);
+                                this.applyFilter();
+                            }}>Yes
+                        </ButtonYesNo>
+                        <ButtonYesNo
+                            disabled={!localStorage.getItem("showTableTennis")}
+                            onClick={() => {
+                                this.setState({checkedTableTennis: false});
+                                localStorage.removeItem("showTableTennis");
+                                this.applyFilter();
+                            }}>No
+                        </ButtonYesNo>
+                    </ButtonContainerYesNo>
+                    <Name>Table Tennis</Name>
                 </label>
                 <label style={{color: 'white'}}>
-                    <Checkbox
-                        checked={this.state.checkedBenches}
-                        onChange={this.handleCheckboxChangeBenches.bind(this)}
-                    />
-                    <span>Benches</span>
+                    <ButtonContainerYesNo>
+                        <ButtonYesNo
+                            disabled={localStorage.getItem("showBenches")}
+                            onClick={() => {
+                                this.setState({checkedBenches: true});
+                                localStorage.setItem("showBenches", true);
+                                this.applyFilter();
+                            }}>Yes
+                        </ButtonYesNo>
+                        <ButtonYesNo
+                            disabled={!localStorage.getItem("showBenches")}
+                            onClick={() => {
+                                this.setState({checkedBenches: false});
+                                localStorage.removeItem("showBenches");
+                                this.applyFilter();
+                            }}>No
+                        </ButtonYesNo>
+                    </ButtonContainerYesNo>
+                    <Name>Benches</Name>
                 </label>
                 <ButtonContainer>
-                    <FilterButton width="75%" onClick={() => {this.changeLocalStorage()}}>Apply Filter</FilterButton>
-                    <FilterButton width="75%" onClick={() => {this.clearFilter()}}>Clear Filter</FilterButton>
-                    <FilterButton width="75%" onClick={() => {this.selectAll()}}>Select All</FilterButton>
+                    <FilterButton width="100%" onClick={() => {this.selectAll()}}>Select All</FilterButton>
+                    <FilterButton width="100%" onClick={() => {this.selectNone()}}>Select None</FilterButton>
                 </ButtonContainer>
             </Container>
         )
