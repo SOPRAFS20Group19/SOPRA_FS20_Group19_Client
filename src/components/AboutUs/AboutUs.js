@@ -34,6 +34,16 @@ const Container2 = styled.div`
   background: #94BFE9;
 `;
 
+const Container3 = styled.div`
+  width: 100%;
+  position: absolute;
+  padding-top: 15%;
+  padding-left: 15%;
+  padding-right: 15%;
+  left: 0%;
+  background: #94BFE9;
+`;
+
 const BackgroundContainerAboutUs = styled.div`
    background-color: #94BFE9;
    width: 100%;
@@ -63,6 +73,25 @@ const ReturnToMapButton = styled.div`
   transition: all 0.3s ease;
 `;
 
+const Title = styled.div`
+  font-weight: bold;
+  font-size: x-large;
+  flex-direction: row;
+  letter-spacing: 0.2em;
+  line-height: 1.1em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  @media only screen and (max-width: 700px){
+    font-size: 20px;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 15px
+  }
+`;
+
 // This component is responsible for the about us page
 class AboutUs extends React.Component {
     constructor() {
@@ -86,6 +115,15 @@ class AboutUs extends React.Component {
                 </ButtonContainer>
                 <Container2>
                 <Carousel/>
+                    <Title>
+                        KNOW YOUR CITY was built as a SoPra Project at the University of Zurich in FS20.
+
+                        Idea and realization by group 19: Lena, Luca, Luis, Maximilian, Tim.
+
+                        Contact: knowyourcity@gmx.ch
+
+                        We thank the whole SoPra team for their tips and tricks, especially our tutor Anja.
+                    </Title>
                 </Container2>
             </BackgroundContainerAboutUs>
             </MainContainer>
