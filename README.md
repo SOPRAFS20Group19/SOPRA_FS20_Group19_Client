@@ -42,7 +42,7 @@ Server:
 
 ## High-level components
 
-- [Map] (https://github.com//repo/blob/master/other_file.md) renders the most important component of the application. Here, the user can find 
+- [Map](https://github.com/SOPRAFS20Group19/SOPRA_FS20_Group19_Client/blob/master/src/components/map/Map.js) renders the most important component of the application. Here, the user can find 
 
 ## Launch & Deployment
 
