@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import AboutUsQuestion1 from "../AboutUs/AboutUsQuestion1.png";
+import {withRouter} from "react-router-dom";
+import {RoundButton} from "../variables/RoundButton";
+
 
 /**
  * Using styled-components you can visual HTML primitives and use props with it!
@@ -40,6 +44,42 @@ const Title = styled.h1`
   }
 
 `;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  @media only screen and (max-width: 500px){
+    margin-top: 0px;
+  }
+`;
+
+
+const AboutUsButton = styled.div`
+  &:hover {
+    transform: translateY(-2px);
+  }
+  padding: 0px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10px;
+  text-align: center;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  transition: all 0.3s ease;
+    @media only screen and (max-width: 700px){
+    width: 70px;
+    height: 70px;
+    &:hover {
+    transform: translateY(0px);
+  }
+  @media only screen and (max-width: 500px){
+    width: 60px;
+    height: 60px;
+  }
+`;
+
+
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
  * Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.
@@ -48,15 +88,31 @@ const Title = styled.h1`
  * https://reactjs.org/docs/components-and-props.html
  * @FunctionalComponent
  */
-const TitleProfile = props => {
-    return (
-        <Container height={props.height}>
-            <Title>Know your city</Title>
-        </Container>
-    );
-};
+
+class TitleProfile extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Container height={this.props.height}>
+                <Title>Know your city</Title>
+                <ButtonContainer>
+                    <AboutUsButton
+                        onClick={() => {
+                            this.props.history.push(`/aboutus`);
+                        }}
+                    >
+                        <img src={AboutUsQuestion1} width="40%" heigth="40%"/>
+                    </AboutUsButton>
+                </ButtonContainer>
+            </Container>
+        );
+    }
+}
 
 /**
  * Don't forget to export your component!
  */
-export default TitleProfile;
+export default withRouter(TitleProfile);

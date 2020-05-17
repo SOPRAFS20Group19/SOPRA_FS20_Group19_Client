@@ -115,16 +115,16 @@ class AboutUs extends React.Component {
                 </ButtonContainer>
                 <Container2>
                 <Carousel/>
-                    <Title>
-                        KNOW YOUR CITY was built as a SoPra Project at the University of Zurich in FS20.
-
-                        Idea and realization by group 19: Lena, Luca, Luis, Maximilian, Tim.
-
-                        Contact: knowyourcity@gmx.ch
-
-                        We thank the whole SoPra team for their tips and tricks, especially our tutor Anja.
-                    </Title>
                 </Container2>
+                <Title>
+                    KNOW YOUR CITY was built as a SoPra Project at the University of Zurich in FS20.
+
+                    Idea and realization by group 19: Lena, Luca, Luis, Maximilian, Tim.
+
+                    Contact: knowyourcity@gmx.ch
+
+                    We thank the whole SoPra team for their tips and tricks, especially our tutor Anja.
+                </Title>
             </BackgroundContainerAboutUs>
             </MainContainer>
 
