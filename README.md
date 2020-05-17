@@ -1,7 +1,9 @@
  ![Bildschirmfoto 2020-05-17 um 00 52 52](https://user-images.githubusercontent.com/45396540/82131756-e6417100-97d8-11ea-9aff-df5728be28d9.png)
 
 # KNOW YOUR CITY
-A SoPra Project at the University of Zurich in FS20.
+Take a look at the current running version of the application [here](https://sopra-fs20-group-19-client.herokuapp.com/map).
+
+This is a SoPra Project from Students at the University of Zurich, realized in FS20.
 
 ## Introduction
 
@@ -29,6 +31,7 @@ Have fun!
 
 Client:
 - React: Used to design the User Interface with JavaScript
+- Heroku: Used to build, run and deploy the application
 
 Server:
 - SpringBoot: Used to build the REST service with Spring
@@ -65,14 +68,14 @@ You will also see any lint errors in the console. It is recommended to use Googl
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
 The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+
+Every push to the master branch automatically redeploys the heroku application and thus is "going live". If you don't want that you have to push to another branch because every push to the master is automatically a new release.
 
 ## Illustrations (RAUS IM SERVER!)
 
+To get access to all the functionalities of KNOW YOUR CITY you have to register first. Afterwards you can login:
 <img width="860" alt="Registration" src="https://user-images.githubusercontent.com/45396540/82139659-d7cf7580-9829-11ea-906d-0b7c1530316b.PNG">
-To get access to all the functionalities of Know Your City you have to register first. Afterwards you can do the login.
 
 On the map you can see fountains, fireplaces, recycling stations, public toilets, ping pong tables and benches:
  ![Bildschirmfoto 2020-05-17 um 00 52 52](https://user-images.githubusercontent.com/45396540/82131756-e6417100-97d8-11ea-9aff-df5728be28d9.png)
@@ -109,6 +112,7 @@ If you are wandering around and you discover a new location which is not stored 
 
 
 You can get your coordinates or set them manually:
+<img width="949" alt="AddPingpong" src="https://user-images.githubusercontent.com/45396540/82139871-6abcdf80-982b-11ea-94d0-ccae1f458155.PNG">
 
 
 You can add some additional information to help other users decide if they want to go to that location or not:
@@ -117,7 +121,9 @@ You can add some additional information to help other users decide if they want 
 
 ## Roadmap 
 
-dd
+- grössere Fläche
+- Filter für favorite locations
+- 
 
 ## Authors and acknowledgement
 
