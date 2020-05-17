@@ -1,5 +1,5 @@
  <img width="348" alt="Bildschirmfoto 2020-05-17 um 00 34 39" src="https://user-images.githubusercontent.com/45396540/82131545-91046000-97d6-11ea-8377-6851606d97d3.png"> 
-
+ 
 ![Bildschirmfoto 2020-05-17 um 00 52 52](https://user-images.githubusercontent.com/45396540/82131756-e6417100-97d8-11ea-9aff-df5728be28d9.png)
 
 # KNOW YOUR CITY
@@ -7,11 +7,37 @@ A SoPra Project at the University of Zurich in FS20.
 
 ## Introduction
 
-Read and go through those Tutorials, It will make your life easier!
+KNOW YOUR CITY is a complement to ubiquitous map services as Google Maps. It should help people find places of everyday life: 
+
+- Fountains
+- Fireplaces
+- Recycling Stations 
+- Table Tennis Spots
+- Beautiful Benches
+
+Our target audience are people who want to spend a nice summer evening in Zurich with BBQ and a round of table tennis. But don't forget about the others: A normal resident could find a new recycling station here. Or what if a stressed businessman has to pee urgently while travelling? KNOW YOUR CITY will show him the nearest toilet for sure.
+
+Furthermore, the application is a remote meeting place for people who want to get to know their city better. You can: 
+
+- rate locations
+- leave a comment about a location
+- chat with your friends
+- take a look at your friends favorite locations
+- add a new location if it's missing in the database.
+
+Have fun!
 
 ## Technologies
 
-ddd
+Client:
+- React: Used to design the User Interface with JavaScript
+
+Server:
+- SpringBoot: Used to build the REST service with Spring
+- Gradle: Used to build the application
+- MongoDB: Database used to store all location and user data
+- Postman: Used to test the API calls
+- SonarQube: Used to analyse code and test quality
 
 
 ## High-level components
