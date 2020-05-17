@@ -51,7 +51,9 @@ Server:
 
 ## Launch & Deployment
 
-As a new developer, for your local development environment you'll need Node.js >= 8.10. You can download it [here](https://nodejs.org). All other dependencies including React get installed with:
+As a new developer, first zip download or git clone our repository.
+
+For your local development environment you'll need Node.js >= 8.10. You can download it [here](https://nodejs.org). All other dependencies including React get installed with:
 
 ### `npm install`
 
