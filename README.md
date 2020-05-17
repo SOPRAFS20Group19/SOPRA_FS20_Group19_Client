@@ -1,6 +1,4 @@
- <img width="348" alt="Bildschirmfoto 2020-05-17 um 00 34 39" src="https://user-images.githubusercontent.com/45396540/82131545-91046000-97d6-11ea-8377-6851606d97d3.png"> 
- 
-![Bildschirmfoto 2020-05-17 um 00 52 52](https://user-images.githubusercontent.com/45396540/82131756-e6417100-97d8-11ea-9aff-df5728be28d9.png)
+ ![Bildschirmfoto 2020-05-17 um 00 52 52](https://user-images.githubusercontent.com/45396540/82131756-e6417100-97d8-11ea-9aff-df5728be28d9.png)
 
 # KNOW YOUR CITY
 A SoPra Project at the University of Zurich in FS20.
@@ -49,11 +47,31 @@ Server:
 
 ## Launch & Deployment
 
-dd
+For your local development environment you'll need Node.js >= 8.10. You can download it [here](https://nodejs.org). All other dependencies including React get installed with:
+
+### `npm install`
+
+This has to be done before starting the application for the first time (only once).
+
+### `npm run dev`
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console. It is recommended to use Google Chrome.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
 ## Illustrations (RAUS IM SERVER!)
 
-dd
+d
 
 ## Roadmap 
 
