@@ -71,7 +71,49 @@ Your app is ready to be deployed!
 
 ## Illustrations (RAUS IM SERVER!)
 
-d
+<img width="860" alt="Registration" src="https://user-images.githubusercontent.com/45396540/82139659-d7cf7580-9829-11ea-906d-0b7c1530316b.PNG">
+To get access to all the functionalities of Know Your City you have to register first. Afterwards you can do the login.
+
+On the map you can see fountains, fireplaces, recycling stations, public toilets, ping pong tables and benches:
+ ![Bildschirmfoto 2020-05-17 um 00 52 52](https://user-images.githubusercontent.com/45396540/82131756-e6417100-97d8-11ea-9aff-df5728be28d9.png)
+
+If you click on a location on the map an information window pops up. You can click on the button to get more information about this location:
+<img width="958" alt="PopUp" src="https://user-images.githubusercontent.com/45396540/82139668-eb7adc00-9829-11ea-8ee6-c1eebf0be3bd.PNG">
+
+At the location information page you can rate the location and chat with other users about it:
+<img width="960" alt="LocationInfo" src="https://user-images.githubusercontent.com/45396540/82139669-ef0e6300-9829-11ea-836b-2a5c142c9645.PNG">
+
+
+By clicking at the "Profile options" button at the sidebar of the map, you can access your profile page. You can see your friends list and your favorite locations:
+<img width="949" alt="UserProfile1" src="https://user-images.githubusercontent.com/45396540/82139673-f59cda80-9829-11ea-86b9-15466067e1ea.PNG">
+
+
+By clicking at one of your friends, you get to their profile where you can chat with each other:
+<img width="907" alt="FriendChat" src="https://user-images.githubusercontent.com/45396540/82139675-f9c8f800-9829-11ea-93b3-c2fb55cf780a.PNG">
+
+
+You can edit your profile and add a profile picture:
+<img width="951" alt="EditPicture" src="https://user-images.githubusercontent.com/45396540/82139677-fd5c7f00-9829-11ea-8d79-a713ff6ecc53.PNG">
+
+
+To view all the current users of KNOW YOUR CITY you can click on the users button at the sidebar:
+<img width="959" alt="Users" src="https://user-images.githubusercontent.com/45396540/82139680-00f00600-982a-11ea-8a5f-64c5661051da.PNG">
+
+
+If you only want to see some location types, you can use the filter:
+<img width="960" alt="Filter" src="https://user-images.githubusercontent.com/45396540/82139681-064d5080-982a-11ea-9258-d2ffe11d26e0.PNG">
+
+
+If you are wandering around and you discover a new location which is not stored in our database yet, you can add the location by clicking at the plus at the sidebar:
+<img width="946" alt="AddLocation" src="https://user-images.githubusercontent.com/45396540/82139685-09e0d780-982a-11ea-902d-d50db1849e5c.PNG">
+
+
+You can get your coordinates or set them manually:
+
+
+You can add some additional information to help other users decide if they want to go to that location or not:
+<img width="954" alt="InfosPingpong" src="https://user-images.githubusercontent.com/45396540/82139689-11a07c00-982a-11ea-8423-e96a84f77699.PNG">
+
 
 ## Roadmap 
 
