@@ -99,6 +99,39 @@ const Text = styled.div`
   }
 `;
 
+const ButtonReturnMap = styled.button`
+  &:hover {
+    transform: translateY(-2px);
+  }
+  padding: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  color: #003068;
+  width: ${props => props.width || null};
+  height: 35px;
+  border: 2px solid #003068;
+  border-radius: 5px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  background: #66A3E0;
+  transition: all 0.3s ease;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+    padding: 3px;
+    border: 1.5px solid #003068;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 10px;
+    height: 25px;
+    padding: 3px;
+    border: 1.5px solid #003068;
+    width: 200px;
+  }
+`;
+
 
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
@@ -126,8 +159,7 @@ class LocationInformation extends React.Component{
                         <Title>Address: </Title><Text>{this.props.address}</Text>
                         <Title>Additional Information:</Title><Text>{this.props.information}</Text>
                         <Title>Coordinates: </Title><Text>{this.props.latitude}, {this.props.longitude}</Text>
-                        <Button
-                            width="200px"
+                        <ButtonReturnMap
                             onClick={() => {
                                 localStorage.setItem("currentLocationInformationLat", this.props.latitude);
                                 localStorage.setItem("currentLocationInformationLon", this.props.longitude);
@@ -135,7 +167,7 @@ class LocationInformation extends React.Component{
                                 //localStorage.setItem("currentLocationInformation", JSON.stringify(this.props.location));
                                 this.props.history.push(`/map`);
                         }}>
-                            Show Location on Map</Button>
+                            Show Location on Map</ButtonReturnMap>
                     </div>
                     )}
             </Container>

@@ -195,7 +195,8 @@ class ProfilePage extends React.Component {
 
             await api.put(url);
 
-            this.setState({isFriend: true});
+            setTimeout(() => {this.setState({isFriend: true})}, 1000);
+            //this.setState({isFriend: true});
         } catch (e) {
             alert(`Something went wrong while adding this friend: \n${handleError(e)}`);
         }

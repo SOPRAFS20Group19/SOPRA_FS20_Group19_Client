@@ -103,18 +103,21 @@ const ButtonRecycling = {
     color: '#228B22',
     border: '2px solid #228B22',
     background: '#000000',
+    width: '100%',
 };
 
 const ButtonFirePlace = {
     color: 'chocolate',
     border: '2px solid chocolate',
     background: 'darkred',
+    width: '100%',
 };
 
 const ButtonFountain = {
     color: '#66A3E0',
     border: '2px solid #66A3E0',
     background: '#003068',
+    width: '100%',
 
 };
 
@@ -122,21 +125,21 @@ const ButtonToilet = {
     color: '#A9A9A9',
     border: '2px solid #A9A9A9',
     background: '#000000',
-
+    width: '100%',
 };
 
 const ButtonTableTennis = {
     color: '#FFC0CB',
     border: '2px solid #FFC0CB',
     background: '#8f193f',
-
+    width: '100%',
 };
 
 const ButtonBench = {
     color: '#A58A72',
     border: '2px solid #A58A72',
     background: '#2D150A',
-
+    width: '100%',
 };
 
 

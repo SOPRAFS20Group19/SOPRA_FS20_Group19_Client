@@ -17,11 +17,11 @@ const Container = styled.div`
   right: 10%;
   flex-direction: column;
   @media only screen and (max-width: 800px){
-    height: 50%;
+    height: flex;
     width: 100%
     overflow: scroll;
     position: absolute;
-    top: 38%;
+    bottom: 17%;
     right: 0%;
   }
 `;

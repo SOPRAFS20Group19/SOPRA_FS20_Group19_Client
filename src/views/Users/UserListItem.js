@@ -102,7 +102,7 @@ const ProfilePageButton = styled.button`
   text-align: left;
   @media only screen and (max-width: 700px){
     font-size: 10px;
-    height: 25px;
+    height: flex;
     border: 0px solid transparent;
   }
   &:hover {
@@ -242,12 +242,23 @@ class UserListItem extends React.Component{
                 </AvatarContainer>
                 <Title>{this.props.user.username} </Title>
                 <ButtonContainer>
-                    <ProfilePageButton
+                    {this.state.isFriend ?  <ProfilePageButton
                         variant="primary"
                         width="100%"
-                        onClick={() => {this.props.goToProfile(this.props.user.id);}}>
+                        onClick={() => {
+                            this.props.goToProfile(this.props.user.id);
+                        }}>
+                        Chat with {this.props.user.username}
+                    </ProfilePageButton> :
+                        <ProfilePageButton
+                        variant="primary"
+                        width="100%"
+                        onClick={() => {
+                        this.props.goToProfile(this.props.user.id);
+                    }}>
                         Visit {this.props.user.username}'s profile
-                    </ProfilePageButton>
+                        </ProfilePageButton>
+                    }
                 </ButtonContainer>
                 <ImageContainer>
                     {this.state.isFriend === false ?
