@@ -34,15 +34,15 @@ Client:
 
 Server:
 - SpringBoot: Used to build the REST service with Spring
-- Gradle: Used to build the application
 - MongoDB: Database used to store all location and user data
+- Gradle: Used to build the application
 - Postman: Used to test the API calls
 - SonarQube: Used to analyse code and test quality
 
 
 ## High-level components
 
-ddd
+- [Map] (https://github.com//repo/blob/master/other_file.md) renders the most important component of the application. Here, the user can find 
 
 ## Launch & Deployment
 
