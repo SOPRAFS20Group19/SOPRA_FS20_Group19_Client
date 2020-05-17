@@ -11,6 +11,7 @@ import SavedLocations from "../../views/UserInformation/SavedLocations";
 import {Spinner} from "../../views/variables/Spinner";
 import TitleProfile from "../../views/UserInformation/TitleProfile";
 import FriendsUser from "../../views/UserInformation/FriendsUser";
+import AboutUsQuestion1 from "../../views/AboutUs/AboutUsQuestion1.png";
 
 const BackgroundContainer = styled(BaseContainer)`
   min-height: 620px;
@@ -65,6 +66,28 @@ const Container =styled.div`
   grid-column-gap: 30px;
 `;
 
+const AboutUsButton = styled.div`
+  &:hover {
+    transform: translateY(-2px);
+  }
+  padding: 0px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10px;
+  text-align: center;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  transition: all 0.3s ease;
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  @media only screen and (max-width: 500px){
+    margin-top: 10px;
+  }
+`;
+
 // this component is responsible for the user profile
 class UserProfile extends React.Component {
     constructor() {
@@ -112,7 +135,6 @@ class UserProfile extends React.Component {
             <div>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                         <MainContainer>
-
                             <UserHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
                             <UserInformation
                                 username={this.state.loggedInUser.username}
@@ -121,6 +143,15 @@ class UserProfile extends React.Component {
                             />
                             <SavedLocations userId={this.state.loggedInUserId}/>
                             <FriendsUser userId={this.state.loggedInUserId}/>
+                            <ButtonContainer>
+                                <AboutUsButton
+                                    onClick={() => {
+                                        this.props.history.push(`/aboutus`);
+                                    }}
+                                >
+                                    <img src={AboutUsQuestion1} width="40%" heigth= "40%"/>
+                                </AboutUsButton>
+                            </ButtonContainer>
                         </MainContainer>
                 ) }
                 <TitleProfile/>
