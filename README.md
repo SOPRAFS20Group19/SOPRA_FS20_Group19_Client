@@ -43,9 +43,9 @@ Server:
 ## High-level components
 
 - [Map](https://github.com/SOPRAFS20Group19/SOPRA_FS20_Group19_Client/blob/master/src/components/map/Map.js) controls the most important component of the application: the map. It handles the current position of the user and stores the chosen filters if the user wants to see just some specific location types.
-- [MapService](xxx) is called by Map and renders the map itself by accessing the Google Maps API and our MongoDB database to get coordinates and informations about our locations which it shows to the user with the help of Map Markers and Popups after clicking on such a Marker.
-- [AppRouter] controls which components are rendered for each specific URL path. Like that it handles part of the logic of the application. For example it calls [MapRouter](xxx) if the map should be displayed. MapRouter then controls which components are rendered for each specific URL path in connection with the map.
-- [App](xxx) is the main class of the file, rendering AppRouter. 
+- [MapService](https://github.com/SOPRAFS20Group19/SOPRA_FS20_Group19_Client/blob/master/src/components/map/MapService.js) is called by Map and renders the map itself by accessing the Google Maps API and our MongoDB database to get coordinates and informations about our locations which it shows to the user with the help of Map Markers and Popups after clicking on such a Marker.
+- [AppRouter](https://github.com/SOPRAFS20Group19/SOPRA_FS20_Group19_Client/blob/master/src/components/shared/routers/AppRouter.js) controls which components are rendered for each specific URL path. Like that it handles part of the logic of the application. For example it calls [MapRouter](https://github.com/SOPRAFS20Group19/SOPRA_FS20_Group19_Client/blob/master/src/components/shared/routers/MapRouter.js) if the map should be displayed. MapRouter then controls which components are rendered for each specific URL path in connection with the map.
+- [App](https://github.com/SOPRAFS20Group19/SOPRA_FS20_Group19_Client/blob/master/src/App.js) is the main class of the file, rendering AppRouter. 
 
 ## Launch & Deployment
 
