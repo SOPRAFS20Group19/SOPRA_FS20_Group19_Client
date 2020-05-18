@@ -37,6 +37,16 @@ const Container2 = styled.div`
   }
 `;
 
+const Container3 = styled.div`
+  width: 100%;
+  position: absolute;
+  padding-top: 15%;
+  padding-left: 15%;
+  padding-right: 15%;
+  left: 0%;
+  background: #94BFE9;
+`;
+
 const BackgroundContainerAboutUs = styled.div`
    background-color: #94BFE9;
    width: 100%;

@@ -51,15 +51,29 @@ class Map extends React.Component{
             currentCenter: [47.366950, 8.547200],
             loggedInUserId: localStorage.getItem("userId"),
             loggedInUser: new User(),
-            loading: false
+            loading: false,
+            filterSpinner: false,
         };
-        this.resetFilter();
+        //this.resetFilter();
+        this.firstTimeLoadingMap();
         this.getFilteredLocations();
         this.getFilteredLocations = this.getFilteredLocations.bind(this);
         this.getLocation = this.getLocation.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
         this.getLocation();
         this.getUser();
+    }
+
+    firstTimeLoadingMap(){
+        if (!localStorage.getItem("firstTime")){
+            localStorage.setItem('showFountains', true);
+            localStorage.setItem('showFireplaces', true);
+            localStorage.setItem('showRecyclingStations', true);
+            localStorage.setItem('showToilets', true);
+            localStorage.setItem('showTableTennis', true);
+            localStorage.setItem('showBenches', true);
+            localStorage.setItem("firstTime", true)
+        }
     }
 
     /*componentDidMount(): void {
@@ -95,6 +109,7 @@ class Map extends React.Component{
 
 
     async getFilteredLocations(){
+        this.setState({filterSpinner: true})
         try {
             const requestBody = JSON.stringify({
                 fountains: localStorage.getItem('showFountains'),
@@ -113,6 +128,7 @@ class Map extends React.Component{
 
             // Get the returned users and update the state.
             this.setState({ locationsShown: response.data });
+            this.setState({filterSpinner: false})
         } catch (error) {
             alert(`Something went wrong while fetching the filtered locations: \n${handleError(error)}`);
         }
@@ -226,7 +242,7 @@ class Map extends React.Component{
             </MapService>
             </MapContainer>)}
             <HeaderMap/>
-            <Sidebar centerMapAtCurrentLocation={this.centerMapAtCurrentLocation.bind(this)} getFilteredLocations={this.getFilteredLocations.bind(this)} avatarNr={this.state.loggedInUser.avatarNr}/>
+            <Sidebar filterSpinner={this.state.filterSpinner} centerMapAtCurrentLocation={this.centerMapAtCurrentLocation.bind(this)} getFilteredLocations={this.getFilteredLocations.bind(this)} avatarNr={this.state.loggedInUser.avatarNr}/>
         </div>
         );
     }

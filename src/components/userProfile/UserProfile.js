@@ -11,6 +11,7 @@ import SavedLocations from "../../views/UserInformation/SavedLocations";
 import {Spinner} from "../../views/variables/Spinner";
 import TitleProfile from "../../views/UserInformation/TitleProfile";
 import FriendsUser from "../../views/UserInformation/FriendsUser";
+import AboutUsQuestion1 from "../../views/AboutUs/AboutUsQuestion1.png";
 
 const BackgroundContainer = styled(BaseContainer)`
   min-height: 620px;
@@ -65,6 +66,7 @@ const Container =styled.div`
   grid-column-gap: 30px;
 `;
 
+
 // this component is responsible for the user profile
 class UserProfile extends React.Component {
     constructor() {
@@ -112,7 +114,6 @@ class UserProfile extends React.Component {
             <div>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
                         <MainContainer>
-
                             <UserHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
                             <UserInformation
                                 username={this.state.loggedInUser.username}
