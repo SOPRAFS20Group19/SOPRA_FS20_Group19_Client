@@ -287,7 +287,7 @@ class Sidebar extends React.Component{
                         onHide={() => this.setState({ showFilter: false })}
                         trigger="click"
                         placement="left"
-                        overlay={<Filter applyFilterSidebar={this.applyFilterSidebar.bind(this)}/>}>
+                        overlay={<Filter filterSpinner={this.props.filterSpinner} applyFilterSidebar={this.applyFilterSidebar.bind(this)}/>}>
                         <div>
                             <ButtonContainer>
                                 <RoundButton

@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from '../../views/variables/Button';
+import {Button} from '../../views/variables/Button';
 import {Checkbox} from '../../views/Filter/Checkbox';
 import {ButtonForLogin} from "../../views/variables/ButtonForLogin";
 import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo";
+import Spinner from "react-bootstrap/Spinner";
 
 const Container = styled.div`
   height: flex;
@@ -27,6 +28,9 @@ const Container = styled.div`
   }
 `;
 
+const Container2 = styled.div`
+`;
+
 const Title = styled.h1`
   color: #ffffff;
   text-align: center;
@@ -48,7 +52,7 @@ const FilterLabel = styled.label`
   opacity: 1;
 `;
 
-const FilterButton= styled(Button)`
+const FilterButton = styled(Button)`
   margin-bottom: 5px;
   @media only screen and (max-width: 800px){
     margin-bottom: 0px;
@@ -98,7 +102,7 @@ const Name = styled.div`
 `;
 
 
-class Filter extends React.Component{
+class Filter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -112,7 +116,7 @@ class Filter extends React.Component{
         };
     }
 
-    selectAll(){
+    selectAll() {
         localStorage.setItem('showFountains', true);
         localStorage.setItem('showFireplaces', true);
         localStorage.setItem('showRecyclingStations', true);
@@ -122,7 +126,7 @@ class Filter extends React.Component{
         this.applyFilter();
     }
 
-    selectNone(){
+    selectNone() {
         localStorage.removeItem('showFountains');
         localStorage.removeItem('showFireplaces');
         localStorage.removeItem('showRecyclingStations');
@@ -132,147 +136,164 @@ class Filter extends React.Component{
         this.applyFilter();
     }
 
-    applyFilter(){
+    applyFilter() {
         this.props.applyFilterSidebar();
     }
 
-    render(){
-        return(
-            <Container>
-                <Title>Filter</Title>
-                <label style={{color: 'white'}}>
-                    <ButtonContainerYesNo>
-                        <ButtonYesNo
-                            disabled={localStorage.getItem("showFountains")}
-                            onClick={() => {
-                                this.setState({checkedFountains: true});
-                                localStorage.setItem("showFountains", true);
-                                this.applyFilter();
-                            }}>Yes
-                        </ButtonYesNo>
-                        <ButtonYesNo
-                            disabled={!localStorage.getItem("showFountains")}
-                            onClick={() => {
-                                this.setState({checkedFountains: false});
-                                localStorage.removeItem("showFountains");
-                                this.applyFilter();
-                            }}>No
-                        </ButtonYesNo>
-                    </ButtonContainerYesNo>
-                    <Name>Fountains</Name>
-                </label>
-                <label style={{color: 'white'}}>
-                    <ButtonContainerYesNo>
-                        <ButtonYesNo
-                            disabled={localStorage.getItem("showFireplaces")}
-                            onClick={() => {
-                                this.setState({checkedFireplaces: true});
-                                localStorage.setItem("showFireplaces", true);
-                                this.applyFilter();
-                            }}>Yes
-                        </ButtonYesNo>
-                        <ButtonYesNo
-                            disabled={!localStorage.getItem("showFireplaces")}
-                            onClick={() => {
-                                this.setState({checkedFireplaces: false});
-                                localStorage.removeItem("showFireplaces");
-                                this.applyFilter();
-                            }}>No
-                        </ButtonYesNo>
-                    </ButtonContainerYesNo>
-                    <Name>Fireplaces</Name>
-                </label>
-                <label style={{color: 'white'}}>
-                    <ButtonContainerYesNo>
-                        <ButtonYesNo
-                            disabled={localStorage.getItem("showRecyclingStations")}
-                            onClick={() => {
-                                this.setState({checkedRecyclingStations: true});
-                                localStorage.setItem("showRecyclingStations", true);
-                                this.applyFilter();
-                            }}>Yes
-                        </ButtonYesNo>
-                        <ButtonYesNo
-                            disabled={!localStorage.getItem("showRecyclingStations")}
-                            onClick={() => {
-                                this.setState({checkedRecyclingStations: false});
-                                localStorage.removeItem("showRecyclingStations");
-                                this.applyFilter();
-                            }}>No
-                        </ButtonYesNo>
-                    </ButtonContainerYesNo>
-                    <Name>Recycling</Name>
-                </label>
-                <label style={{color: 'white'}}>
-                    <ButtonContainerYesNo>
-                        <ButtonYesNo
-                            disabled={localStorage.getItem("showToilets")}
-                            onClick={() => {
-                                this.setState({checkedToilets: true});
-                                localStorage.setItem("showToilets", true);
-                                this.applyFilter();
-                            }}>Yes
-                        </ButtonYesNo>
-                        <ButtonYesNo
-                            disabled={!localStorage.getItem("showToilets")}
-                            onClick={() => {
-                                this.setState({checkedToilets: false});
-                                localStorage.removeItem("showToilets");
-                                this.applyFilter();
-                            }}>No
-                        </ButtonYesNo>
-                    </ButtonContainerYesNo>
-                    <Name>Toilets</Name>
-                </label>
-                <label style={{color: 'white'}}>
-                    <ButtonContainerYesNo>
-                        <ButtonYesNo
-                            disabled={localStorage.getItem("showTableTennis")}
-                            onClick={() => {
-                                this.setState({checkedTableTennis: true});
-                                localStorage.setItem("showTableTennis", true);
-                                this.applyFilter();
-                            }}>Yes
-                        </ButtonYesNo>
-                        <ButtonYesNo
-                            disabled={!localStorage.getItem("showTableTennis")}
-                            onClick={() => {
-                                this.setState({checkedTableTennis: false});
-                                localStorage.removeItem("showTableTennis");
-                                this.applyFilter();
-                            }}>No
-                        </ButtonYesNo>
-                    </ButtonContainerYesNo>
-                    <Name>Table Tennis</Name>
-                </label>
-                <label style={{color: 'white'}}>
-                    <ButtonContainerYesNo>
-                        <ButtonYesNo
-                            disabled={localStorage.getItem("showBenches")}
-                            onClick={() => {
-                                this.setState({checkedBenches: true});
-                                localStorage.setItem("showBenches", true);
-                                this.applyFilter();
-                            }}>Yes
-                        </ButtonYesNo>
-                        <ButtonYesNo
-                            disabled={!localStorage.getItem("showBenches")}
-                            onClick={() => {
-                                this.setState({checkedBenches: false});
-                                localStorage.removeItem("showBenches");
-                                this.applyFilter();
-                            }}>No
-                        </ButtonYesNo>
-                    </ButtonContainerYesNo>
-                    <Name>Benches</Name>
-                </label>
-                <ButtonContainer>
-                    <FilterButton width="100%" onClick={() => {this.selectAll()}}>Select All</FilterButton>
-                    <FilterButton width="100%" onClick={() => {this.selectNone()}}>Select None</FilterButton>
-                </ButtonContainer>
-            </Container>
-        )
-    }
-}
+    render() {
+        return (
+            <div>
 
-export default Filter;
+            {this.props.filterSpinner === true ? (
+                    <Container>
+                        <Title>Filter</Title>
+                        <div className="d-flex justify-content-center">
+                            <div className="spinner-border text-light" role="status">
+                            </div>
+                        </div>
+                    </Container>
+                ) : (
+                    <Container>
+                        <Title>Filter</Title>
+                        <label style={{color: 'white'}}>
+                            <ButtonContainerYesNo>
+                                <ButtonYesNo
+                                    disabled={localStorage.getItem("showFountains")}
+                                    onClick={() => {
+                                        this.setState({checkedFountains: true});
+                                        localStorage.setItem("showFountains", true);
+                                        this.applyFilter();
+                                    }}>Yes
+                                </ButtonYesNo>
+                                <ButtonYesNo
+                                    disabled={!localStorage.getItem("showFountains")}
+                                    onClick={() => {
+                                        this.setState({checkedFountains: false});
+                                        localStorage.removeItem("showFountains");
+                                        this.applyFilter();
+                                    }}>No
+                                </ButtonYesNo>
+                            </ButtonContainerYesNo>
+                            <Name>Fountains</Name>
+                        </label>
+                        <label style={{color: 'white'}}>
+                            <ButtonContainerYesNo>
+                                <ButtonYesNo
+                                    disabled={localStorage.getItem("showFireplaces")}
+                                    onClick={() => {
+                                        this.setState({checkedFireplaces: true});
+                                        localStorage.setItem("showFireplaces", true);
+                                        this.applyFilter();
+                                    }}>Yes
+                                </ButtonYesNo>
+                                <ButtonYesNo
+                                    disabled={!localStorage.getItem("showFireplaces")}
+                                    onClick={() => {
+                                        this.setState({checkedFireplaces: false});
+                                        localStorage.removeItem("showFireplaces");
+                                        this.applyFilter();
+                                    }}>No
+                                </ButtonYesNo>
+                            </ButtonContainerYesNo>
+                            <Name>Fireplaces</Name>
+                        </label>
+                        <label style={{color: 'white'}}>
+                            <ButtonContainerYesNo>
+                                <ButtonYesNo
+                                    disabled={localStorage.getItem("showRecyclingStations")}
+                                    onClick={() => {
+                                        this.setState({checkedRecyclingStations: true});
+                                        localStorage.setItem("showRecyclingStations", true);
+                                        this.applyFilter();
+                                    }}>Yes
+                                </ButtonYesNo>
+                                <ButtonYesNo
+                                    disabled={!localStorage.getItem("showRecyclingStations")}
+                                    onClick={() => {
+                                        this.setState({checkedRecyclingStations: false});
+                                        localStorage.removeItem("showRecyclingStations");
+                                        this.applyFilter();
+                                    }}>No
+                                </ButtonYesNo>
+                            </ButtonContainerYesNo>
+                            <Name>Recycling</Name>
+                        </label>
+                        <label style={{color: 'white'}}>
+                            <ButtonContainerYesNo>
+                                <ButtonYesNo
+                                    disabled={localStorage.getItem("showToilets")}
+                                    onClick={() => {
+                                        this.setState({checkedToilets: true});
+                                        localStorage.setItem("showToilets", true);
+                                        this.applyFilter();
+                                    }}>Yes
+                                </ButtonYesNo>
+                                <ButtonYesNo
+                                    disabled={!localStorage.getItem("showToilets")}
+                                    onClick={() => {
+                                        this.setState({checkedToilets: false});
+                                        localStorage.removeItem("showToilets");
+                                        this.applyFilter();
+                                    }}>No
+                                </ButtonYesNo>
+                            </ButtonContainerYesNo>
+                            <Name>Toilets</Name>
+                        </label>
+                        <label style={{color: 'white'}}>
+                            <ButtonContainerYesNo>
+                                <ButtonYesNo
+                                    disabled={localStorage.getItem("showTableTennis")}
+                                    onClick={() => {
+                                        this.setState({checkedTableTennis: true});
+                                        localStorage.setItem("showTableTennis", true);
+                                        this.applyFilter();
+                                    }}>Yes
+                                </ButtonYesNo>
+                                <ButtonYesNo
+                                    disabled={!localStorage.getItem("showTableTennis")}
+                                    onClick={() => {
+                                        this.setState({checkedTableTennis: false});
+                                        localStorage.removeItem("showTableTennis");
+                                        this.applyFilter();
+                                    }}>No
+                                </ButtonYesNo>
+                            </ButtonContainerYesNo>
+                            <Name>Table Tennis</Name>
+                        </label>
+                        <label style={{color: 'white'}}>
+                            <ButtonContainerYesNo>
+                                <ButtonYesNo
+                                    disabled={localStorage.getItem("showBenches")}
+                                    onClick={() => {
+                                        this.setState({checkedBenches: true});
+                                        localStorage.setItem("showBenches", true);
+                                        this.applyFilter();
+                                    }}>Yes
+                                </ButtonYesNo>
+                                <ButtonYesNo
+                                    disabled={!localStorage.getItem("showBenches")}
+                                    onClick={() => {
+                                        this.setState({checkedBenches: false});
+                                        localStorage.removeItem("showBenches");
+                                        this.applyFilter();
+                                    }}>No
+                                </ButtonYesNo>
+                            </ButtonContainerYesNo>
+                            <Name>Benches</Name>
+                        </label>
+                        <ButtonContainer>
+                            <FilterButton width="100%" onClick={() => {
+                                this.selectAll()
+                            }}>Select All</FilterButton>
+                            <FilterButton width="100%" onClick={() => {
+                                this.selectNone()
+                            }}>Select None</FilterButton>
+                        </ButtonContainer>
+                    </Container>
+                )
+            }
+            </div>    )
+    }
+    }
+
+    export default Filter;
