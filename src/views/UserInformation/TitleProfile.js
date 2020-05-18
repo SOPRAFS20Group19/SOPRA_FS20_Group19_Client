@@ -101,6 +101,7 @@ class TitleProfile extends React.Component {
                 <ButtonContainer>
                     <AboutUsButton
                         onClick={() => {
+                            localStorage.setItem('cameToAboutUsFrom', 'userprofile');
                             this.props.history.push(`/aboutus`);
                         }}
                     >

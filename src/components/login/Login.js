@@ -116,6 +116,12 @@ const ButtonContainer = styled.div`
   min-width: 240px;
 `;
 
+const ErrorContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    min-width: 240px;
+`;
+
 const AboutUsButton = styled.div`
   &:hover {
     transform: translateY(-2px);
@@ -136,6 +142,8 @@ const ErrorMessage = styled.div`
   flex-direction: row;
   color: red;
   margin-top: 5px;
+  max-width: 200px;
+  text-align: center;
 `;
 
 /*const TextHover = styled.p`
@@ -298,6 +306,9 @@ class Login extends React.Component {
                                     this.handleInputChange('password', e.target.value);
                                 }}
                             />
+                            <ErrorContainer>
+                                <ValidationMessage valid={this.state.hasErrorMessage} message={this.state.errorMessage}/>
+                            </ErrorContainer>
                             <ButtonContainer>
                                 <Button
                                     disabled={!this.state.username || !this.state.password}
@@ -330,11 +341,9 @@ class Login extends React.Component {
                                 </ButtonForLogin>
                             </ButtonContainer>
                             <ButtonContainer>
-                                <ValidationMessage valid={this.state.hasErrorMessage} message={this.state.errorMessage}/>
-                            </ButtonContainer>
-                            <ButtonContainer>
                                 <AboutUsButton
                                     onClick={() => {
+                                        localStorage.setItem('cameToAboutUsFrom', 'login');
                                         this.props.history.push(`/aboutus`);
                                     }}
                                 >

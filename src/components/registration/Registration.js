@@ -18,6 +18,8 @@ const ErrorMessage = styled.div`
   margin-top:0px;
   padding-bottom: 5px;
   color: red;
+  max-width: 215px;
+  text-align: center;
 `;
 const BackgroundContainer = styled.div`
   display: flex;
@@ -441,6 +443,7 @@ class Registration extends React.Component {
                                 <ButtonContainer>
                                     <AboutUsButton
                                         onClick={() => {
+                                            localStorage.setItem('cameToAboutUsFrom', 'registration');
                                             this.props.history.push(`/aboutus`);
                                         }}
                                     >

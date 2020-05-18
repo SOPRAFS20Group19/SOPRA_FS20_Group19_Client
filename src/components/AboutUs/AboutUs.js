@@ -90,6 +90,14 @@ class AboutUs extends React.Component {
         this.state = {};
     }
 
+    returnToLastPage(){
+      let redirectTo = '/map'
+      if (localStorage.getItem('cameToAboutUsFrom') === 'login'){redirectTo = '/login';}
+      else if (localStorage.getItem('cameToAboutUsFrom') === 'registration'){redirectTo = '/registration';}
+      else if (localStorage.getItem('cameToAboutUsFrom') === 'userprofile'){redirectTo = '/userprofile';}
+      this.props.history.push(redirectTo);
+    }
+
     render() {
         return (
             <MainContainer>
@@ -98,7 +106,7 @@ class AboutUs extends React.Component {
                 <ButtonContainer>
                     <ReturnToMapButton
                         onClick={() => {
-                            this.props.history.push(`/map`);
+                            this.returnToLastPage();
                         }}
                     >
                         <img src={LogoutIcon} width="4%" heigth= "4%"/>
@@ -114,7 +122,7 @@ class AboutUs extends React.Component {
                     <br/>
                     Contact: knowyourcity@gmx.ch
                     <br/>
-                    We thank the whole SoPra team for their tips and trick, especially our tutor Anja.
+                    We thank the whole SoPra team for their tips and tricks, especially our tutor Anja.
                 </Text>
             </BackgroundContainerAboutUs>
             </MainContainer>
