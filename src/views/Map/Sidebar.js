@@ -171,10 +171,13 @@ class Sidebar extends React.Component{
         try{
             api.put('/logout/' + localStorage.getItem('userId')); //logs out user in database
             localStorage.removeItem('userId');
-            localStorage.removeItem('showFountains');
-            localStorage.removeItem('showFireplaces');
-            localStorage.removeItem('showRecyclingStations');
             localStorage.removeItem('userAvatar');
+            localStorage.setItem('showFountains', true);
+            localStorage.setItem('showFireplaces', true);
+            localStorage.setItem('showRecyclingStations', true);
+            localStorage.setItem('showToilets', true);
+            localStorage.setItem('showTableTennis', true);
+            localStorage.setItem('showBenches', true);
             this.props.history.push('/login');
         }catch (error) {
             alert(`Something went wrong during the logout: \n${handleError(error)}`);
