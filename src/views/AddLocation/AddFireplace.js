@@ -19,7 +19,7 @@ const MainContainer =styled.div`
   top: 7%;
   @media only screen and (max-width: 800px){
     display: block;
-    max-height: 83%;
+    max-height: 80%;
     overflow: scroll;
     width: 100%;
     left: 0%;
