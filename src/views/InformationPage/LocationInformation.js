@@ -102,6 +102,7 @@ class LocationInformation extends React.Component{
                             onClick={() => {
                                 localStorage.setItem("currentLocationInformationLat", this.props.latitude);
                                 localStorage.setItem("currentLocationInformationLon", this.props.longitude);
+                                localStorage.setItem("showLocation", true);
                                 this.props.history.push(`/map`);
                         }}>
                             Show Location on Map</ButtonReturnMap>

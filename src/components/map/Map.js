@@ -52,6 +52,7 @@ class Map extends React.Component{
             loggedInUser: new User(),
             loading: false,
             filterSpinner: false,
+            zoom: 15,
         };
         this.firstTimeLoadingMap();
         this.getFilteredLocations();
@@ -151,6 +152,10 @@ class Map extends React.Component{
             this.setState({   currentCenter: [position.coords.latitude, position.coords.longitude]});
             localStorage.removeItem("wantsCurrentLocation");
         }
+        if(localStorage.getItem("showLocation")){
+            this.setState({zoom: 30});
+            localStorage.removeItem("showLocation");
+        }
     }
 
     getLocation() {
@@ -211,6 +216,7 @@ class Map extends React.Component{
                 containerElement={<div style={{ height: `100%` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
                 loggedInUser={this.state.loggedInUser}
+                zoom={this.state.zoom}
             >
             </MapService>
             </MapContainer>)}
