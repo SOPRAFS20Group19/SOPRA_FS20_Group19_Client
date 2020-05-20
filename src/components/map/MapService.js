@@ -259,7 +259,7 @@ class MapService extends React.Component {
                     <Spinner />
                     ) : (
                     <GoogleMap
-                        defaultZoom={15}
+                        defaultZoom={this.props.zoom}
                         //Center at current location
                         defaultCenter={{
                         lat: this.props.currentCenter[0],
