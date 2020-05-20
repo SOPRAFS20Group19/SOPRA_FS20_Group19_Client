@@ -268,10 +268,6 @@ class ProfilePageInformation extends React.Component{
                             <Text>{this.props.user.username}</Text>
                         </GridContainer>
                         <GridContainer row={3}>
-                            <Title>Status:</Title>
-                            <Text>{this.props.user.status}</Text>
-                        </GridContainer>
-                        <GridContainer row={4}>
                             <Title>KYC-user since:</Title>
                             <Text>{this.props.user.creationDate}</Text>
                         </GridContainer>
