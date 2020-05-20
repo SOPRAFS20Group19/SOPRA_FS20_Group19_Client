@@ -22,6 +22,7 @@ const Container = styled.div`
     position: absolute;
     bottom: 17%;
     right: 0%;
+    top: 0%;
   }
 `;
 
