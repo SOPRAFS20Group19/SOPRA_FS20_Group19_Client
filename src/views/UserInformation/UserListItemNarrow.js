@@ -98,6 +98,8 @@ const NotificationContainer= styled.div`
   @media only screen and (max-width: 500px){
     height: 15px;
     width: 15px;
+    margin-left: -10px;
+    margin-top: -2px;
 `;
 
 const ProfilePageButton = styled.button`
@@ -225,12 +227,23 @@ class UserListItemNarrow extends React.Component{
                 </AvatarContainer>
                 <Title>{this.props.user.username}</Title>
                 <ButtonContainer>
-                    <ProfilePageButton
-                        variant="primary"
-                        width="100%"
-                        onClick={() => {this.props.goToProfile(this.props.user.id);}}>
-                        Visit {this.props.user.username}'s profile
-                    </ProfilePageButton>
+                    {this.state.isFriend ?  <ProfilePageButton
+                            variant="primary"
+                            width="100%"
+                            onClick={() => {
+                                this.props.goToProfile(this.props.user.id);
+                            }}>
+                            Chat with {this.props.user.username}
+                        </ProfilePageButton> :
+                        <ProfilePageButton
+                            variant="primary"
+                            width="100%"
+                            onClick={() => {
+                                this.props.goToProfile(this.props.user.id);
+                            }}>
+                            Visit {this.props.user.username}'s profile
+                        </ProfilePageButton>
+                    }
                 </ButtonContainer>
                 <ImageContainer>
                     {this.state.isFriend === false ?

@@ -127,6 +127,8 @@ const NotificationContainer= styled.div`
   @media only screen and (max-width: 500px){
     height: 15px;
     width: 15px;
+    margin-left: -10px;
+    margin-top: -2px;
   }
 `;
 
