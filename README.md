@@ -107,7 +107,7 @@ To view all the current users of KNOW YOUR CITY you can click on the users butto
 
 
 If you only want to see some location types, you can use the filter:
-<img width="960" alt="Filter" src="https://user-images.githubusercontent.com/45396540/82139681-064d5080-982a-11ea-9258-d2ffe11d26e0.PNG">
+![Filter2](https://user-images.githubusercontent.com/45396540/82493381-26119c80-9ae8-11ea-8548-7d0a869c157b.png)
 
 
 If you are wandering around and you discover a new location which is not stored in our database yet, you can add the location by clicking at the plus at the sidebar:
