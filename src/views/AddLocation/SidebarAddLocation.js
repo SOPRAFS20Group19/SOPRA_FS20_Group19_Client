@@ -1,18 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import {BaseContainer} from "../../helpers/layout";
 import {Button} from "../variables/Button";
 import {RoundButton} from "../variables/RoundButton";
-import {Nav} from "react-bootstrap";
-import {UserIcon} from "../variables/UserIcon";
-import {FilterIcon} from "../variables/FilterIcon";
-import {PlusIcon} from "../variables/PlusIcon";
-import UserIconComplete from "../UserInformation/UserIconComplete.svg"
-import FilterIconComplete from "../Filter/FilterIconComplete.svg"
-import PlusIconComplete from "../Map/PlusIconComplete.svg"
-import Profile from "../UserInformation/Profile";
-import Filter from "../../components/map/Filter";
-import AddLocation from "../../components/addLocation/AddLocation";
 import { withRouter } from 'react-router-dom';
 import LogoutIcon from "../variables/LogoutIcon.svg"
 import Popover from "react-bootstrap/Popover";
@@ -21,7 +10,7 @@ import {ButtonForLogin} from "../variables/ButtonForLogin";
 import {api, handleError} from "../../helpers/api";
 import avatarArray from "../Avatar/AvatarArray";
 
-//Sidebar for Information Page and Add Location
+//Sidebar for add Location
 
 const Container = styled.div`
   &:hover {

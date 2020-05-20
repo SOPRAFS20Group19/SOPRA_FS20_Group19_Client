@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {Button} from "../variables/Button";
-import {ButtonForLogin} from "../variables/ButtonForLogin";
-import {RoundButton} from "../variables/RoundButton";
 import avatarArray from "../Avatar/AvatarArray";
-import LogoutIcon from "../variables/LogoutIcon.svg";
-import HeartUnfilled from "../InformationPage/HeartUnfilled.png";
-import HeartRed from "../InformationPage/HeartRed.png";
 import {api, handleError} from "../../helpers/api";
 import AddFriend from "../Users/AddFriend.png";
 import FriendAdded from "../Users/FriendAdded.png";
@@ -133,14 +127,6 @@ const imgStyle = {
     "width": "100%"
 };
 
-/**
- * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
- * Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.
- * They are reusable pieces, and think about each piece in isolation.
- * Functional components have to return always something. However, they don't need a "render()" method.
- * https://reactjs.org/docs/components-and-props.html
- * @FunctionalComponent
- */
 class UserListItemNarrow extends React.Component{
     constructor(props) {
         super(props);

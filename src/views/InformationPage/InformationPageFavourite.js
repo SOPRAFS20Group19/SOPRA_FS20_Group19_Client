@@ -1,16 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import HeartEmpty from "../variables/HeartEmpty.svg";
-import HeartFull from "../variables/HeartFull.svg";
 import HeartUnfilled from "./HeartUnfilled.png"
 import HeartRed from "./HeartRed.png"
 import {api, handleError} from "../../helpers/api";
-import LocationListItem from "../UserInformation/LocationListItem";
-import Spinner from "react-bootstrap/Spinner";
 import Location from "../../components/shared/models/Location";
-import {Checkbox} from "../Filter/Checkbox";
-
 
 const Container2 = styled.div`
   display: flex;
@@ -67,24 +61,6 @@ const ImageContainer= styled.div`
     margin-right: 7.5px;
   }
 `;
-
-const TextContainer= styled.div`
-  font-weight: normal;
-  font-size: 20px;
-  display: flex;
-  justify-content: top;
-  align-items: left;
-  flex-direction: column;
-  grid-column: 2;
-  grid-row: 1;
-  @media only screen and (max-width: 700px){
-    font-size: 15px
-  }
-  @media only screen and (max-width: 500px){
-    font-size: 10px
-  }
-`;
-
 
 class InformationPageFavourite extends React.Component {
     constructor(props) {

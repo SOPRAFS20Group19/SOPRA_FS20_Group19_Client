@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import FormControl from "react-bootstrap/FormControl";
-import Player from "../variables/Player";
-import {Button as Button1, Button} from "../variables/Button";
 import {Spinner} from "../variables/Spinner";
 
 
@@ -21,19 +15,6 @@ const Container = styled.div`
   margin-left: 20px;
   grid-column: 1;
   grid-row: 2 / span 3;
-`;
-
-const ID = styled.div`
-  font-weight: bold;
-  font-size: 20px;
-  letter-spacing: 0.2em;
-  line-height: 1.1em;
-  text-transform: uppercase;
-  margin-bottom: 0.25%;
-  flex-direction: row;
-  @media only screen and (max-width: 700px){
-    font-size: 15px
-  }
 `;
 
 const Title = styled.div`
@@ -51,37 +32,6 @@ const Title = styled.div`
   @media only screen and (max-width: 500px){
     font-size: 15px
   }
-`;
-
-const Address = styled.div`
-  font-weight: bold;
-  font-size: 20px;
-  letter-spacing: 0.2em;
-  line-height: 1.1em;
-  text-transform: uppercase;
-  margin-bottom: 0.25%;
-  flex-direction: row;
-  @media only screen and (max-width: 700px){
-    font-size: 15px
-  }
-  @media only screen and (max-width: 500px){
-    font-size: 10px
-  }
-  
-`;
-
-const AdditionalInformation = styled.div`
-  font-weight: bold;
-  font-size: x-large;
-  margin-bottom: 0.25%;
-  flex-direction: row;
-`;
-
-const Coordinates = styled.div`
-  font-weight: bold;
-  font-size: x-large;
-  margin-bottom: 0.25%;
-  flex-direction: row;
 `;
 
 const Text = styled.div`
@@ -132,23 +82,12 @@ const ButtonReturnMap = styled.button`
   }
 `;
 
-
-/**
- * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
- * Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.
- * They are reusable pieces, and think about each piece in isolation.
- * Functional components have to return always something. However, they don't need a "render()" method.
- * https://reactjs.org/docs/components-and-props.html
- * @FunctionalComponent
- */
-
 class LocationInformation extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
         }
     }
-
 
     render() {
         return (
@@ -163,8 +102,6 @@ class LocationInformation extends React.Component{
                             onClick={() => {
                                 localStorage.setItem("currentLocationInformationLat", this.props.latitude);
                                 localStorage.setItem("currentLocationInformationLon", this.props.longitude);
-                                //localStorage.setItem("com")
-                                //localStorage.setItem("currentLocationInformation", JSON.stringify(this.props.location));
                                 this.props.history.push(`/map`);
                         }}>
                             Show Location on Map</ButtonReturnMap>

@@ -14,10 +14,7 @@ import maleScientistColor from "../../views/UserInformation/scientist-man-color.
 import femaleScientistColor from "../../views/UserInformation/scientist-woman-color.svg";
 import femaleYogiColor from "../../views/UserInformation/yogi-man-color.svg";
 import maleYogiColor from "../../views/UserInformation/yogi-woman-color.svg";
-
 import { api, handleError } from '../../helpers/api';
-
-
 
 const Container = styled.div`
   display: flex;
@@ -64,8 +61,6 @@ const PictureContainer = styled.div`
   flex-direction: column;
   padding: 10px;
   margin-top: 10px;
-  
-  
 `;
 
 

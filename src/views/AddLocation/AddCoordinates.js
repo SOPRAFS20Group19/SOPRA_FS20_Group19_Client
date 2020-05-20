@@ -3,12 +3,6 @@ import SidebarAddLocationtoStart from "./SidebarAddLocationtoStart";
 import {Button} from "../variables/Button";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import FireplaceCircle from "../MapMarkers/FireplaceCircle.png";
-import FountainCircle from "../MapMarkers/FountainCircle.png";
-import RecyclingCircle from "../MapMarkers/RecyclingCircle.png";
-import ToiletCircle from "../MapMarkers/PublicToiletCircle.png";
-import TableTennisCircle from "../MapMarkers/PingPongCircle.png";
-import BenchCircle from "../MapMarkers/BenchCircle.png";
 
 
 const MainContainer =styled.div`
@@ -124,20 +118,6 @@ const Container4 = styled.div`
   margin-left: 0px;
   grid-column: 1;
   grid-row: 7;
-  margin-top: 15px;
-`;
-
-const Container5 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 8;
   margin-top: 15px;
 `;
 

@@ -1,17 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BaseContainer} from '../../helpers/layout';
-import {api, handleError} from '../../helpers/api';
 import {withRouter} from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Carousel from "../../views/AboutUs/Carousel"
-//import { Carousel } from 'react-responsive-carousel';
 import HeaderForAboutUs from "../../views/AboutUs/HeaderForAboutUs";
 import LogoutIcon from "../../views/variables/LogoutIcon.svg"
-const BackgroundContainer = styled(BaseContainer)`
-  min-height: 620px;
-`;
 
 const MainContainer = styled.div`
   color: #94BFE9;
@@ -35,16 +28,6 @@ const Container2 = styled.div`
     padding-left: 5%;
     padding-right: 5%;
   }
-`;
-
-const Container3 = styled.div`
-  width: 100%;
-  position: absolute;
-  padding-top: 15%;
-  padding-left: 15%;
-  padding-right: 15%;
-  left: 0%;
-  background: #94BFE9;
 `;
 
 const BackgroundContainerAboutUs = styled.div`

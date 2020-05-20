@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react";
 import {RoundButton} from "../variables/RoundButton";
-import UserIconComplete from "../UserInformation/UserIconComplete.svg";
 import LogoutIcon from "../variables/LogoutIcon.svg";
 import {withRouter} from "react-router-dom";
 import Popover from "react-bootstrap/Popover";
@@ -164,7 +163,6 @@ class SidebarProfilePage extends React.Component{
     toggleShowUserHover(value){
         this.setState({showUserHover: value})
     }
-
 
     render() {
         return (

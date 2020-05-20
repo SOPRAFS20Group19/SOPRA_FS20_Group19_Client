@@ -3,7 +3,6 @@ import React from "react";
 import {withRouter} from "react-router-dom";
 import avatarArray from "../Avatar/AvatarArray"
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;

@@ -1,9 +1,7 @@
 import React from "react";
 import {Spinner} from "../variables/Spinner";
 import {withRouter} from "react-router-dom";
-import User from "../../components/shared/models/User";
 import styled from "styled-components";
-import {Button} from "../variables/Button";
 
 const Container = styled.div`
   height: flex;

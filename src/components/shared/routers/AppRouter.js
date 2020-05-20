@@ -9,8 +9,6 @@ import ProfileUser from "../../userProfile/UserProfile";
 import ProfileEdit from "../../editProfile/EditProfile";
 import Users from "../../users/Users";
 import AboutUs from "../../AboutUs/AboutUs";
-import {MapGuard} from "../routeProtectors/MapGuard";
-import LocationInformationPage from "../../locationInformationPage/LocationInformationPage";
 import ProfilePage from "../../userProfile/ProfilePage";
 
 /**
@@ -98,7 +96,5 @@ class AppRouter extends React.Component {
     );
   }
 }
-/*
-* Don't forget to export your component!
- */
+
 export default AppRouter;

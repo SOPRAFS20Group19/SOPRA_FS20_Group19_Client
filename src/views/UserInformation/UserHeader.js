@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react";
 import {withRouter} from "react-router-dom";
-import { api } from "../../helpers/api";
 import avatarArray from "../Avatar/AvatarArray"
 
 

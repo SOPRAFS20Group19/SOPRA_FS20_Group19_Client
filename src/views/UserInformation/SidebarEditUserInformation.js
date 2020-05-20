@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react";
 import {RoundButton} from "../variables/RoundButton";
-import UserIconComplete from "./UserIconComplete.svg";
 import LogoutIcon from "../variables/LogoutIcon.svg";
 import {withRouter} from "react-router-dom";
 
@@ -84,14 +83,6 @@ const ButtonContainer = styled.div`
   @media only screen and (max-width: 800px){
       margin-top: 0px;
       margin-left: 0px;
-`;
-
-const ButtonContainerPopup = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-  @media only screen and (max-width: 800px){
-      margin-top: 10px;
 `;
 
 const HoverContainer = styled.div`

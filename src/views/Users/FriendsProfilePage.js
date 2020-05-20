@@ -1,11 +1,8 @@
 import styled from "styled-components";
 import React from "react";
 import {withRouter} from "react-router-dom";
-import ListGroup from "react-bootstrap/ListGroup";
 import {api, handleError} from "../../helpers/api";
-import User from "../../components/shared/models/User";
 import Spinner from "react-bootstrap/Spinner";
-import UserListItem from "../Users/UserListItem";
 import ProfilePageListItemNarrow from "./ProfilePageListItemNarrow";
 
 const Container = styled.div`
@@ -36,14 +33,6 @@ const Title = styled.div`
   }
 `;
 
-const Text = styled.div`
-  font-weight: bold;
-  font-size: 20px;
-  letter-spacing: 0.2em;
-  line-height: 1.1em;
-  margin-top: 20px;
-`;
-
 const ListContainer = styled.div`
   max-height: 300px;
   overflow: scroll;
@@ -71,15 +60,10 @@ class FriendsProfilePage extends React.Component {
             friendsList: null,
             friends: null
         };
-        //this.getFriends();
     }
 
     componentDidMount(): void {
         this.getFriends();
-    }
-
-    goToInfoPageSavedLocations(locationId){
-        this.props.history.push(`/map/informationpage/` + locationId);
     }
 
     async getFriends(){
@@ -89,16 +73,9 @@ class FriendsProfilePage extends React.Component {
             const response = await api.get(url);
 
             this.setState({friends: response.data});
-
-            //const friendsList = response.data.map((friend) => <LocationListItem friend={friend} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>);
-            //this.setState({friendsList: friendsList});
         } catch (e) {
             alert(`Something went wrong while getting the friends: \n${handleError(e)}`);
         }
-    }
-
-    refreshPage(){
-        window.location.reload();
     }
 
     goToProfile(userId){

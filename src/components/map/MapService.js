@@ -6,7 +6,6 @@ import {
     Marker,
     InfoWindow
 } from "react-google-maps";
-import {mapStyles} from "./mapStyles";
 import {Button} from "../../views/variables/Button";
 import styled from "styled-components";
 import {api, handleError} from "../../helpers/api";
@@ -25,9 +24,6 @@ import yogiWomanColor from "../../views/Avatar/markers/yogi-woman-color-marker.s
 import yogiMan from "../../views/Avatar/markers/yogi-man-marker.svg";
 import yogiManColor from "../../views/Avatar/markers/yogi-man-color-marker.svg";
 import unknownMarker from "../../views/Avatar/markers/unknown-marker.svg";
-import BenchIcon from "../../views/MapMarkers/BenchIcon.png";
-import ToiletIcon from "../../views/MapMarkers/PublicToiletIcon.png";
-import PingPongIcon from "../../views/MapMarkers/PingPongIcon.png";
 
 const markerArray = [unknownMarker, coderWoman, coderWomanColor, coderMan, coderManColor, scientistWoman, scientistWomanColor, scientistMan, scientistManColor, yogiWoman, yogiWomanColor, yogiMan, yogiManColor]
 
@@ -151,24 +147,6 @@ class MapService extends React.Component {
             selectedLocationRating: null,
             currCenter: null
         };
-        //this.setCenter();
-    }
-
-    async componentDidMount() {
-        /*
-        if (localStorage.getItem("currentLocationInformation")){
-            this.setSelectedLocation(JSON.parse(localStorage.getItem("currentLocationInformation")))
-        }
-        if (localStorage.getItem("currentLocationInfo")){
-            this.setSelectedLocation(JSON.parse(localStorage.getItem("currentLocationInfo")))
-        }*/
-    }
-
-    setSelectedLocationFromLocationInformation(location){
-        this.setState({selectedLocation: location})
-        if (location != null){
-            this.showAverageRating(location.id)
-        }
     }
 
     setSelectedLocation(location) {
@@ -186,32 +164,6 @@ class MapService extends React.Component {
             this.setState({selectedLocationRating: rating});
         } catch (e) {
             alert(`Something went wrong while getting the average rating: \n${handleError(e)}`);
-        }
-    }
-
-
-    async getLocations() {
-        try {
-            const response = await api.get('/locations');
-            // delays continuous execution of an async operation for 1 second.
-            // This is just a fake async call, so that the spinner can be displayed
-            // feel free to remove it :)
-            // await new Promise(resolve => setTimeout(resolve, 1000));
-
-            // Get the returned users and update the state.
-            this.setState({ locationsShown: response.data });
-
-            // This is just some data for you to see what is available.
-            // Feel free to remove it.
-            console.log('request to:', response.request.responseURL);
-            console.log('status code:', response.status);
-            console.log('status text:', response.statusText);
-            console.log('requested data:', response.data);
-
-            // See here to get more data.
-            console.log(response);
-        } catch (error) {
-            alert(`Something went wrong while fetching the locations: \n${handleError(error)}`);
         }
     }
 
@@ -237,18 +189,7 @@ class MapService extends React.Component {
     }
 
     handleInputChange(key, value) {
-        // Example: if the key is username, this statement is the equivalent to the following one:
-        // this.setState({'username': value});
         this.setState({[key]: value});
-    }
-
-    setCenter(){
-        if (this.props.currentLocation != null){
-            this.setState({currCenter: this.props.currentLocation})
-        }
-        else{
-            this.setState({currCenter: [47.366950, 8.547200]})
-        }
     }
 
     // Returns the string to be rendered according to the type
@@ -311,9 +252,6 @@ class MapService extends React.Component {
         return ButtonRecycling;
     }
 
-
-
-
     render(){
         return (
             <div>
@@ -343,7 +281,6 @@ class MapService extends React.Component {
                                             onClick={() => {
                                                 localStorage.setItem("currentLocationInformationLat", location.coordinates[1]);
                                                 localStorage.setItem("currentLocationInformationLon", location.coordinates[0]);
-                                                //localStorage.setItem("currentLocationInformation", JSON.stringify(location));
                                                 this.setSelectedLocation(location);
                                             }}
                                             icon={{
@@ -359,7 +296,6 @@ class MapService extends React.Component {
                             <InfoWindow
                                 onCloseClick={() => {
                                     this.setSelectedLocation(null);
-                                    //localStorage.removeItem("currentLocationInformation");
                                 }}
                                 position={{
                                     lat: this.state.selectedLocation.coordinates[1],
@@ -387,7 +323,6 @@ class MapService extends React.Component {
                                     <Text>{this.state.selectedLocation.latitude}, {this.state.selectedLocation.longitude}</Text><br/>
                                     <br/>
 
-                                        {/*<h2>{"URL: " + this.props.match.params.locationId}</h2> only for testing purpose*/}
                                     {!localStorage.getItem('userId') ? (
                                         <Button style={this.getStyleOfButton()}
                                                 width="100%"
@@ -403,7 +338,6 @@ class MapService extends React.Component {
                                             onClick={() => {
                                                 localStorage.setItem("currentLocationInformationLat", this.state.selectedLocation.latitude);
                                                 localStorage.setItem("currentLocationInformationLon", this.state.selectedLocation.longitude);
-                                                //localStorage.setItem("currentLocationInformation", JSON.stringify(this.state.selectedLocation));
                                                 this.props.history.push(`/map/informationpage/` + this.state.selectedLocation.id);
                                             }}
                                         >

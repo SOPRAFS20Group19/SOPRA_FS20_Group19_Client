@@ -57,9 +57,7 @@ const Container = styled.div`
   @media only screen and (max-width: 500px){
     width: 80%
   }
-
 `;
-
 
 const InputField = styled.input`
   &::placeholder {
@@ -238,7 +236,7 @@ class EditProfile extends React.Component {
     validateUsername = () => {
         const {username} = this.state;
         let usernameValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (username.length < 4) {
             usernameValid = false;
@@ -250,7 +248,7 @@ class EditProfile extends React.Component {
     validateName = () => {
         const {name} = this.state;
         let nameValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (name.length < 4) {
             nameValid = false;
@@ -274,7 +272,7 @@ class EditProfile extends React.Component {
     validatePasswordConfirm = () => {
         const {passwordConfirm, password} = this.state;
         let passwordConfirmValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (password !== passwordConfirm) {
             passwordConfirmValid = false;
@@ -303,7 +301,6 @@ class EditProfile extends React.Component {
     // renders the page
     render() {
         return (
-
             <div>
                 <TitleEdit/>
                 <SidebarEditUserInformation column={3}/>

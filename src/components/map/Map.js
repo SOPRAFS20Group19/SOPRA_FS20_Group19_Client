@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Sidebar from "../../views/Map/Sidebar";
-import Header from "../../views/Map/Header";
 import {Button} from '../../views/variables/Button';
 import { withRouter } from 'react-router-dom';
 import MapService from "./MapService";
@@ -54,7 +53,6 @@ class Map extends React.Component{
             loading: false,
             filterSpinner: false,
         };
-        //this.resetFilter();
         this.firstTimeLoadingMap();
         this.getFilteredLocations();
         this.getFilteredLocations = this.getFilteredLocations.bind(this);
@@ -76,10 +74,6 @@ class Map extends React.Component{
         }
     }
 
-    /*componentDidMount(): void {
-        this.getFilteredLocations();
-    }*/
-
     //gets the logged in user in order to display the correct 
     async getUser() {
         try {
@@ -95,8 +89,6 @@ class Map extends React.Component{
                 this.setState({loggedInUser: user});
                 localStorage.setItem("userAvatar", user.avatarNr);
             }
-
-
             else{
                 const user = new User()
                 this.setState({loggedInUser: user})
@@ -121,27 +113,12 @@ class Map extends React.Component{
             });
 
             const response = await api.post('/locations/filter', requestBody);
-            // delays continuous execution of an async operation for 1 second.
-            // This is just a fake async call, so that the spinner can be displayed
-            // feel free to remove it :)
-            // await new Promise(resolve => setTimeout(resolve, 1000));
 
             // Get the returned users and update the state.
             this.setState({ locationsShown: response.data });
             this.setState({filterSpinner: false})
         } catch (error) {
             alert(`Something went wrong while fetching the filtered locations: \n${handleError(error)}`);
-        }
-    }
-
-    resetFilter(){
-        if (localStorage.getItem('showFountains') !== false && localStorage.getItem('showFountains') !== true){
-            localStorage.setItem('showFountains', true);
-            localStorage.setItem('showFireplaces', true);
-            localStorage.setItem('showRecyclingStations', true);
-            localStorage.setItem('showBenches', true);
-            localStorage.setItem('showToilets', true);
-            localStorage.setItem('showTableTennis', true);
         }
     }
 
@@ -157,7 +134,7 @@ class Map extends React.Component{
     getCoordinates(position) {
         this.setState({
             currentPosition: [position.coords.latitude, position.coords.longitude]
-        })
+        });
         if (position.coords.longitude > 8.4680486289
             && position.coords.longitude < 8.6191027275
             && position.coords.latitude > 47.3232261256
@@ -174,8 +151,6 @@ class Map extends React.Component{
             this.setState({   currentCenter: [position.coords.latitude, position.coords.longitude]});
             localStorage.removeItem("wantsCurrentLocation");
         }
-
-
     }
 
     getLocation() {
@@ -209,11 +184,9 @@ class Map extends React.Component{
         }
     }
 
-    // insert <Weather/> after Spinner Button
     render(){
         return (<div>
             {!this.state.locationsShown ? (
-            
             <Container>
             <WeatherContainer>
             <Weather />

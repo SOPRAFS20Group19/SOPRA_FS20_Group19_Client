@@ -1,15 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import InputGroup from 'react-bootstrap/InputGroup'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
 import {api, handleError} from "../../helpers/api";
-import Location from "../../components/shared/models/Location";
 import Message from "./Message";
-import Player from "../variables/Player";
-import {Button as Button1} from "../../views/variables/Button";
 
 const ButtonBlue = styled.button`
   padding: 6px;
@@ -30,24 +23,6 @@ const ButtonBlue = styled.button`
   @media only screen and (max-width: 700px){
     font-size: 10px;
   }
-`;
-
-const Button = styled.button`
-  padding: 6px;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 13px;
-  text-align: center;
-  color: black;
-  width: 150px;
-  height: 35px;
-  border-bottom: 2px solid black;
-  border: 2px transparent;
-  border-radius: 0px;
-  cursor: ${props => (props.disabled ? "default" : "pointer")};
-  opacity: ${props => (props.disabled ? 0.4 : 1)};
-  background: white;
-  transition: all 0.3s ease;
 `;
 
 const Container = styled.div`
@@ -196,8 +171,6 @@ class Chatbox extends React.Component {
     }
 
     handleInputChange(key, value) {
-        // Example: if the key is username, this statement is the equivalent to the following one:
-        // this.setState({'username': value});
         this.setState({ [key]: value });
     }
 
@@ -280,16 +253,3 @@ class Chatbox extends React.Component {
 }
 
 export default withRouter(Chatbox);
-
-/*
-<InputGroup className="mb-3">
-    <FormControl
-      placeholder="Recipient's username"
-      aria-label="Recipient's username"
-      aria-describedby="basic-addon2"
-    />
-    <InputGroup.Append>
-      <Button variant="outline-secondary">Button</Button>
-    </InputGroup.Append>
-  </InputGroup>
-*/

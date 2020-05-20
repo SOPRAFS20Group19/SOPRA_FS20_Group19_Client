@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {Redirect, Route, withRouter} from "react-router-dom";
+import {Route} from "react-router-dom";
 import Maps from "../../map/Map";
 import AddLocation from "../../addLocation/AddLocation";
 import {MapGuard} from "../routeProtectors/MapGuard";
@@ -25,7 +25,7 @@ class MapRouter extends React.Component {
     async getLocations() {
         try {
             const response = await api.get('/locations');
-            // Get the returned users and update the state.
+
             this.setState({ allLocations: response.data });
 
         } catch (error) {
@@ -35,7 +35,7 @@ class MapRouter extends React.Component {
 
     render() {
       /**
-       * "this.props.base" is "/map" because as been passed as a prop in the parent of GameRouter, i.e., Map.js
+       * "this.props.base" is "/map" because as been passed as a prop in the parent of AppRouter, i.e., Map.js
        */
       return (
         <Container>

@@ -1,10 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import {Redirect, withRouter} from "react-router-dom";
-import ListGroup from "react-bootstrap/ListGroup";
 import {api, handleError} from "../../helpers/api";
-import User from "../../components/shared/models/User";
-import {Spinner} from "../variables/Spinner";
 import FireplaceCircle from "../MapMarkers/FireplaceCircle.png"
 import RecyclingCircle from "../MapMarkers/RecyclingCircle.png"
 import FountainCircle from "../MapMarkers/FountainCircle.png"
@@ -13,8 +9,6 @@ import ToiletCircle from "../MapMarkers/PublicToiletCircle.png"
 import BenchCircle from "../MapMarkers/BenchCircle.png"
 import HeartUnfilled from "../InformationPage/HeartUnfilled.png"
 import HeartRed from "../InformationPage/HeartRed.png"
-import ListGroupItem from "react-bootstrap/ListGroupItem";
-import {Button} from "../variables/Button";
 
 const Container = styled.div`
   display: grid;

@@ -1,33 +1,22 @@
 import React from "react";
-import {useState} from "react";
 import styled from "styled-components";
-import {BaseContainer} from "../../helpers/layout";
 import {Button} from "../variables/Button";
 import {RoundButton} from "../variables/RoundButton";
-import {Nav} from "react-bootstrap";
-import {UserIcon} from "../variables/UserIcon";
-import {FilterIcon} from "../variables/FilterIcon";
-import {PlusIcon} from "../variables/PlusIcon";
 import { api, handleError } from '../../helpers/api';
-import UserIconComplete from "../UserInformation/UserIconComplete.svg"
 import FilterIconComplete from "../Filter/FilterIconComplete.svg"
 import PlusIconComplete from "./PlusIconComplete.svg"
 import UsersIcon from "./UsersIcon.svg"
-import Profile from "../UserInformation/Profile";
 import Filter from "../../components/map/Filter";
-import AddLocation from "../../components/addLocation/AddLocation";
 import { withRouter } from 'react-router-dom';
-import LogoutIcon from "../variables/LogoutIcon.svg"
 import CurrentLocationIcon from "./CurrentLocationIcon.svg"
 import Popover from "react-bootstrap/Popover";
-import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import {ButtonForLogin} from "../variables/ButtonForLogin";
 
 
 import avatarArray from "../Avatar/AvatarArray"
 
-//Sidebar for the map -->Refactoring the name of the class later
+//Sidebar for the map
 
 const Container = styled.div`
   &:hover {

@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Button} from '../../views/variables/Button';
-import {Checkbox} from '../../views/Filter/Checkbox';
-import {ButtonForLogin} from "../../views/variables/ButtonForLogin";
 import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo";
-import Spinner from "react-bootstrap/Spinner";
 
 const Container = styled.div`
   height: flex;
@@ -28,9 +25,6 @@ const Container = styled.div`
   }
 `;
 
-const Container2 = styled.div`
-`;
-
 const Title = styled.h1`
   color: #ffffff;
   text-align: center;
@@ -46,19 +40,12 @@ const Title = styled.h1`
   }
 `;
 
-const FilterLabel = styled.label`
-  color: #ffffff;
-  text-align: left;
-  opacity: 1;
-`;
-
 const FilterButton = styled(Button)`
   margin-bottom: 5px;
   @media only screen and (max-width: 800px){
     margin-bottom: 0px;
     margin-right: 5px;
   }
-
 `;
 
 const ButtonContainer = styled.div`
@@ -71,6 +58,7 @@ const ButtonContainer = styled.div`
     margin-right: 10px;
   }
 `;
+
 const ButtonContainerYesNo = styled.div`
   display: grid;
   grid-template-columns: auto auto;
@@ -294,6 +282,6 @@ class Filter extends React.Component {
             }
             </div>    )
     }
-    }
+}
 
-    export default Filter;
+export default Filter;

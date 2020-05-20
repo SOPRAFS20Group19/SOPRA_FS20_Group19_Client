@@ -1,13 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import {Button as Button1} from "../variables/Button";
 import StarEmpty from "../variables/StarEmpty.svg";
 import StarFull from "../variables/StarFilled.svg";
 import {api, handleError} from "../../helpers/api";
-import Location from "../../components/shared/models/Location";
 
 const Container = styled.div`
   height: 10%;
@@ -61,15 +58,6 @@ const Text = styled.div`
   min-width: 275px;
 `;
 
-const ButtonContainer = styled.div`
-  justify-content: left;
-  width: 50%;
-  max-width: 200px;
-  margin-top: 10px;
-  flex-direction: column;
-  grid-column: 1 / span 2;
-  grid-row: 2;
-`;
 const ButtonContainer2 = styled.div`
   justify-content: start;
   grid-column: 2;
@@ -116,15 +104,6 @@ const Text2 = styled.div`
   grid-row: 3;
 `;
 
-/**
- * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
- * Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.
- * They are reusable pieces, and think about each piece in isolation.
- * Functional components have to return always something. However, they don't need a "render()" method.
- * https://reactjs.org/docs/components-and-props.html
- * @FunctionalComponent
- */
-
 class LocationRating extends React.Component{
     constructor(props) {
         super(props);
@@ -144,13 +123,11 @@ class LocationRating extends React.Component{
 
     //saves The Rating applied to the Stars
     async saveRating(){
-        //Implement the save Rating Button
         try {
             const url = '/locations/rating/' + localStorage.getItem('userId') + '/' + this.props.locationId + "/" + this.state.ratedStars;
             await api.put(url);
             this.showUserRating();
             this.showAverageRating();
-            //window.location.reload();
         } catch (e) {
             alert(`Something went wrong while updating the rating: \n${handleError(e)}`);
         }

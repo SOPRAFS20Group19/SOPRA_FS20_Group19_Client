@@ -2,10 +2,8 @@ import React from "react";
 import {withRouter} from "react-router-dom";
 import SidebarAddLocationtoStart from "./SidebarAddLocationtoStart";
 import Spinner from "react-bootstrap/Spinner";
-import {ButtonYesNo} from "./ButtonYesNo";
 import {Button} from "../variables/Button";
 import styled from "styled-components";
-import {RoundButton} from "../variables/RoundButton";
 
 const MainContainer =styled.div`
   color: black;
@@ -220,17 +218,6 @@ const InfoSchrift = styled.div`
   @media only screen and (max-width: 700px){
     font-size: 15px;
   }
-`;
-
-const ButtonContainerYesNo = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-column-gap: 10px;
-  justify-content: center;
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 15px;
-  width: 100%;
 `;
 
 const ButtonContainer = styled.div`

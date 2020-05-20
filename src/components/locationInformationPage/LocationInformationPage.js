@@ -65,32 +65,6 @@ const LoadingContainer = styled.div`
   right: 0;
   padding-top: 0px;
 `;
-const Label = styled.label`
-  color: white;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-`;
-
-const InputField = styled.input`
-  &::placeholder {
-    color: rgba(255, 255, 255, 1.0);
-  }
-  height: 35px;
-  width: 300px;
-  padding-left: 15px;
-  margin-left: 15px;
-  border: none;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-`;
 
 // This component is responsible for the edit profile page
 class LocationInformationPage extends React.Component {
@@ -105,8 +79,6 @@ class LocationInformationPage extends React.Component {
     }
 
     // Get all the needed Information about the selected Location
-
-
     async getCurrentLocation() {
         try {
             const url = '/locations/' + this.props.match.params.locationId;
@@ -117,9 +89,6 @@ class LocationInformationPage extends React.Component {
             // Get the returned location and update the state.
             this.setState({locationToBeShown: location});
             this.setState({location: response.data, additionalInformation: additionalInformation});
-
-            // See here to get more data.
-            console.log(response);
         } catch (error) {
             alert(`Something went wrong while fetching the locations: \n${handleError(error)}`);
         }

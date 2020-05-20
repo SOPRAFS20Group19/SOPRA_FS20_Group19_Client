@@ -1,14 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {Button} from "../variables/Button";
-import {ButtonForLogin} from "../variables/ButtonForLogin";
-import {RoundButton} from "../variables/RoundButton";
 import avatarArray from "../Avatar/AvatarArray";
-import LogoutIcon from "../variables/LogoutIcon.svg";
-import HeartUnfilled from "../InformationPage/HeartUnfilled.png";
-import HeartRed from "../InformationPage/HeartRed.png";
-import {api, handleError} from "../../helpers/api";
-import AddFriend from "../../views/Users/AddFriend.png";
 import FriendAdded from "../../views/Users/FriendAdded.png";
 
 const Container = styled.div`

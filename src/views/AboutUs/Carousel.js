@@ -13,21 +13,7 @@ import Users from "../AboutUs/Users.PNG"
 import Registration from "../AboutUs/Registration.PNG"
 import PopUp from "../AboutUs/PopUp.PNG"
 import firstpage4 from "../AboutUs/firstpage4.PNG"
-import smartphone from "../AboutUs/smartphone.PNG"
-
-
 import styled from "styled-components";
-import User from "../../components/shared/models/User";
-import UserProfile from "../../components/userProfile/UserProfile";
-
-const Question = styled.div`
-  font-weight: bolder;
-  font-size: 70px;
-  margin-left: 0px;
-  letter-spacing: 0.2em;
-  line-height: 1.1em;
-  margin-top: 15px;
-`;
 
 const Legend = styled.div`
   font-weight: bold;

@@ -11,11 +11,6 @@ import SavedLocations from "../../views/UserInformation/SavedLocations";
 import {Spinner} from "../../views/variables/Spinner";
 import TitleProfile from "../../views/UserInformation/TitleProfile";
 import FriendsUser from "../../views/UserInformation/FriendsUser";
-import AboutUsQuestion1 from "../../views/AboutUs/AboutUsQuestion1.png";
-
-const BackgroundContainer = styled(BaseContainer)`
-  min-height: 620px;
-`;
 
 const MainContainer =styled.div`
   color: black;
@@ -55,17 +50,6 @@ const MainContainer =styled.div`
   }
 `;
 
-const Container =styled.div`
-  color: black;
-  flex-direction: row;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto auto auto;
-  justify-content: center;
-  grid-column-gap: 30px;
-`;
-
 
 // this component is responsible for the user profile
 class UserProfile extends React.Component {
@@ -75,8 +59,6 @@ class UserProfile extends React.Component {
             loggedInUserId: localStorage.getItem('userId'),
             loggedInUser: null,
             loading: false
-            //userToBeShownId: localStorage.getItem("showUserId"),
-            //userToBeShown: null
         };
         this.getUser();
     }

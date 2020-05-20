@@ -1,31 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BaseContainer} from '../../helpers/layout';
 import {api, handleError} from '../../helpers/api';
 import {withRouter} from 'react-router-dom';
 import User from "../shared/models/User";
-import UserHeader from '../../views/UserInformation/UserHeader';
-import UserInformation from '../../views/UserInformation/UserInformation';
-import SidebarUserInformation from "../../views/UserInformation/SidebarUserInformation";
-import SavedLocations from "../../views/UserInformation/SavedLocations";
 import {Spinner} from "../../views/variables/Spinner";
 import TitleProfile from "../../views/UserInformation/TitleProfile";
-import Location from "../shared/models/Location";
 import ProfilePageInformation from "../../views/Users/ProfilePageInformation";
 import ProfilePageHeader from "../../views/Users/ProfilePageHeader";
 import SavedLocationsProfilePage from "../../views/Users/SavedLocationsProfilePage";
-import HeartUnfilled from "../../views/InformationPage/HeartUnfilled.png";
-import HeartRed from "../../views/InformationPage/HeartRed.png";
 import AddFriend from "../../views/Users/AddFriend.png";
 import FriendAdded from "../../views/Users/FriendAdded.png";
-import FriendsUser from "../../views/UserInformation/FriendsUser";
 import FriendsProfilePage from "../../views/Users/FriendsProfilePage";
 import ChatboxFriends from "../../views/Users/ChatboxFriends";
 import SidebarProfilePage from "../../views/Users/SidebarProfilePage";
-
-const BackgroundContainer = styled(BaseContainer)`
-  min-height: 620px;
-`;
 
 const MainContainer =styled.div`
   color: black;
@@ -64,17 +51,6 @@ const MainContainer =styled.div`
     max-width: 500;
     display: block;
   }
-`;
-
-const Container =styled.div`
-  color: black;
-  flex-direction: row;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto auto auto;
-  justify-content: center;
-  grid-column-gap: 30px;
 `;
 
 const ImageContainer= styled.div`
@@ -166,7 +142,6 @@ class ProfilePage extends React.Component {
     }
 
     changeColor(value){
-        this.setState({isFriend: value });
         if (value === true){
             this.addFriend();
         }
@@ -182,8 +157,6 @@ class ProfilePage extends React.Component {
             await api.delete(url);
 
             this.setState({isFriend: false});
-
-            //this.props.refresh();
         } catch (e) {
             alert(`Something went wrong while deleting this friend: \n${handleError(e)}`);
         }
@@ -195,8 +168,7 @@ class ProfilePage extends React.Component {
 
             await api.put(url);
 
-            setTimeout(() => {this.setState({isFriend: true})}, 1000);
-            //this.setState({isFriend: true});
+            setTimeout(() => {this.setState({isFriend: true})}, 500);
         } catch (e) {
             alert(`Something went wrong while adding this friend: \n${handleError(e)}`);
         }
@@ -205,7 +177,6 @@ class ProfilePage extends React.Component {
     checkIfOwnProfile(){
         if (localStorage.getItem('userId') == this.props.match.params.userId){
             this.props.history.push('/userprofile');
-            //window.location.reload();
         }
     }
 

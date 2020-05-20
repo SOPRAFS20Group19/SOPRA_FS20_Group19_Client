@@ -1,17 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import FireplaceClipart from "../Map/FireplaceClipart.png";
-import RecyclingClipart from "../Map/RecyclingClipart.png";
-import FountainClipart from "../Map/FountainClipart.png";
 import FireplaceCircle from "../MapMarkers/FireplaceCircle.png"
 import RecyclingCircle from "../MapMarkers/RecyclingCircle.png"
 import FountainCircle from "../MapMarkers/FountainCircle.png"
 import TableTennisCircle from "../MapMarkers/PingPongCircle.png"
 import ToiletCircle from "../MapMarkers/PublicToiletCircle.png"
 import BenchCircle from "../MapMarkers/BenchCircle.png"
-import {api, handleError} from "../../helpers/api";
-import {Spinner} from "../variables/Spinner";
 import InformationPageFavourite from "./InformationPageFavourite";
 
 const Container = styled.div`
@@ -25,12 +20,6 @@ const Container = styled.div`
   margin-top: 10px;
   margin-left: 20px;
   align-content: center;
-`;
-
-const PictureContainer = styled.div`
-  display: flex;
-  justify-content: left;
-  flex-direction: row;
 `;
 
 const Picture = styled.div`

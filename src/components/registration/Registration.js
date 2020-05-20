@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { api, handleError } from '../../helpers/api';
+import { api } from '../../helpers/api';
 import User from '../shared/models/User';
 import { withRouter } from 'react-router-dom';
 import { Button } from '../../views/variables/Button';
@@ -72,7 +72,6 @@ const EmblemContainer = styled.div`
   }
 `;
 
-
 const FormContainer = styled.div`
   margin-top: 1em;
   display: flex;
@@ -111,21 +110,6 @@ const InputField = styled.input`
   @media only screen and (max-width: 500px){
     margin-bottom: 4px;
   }
-`;
-
-
-
-const InputFieldPassword = styled.input`
-  &::placeholder {
-    color: black;
-  }
-  height: 35px;
-  padding-left: 15px;
-  margin-left: -4px;
-  border: 2px solid #003068;
-  margin-bottom: 20px;
-  background: white;
-  color: #000000;
 `;
 
 const ContainerError = styled.div`
@@ -226,7 +210,6 @@ class Registration extends React.Component {
         } catch (error) {
             this.handleErrorDesigned(error);
             this.setState({hasNoErrorMessage: false});
-            //alert(`Something went wrong during the registration: \n${handleError(error)}`);
         }
     }
 
@@ -274,21 +257,10 @@ class Registration extends React.Component {
     }
 
     handleInputChange(key, value) {
-        // Example: if the key is username, this statement is the equivalent to the following one:
-        // this.setState({'username': value});
         this.setState({ [key]: value });
         this.validateUsername();
 
     }
-
-    /**
-     * componentDidMount() is invoked immediately after a component is mounted (inserted into the tree).
-     * Initialization that requires DOM nodes should go here.
-     * If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
-     * You may call setState() immediately in componentDidMount().
-     * It will trigger an extra rendering, but it will happen before the browser updates the screen.
-     */
-    componentDidMount() {}
 
     validateForm = () => {
         const {usernameValid, nameValid, passwordValid, passwordConfirmValid} = this.state;
@@ -345,8 +317,6 @@ class Registration extends React.Component {
 
         this.setState({passwordConfirmValid, errorMsg}, this.validateForm);
     }
-
-
 
     render() {
         return (

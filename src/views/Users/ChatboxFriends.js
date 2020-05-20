@@ -1,13 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from 'react-router-dom';
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import InputGroup from 'react-bootstrap/InputGroup'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
 import {api, handleError} from "../../helpers/api";
-import Location from "../../components/shared/models/Location";
-import Player from "../variables/Player";
 import MessageFriends from "./MessageFriends";
 
 const ButtonBlue = styled.button`
@@ -149,24 +143,6 @@ const ButtonContainer = styled.div`
   width: 150px;
 `;
 
-const Button = styled.button`
-  padding: 6px;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 13px;
-  text-align: center;
-  color: black;
-  width: 150px;
-  height: 35px;
-  border-bottom: 2px solid black;
-  border: 2px transparent;
-  border-radius: 0px;
-  cursor: ${props => (props.disabled ? "default" : "pointer")};
-  opacity: ${props => (props.disabled ? 0.4 : 1)};
-  background: white;
-  transition: all 0.3s ease;
-`;
-
 
 class ChatboxFriends extends React.Component {
     constructor() {
@@ -200,8 +176,6 @@ class ChatboxFriends extends React.Component {
     }
 
     handleInputChange(key, value) {
-        // Example: if the key is username, this statement is the equivalent to the following one:
-        // this.setState({'username': value});
         this.setState({ [key]: value });
     }
 

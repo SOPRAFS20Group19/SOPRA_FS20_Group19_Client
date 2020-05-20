@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {api, handleError} from '../../helpers/api';
+import {api} from '../../helpers/api';
 import User from '../shared/models/User';
 import {withRouter} from 'react-router-dom';
 import {Button} from '../../views/variables/Button';
@@ -8,16 +8,7 @@ import '../../views/Map/BackgroundMap.css';
 import '../../views/variables/ZurichEmblem.css';
 import {ButtonForLogin} from "../../views/variables/ButtonForLogin";
 import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
-import {RoundButton} from "../../views/variables/RoundButton";
-import avatarArray from "../../views/Avatar/AvatarArray";
 import AboutUsQuestion1 from '../../views/AboutUs/AboutUsQuestion1.png';
-
-const Container = styled.div`
-  display: flex;
-  margin-top: 10px;
-  margin-left: 20px;
-  align-content: center;
-`;
 
 const BackgroundContainer = styled.div`
   display: flex;
@@ -34,7 +25,6 @@ const BackgroundContainer = styled.div`
   @media only screen and (max-width: 1215px){
     
   }
-  
   @media only screen and (max-width: 900px){
     min-width: 700px;
   }
@@ -67,10 +57,8 @@ const EmblemContainer = styled.div`
     max-width: 300;
     background-size: 320px;
     display: center;
-   
   }
 `;
-
 
 const FormContainer = styled.div`
   margin-top: 1em;
@@ -145,14 +133,6 @@ const ErrorMessage = styled.div`
   max-width: 200px;
   text-align: center;
 `;
-
-/*const TextHover = styled.p`
-    color: #000;
-    :hover {
-        color: pink;
-        cursor: mouse; 
-    }
-`*/
 
 function ValidationMessage(props) {
     if (props.valid) {
@@ -247,29 +227,13 @@ class Login extends React.Component {
         }
     }
 
-    toggleShowAboutUsHover(value){
-        this.setState({showAboutUsHover: value})
-    }
-
     /**
      *  Every time the user enters something in the input field, the state gets updated.
      * @param key (the key of the state for identifying the field that needs to be updated)
      * @param value (the value that gets assigned to the identified state key)
      */
     handleInputChange(key, value) {
-        // Example: if the key is username, this statement is the equivalent to the following one:
-        // this.setState({'username': value});
         this.setState({[key]: value});
-    }
-
-    /**
-     * componentDidMount() is invoked immediately after a component is mounted (inserted into the tree).
-     * Initialization that requires DOM nodes should go here.
-     * If you need to load data from a remote endpoint, this is a good place to instantiate the network request.
-     * You may call setState() immediately in componentDidMount().
-     * It will trigger an extra rendering, but it will happen before the browser updates the screen.
-     */
-    componentDidMount() {
     }
 
     render() {

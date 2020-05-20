@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { api, handleError } from '../../helpers/api';
-import { withRouter } from 'react-router-dom';
-import { Button } from '../../views/variables/Button';
-import axios from "axios";
+import {handleError } from '../../helpers/api';
 import {apiWeather} from "../../helpers/apiWeather";
-import HeaderForLogin from "../UserInformation/HeaderForLogin";
-import {ButtonForLogin} from "./ButtonForLogin";
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -28,9 +23,7 @@ const phrasesNiceWeather = ['Stay hydrated with some fresh fountain water!', 'Yo
 const phrasesClouds = ['You better go recycle as long as there is no rain!', 'Nice opportunity to play some ping pong!', 'Real grillmasters do not care about the weather. Grab your friends and go to a fireplace!', 'Find yourself a quiet place to relax! How about a public bench?', 'Would it not be nice to play some table tennis now?', 'You could grab the opportunity and go recycle!',  'Take your bicycle and head to some table tennis spot to battle with your friends!']
 const phrasesRain = ['No day is too rainy for a table tennis match!', 'Not even rain holds a real grillmaster off from grilling. Head off to a nearby fireplace!', 'It is raining, go look for cover under the nearest table tennis table!']
 const phrasesSuitableForAll = ['Would it not be nice to play some table tennis now?', 'Find yourself a quiet place to relax! How about a public bench?', 'Find some secret spots today with KnowYourCity!', 'Grab your bike and go explore Zurich!', 'Nice day to run down the lakeside. Remember to stay hydrated!']
-let phrase = ''
 export default class Weather extends React.Component{
-
     constructor(props) {
         super(props);
         this.state = {
@@ -49,19 +42,18 @@ export default class Weather extends React.Component{
 
     checkSession(){
         if (sessionStorage.length === 0){
-            this.getWeather2();
+            this.getWeather();
         }
         const dateUnix = sessionStorage.getItem("timestampTime");
         const oldTimestampAddedTime = new Date(dateUnix * 1000 + 10*60000);
         if (dateUnix ===  null){
-            this.getWeather2();
+            this.getWeather();
         }
         else if (oldTimestampAddedTime.getTime() <= new Date().getTime()){
-            this.getWeather2();
+            this.getWeather();
         }
         else {
             this.setState({temp: sessionStorage.getItem("temp"), humidity: sessionStorage.getItem("humidity"), description: sessionStorage.getItem("description"), icon: sessionStorage.getItem("icon"), dateGet: sessionStorage.getItem("timestampUTC"), date: sessionStorage.getItem("date")});
-            //this.setState({temp: JSON.parse(sessionStorage.getItem("weatherData")).main.temp - 273.15, humidity: JSON.parse(sessionStorage.getItem("weatherData")).main.humidity, description: JSON.parse(sessionStorage.getItem("weatherData")).weather[0].description});
         }
     }
 
@@ -81,8 +73,7 @@ export default class Weather extends React.Component{
         else {x = phrasesSuitableForAll;}
         return this.randomChoice(x);
     }
-    async getWeather2(){
-
+    async getWeather(){
         try {
 
             const response = await apiWeather.get('/data/2.5/weather?id=2657896&appid=148df75c67cf715124b95c25cc873565');

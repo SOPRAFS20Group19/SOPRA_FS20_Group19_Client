@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import React from "react";
 import {withRouter} from "react-router-dom";
-import ListGroup from "react-bootstrap/ListGroup";
 import {api, handleError} from "../../helpers/api";
-import User from "../../components/shared/models/User";
 import LocationListItem from "./LocationListItem";
 import Spinner from "react-bootstrap/Spinner";
-import UserListItem from "../Users/UserListItem";
 
 const Container = styled.div`
   display: flex;
@@ -30,14 +27,6 @@ const Title = styled.div`
   @media only screen and (max-width: 500px){
     font-size: 15px
   }
-`;
-
-const Text = styled.div`
-  font-weight: bold;
-  font-size: 20px;
-  letter-spacing: 0.2em;
-  line-height: 1.1em;
-  margin-top: 20px;
 `;
 
 const ListContainer = styled.div`
@@ -77,8 +66,6 @@ class SavedLocations extends React.Component {
             const url = '/locations/favorites/' + this.props.userId;
 
             const response = await api.get(url);
-
-            //const locationsList = response.data.map((location) => <LocationListItem location={location} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>);
             this.setState({favoriteLocations: response.data});
         } catch (e) {
             alert(`Something went wrong while getting the favorite locations: \n${handleError(e)}`);

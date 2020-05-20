@@ -1,11 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BaseContainer } from '../../helpers/layout';
 import { api, handleError } from '../../helpers/api';
-import { Button } from '../../views/variables/Button';
 import { withRouter } from 'react-router-dom';
-import Header from "../../views/Map/Header";
-import SidebarInfoAndAddLocation from "../../views/InformationPage/SidebarInfoAndAddLocation";
 import TitleEdit from "../../views/UserInformation/TitleEdit";
 import AddFountain from "../../views/AddLocation/AddFountain";
 import AddToilet from "../../views/AddLocation/AddToilet";
@@ -17,12 +13,6 @@ import ToiletCircle from "../../views/MapMarkers/PublicToiletCircle.png"
 import FountainCircle from "../../views/MapMarkers/FountainCircle.png"
 import TableTennisCircle from "../../views/MapMarkers/PingPongCircle.png"
 import BenchCircle from "../../views/MapMarkers/BenchCircle.png"
-import {ButtonForRecycling} from "../../views/variables/ButtonForRecycling";
-import {RoundButton} from "../../views/variables/RoundButton";
-import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo"
-import Spinner from "react-bootstrap/Spinner";
-import SidebarAddLocation from "../../views/AddLocation/SidebarAddLocation";
-import SidebarAddLocationtoStart from "../../views/AddLocation/SidebarAddLocationtoStart";
 import AddCoordinates from "../../views/AddLocation/AddCoordinates";
 import CreatingLocation from "../../views/AddLocation/CreatingLocation";
 import AddFireplace from "../../views/AddLocation/AddFireplace";
@@ -40,320 +30,6 @@ const MainContainer =styled.div`
   height: 100%;
   overflow: scroll;
 `;
-
-const ImageContainer = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 15px;
-`;
-const Container1 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: top;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 15px;
-`;
-
-const Container2 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 4;
-  margin-top: 15px;
-`;
-const Container3 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 6;
-  margin-top: 15px;
-`;
-const Container4 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 7;
-  margin-top: 15px;
-`;
-
-const Container5 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 8;
-  margin-top: 15px;
-`;
-
-const Container6 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 9;
-  margin-top: 15px;
-`;
-const Container7 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 10;
-  margin-top: 15px;
-`;
-
-const Container8 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 11;
-  margin-top: 15px;
-`;
-
-const Container9 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 12;
-  margin-top: 15px;
-`;
-
-const Container10 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 13;
-  margin-top: 15px;
-`;
-
-const Container11 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 14;
-  margin-top: 15px;
-`;
-
-const Container12 = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 15;
-  margin-top: 15px;
-`;
-
-const InputField = styled.input`
-  &::placeholder {
-    color: black;
-  }
-  height: 35px;
-  width: 54%;
-  border: 2px solid #003068;
-  border-color: #66A3E0;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.2);
-`;
-
-const InputFieldBaujahr = styled.input`
-  &::placeholder {
-    color: black;
-  }
-  height: 35px;
-  width: 35%;
-  border: 2px solid #003068;
-  border-color: #66A3E0;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.2);
-`;
-
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 15px;
-  width: 100%;
-`;
-
-const ButtonContainerYesNo = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-column-gap: 10px;
-  justify-content: center;
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 15px;
-  width: 100%;
-`;
-
-const ButtonContainerSpinnerAddLocation = styled.div`
-  height: flex;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5%
-  flex-direction: column;
-  margin-left: 0px;
-  grid-column: 1;
-  grid-row: 4;
-  margin-top: 15px;
-`;
-
-const ButtonContainerFountainCircle = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1;
-  grid-row: 1;
-  margin-top: 15px;
-  width: 100%;
-`;
-
-const ButtonContainerFireplaceCircle = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1;
-  grid-row: 2;
-  margin-top: 15px;
-  width: 100%;
-`;
-
-const ButtonContainerRecyclingCircle = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1;
-  grid-row: 3;
-  margin-top: 15px;
-  width: 100%;
-`;
-
-const ButtonContainerCoordinates = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1;
-  grid-row: 4;
-  margin-top: 15px;
-  width: 100%;
-`;
-
-const ButtonContainerCoordinatesManually = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1;
-  grid-row: 8;
-  margin-top: 15px;
-  width: 100%;
-`;
-
-const QuestionContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  grid-column: 1;
-  grid-row: 2;
-  margin-top: 15px;
-  width: 100%;
-`;
-
-const Question = styled.div`
-  font-weight: bolder;
-  font-size: 30px;
-  margin-left: 0px;
-  letter-spacing: 0.2em;
-  line-height: 1.1em;
-  margin-top: 15px;
-`;
-const Title = styled.div`
-  font-weight: bold;
-  font-size: x-large;
-  flex-direction: row;
-`;
-
-const InfoSchrift = styled.div`
-  font-weight: normal;
-  font-size: large;
-  flex-direction: row;
-`;
-
-
-
 
 // This component is responsible for the edit profile page
 class AddLocation extends React.Component {
@@ -494,7 +170,7 @@ class AddLocation extends React.Component {
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesBench() {
         try {
-            this.setState({savingLocation: true})
+            this.setState({savingLocation: true});
 
             const requestBody = JSON.stringify({
                 locationType: "BENCH",
@@ -507,12 +183,11 @@ class AddLocation extends React.Component {
             });
 
             const url = '/locations';
-            //api.post(url, requestBody);
             const response = await api.post(url, requestBody);
             const location = new Location(response.data);
             const locationUrl = '/map/informationpage/' + location.id;
 
-            // after successfully saving the changes, the user is redirected to his profile page
+            // after successfully saving the changes, the user is redirected to the information page
             this.props.history.push(locationUrl);
         } catch (e) {
             alert(`Something went wrong while adding the new location: \n${handleError(e)}`);
@@ -522,7 +197,7 @@ class AddLocation extends React.Component {
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesTableTennis() {
         try {
-            this.setState({savingLocation: true})
+            this.setState({savingLocation: true});
             if (this.state.net==="X"){
                 this.state.net = "Yes";
             }
@@ -539,7 +214,6 @@ class AddLocation extends React.Component {
             });
 
             const url = '/locations';
-            //api.post(url, requestBody);
             const response = await api.post(url, requestBody);
             const location = new Location(response.data);
             const locationUrl = '/map/informationpage/' + location.id;
@@ -554,7 +228,7 @@ class AddLocation extends React.Component {
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesToilet() {
         try {
-            this.setState({savingLocation: true})
+            this.setState({savingLocation: true});
             if (this.state.category==="X"){
                 this.state.category = "WC (rollstuhlgängig)";
             }
@@ -575,7 +249,6 @@ class AddLocation extends React.Component {
             });
 
             const url = '/locations';
-            //api.post(url, requestBody);
             const response = await api.post(url, requestBody);
             const location = new Location(response.data);
             const locationUrl = '/map/informationpage/' + location.id;
@@ -590,7 +263,7 @@ class AddLocation extends React.Component {
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesFireplace() {
         try {
-            this.setState({savingLocation: true})
+            this.setState({savingLocation: true});
 
             const requestBody = JSON.stringify({
                 locationType: "FIREPLACE",
@@ -608,7 +281,6 @@ class AddLocation extends React.Component {
             });
 
             const url = '/locations';
-            //api.post(url, requestBody);
             const response = await api.post(url, requestBody);
             const location = new Location(response.data);
             const locationUrl = '/map/informationpage/' + location.id;
@@ -623,7 +295,7 @@ class AddLocation extends React.Component {
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesRecycling() {
         try {
-            this.setState({savingLocation: true})
+            this.setState({savingLocation: true});
             if (this.state.glas==="X"){
                 this.state.glas_definite = "X";
             }
@@ -647,7 +319,6 @@ class AddLocation extends React.Component {
             });
 
             const url = '/locations';
-            //api.post(url, requestBody);
             const response = await api.post(url, requestBody);
             const location = new Location(response.data);
             const locationUrl = '/map/informationpage/' + location.id;
@@ -662,7 +333,7 @@ class AddLocation extends React.Component {
     // when the save changes button is clicked, the new data is sent to the server via put request
     async saveChangesFountain() {
         try {
-            this.setState({savingLocation: true})
+            this.setState({savingLocation: true});
             const requestBody = JSON.stringify({
                 locationType: "FOUNTAIN",
                 longitude: this.state.longitude,
@@ -673,7 +344,6 @@ class AddLocation extends React.Component {
             });
 
             const url = '/locations';
-            //api.post(url, requestBody);
             const response = await api.post(url, requestBody);
             const location = new Location(response.data);
             const locationUrl = '/map/informationpage/' + location.id;
@@ -710,8 +380,6 @@ class AddLocation extends React.Component {
 
     // this method handles the given user input and changes the component's state
     handleInputChange(key, value) {
-        // Example: if the key is username, this statement is the equivalent to the following one:
-        // this.setState({'username': value});
         this.setState({[key]: value});
     }
 
@@ -724,23 +392,23 @@ class AddLocation extends React.Component {
 
     updateLongitude = (longitude) => {
         this.setState({longitude}, this.validateLongitude);
-    }
+    };
 
     updateLatitude = (latitude) => {
         this.setState({latitude}, this.validateLatitude)
-    }
+    };
 
     validateCoordinates = () => {
         const {longitudeValid, latitudeValid} = this.state;
         this.setState({
             coordinatesValid: longitudeValid && latitudeValid
         })
-    }
+    };
 
     validateLongitude = () => {
         const {longitude} = this.state;
         let longitudeValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (longitude < 8.4680486289  || longitude > 8.6191027275) {
             longitudeValid = false;
@@ -751,12 +419,12 @@ class AddLocation extends React.Component {
             errorMsg.longitude = "That's not a valid number."
         }
         this.setState({longitudeValid, errorMsg}, this.validateCoordinates)
-    }
+    };
 
     validateLatitude = () => {
         const {latitude} = this.state;
         let latitudeValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (latitude < 47.3232261256  || latitude > 47.4308197123) {
             latitudeValid = false;
@@ -767,16 +435,16 @@ class AddLocation extends React.Component {
             errorMsg.latitude = "That's not a valid number."
         }
         this.setState({latitudeValid, errorMsg}, this.validateCoordinates)
-    }
+    };
 
     updateBaujahr = (baujahr) => {
         this.setState({baujahr}, this.validateBaujahr)
-    }
+    };
 
     validateBaujahr = () => {
         const {baujahr} = this.state;
         let baujahrValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (baujahr < 500  || baujahr > 2021) {
             baujahrValid = false;
@@ -787,64 +455,64 @@ class AddLocation extends React.Component {
             errorMsg.baujahr = "That's not a valid number."
         }
         this.setState({baujahrValid, errorMsg})
-    }
+    };
 
     updateAdresse = (adresse) => {
         this.setState({adresse}, this.validateAdresse);
-    }
+    };
 
     validateAdresse = () => {
         const {adresse} = this.state;
         let adresseValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (adresse.length < 5) {
             adresseValid = false;
             errorMsg.adresse = "That's not a valid adress."
         }
         this.setState({adresseValid, errorMsg})
-    }
+    };
 
     updatePlz = (plz) => {
         this.setState({plz}, this.validatePlz);
-    }
+    };
 
     validatePlz= () => {
         const {plz} = this.state;
         let plzValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (plz < 8000 || plz > 8150) {
             plzValid = false;
             errorMsg.plz = "That's not a valid Zip code."
         }
         this.setState({plzValid, errorMsg})
-    }
+    };
 
     updateOrt = (ort) => {
         this.setState({ort}, this.validateOrt);
-    }
+    };
 
     validateOrt= () => {
         const {ort} = this.state;
         let ortValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (ort.length < 4) {
             ortValid = false;
             errorMsg.ort = "That's not a valid city."
         }
         this.setState({ortValid, errorMsg})
-    }
+    };
 
     updateSlabQuality = (slabQuality) => {
         this.setState({slabQuality}, this.validateSlabQuality);
-    }
+    };
 
     validateSlabQuality = () => {
         const {slabQuality} = this.state;
         let slabQualityValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (slabQuality > 5  ||  slabQuality < 1) {
             slabQualityValid = false;
@@ -855,16 +523,16 @@ class AddLocation extends React.Component {
             errorMsg.slabQuality = "That's not a valid number."
         }
         this.setState({slabQualityValid, errorMsg})
-    }
+    };
 
     updateView = (view) => {
         this.setState({view}, this.validateView);
-    }
+    };
 
     validateView = () => {
         const {view} = this.state;
         let viewValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (view > 5  ||  view < 1) {
             viewValid = false;
@@ -875,16 +543,16 @@ class AddLocation extends React.Component {
             errorMsg.view = "That's not a valid number."
         }
         this.setState({viewValid, errorMsg})
-    }
+    };
 
     updatePeace = (peace) => {
         this.setState({peace}, this.validatePeace);
-    }
+    };
 
     validatePeace = () => {
         const {peace} = this.state;
         let peaceValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (peace > 5  ||  peace < 1) {
             peaceValid = false;
@@ -895,16 +563,16 @@ class AddLocation extends React.Component {
             errorMsg.peace = "That's not a valid number."
         }
         this.setState({peaceValid, errorMsg})
-    }
+    };
 
     updateRomantics = (romantics) => {
         this.setState({romantics}, this.validateRomantics);
-    }
+    };
 
     validateRomantics = () => {
         const {romantics} = this.state;
         let romanticsValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (romantics > 5  ||  romantics < 1) {
             romanticsValid = false;
@@ -915,16 +583,16 @@ class AddLocation extends React.Component {
             errorMsg.romantics = "That's not a valid number."
         }
         this.setState({romanticsValid, errorMsg})
-    }
+    };
 
     updateComfort = (comfort) => {
         this.setState({comfort}, this.validateComfort);
-    }
+    };
 
     validateComfort = () => {
         const {comfort} = this.state;
         let comfortValid = true;
-        let errorMsg = {...this.state.errorMsg}
+        let errorMsg = {...this.state.errorMsg};
 
         if (comfort > 5  ||  comfort < 1) {
             comfortValid = false;
@@ -935,9 +603,7 @@ class AddLocation extends React.Component {
             errorMsg.comfort = "That's not a valid number."
         }
         this.setState({comfortValid, errorMsg})
-    }
-
-
+    };
 
     getCoordinatesAddLocation(position) {
         let latitudeValid = true;
@@ -946,16 +612,16 @@ class AddLocation extends React.Component {
             latitudeValid = false;
             this.setState({errorMsgCoordinates : "You're not in Zurich! Type in the coordinates."});
         }
-        this.setState({latitude: position.coords.latitude})
-        this.setState({latitudeValid})
+        this.setState({latitude: position.coords.latitude});
+        this.setState({latitudeValid});
         if (position.coords.longitude < 8.4680486289 || position.coords.longitude > 8.6191027275){
             longitudeValid = false;
             this.setState({errorMsgCoordinates : "You're not in Zurich! Type in the coordinates."});
         }
-        this.setState({longitude: position.coords.longitude})
-        this.setState({longitudeValid})
+        this.setState({longitude: position.coords.longitude});
+        this.setState({longitudeValid});
         if (latitudeValid && longitudeValid){
-            this.setState({coordinatesValid: true})
+            this.setState({coordinatesValid: true});
             this.setCoordinatesSuccessfully();
         }
     }
@@ -979,16 +645,16 @@ class AddLocation extends React.Component {
     handleLocationError(error){
         switch(error.code) {
             case error.PERMISSION_DENIED:
-                alert ("User denied the request for Geolocation.")
+                alert ("User denied the request for Geolocation.");
                 break;
             case error.POSITION_UNAVAILABLE:
-                alert ("Location information is unavailable.")
+                alert ("Location information is unavailable.");
                 break;
             case error.TIMEOUT:
-                alert ("The request to get user location timed out.")
+                alert ("The request to get user location timed out.");
                 break;
             case error.UNKNOWN_ERROR:
-                alert ("An unknown error occurred.")
+                alert ("An unknown error occurred.");
                 break;
         }
     }

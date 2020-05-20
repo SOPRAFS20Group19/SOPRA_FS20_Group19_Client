@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { api, handleError } from '../../helpers/api';
-import User from '../shared/models/User';
 import {Button} from "../../views/variables/Button";
 import { withRouter } from 'react-router-dom';
 import '../../views/Map/BackgroundMap.css';
 import '../../views/variables/ZurichEmblem.css';
 import Spinner from "react-bootstrap/Spinner";
 import UserListItem from "../../views/Users/UserListItem";
-import { ButtonForLogin } from '../../views/variables/ButtonForLogin';
-import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 import Header from "../../views/Map/Header";
 import SidebarUsers from "../../views/Users/SidebarUsers";
 
@@ -112,24 +109,6 @@ const SearchBar = styled.input`
   }
 `;
 
-const Button2 = styled.button`
-  padding: 6px;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 13px;
-  text-align: center;
-  color: black;
-  width: 250px;
-  height: 35px;
-  border-bottom: 2px solid black;
-  border: 2px transparent;
-  border-radius: 0px;
-  cursor: ${props => (props.disabled ? "default" : "pointer")};
-  opacity: ${props => (props.disabled ? 0.4 : 1)};
-  background: white;
-  transition: all 0.3s ease;
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -180,8 +159,6 @@ class Users extends React.Component{
     }
 
     handleInputChange(key, value) {
-        // Example: if the key is username, this statement is the equivalent to the following one:
-        // this.setState({'username': value});
         this.setState({ [key]: value });
     }
 

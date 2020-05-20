@@ -277,23 +277,6 @@ const Title = styled.div`
   }
 `;
 
-const InputField = styled.input`
-  &::placeholder {
-    color: black;
-  }
-  height: 35px;
-  width: 40%;
-  border: 2px solid #003068;
-  border-color: #66A3E0;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.2);
-  text-align: center;
-  @media only screen and (max-width: 700px){
-    font-size: 10px;
-    height: 25px;
-  }
-`;
-
 const InfoSchrift = styled.div`
   font-weight: normal;
   font-size: 20px;
