@@ -126,6 +126,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  min-width: 240px;
   @media only screen and (max-width: 500px){
     margin-top: 10px;
   }
