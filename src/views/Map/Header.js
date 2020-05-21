@@ -35,11 +35,11 @@ const Title = styled.h1`
 `;
 
 const Header = props => {
-  return (
-    <Container height={props.height}>
-      <Title>Know your city</Title>
-    </Container>
-  );
+    return (
+        <Container height={props.height}>
+            <Title>Know your city</Title>
+        </Container>
+    );
 };
 
 export default Header;

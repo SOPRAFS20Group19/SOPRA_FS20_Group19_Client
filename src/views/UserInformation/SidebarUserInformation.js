@@ -104,11 +104,10 @@ const HoverContainer = styled.div`
   }
 `;
 
-class Sidebar extends React.Component{
+class Sidebar extends React.Component {
     constructor() {
         super();
-        this.state = {
-        }
+        this.state = {}
     }
 
     //Return to previous Page
@@ -116,30 +115,14 @@ class Sidebar extends React.Component{
         this.props.history.push(`/map`);
     }
 
-    toggleShowReturnHover(value){
+    toggleShowReturnHover(value) {
         this.setState({showReturnHover: value})
     }
 
     render() {
         return (
             <div>
-            <Container>
-                <ButtonContainer>
-                    <RoundButton
-                        width="75%"
-                        onMouseOver={() => this.toggleShowReturnHover(true)}
-                        onMouseLeave={() => this.toggleShowReturnHover(false)}
-                        onClick={() => {
-                            this.returnToPage();
-                        }}
-                    >
-                        <img src={LogoutIcon}/>
-                    </RoundButton>
-                </ButtonContainer>
-                {this.state.showReturnHover ? <HoverContainer>Return to map</HoverContainer> : null}
-            </Container>
-                <Container2>
-                    <div>
+                <Container>
                     <ButtonContainer>
                         <RoundButton
                             width="75%"
@@ -153,6 +136,22 @@ class Sidebar extends React.Component{
                         </RoundButton>
                     </ButtonContainer>
                     {this.state.showReturnHover ? <HoverContainer>Return to map</HoverContainer> : null}
+                </Container>
+                <Container2>
+                    <div>
+                        <ButtonContainer>
+                            <RoundButton
+                                width="75%"
+                                onMouseOver={() => this.toggleShowReturnHover(true)}
+                                onMouseLeave={() => this.toggleShowReturnHover(false)}
+                                onClick={() => {
+                                    this.returnToPage();
+                                }}
+                            >
+                                <img src={LogoutIcon}/>
+                            </RoundButton>
+                        </ButtonContainer>
+                        {this.state.showReturnHover ? <HoverContainer>Return to map</HoverContainer> : null}
                     </div>
                 </Container2>
             </div>

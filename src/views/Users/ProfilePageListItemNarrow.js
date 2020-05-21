@@ -56,7 +56,7 @@ const ButtonContainer = styled.div`
   grid-row: 2;
 `;
 
-const ImageContainer= styled.div`
+const ImageContainer = styled.div`
   justify-content: right;
   align-items: right;
   grid-column: 3;
@@ -112,7 +112,7 @@ const imgStyle = {
  * https://reactjs.org/docs/components-and-props.html
  * @FunctionalComponent
  */
-class ProfilePageListItemNarrow extends React.Component{
+class ProfilePageListItemNarrow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -123,23 +123,25 @@ class ProfilePageListItemNarrow extends React.Component{
         }
     }
 
-    render(){
+    render() {
         return (
             <Container>
                 <AvatarContainer>
-                    <img src={avatarArray[this.props.user.avatarNr]} style={imgStyle} />
+                    <img src={avatarArray[this.props.user.avatarNr]} style={imgStyle}/>
                 </AvatarContainer>
                 <Title>{this.props.user.username}</Title>
                 <ButtonContainer>
                     <ProfilePageButton
                         variant="primary"
                         width="100%"
-                        onClick={() => {this.props.goToProfile(this.props.user.id);}}>
+                        onClick={() => {
+                            this.props.goToProfile(this.props.user.id);
+                        }}>
                         Visit {this.props.user.username}'s profile
                     </ProfilePageButton>
                 </ButtonContainer>
                 <ImageContainer>
-                        <img src={FriendAdded} alt="FriendAdded" height="100%" width="100%"/>
+                    <img src={FriendAdded} alt="FriendAdded" height="100%" width="100%"/>
                 </ImageContainer>
             </Container>
         )

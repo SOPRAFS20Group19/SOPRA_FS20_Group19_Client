@@ -66,7 +66,7 @@ class FriendsUser extends React.Component {
         this.getFriends();
     }
 
-    async getFriends(){
+    async getFriends() {
         try {
             const url = '/users/friends/' + this.props.userId;
 
@@ -78,11 +78,11 @@ class FriendsUser extends React.Component {
         }
     }
 
-    goToProfile(userId){
+    goToProfile(userId) {
         this.props.history.push(`/user/` + userId);
     }
 
-    render(){
+    render() {
         return (
             <Container>
                 <Title>
@@ -96,7 +96,8 @@ class FriendsUser extends React.Component {
                             {this.state.friends.map(friend => {
                                 return (
                                     <UserContainer key={friend.id}>
-                                        <UserListItemNarrow user={friend} goToProfile={this.goToProfile.bind(this)} refresh={this.getFriends.bind(this)}/>
+                                        <UserListItemNarrow user={friend} goToProfile={this.goToProfile.bind(this)}
+                                                            refresh={this.getFriends.bind(this)}/>
                                     </UserContainer>
                                 );
                             })}

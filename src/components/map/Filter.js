@@ -133,7 +133,7 @@ class Filter extends React.Component {
         return (
             <div>
 
-            {this.props.filterSpinner === true ? (
+                {this.props.filterSpinner === true ? (
                     <Container>
                         <Title>Filter</Title>
                         <div className="d-flex justify-content-center">
@@ -280,8 +280,8 @@ class Filter extends React.Component {
                         </ButtonContainer>
                     </Container>
                 )
-            }
-            </div>    )
+                }
+            </div>)
     }
 }
 

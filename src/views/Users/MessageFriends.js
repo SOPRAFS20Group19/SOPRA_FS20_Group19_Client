@@ -77,14 +77,13 @@ const imgStyle = {
     "width": "10px"
 };
 
-export default class MessageFriends extends React.Component{
+export default class MessageFriends extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
-    async deleteMessage(){
+    async deleteMessage() {
         try {
             const url = '/users/chats/' + localStorage.getItem('userId') + '/' + this.props.friendId + '/' + this.props.messageId;
 
@@ -97,25 +96,25 @@ export default class MessageFriends extends React.Component{
     }
 
     // DO NOT CHANGE == to ===!!!
-    render(){
+    render() {
         return (
             <Container>
                 <Username>{this.props.senderUsername}</Username>
                 <Timestamp>{this.props.timestamp}</Timestamp>
                 <Text>{this.props.content}</Text>
-                {localStorage.getItem("userId") == this.props.senderId ? (
-                <Delete>
-                    <ButtonContainer>
-                        <TrashButton
-                            width="75%"
-                            onClick={() => {
-                                this.deleteMessage();
-                            }}
-                        >
-                            <img src={TrashCan} style={imgStyle}/>
-                        </TrashButton>
-                    </ButtonContainer>
-                </Delete>) : null}
+                {localStorage.getItem("userId") === this.props.senderId ? (
+                    <Delete>
+                        <ButtonContainer>
+                            <TrashButton
+                                width="75%"
+                                onClick={() => {
+                                    this.deleteMessage();
+                                }}
+                            >
+                                <img src={TrashCan} style={imgStyle}/>
+                            </TrashButton>
+                        </ButtonContainer>
+                    </Delete>) : null}
             </Container>
         )
     }

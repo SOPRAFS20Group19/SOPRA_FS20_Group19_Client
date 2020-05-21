@@ -25,7 +25,7 @@ const Container = styled.div`
   }
 `;
 
-const GridContainer =styled.div`
+const GridContainer = styled.div`
   color: black;
   width: 100%;
   display: grid;
@@ -44,8 +44,6 @@ const GridContainer =styled.div`
     font-size: 14px;
   }
 `;
-
-
 
 
 const Title = styled.div`
@@ -90,14 +88,13 @@ const ButtonContainer = styled.div`
 `;
 
 
-class UserInformation extends React.Component{
+class UserInformation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
+        this.state = {}
     }
 
-    goToEditProfile(){
+    goToEditProfile() {
         this.props.history.push(`/userprofile/edit`);
     }
 
@@ -105,11 +102,11 @@ class UserInformation extends React.Component{
     render() {
         return (
             <Container>
-                {!this.props.username ? (<Spinner/>) :(<div>
+                {!this.props.username ? (<Spinner/>) : (<div>
                         <GridContainer row={1}>
                             <Title>Name:</Title>
                             <Text>{this.props.name}</Text>
-                        </GridContainer >
+                        </GridContainer>
                         <GridContainer row={2}>
                             <Title>Username:</Title>
                             <Text>{this.props.username}</Text>
@@ -125,8 +122,8 @@ class UserInformation extends React.Component{
                         variant="primary"
                         width="100%"
                         onClick={() => {
-                        this.goToEditProfile();
-                    }}>
+                            this.goToEditProfile();
+                        }}>
                         Edit your Profile
                     </Button>
                 </ButtonContainer>

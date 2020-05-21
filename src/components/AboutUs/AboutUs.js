@@ -60,7 +60,7 @@ const ReturnToMapButton = styled.div`
   transition: all 0.3s ease;
 `;
 
-const Text= styled.div`
+const Text = styled.div`
   text-align: center;
   font-size: 12px;
   color: black;
@@ -73,41 +73,45 @@ class AboutUs extends React.Component {
         this.state = {};
     }
 
-    returnToLastPage(){
-      let redirectTo = '/map'
-      if (localStorage.getItem('cameToAboutUsFrom') === 'login'){redirectTo = '/login';}
-      else if (localStorage.getItem('cameToAboutUsFrom') === 'registration'){redirectTo = '/registration';}
-      else if (localStorage.getItem('cameToAboutUsFrom') === 'userprofile'){redirectTo = '/userprofile';}
-      this.props.history.push(redirectTo);
+    returnToLastPage() {
+        let redirectTo = '/map'
+        if (localStorage.getItem('cameToAboutUsFrom') === 'login') {
+            redirectTo = '/login';
+        } else if (localStorage.getItem('cameToAboutUsFrom') === 'registration') {
+            redirectTo = '/registration';
+        } else if (localStorage.getItem('cameToAboutUsFrom') === 'userprofile') {
+            redirectTo = '/userprofile';
+        }
+        this.props.history.push(redirectTo);
     }
 
     render() {
         return (
             <MainContainer>
-            <BackgroundContainerAboutUs>
-                <HeaderForAboutUs/>
-                <ButtonContainer>
-                    <ReturnToMapButton
-                        onClick={() => {
-                            this.returnToLastPage();
-                        }}
-                    >
-                        <img src={LogoutIcon} width="4%" heigth= "4%"/>
-                    </ReturnToMapButton>
-                </ButtonContainer>
-                <Container2>
-                <Carousel/>
-                </Container2>
-                <Text>
-                    KNOW YOUR CITY was built as a SoPra project at the University of Zurich in FS20.
-                    <br/>
-                    Idea and realization by group 19: Lena, Luca, Luis, Maximilian and Tim.
-                    <br/>
-                    Contact: knowyourcity@gmx.ch
-                    <br/>
-                    We thank the whole SoPra team for their tips and tricks, especially our tutor Anja.
-                </Text>
-            </BackgroundContainerAboutUs>
+                <BackgroundContainerAboutUs>
+                    <HeaderForAboutUs/>
+                    <ButtonContainer>
+                        <ReturnToMapButton
+                            onClick={() => {
+                                this.returnToLastPage();
+                            }}
+                        >
+                            <img src={LogoutIcon} width="4%" heigth="4%"/>
+                        </ReturnToMapButton>
+                    </ButtonContainer>
+                    <Container2>
+                        <Carousel/>
+                    </Container2>
+                    <Text>
+                        KNOW YOUR CITY was built as a SoPra project at the University of Zurich in FS20.
+                        <br/>
+                        Idea and realization by group 19: Lena, Luca, Luis, Maximilian and Tim.
+                        <br/>
+                        Contact: knowyourcity@gmx.ch
+                        <br/>
+                        We thank the whole SoPra team for their tips and tricks, especially our tutor Anja.
+                    </Text>
+                </BackgroundContainerAboutUs>
             </MainContainer>
 
         )

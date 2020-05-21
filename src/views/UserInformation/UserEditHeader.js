@@ -54,23 +54,22 @@ const Title = styled.div`
 class UserEditHeader extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
     }
 
     //returns the set image
-    getProfileImage(nr){
+    getProfileImage(nr) {
         return avatarArray[nr];
     }
 
 
-    render(){
+    render() {
         return (
             <Container>
                 <PictureContainer>
                     <Picture>
-                    <img src={this.getProfileImage(this.props.avatarNr)} alt="User icon" width="100%" height="100%"/>
+                        <img src={this.getProfileImage(this.props.avatarNr)} alt="User icon" width="100%"
+                             height="100%"/>
                     </Picture>
                     <Title>
                         {this.props.username}, edit your profile:

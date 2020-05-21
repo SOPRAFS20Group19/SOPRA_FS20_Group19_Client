@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import MapRouter from "./MapRouter";
-import { ProfileGuard } from "../routeProtectors/ProfileGuard";
-import { LoginGuard } from "../routeProtectors/LoginGuard";
+import {ProfileGuard} from "../routeProtectors/ProfileGuard";
+import {LoginGuard} from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Registration from "../../registration/Registration";
 import ProfileUser from "../../userProfile/UserProfile";
@@ -21,80 +21,80 @@ import ProfilePage from "../../userProfile/ProfilePage";
  * Documentation about routing in React: https://reacttraining.com/react-router/web/guides/quick-start
  */
 class AppRouter extends React.Component {
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <div>
-            <Route
-              path="/map"
-              render={() => (
-                  <MapRouter base={"/map"} />
-              )}
-            />
-            <Route
-                path="/userprofile"
-                exact
-                render={() => 
-                <ProfileGuard>
-                  <ProfileUser />
-                </ProfileGuard>
-                }
-            />
-            <Route
-                path="/userprofile/edit"
-                exact
-                render={() => 
-                <ProfileGuard>
-                  <ProfileEdit />
-                </ProfileGuard>
-                
-              }
-            />
-              <Route
-                  path="/users"
-                  exact
-                  render={() =>
-                      <ProfileGuard>
-                          <Users />
-                      </ProfileGuard>
+    render() {
+        return (
+            <BrowserRouter>
+                <Switch>
+                    <div>
+                        <Route
+                            path="/map"
+                            render={() => (
+                                <MapRouter base={"/map"}/>
+                            )}
+                        />
+                        <Route
+                            path="/userprofile"
+                            exact
+                            render={() =>
+                                <ProfileGuard>
+                                    <ProfileUser/>
+                                </ProfileGuard>
+                            }
+                        />
+                        <Route
+                            path="/userprofile/edit"
+                            exact
+                            render={() =>
+                                <ProfileGuard>
+                                    <ProfileEdit/>
+                                </ProfileGuard>
 
-                  }
-              />
-              <Route
-                  exact
-                  path={'/user/:userId'}
-                  render={() => <ProfileGuard><ProfilePage /></ProfileGuard>}
-              />
-            <Route
-              path="/login"
-              exact
-              render={() => (
-                <LoginGuard>
-                  <Login />
-                </LoginGuard>
-              )}
-            />
-            <Route
-                path="/registration"
-                exact
-                render={() => (
-                    <Registration />
-                    )}
-              />
-              <Route
-                  path="/aboutUs"
-                  exact
-                  render={() => (
-                      <AboutUs />
-                  )}
-              />
-            <Route path="/" exact render={() => <Redirect to={"/login"} />} /> 
-          </div>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
+                            }
+                        />
+                        <Route
+                            path="/users"
+                            exact
+                            render={() =>
+                                <ProfileGuard>
+                                    <Users/>
+                                </ProfileGuard>
+
+                            }
+                        />
+                        <Route
+                            exact
+                            path={'/user/:userId'}
+                            render={() => <ProfileGuard><ProfilePage/></ProfileGuard>}
+                        />
+                        <Route
+                            path="/login"
+                            exact
+                            render={() => (
+                                <LoginGuard>
+                                    <Login/>
+                                </LoginGuard>
+                            )}
+                        />
+                        <Route
+                            path="/registration"
+                            exact
+                            render={() => (
+                                <Registration/>
+                            )}
+                        />
+                        <Route
+                            path="/aboutUs"
+                            exact
+                            render={() => (
+                                <AboutUs/>
+                            )}
+                        />
+                        <Route path="/" exact render={() => <Redirect to={"/login"}/>}/>
+                    </div>
+                </Switch>
+            </BrowserRouter>
+        );
+    }
 }
 
 export default AppRouter;

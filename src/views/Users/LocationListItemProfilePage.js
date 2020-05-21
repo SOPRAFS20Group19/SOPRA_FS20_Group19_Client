@@ -58,7 +58,7 @@ const ButtonContainer = styled.div`
   grid-row: 2;
 `;
 
-const ImageContainer= styled.div`
+const ImageContainer = styled.div`
   justify-content: right;
   align-items: right;
   grid-column: 3;
@@ -99,7 +99,7 @@ const InfoPageButton = styled.button`
   transition: all 0.3s ease;
 `;
 
-export default class LocationListItemProfilePage extends React.Component{
+export default class LocationListItemProfilePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -109,40 +109,40 @@ export default class LocationListItemProfilePage extends React.Component{
     }
 
     //returns the image to be rendered according to the type
-    getImage(){
-        if (this.props.location.locationType === 'FIREPLACE'){
+    getImage() {
+        if (this.props.location.locationType === 'FIREPLACE') {
             return FireplaceCircle;
-        }else if (this.props.location.locationType === 'FOUNTAIN'){
+        } else if (this.props.location.locationType === 'FOUNTAIN') {
             return FountainCircle;
-        } else if (this.props.location.locationType === 'RECYCLING_STATION'){
+        } else if (this.props.location.locationType === 'RECYCLING_STATION') {
             return RecyclingCircle;
-        }else if (this.props.location.locationType === 'TOILET'){
+        } else if (this.props.location.locationType === 'TOILET') {
             return ToiletCircle;
-        }else if (this.props.location.locationType === 'TABLE_TENNIS'){
+        } else if (this.props.location.locationType === 'TABLE_TENNIS') {
             return TableTennisCircle;
-        }else if (this.props.location.locationType === 'BENCH'){
+        } else if (this.props.location.locationType === 'BENCH') {
             return BenchCircle;
         }
     }
 
     //returns the string to be rendered according to the type
-    getTypeAsString(){
-        if (this.props.location.locationType === 'FIREPLACE'){
+    getTypeAsString() {
+        if (this.props.location.locationType === 'FIREPLACE') {
             return "FIREPLACE";
-        }else if (this.props.location.locationType === 'FOUNTAIN'){
+        } else if (this.props.location.locationType === 'FOUNTAIN') {
             return "FOUNTAIN";
-        }else if (this.props.location.locationType  === 'RECYCLING_STATION'){
+        } else if (this.props.location.locationType === 'RECYCLING_STATION') {
             return "RECYCLING";
-        }else if (this.props.location.locationType  === 'TOILET'){
+        } else if (this.props.location.locationType === 'TOILET') {
             return "TOILET";
-        }else if (this.props.location.locationType  === 'TABLE_TENNIS'){
+        } else if (this.props.location.locationType === 'TABLE_TENNIS') {
             return "TABLE TENNIS";
-        }else if (this.props.location.locationType  === 'BENCH'){
+        } else if (this.props.location.locationType === 'BENCH') {
             return "BENCH";
         }
     }
 
-    render(){
+    render() {
         return (
             <Container>
                 <IconContainer>
@@ -153,12 +153,14 @@ export default class LocationListItemProfilePage extends React.Component{
                     <InfoPageButton
                         variant="primary"
                         width="100%"
-                        onClick={() => {this.props.goToInfoPageSavedLocations(this.props.location.id);}}>
+                        onClick={() => {
+                            this.props.goToInfoPageSavedLocations(this.props.location.id);
+                        }}>
                         Visit the information page of this location
                     </InfoPageButton>
                 </ButtonContainer>
                 <ImageContainer>
-                        <img src={HeartRed} alt="Heart Full" height="100%" width="100%"/>
+                    <img src={HeartRed} alt="Heart Full" height="100%" width="100%"/>
                 </ImageContainer>
             </Container>
         )

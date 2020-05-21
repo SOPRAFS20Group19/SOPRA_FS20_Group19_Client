@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
     withGoogleMap,
     withScriptjs,
@@ -151,12 +151,12 @@ class MapService extends React.Component {
 
     setSelectedLocation(location) {
         this.setState({selectedLocation: location});
-        if (location != null){
+        if (location != null) {
             this.showAverageRating(location.id);
         }
     }
 
-    async showAverageRating(locationId){
+    async showAverageRating(locationId) {
         try {
             const url = '/locations/rating/' + locationId;
             const response = await api.get(url);
@@ -167,23 +167,18 @@ class MapService extends React.Component {
         }
     }
 
-    getIcon(location){
-        if (location.locationType === "FOUNTAIN"){
+    getIcon(location) {
+        if (location.locationType === "FOUNTAIN") {
             return '/FountainIcon.png'
-        }
-        else if (location.locationType === "FIREPLACE"){
+        } else if (location.locationType === "FIREPLACE") {
             return '/FireplaceIcon.png'
-        }
-        else if (location.locationType === "RECYCLING_STATION") {
+        } else if (location.locationType === "RECYCLING_STATION") {
             return '/RecyclingIcon.png'
-        }
-        else if (location.locationType === "TOILET") {
+        } else if (location.locationType === "TOILET") {
             return '/PublicToiletIcon.png'
-        }
-        else if (location.locationType === "TABLE_TENNIS") {
+        } else if (location.locationType === "TABLE_TENNIS") {
             return '/PingPongIcon.png'
-        }
-        else{
+        } else {
             return '/BenchIcon.png'
         }
     }
@@ -193,20 +188,16 @@ class MapService extends React.Component {
     }
 
     // Returns the string to be rendered according to the type
-    getTypeAsString(location){
-        if (this.state.selectedLocation.locationType === 'FIREPLACE'){
+    getTypeAsString(location) {
+        if (this.state.selectedLocation.locationType === 'FIREPLACE') {
             return 'FIREPLACE';
-        }
-        else if (this.state.selectedLocation.locationType === 'FOUNTAIN'){
+        } else if (this.state.selectedLocation.locationType === 'FOUNTAIN') {
             return 'FOUNTAIN';
-        }
-        else if (this.state.selectedLocation.locationType === 'TOILET'){
+        } else if (this.state.selectedLocation.locationType === 'TOILET') {
             return 'PUBLIC TOILET';
-        }
-        else if (this.state.selectedLocation.locationType === 'TABLE_TENNIS'){
+        } else if (this.state.selectedLocation.locationType === 'TABLE_TENNIS') {
             return 'TABLE TENNIS';
-        }
-        else if (this.state.selectedLocation.locationType === 'BENCH'){
+        } else if (this.state.selectedLocation.locationType === 'BENCH') {
             return 'BENCH';
         }
         return 'RECYCLING';
@@ -214,19 +205,15 @@ class MapService extends React.Component {
 
     // Gets the right style for the different types of information windows
     getStyleOfBorder() {
-        if (this.state.selectedLocation.locationType === 'FOUNTAIN'){
+        if (this.state.selectedLocation.locationType === 'FOUNTAIN') {
             return BorderFountain;
-        }
-        else if (this.state.selectedLocation.locationType === 'FIREPLACE'){
+        } else if (this.state.selectedLocation.locationType === 'FIREPLACE') {
             return BorderFireplace;
-        }
-        else if (this.state.selectedLocation.locationType === 'TOILET'){
+        } else if (this.state.selectedLocation.locationType === 'TOILET') {
             return BorderToilet;
-        }
-        else if (this.state.selectedLocation.locationType === 'TABLE_TENNIS'){
+        } else if (this.state.selectedLocation.locationType === 'TABLE_TENNIS') {
             return BorderTableTennis;
-        }
-        else if (this.state.selectedLocation.locationType === 'BENCH'){
+        } else if (this.state.selectedLocation.locationType === 'BENCH') {
             return BorderBench;
         }
 
@@ -236,61 +223,58 @@ class MapService extends React.Component {
     getStyleOfButton() {
         if (this.state.selectedLocation.locationType === 'FOUNTAIN') {
             return ButtonFountain;
-        }
-        else if (this.state.selectedLocation.locationType === 'FIREPLACE') {
+        } else if (this.state.selectedLocation.locationType === 'FIREPLACE') {
             return ButtonFirePlace;
-        }
-        else if (this.state.selectedLocation.locationType === 'TOILET') {
+        } else if (this.state.selectedLocation.locationType === 'TOILET') {
             return ButtonToilet;
-        }
-        else if (this.state.selectedLocation.locationType === 'TABLE_TENNIS') {
+        } else if (this.state.selectedLocation.locationType === 'TABLE_TENNIS') {
             return ButtonTableTennis;
-        }
-        else if (this.state.selectedLocation.locationType === 'BENCH') {
+        } else if (this.state.selectedLocation.locationType === 'BENCH') {
             return ButtonBench;
         }
         return ButtonRecycling;
     }
 
-    render(){
+    render() {
         return (
             <div>
                 {!this.props.locationsShown ? (
-                    <Spinner />
-                    ) : (
+                    <Spinner/>
+                ) : (
                     <GoogleMap
                         defaultZoom={this.props.zoom}
                         //Center at current location
                         defaultCenter={{
-                        lat: this.props.currentCenter[0],
-                        lng: this.props.currentCenter[1]
-                    }}
-                        defaultOptions={ {zoomControl: window.innerWidth > 800, fullscreenControl: false} }
+                            lat: this.props.currentCenter[0],
+                            lng: this.props.currentCenter[1]
+                        }}
+                        defaultOptions={{zoomControl: window.innerWidth > 800, fullscreenControl: false}}
 
                     >
-                            {this.props.locationsShown.map(location => {
-                                    return (
-                                        <Marker
-                                            key={location.id}
+                        {this.props.locationsShown.map(location => {
+                            return (
+                                <Marker
+                                    key={location.id}
 
-                                            position={{
-                                                lat: location.coordinates[1],
-                                                lng: location.coordinates[0]
-                                            }}
+                                    position={{
+                                        lat: location.coordinates[1],
+                                        lng: location.coordinates[0]
+                                    }}
 
-                                            onClick={() => {
-                                                localStorage.setItem("currentLocationInformationLat", location.coordinates[1]);
-                                                localStorage.setItem("currentLocationInformationLon", location.coordinates[0]);
-                                                this.setSelectedLocation(location);
-                                            }}
-                                            icon={{
-                                                url: this.getIcon(location),
-                                                scaledSize: new window.google.maps.Size(50, 77)}}
+                                    onClick={() => {
+                                        localStorage.setItem("currentLocationInformationLat", location.coordinates[1]);
+                                        localStorage.setItem("currentLocationInformationLon", location.coordinates[0]);
+                                        this.setSelectedLocation(location);
+                                    }}
+                                    icon={{
+                                        url: this.getIcon(location),
+                                        scaledSize: new window.google.maps.Size(50, 77)
+                                    }}
 
 
-                                        />
-                                    );
-                                })}
+                                />
+                            );
+                        })}
 
                         {this.state.selectedLocation && (
                             <InfoWindow
@@ -305,15 +289,15 @@ class MapService extends React.Component {
 
                                 <Border style={this.getStyleOfBorder()}>
 
-                                        <h2>{this.getTypeAsString()}</h2>
-                                        <HeaderOfPopUp>{"Address: "}</HeaderOfPopUp>
-                                        <Text>{this.state.selectedLocation.address}</Text><br/>
+                                    <h2>{this.getTypeAsString()}</h2>
+                                    <HeaderOfPopUp>{"Address: "}</HeaderOfPopUp>
+                                    <Text>{this.state.selectedLocation.address}</Text><br/>
 
                                     {this.state.selectedLocationRating ? (
-                                    <div>
-                                        <HeaderOfPopUp> {"Average Rating: "}</HeaderOfPopUp>
-                                        <Text>{this.state.selectedLocationRating}/5</Text>
-                                    </div>) :
+                                            <div>
+                                                <HeaderOfPopUp> {"Average Rating: "}</HeaderOfPopUp>
+                                                <Text>{this.state.selectedLocationRating}/5</Text>
+                                            </div>) :
                                         (
                                             <div>
                                                 <HeaderOfPopUp> {"Average Rating: "}</HeaderOfPopUp>
@@ -335,11 +319,11 @@ class MapService extends React.Component {
                                     ) : (
                                         <Button style={this.getStyleOfButton()}
                                                 width="100%"
-                                            onClick={() => {
-                                                localStorage.setItem("currentLocationInformationLat", this.state.selectedLocation.latitude);
-                                                localStorage.setItem("currentLocationInformationLon", this.state.selectedLocation.longitude);
-                                                this.props.history.push(`/map/informationpage/` + this.state.selectedLocation.id);
-                                            }}
+                                                onClick={() => {
+                                                    localStorage.setItem("currentLocationInformationLat", this.state.selectedLocation.latitude);
+                                                    localStorage.setItem("currentLocationInformationLon", this.state.selectedLocation.longitude);
+                                                    this.props.history.push(`/map/informationpage/` + this.state.selectedLocation.id);
+                                                }}
                                         >
                                             Get more information here!
                                         </Button>
@@ -359,7 +343,8 @@ class MapService extends React.Component {
 
                             icon={{
                                 url: markerArray[this.props.loggedInUser.avatarNr],
-                                scaledSize: new window.google.maps.Size(65, 100)}}
+                                scaledSize: new window.google.maps.Size(65, 100)
+                            }}
                         />
                     </GoogleMap>
                 )}

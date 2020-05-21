@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { api } from '../../helpers/api';
+import {api} from '../../helpers/api';
 import User from '../shared/models/User';
-import { withRouter } from 'react-router-dom';
-import { Button } from '../../views/variables/Button';
+import {withRouter} from 'react-router-dom';
+import {Button} from '../../views/variables/Button';
 import '../../views/Map/BackgroundMap.css';
 import '../../views/variables/ZurichEmblem.css';
-import { ButtonForLogin } from '../../views/variables/ButtonForLogin';
+import {ButtonForLogin} from '../../views/variables/ButtonForLogin';
 import HeaderForLogin from "../../views/UserInformation/HeaderForLogin";
 import AboutUsQuestion1 from "../../views/AboutUs/AboutUsQuestion1.png";
 
@@ -158,7 +158,7 @@ const AboutUsButton = styled.div`
 
 function ValidationMessage(props) {
     if (!props.valid) {
-        return(
+        return (
             <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
         )
     }
@@ -189,6 +189,7 @@ class Registration extends React.Component {
             errorMsgError: "",
         };
     }
+
     /**
      * HTTP POST request is sent to the backend.
      * If the request is successful, a new user is returned to the front-end
@@ -220,7 +221,7 @@ class Registration extends React.Component {
      * @param value (the value that gets assigned to the identified state key)
      */
 
-    handleErrorDesigned(error){
+    handleErrorDesigned(error) {
 
         const response = error.response;
 
@@ -232,8 +233,7 @@ class Registration extends React.Component {
             } else {
                 this.setState({errorMessageError: response.data})
             }
-        }
-        else {
+        } else {
             if (error.message.match(/Network Error/)) {
                 alert('The server cannot be reached. Did you start it?');
             }
@@ -258,7 +258,7 @@ class Registration extends React.Component {
     }
 
     handleInputChange(key, value) {
-        this.setState({ [key]: value });
+        this.setState({[key]: value});
         this.validateUsername();
 
     }
@@ -323,108 +323,118 @@ class Registration extends React.Component {
         return (
             //className html (BackgroundMap.css) and container (ZurichEmblem.css) are css files with the background images in it (map and emblem)
             <BackgroundContainer className={'html'}>
-                    <HeaderForLogin/>
-                    <EmblemContainer className={'container'}>
-                        <FormContainer>
-                            <Form>
-                                <InputField
-                                    onKeyPress={e => {if (e.key === 'Enter'){
-                                        if (this.state.formValid === true){
+                <HeaderForLogin/>
+                <EmblemContainer className={'container'}>
+                    <FormContainer>
+                        <Form>
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.formValid === true) {
                                             this.registration();
                                         }
-                                    }}}
-                                    placeholder="Enter username here"
-                                    onChange={e => {
-                                        this.updateUsername(e.target.value);
-                                    }}
-                                />
-                                <ValidationMessage valid={this.state.usernameValid} message={this.state.errorMsg.username}/>
-                                <InputField
-                                    onKeyPress={e => {if (e.key === 'Enter'){
-                                        if (this.state.formValid === true){
+                                    }
+                                }}
+                                placeholder="Enter username here"
+                                onChange={e => {
+                                    this.updateUsername(e.target.value);
+                                }}
+                            />
+                            <ValidationMessage valid={this.state.usernameValid} message={this.state.errorMsg.username}/>
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.formValid === true) {
                                             this.registration();
                                         }
-                                    }}}
-                                    placeholder="Enter name here"
-                                    onChange={e => {
-                                        this.updateName(e.target.value);
-                                    }}
-                                />
-                                <ValidationMessage valid={this.state.nameValid} message={this.state.errorMsg.name}/>
-                                <InputField
-                                    onKeyPress={e => {if (e.key === 'Enter'){
-                                        if (this.state.formValid === true){
+                                    }
+                                }}
+                                placeholder="Enter name here"
+                                onChange={e => {
+                                    this.updateName(e.target.value);
+                                }}
+                            />
+                            <ValidationMessage valid={this.state.nameValid} message={this.state.errorMsg.name}/>
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.formValid === true) {
                                             this.registration();
                                         }
-                                    }}}
-                                    type="password"
-                                    placeholder="Enter password here"
-                                    onChange={e => {
-                                        this.updatePassword(e.target.value);
-                                    }}
-                                />
-                                <ValidationMessage valid={this.state.passwordValid} message={this.state.errorMsg.password}/>
-                                <InputField
-                                    onKeyPress={e => {if (e.key === 'Enter'){
-                                        if (this.state.formValid === true){
+                                    }
+                                }}
+                                type="password"
+                                placeholder="Enter password here"
+                                onChange={e => {
+                                    this.updatePassword(e.target.value);
+                                }}
+                            />
+                            <ValidationMessage valid={this.state.passwordValid} message={this.state.errorMsg.password}/>
+                            <InputField
+                                onKeyPress={e => {
+                                    if (e.key === 'Enter') {
+                                        if (this.state.formValid === true) {
                                             this.registration();
                                         }
-                                    }}}
-                                    type="password"
-                                    placeholder="Enter password again"
-                                    onChange={e => {
-                                        this.updatePasswordConfirm(e.target.value);
+                                    }
+                                }}
+                                type="password"
+                                placeholder="Enter password again"
+                                onChange={e => {
+                                    this.updatePasswordConfirm(e.target.value);
+                                }}
+                            />
+                            <ValidationMessage valid={this.state.passwordConfirmValid}
+                                               message={this.state.errorMsg.passwordConfirm}/>
+                            <ContainerError>
+                                <ValidationMessage valid={this.state.hasNoErrorMessage}
+                                                   message={this.state.errorMessageError}/>
+                            </ContainerError>
+                            <ButtonContainer>
+                                <Button
+                                    disabled={!this.state.formValid}
+                                    width="75%"
+                                    onClick={() => {
+                                        this.registration();
                                     }}
-                                />
-                                <ValidationMessage valid={this.state.passwordConfirmValid} message={this.state.errorMsg.passwordConfirm}/>
-                                <ContainerError>
-                                <ValidationMessage valid={this.state.hasNoErrorMessage} message={this.state.errorMessageError}/>
-                                </ContainerError>
-                                <ButtonContainer>
-                                    <Button
-                                        disabled={!this.state.formValid}
-                                        width="75%"
-                                        onClick={() => {
-                                            this.registration();
-                                        }}
-                                    >
-                                        Register
-                                    </Button>
-                                </ButtonContainer>
-                                <ButtonContainer>
-                                    <ButtonForLogin
-                                        width="75%"
-                                        onClick={() => {
-                                            this.props.history.push(`/map`);
-                                        }}
-                                    >
-                                        Continue as a guest
-                                    </ButtonForLogin>
-                                </ButtonContainer>
-                                <ButtonContainer>
-                                    <ButtonForLogin
-                                        width="75%"
-                                        onClick={() => {
-                                            this.props.history.push(`/login`);
-                                        }}
-                                    >
-                                        Login here
-                                    </ButtonForLogin>
-                                </ButtonContainer>
-                                <ButtonContainer>
-                                    <AboutUsButton
-                                        onClick={() => {
-                                            localStorage.setItem('cameToAboutUsFrom', 'registration');
-                                            this.props.history.push(`/aboutus`);
-                                        }}
-                                    >
-                                        <img src={AboutUsQuestion1} width="40%" heigth= "40%"/>
-                                    </AboutUsButton>
-                                </ButtonContainer>
-                            </Form>
-                        </FormContainer>
-                    </EmblemContainer>
-                </BackgroundContainer>
+                                >
+                                    Register
+                                </Button>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <ButtonForLogin
+                                    width="75%"
+                                    onClick={() => {
+                                        this.props.history.push(`/map`);
+                                    }}
+                                >
+                                    Continue as a guest
+                                </ButtonForLogin>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <ButtonForLogin
+                                    width="75%"
+                                    onClick={() => {
+                                        this.props.history.push(`/login`);
+                                    }}
+                                >
+                                    Login here
+                                </ButtonForLogin>
+                            </ButtonContainer>
+                            <ButtonContainer>
+                                <AboutUsButton
+                                    onClick={() => {
+                                        localStorage.setItem('cameToAboutUsFrom', 'registration');
+                                        this.props.history.push(`/aboutus`);
+                                    }}
+                                >
+                                    <img src={AboutUsQuestion1} width="40%" heigth="40%"/>
+                                </AboutUsButton>
+                            </ButtonContainer>
+                        </Form>
+                    </FormContainer>
+                </EmblemContainer>
+            </BackgroundContainer>
 
         );
     }

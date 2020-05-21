@@ -10,7 +10,7 @@ import TableTennisCircle from "../MapMarkers/PingPongCircle.png"
 import ToiletCircle from "../MapMarkers/PublicToiletCircle.png"
 import BenchCircle from "../MapMarkers/BenchCircle.png"
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   flex-direction: row;
   width: 100%;
@@ -121,59 +121,67 @@ const ButtonContainer2 = styled.div`
 `;
 
 class ChooseAddLocationType extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render(){
-        return(
+    render() {
+        return (
             <div>
-            <SidebarAddLocation avatarNr={localStorage.getItem("userAvatar")}/>
-            <MainContainer>
-                <QuestionContainer>
-                    <Question>What location type do you want to add?</Question>
-                </QuestionContainer>
-                <ButtonContainer>
-                    <ButtonContainerFountainCircle>
-                        <RoundButton>
-                            <img src={FountainCircle} alt={"FOUNTAIN"} width="100%" height="100%"
-                                 onClick={() => {this.props.setLocationType("FOUNTAIN");}}/>
-                        </RoundButton>
-                    </ButtonContainerFountainCircle>
-                    <ButtonContainerFireplaceCircle>
-                        <RoundButton>
-                            <img src={FireplaceCircle} alt={"FIREPLACE"} width="100%" height="100%"
-                                 onClick={() => {this.props.setLocationType("FIREPLACE");}}/>
-                        </RoundButton>
-                    </ButtonContainerFireplaceCircle>
-                    <ButtonContainerRecyclingCircle>
-                        <RoundButton>
-                            <img src={RecyclingCircle} alt={"RECYCLING_STATION"} width="100%" height="100%"
-                                 onClick={() => {this.props.setLocationType("RECYCLING_STATION");}}/>
-                        </RoundButton>
-                    </ButtonContainerRecyclingCircle>
-                </ButtonContainer>
-                <ButtonContainer2>
-                <ButtonContainerToiletCircle>
-                    <RoundButton>
-                        <img src={ToiletCircle} alt={"TOILET"} width="100%" height="100%"
-                             onClick={() => {this.props.setLocationType("TOILET");}}/>
-                    </RoundButton>
-                    </ButtonContainerToiletCircle>
-                    <ButtonContainerTableTennisCircle>
-                        <RoundButton>
-                            <img src={TableTennisCircle} alt={"TABLE_TENNIS"} width="100%" height="100%"
-                                 onClick={() => {this.props.setLocationType("TABLE_TENNIS");}}/>
-                        </RoundButton>
-                    </ButtonContainerTableTennisCircle>
-                    <ButtonContainerBenchCircle>
-                        <RoundButton>
-                            <img src={BenchCircle} alt={"BENCH"} width="100%" height="100%"
-                                 onClick={() => {this.props.setLocationType("BENCH");}}/>
-                        </RoundButton>
-                    </ButtonContainerBenchCircle>
-                </ButtonContainer2>
-            </MainContainer>
+                <SidebarAddLocation avatarNr={localStorage.getItem("userAvatar")}/>
+                <MainContainer>
+                    <QuestionContainer>
+                        <Question>What location type do you want to add?</Question>
+                    </QuestionContainer>
+                    <ButtonContainer>
+                        <ButtonContainerFountainCircle>
+                            <RoundButton>
+                                <img src={FountainCircle} alt={"FOUNTAIN"} width="100%" height="100%"
+                                     onClick={() => {
+                                         this.props.setLocationType("FOUNTAIN");
+                                     }}/>
+                            </RoundButton>
+                        </ButtonContainerFountainCircle>
+                        <ButtonContainerFireplaceCircle>
+                            <RoundButton>
+                                <img src={FireplaceCircle} alt={"FIREPLACE"} width="100%" height="100%"
+                                     onClick={() => {
+                                         this.props.setLocationType("FIREPLACE");
+                                     }}/>
+                            </RoundButton>
+                        </ButtonContainerFireplaceCircle>
+                        <ButtonContainerRecyclingCircle>
+                            <RoundButton>
+                                <img src={RecyclingCircle} alt={"RECYCLING_STATION"} width="100%" height="100%"
+                                     onClick={() => {
+                                         this.props.setLocationType("RECYCLING_STATION");
+                                     }}/>
+                            </RoundButton>
+                        </ButtonContainerRecyclingCircle>
+                    </ButtonContainer>
+                    <ButtonContainer2>
+                        <ButtonContainerToiletCircle>
+                            <RoundButton>
+                                <img src={ToiletCircle} alt={"TOILET"} width="100%" height="100%"
+                                     onClick={() => {
+                                         this.props.setLocationType("TOILET");
+                                     }}/>
+                            </RoundButton>
+                        </ButtonContainerToiletCircle>
+                        <ButtonContainerTableTennisCircle>
+                            <RoundButton>
+                                <img src={TableTennisCircle} alt={"TABLE_TENNIS"} width="100%" height="100%"
+                                     onClick={() => {
+                                         this.props.setLocationType("TABLE_TENNIS");
+                                     }}/>
+                            </RoundButton>
+                        </ButtonContainerTableTennisCircle>
+                        <ButtonContainerBenchCircle>
+                            <RoundButton>
+                                <img src={BenchCircle} alt={"BENCH"} width="100%" height="100%"
+                                     onClick={() => {
+                                         this.props.setLocationType("BENCH");
+                                     }}/>
+                            </RoundButton>
+                        </ButtonContainerBenchCircle>
+                    </ButtonContainer2>
+                </MainContainer>
             </div>)
     }
 }

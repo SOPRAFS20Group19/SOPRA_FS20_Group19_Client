@@ -11,7 +11,7 @@ import maleScientistColor from "./scientist-man-color-with-circle.svg";
 import femaleScientistColor from "./scientist-woman-color-with-circle.svg";
 import maleYogiColor from "./yogi-man-color-with-circle.svg";
 import femaleYogiColor from "./yogi-woman-color-with-circle.svg";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
-const avatarArray = [UserIconComplete, femaleCoder, femaleCoderColor, maleCoder, maleCoderColor, femaleScientist,femaleScientistColor, maleScientist, maleScientistColor, femaleYogi, femaleYogiColor, maleYogi, maleYogiColor]
+const avatarArray = [UserIconComplete, femaleCoder, femaleCoderColor, maleCoder, maleCoderColor, femaleScientist, femaleScientistColor, maleScientist, maleScientistColor, femaleYogi, femaleYogiColor, maleYogi, maleYogiColor]
 export default withRouter(avatarArray)

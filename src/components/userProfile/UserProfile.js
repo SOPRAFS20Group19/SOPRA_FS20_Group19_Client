@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BaseContainer} from '../../helpers/layout';
 import {api, handleError} from '../../helpers/api';
 import {withRouter} from 'react-router-dom';
 import User from "../shared/models/User";
@@ -12,7 +11,7 @@ import {Spinner} from "../../views/variables/Spinner";
 import TitleProfile from "../../views/UserInformation/TitleProfile";
 import FriendsUser from "../../views/UserInformation/FriendsUser";
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   flex-direction: row;
   width: 80%;
@@ -86,26 +85,27 @@ class UserProfile extends React.Component {
 
     // when the page is updated the user data is requested again so the changes from the edit profile page are immediately displayed
     componentDidUpdate() {
-        if (!this.state.loading){
+        if (!this.state.loading) {
             this.getUser();
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 {!this.state.loggedInUser ? (<Spinner/>) : (
-                        <MainContainer>
-                            <UserHeader username={this.state.loggedInUser.username} avatarNr={this.state.loggedInUser.avatarNr}/>
-                            <UserInformation
-                                username={this.state.loggedInUser.username}
-                                name={this.state.loggedInUser.name}
-                                creationDate={this.state.loggedInUser.creationDate}
-                            />
-                            <SavedLocations userId={this.state.loggedInUserId}/>
-                            <FriendsUser userId={this.state.loggedInUserId}/>
-                        </MainContainer>
-                ) }
+                    <MainContainer>
+                        <UserHeader username={this.state.loggedInUser.username}
+                                    avatarNr={this.state.loggedInUser.avatarNr}/>
+                        <UserInformation
+                            username={this.state.loggedInUser.username}
+                            name={this.state.loggedInUser.name}
+                            creationDate={this.state.loggedInUser.creationDate}
+                        />
+                        <SavedLocations userId={this.state.loggedInUserId}/>
+                        <FriendsUser userId={this.state.loggedInUserId}/>
+                    </MainContainer>
+                )}
                 <TitleProfile/>
                 <SidebarUserInformation column={3}/>
             </div>

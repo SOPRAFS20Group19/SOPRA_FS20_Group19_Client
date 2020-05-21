@@ -38,11 +38,11 @@ const Title = styled.h1`
 `;
 
 const HeaderMap = props => {
-  return (
-    <Container height={props.height}>
-      <Title>Know your city</Title>
-    </Container>
-  );
+    return (
+        <Container height={props.height}>
+            <Title>Know your city</Title>
+        </Container>
+    );
 };
 
 export default HeaderMap;

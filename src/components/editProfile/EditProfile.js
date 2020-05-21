@@ -154,7 +154,7 @@ class EditProfile extends React.Component {
         }
     }
 
-    handleErrorDesigned(error){
+    handleErrorDesigned(error) {
 
         const response = error.response;
 
@@ -166,8 +166,7 @@ class EditProfile extends React.Component {
             } else {
                 this.setState({errorMessageError: response.data})
             }
-        }
-        else {
+        } else {
             if (error.message.match(/Network Error/)) {
                 alert('The server cannot be reached. Did you start it?');
             }
@@ -209,25 +208,22 @@ class EditProfile extends React.Component {
     validateForm = () => {
         const {usernameValid, nameValid, passwordValid, passwordConfirmValid} = this.state;
         if (passwordValid === null && passwordConfirmValid === null) {
-            if (usernameValid === null){
+            if (usernameValid === null) {
                 this.setState({
                     formValid: nameValid
                 })
-            }
-            else if (nameValid === null){
+            } else if (nameValid === null) {
                 this.setState({formValid: usernameValid})
-            }
-            else{
+            } else {
                 this.setState({formValid: nameValid && usernameValid})
             }
 
-        }
-        else{
-            if ((usernameValid===true || usernameValid ===null) && (nameValid===true || nameValid ===null))
+        } else {
+            if ((usernameValid === true || usernameValid === null) && (nameValid === true || nameValid === null))
                 this.setState({
                     formValid: passwordConfirmValid && passwordValid
                 });
-            else{
+            else {
                 this.setState({formValid: false})
             }
         }
@@ -378,7 +374,8 @@ class EditProfile extends React.Component {
                             />
                             <ValidationMessage valid={this.state.passwordConfirmValid}
                                                message={this.state.errorMsg.passwordConfirm}/>
-                            <ValidationMessage valid={this.state.hasNoErrorMessage} message={this.state.errorMessageError}/>
+                            <ValidationMessage valid={this.state.hasNoErrorMessage}
+                                               message={this.state.errorMessageError}/>
                         </Container>
                         <Container column={1}>
                             <ButtonContainer>

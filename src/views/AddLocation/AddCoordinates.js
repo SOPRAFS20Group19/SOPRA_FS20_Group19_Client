@@ -2,10 +2,10 @@ import React from 'react';
 import SidebarAddLocationtoStart from "./SidebarAddLocationtoStart";
 import {Button} from "../variables/Button";
 import styled from "styled-components";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   flex-direction: column;
   max-height: 93%;
@@ -161,7 +161,6 @@ const ErrorMessage = styled.div`
 `;
 
 
-
 const InputField = styled.input`
   &::placeholder {
     color: black;
@@ -222,76 +221,87 @@ const ButtonCoordinate = styled.button`
 
 function ValidationMessage(props) {
     if (!props.valid) {
-        return(
+        return (
             <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
         )
     }
     return null;
 }
 
-class AddCoordinates extends React.Component{
+class AddCoordinates extends React.Component {
     constructor(props) {
         super(props);
     }
 
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
-            <MainContainer>
-            <QuestionContainer>
-                <Question>Set the coordinates:</Question>
-            </QuestionContainer>
-            <ImageContainer>
-                <Picture>
-                    <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%" height="100%"/>
-                </Picture>
-            </ImageContainer>
-            <ButtonContainerCoordinates>
-                <ButtonCoordinate
-                    hidden={this.props.latitude || this.props.longitude}
-                    onClick={() => {this.props.getLocationAddLocation();}}>Get current Coordinates</ButtonCoordinate>
-                <ValidationMessage valid={this.props.coordinatesValid} message={this.props.errorMsgCoordinates}/>
-            </ButtonContainerCoordinates>
-            <Container3>
-                <Title>Latitude: </Title>
-                <InputField
-                    placeholder="Enter latitude here"
-                    onChange={e => {
-                        this.props.updateLatitude(e.target.value);
-                    }}
-                    onKeyPress={e => {if (e.key === 'Enter'){
-                        if (this.props.coordinatesValid){
-                            this.props.setCoordinatesSuccessfully();
-                        }
-                    }}}
-                />
-                <ValidationMessage valid={this.props.latitudeValid} message={this.props.errorMsg.latitude}/>
-            </Container3>
-            <Container4>
-                <Title>Longitude: </Title>
-                <InputField
-                    placeholder="Enter longitude here"
-                    onChange={e => {
-                        this.props.updateLongitude(e.target.value);
-                    }}
-                    onKeyPress={e => {if (e.key === 'Enter'){
-                        if (this.props.coordinatesValid){
-                            this.props.setCoordinatesSuccessfully();
-                        }
-                    }}}
-                />
-                <ValidationMessage valid={this.props.longitudeValid} message={this.props.errorMsg.longitude}/>
-            </Container4>
-            <ButtonContainerCoordinatesManually>
-                <Button
-                    disabled={!this.props.coordinatesValid}
-                    onClick={() => {this.props.setCoordinatesSuccessfully();}}>Continue</Button>
-            </ButtonContainerCoordinatesManually>
+                <MainContainer>
+                    <QuestionContainer>
+                        <Question>Set the coordinates:</Question>
+                    </QuestionContainer>
+                    <ImageContainer>
+                        <Picture>
+                            <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%"
+                                 height="100%"/>
+                        </Picture>
+                    </ImageContainer>
+                    <ButtonContainerCoordinates>
+                        <ButtonCoordinate
+                            hidden={this.props.latitude || this.props.longitude}
+                            onClick={() => {
+                                this.props.getLocationAddLocation();
+                            }}>Get current Coordinates</ButtonCoordinate>
+                        <ValidationMessage valid={this.props.coordinatesValid}
+                                           message={this.props.errorMsgCoordinates}/>
+                    </ButtonContainerCoordinates>
+                    <Container3>
+                        <Title>Latitude: </Title>
+                        <InputField
+                            placeholder="Enter latitude here"
+                            onChange={e => {
+                                this.props.updateLatitude(e.target.value);
+                            }}
+                            onKeyPress={e => {
+                                if (e.key === 'Enter') {
+                                    if (this.props.coordinatesValid) {
+                                        this.props.setCoordinatesSuccessfully();
+                                    }
+                                }
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.latitudeValid} message={this.props.errorMsg.latitude}/>
+                    </Container3>
+                    <Container4>
+                        <Title>Longitude: </Title>
+                        <InputField
+                            placeholder="Enter longitude here"
+                            onChange={e => {
+                                this.props.updateLongitude(e.target.value);
+                            }}
+                            onKeyPress={e => {
+                                if (e.key === 'Enter') {
+                                    if (this.props.coordinatesValid) {
+                                        this.props.setCoordinatesSuccessfully();
+                                    }
+                                }
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.longitudeValid} message={this.props.errorMsg.longitude}/>
+                    </Container4>
+                    <ButtonContainerCoordinatesManually>
+                        <Button
+                            disabled={!this.props.coordinatesValid}
+                            onClick={() => {
+                                this.props.setCoordinatesSuccessfully();
+                            }}>Continue</Button>
+                    </ButtonContainerCoordinatesManually>
 
-        </MainContainer>
+                </MainContainer>
             </div>)
     }
 }
+
 export default withRouter(AddCoordinates);

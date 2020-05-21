@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { api, handleError } from '../../helpers/api';
-import { withRouter } from 'react-router-dom';
+import {api, handleError} from '../../helpers/api';
+import {withRouter} from 'react-router-dom';
 import TitleEdit from "../../views/UserInformation/TitleEdit";
 import AddFountain from "../../views/AddLocation/AddFountain";
 import AddToilet from "../../views/AddLocation/AddToilet";
@@ -21,7 +21,7 @@ import ChooseAddLocationType from "../../views/AddLocation/ChooseAddLocationType
 import AddTableTennis from "../../views/AddLocation/AddTableTennis";
 
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   flex-direction: column;
   width: 100%;
@@ -92,11 +92,11 @@ class AddLocation extends React.Component {
         this.getLocationAddLocation = this.getLocationAddLocation.bind(this);
     }
 
-    setLocationType(type){
+    setLocationType(type) {
         this.setState({locationType: type});
     }
 
-    setToNullState(){
+    setToNullState() {
         this.setState({
             setCoordinates: null,
             locationType: null,
@@ -133,36 +133,36 @@ class AddLocation extends React.Component {
     }
 
     //returns the image to be rendered according to the type
-    getImage(){
-        if (this.state.locationType === 'FIREPLACE'){
+    getImage() {
+        if (this.state.locationType === 'FIREPLACE') {
             return FireplaceCircle;
-        }else if (this.state.locationType === 'FOUNTAIN'){
+        } else if (this.state.locationType === 'FOUNTAIN') {
             return FountainCircle;
-        } else if (this.state.locationType === 'RECYCLING_STATION'){
+        } else if (this.state.locationType === 'RECYCLING_STATION') {
             return RecyclingCircle;
-        }else if (this.state.locationType === 'TOILET'){
+        } else if (this.state.locationType === 'TOILET') {
             return ToiletCircle;
-        }else if (this.state.locationType === 'TABLE_TENNIS'){
+        } else if (this.state.locationType === 'TABLE_TENNIS') {
             return TableTennisCircle;
-        }else if (this.state.locationType === 'BENCH'){
+        } else if (this.state.locationType === 'BENCH') {
             return BenchCircle;
         }
     }
 
 
     //returns the string to be rendered according to the type
-    getTypeAsString(){
-        if (this.state.locationType === 'FIREPLACE'){
+    getTypeAsString() {
+        if (this.state.locationType === 'FIREPLACE') {
             return "FIREPLACE";
-        }else if (this.state.locationType === 'FOUNTAIN'){
+        } else if (this.state.locationType === 'FOUNTAIN') {
             return "FOUNTAIN";
-        }else if (this.state.locationType  === 'RECYCLING_STATION'){
+        } else if (this.state.locationType === 'RECYCLING_STATION') {
             return "RECYCLING";
-        }else if (this.state.locationType  === 'TOILET'){
+        } else if (this.state.locationType === 'TOILET') {
             return "TOILET";
-        }else if (this.state.locationType  === 'TABLE_TENNIS'){
+        } else if (this.state.locationType === 'TABLE_TENNIS') {
             return "TABLE TENNIS";
-        }else if (this.state.locationType  === 'BENCH'){
+        } else if (this.state.locationType === 'BENCH') {
             return "BENCH";
         }
     }
@@ -198,10 +198,9 @@ class AddLocation extends React.Component {
     async saveChangesTableTennis() {
         try {
             this.setState({savingLocation: true});
-            if (this.state.net==="X"){
+            if (this.state.net === "X") {
                 this.state.net = "Yes";
-            }
-            else{
+            } else {
                 this.state.net = "No";
             }
 
@@ -229,10 +228,9 @@ class AddLocation extends React.Component {
     async saveChangesToilet() {
         try {
             this.setState({savingLocation: true});
-            if (this.state.category==="X"){
+            if (this.state.category === "X") {
                 this.state.category = "WC (rollstuhlgängig)";
-            }
-            else{
+            } else {
                 this.state.category = "WC (nicht rollstuhlgängig)";
             }
 
@@ -296,13 +294,13 @@ class AddLocation extends React.Component {
     async saveChangesRecycling() {
         try {
             this.setState({savingLocation: true});
-            if (this.state.glas==="X"){
+            if (this.state.glas === "X") {
                 this.state.glas_definite = "X";
             }
-            if (this.state.oel==="X"){
+            if (this.state.oel === "X") {
                 this.state.oel_definite = "X";
             }
-            if (this.state.metall==="X"){
+            if (this.state.metall === "X") {
                 this.state.metall_definite = "X";
             }
 
@@ -355,7 +353,7 @@ class AddLocation extends React.Component {
         }
     }
 
-    setCoordinatesSuccessfully(){
+    setCoordinatesSuccessfully() {
         this.setState({setCoordinates: true})
     }
 
@@ -410,11 +408,10 @@ class AddLocation extends React.Component {
         let longitudeValid = true;
         let errorMsg = {...this.state.errorMsg};
 
-        if (longitude < 8.4680486289  || longitude > 8.6191027275) {
+        if (longitude < 8.4680486289 || longitude > 8.6191027275) {
             longitudeValid = false;
             errorMsg.longitude = "The location must be in Zurich!"
-        }
-        else if(isNaN(longitude)){
+        } else if (isNaN(longitude)) {
             longitudeValid = false;
             errorMsg.longitude = "That's not a valid number."
         }
@@ -426,11 +423,10 @@ class AddLocation extends React.Component {
         let latitudeValid = true;
         let errorMsg = {...this.state.errorMsg};
 
-        if (latitude < 47.3232261256  || latitude > 47.4308197123) {
+        if (latitude < 47.3232261256 || latitude > 47.4308197123) {
             latitudeValid = false;
             errorMsg.latitude = "The location must be in Zurich!"
-        }
-        else if(isNaN(latitude)){
+        } else if (isNaN(latitude)) {
             latitudeValid = false;
             errorMsg.latitude = "That's not a valid number."
         }
@@ -446,11 +442,10 @@ class AddLocation extends React.Component {
         let baujahrValid = true;
         let errorMsg = {...this.state.errorMsg};
 
-        if (baujahr < 500  || baujahr > 2021) {
+        if (baujahr < 500 || baujahr > 2021) {
             baujahrValid = false;
             errorMsg.baujahr = "That's not a valid year."
-        }
-        else if(isNaN(baujahr)){
+        } else if (isNaN(baujahr)) {
             baujahrValid = false;
             errorMsg.baujahr = "That's not a valid number."
         }
@@ -477,7 +472,7 @@ class AddLocation extends React.Component {
         this.setState({plz}, this.validatePlz);
     };
 
-    validatePlz= () => {
+    validatePlz = () => {
         const {plz} = this.state;
         let plzValid = true;
         let errorMsg = {...this.state.errorMsg};
@@ -493,7 +488,7 @@ class AddLocation extends React.Component {
         this.setState({ort}, this.validateOrt);
     };
 
-    validateOrt= () => {
+    validateOrt = () => {
         const {ort} = this.state;
         let ortValid = true;
         let errorMsg = {...this.state.errorMsg};
@@ -514,11 +509,10 @@ class AddLocation extends React.Component {
         let slabQualityValid = true;
         let errorMsg = {...this.state.errorMsg};
 
-        if (slabQuality > 5  ||  slabQuality < 1) {
+        if (slabQuality > 5 || slabQuality < 1) {
             slabQualityValid = false;
             errorMsg.slabQuality = "Must be number between 1 and 5."
-        }
-        else if(isNaN(slabQuality)){
+        } else if (isNaN(slabQuality)) {
             slabQualityValid = false;
             errorMsg.slabQuality = "That's not a valid number."
         }
@@ -534,11 +528,10 @@ class AddLocation extends React.Component {
         let viewValid = true;
         let errorMsg = {...this.state.errorMsg};
 
-        if (view > 5  ||  view < 1) {
+        if (view > 5 || view < 1) {
             viewValid = false;
             errorMsg.view = "Must be number between 1 and 5."
-        }
-        else if(isNaN(view)){
+        } else if (isNaN(view)) {
             viewValid = false;
             errorMsg.view = "That's not a valid number."
         }
@@ -554,11 +547,10 @@ class AddLocation extends React.Component {
         let peaceValid = true;
         let errorMsg = {...this.state.errorMsg};
 
-        if (peace > 5  ||  peace < 1) {
+        if (peace > 5 || peace < 1) {
             peaceValid = false;
             errorMsg.peace = "Must be number between 1 and 5."
-        }
-        else if(isNaN(peace)){
+        } else if (isNaN(peace)) {
             peaceValid = false;
             errorMsg.peace = "That's not a valid number."
         }
@@ -574,11 +566,10 @@ class AddLocation extends React.Component {
         let romanticsValid = true;
         let errorMsg = {...this.state.errorMsg};
 
-        if (romantics > 5  ||  romantics < 1) {
+        if (romantics > 5 || romantics < 1) {
             romanticsValid = false;
             errorMsg.romantics = "Must be number between 1 and 5."
-        }
-        else if(isNaN(romantics)) {
+        } else if (isNaN(romantics)) {
             romanticsValid = false;
             errorMsg.romantics = "That's not a valid number."
         }
@@ -594,11 +585,10 @@ class AddLocation extends React.Component {
         let comfortValid = true;
         let errorMsg = {...this.state.errorMsg};
 
-        if (comfort > 5  ||  comfort < 1) {
+        if (comfort > 5 || comfort < 1) {
             comfortValid = false;
             errorMsg.comfort = "Must be number between 1 and 5."
-        }
-        else if(isNaN(comfort)) {
+        } else if (isNaN(comfort)) {
             comfortValid = false;
             errorMsg.comfort = "That's not a valid number."
         }
@@ -608,19 +598,19 @@ class AddLocation extends React.Component {
     getCoordinatesAddLocation(position) {
         let latitudeValid = true;
         let longitudeValid = true;
-        if (position.coords.latitude < 47.3232261256 || position.coords.latitude > 47.4308197123){
+        if (position.coords.latitude < 47.3232261256 || position.coords.latitude > 47.4308197123) {
             latitudeValid = false;
-            this.setState({errorMsgCoordinates : "You're not in Zurich! Type in the coordinates."});
+            this.setState({errorMsgCoordinates: "You're not in Zurich! Type in the coordinates."});
         }
         this.setState({latitude: position.coords.latitude});
         this.setState({latitudeValid});
-        if (position.coords.longitude < 8.4680486289 || position.coords.longitude > 8.6191027275){
+        if (position.coords.longitude < 8.4680486289 || position.coords.longitude > 8.6191027275) {
             longitudeValid = false;
-            this.setState({errorMsgCoordinates : "You're not in Zurich! Type in the coordinates."});
+            this.setState({errorMsgCoordinates: "You're not in Zurich! Type in the coordinates."});
         }
         this.setState({longitude: position.coords.longitude});
         this.setState({longitudeValid});
-        if (latitudeValid && longitudeValid){
+        if (latitudeValid && longitudeValid) {
             this.setState({coordinatesValid: true});
             this.setCoordinatesSuccessfully();
         }
@@ -642,19 +632,19 @@ class AddLocation extends React.Component {
         }
     }
 
-    handleLocationError(error){
-        switch(error.code) {
+    handleLocationError(error) {
+        switch (error.code) {
             case error.PERMISSION_DENIED:
-                alert ("User denied the request for Geolocation.");
+                alert("User denied the request for Geolocation.");
                 break;
             case error.POSITION_UNAVAILABLE:
-                alert ("Location information is unavailable.");
+                alert("Location information is unavailable.");
                 break;
             case error.TIMEOUT:
-                alert ("The request to get user location timed out.");
+                alert("The request to get user location timed out.");
                 break;
             case error.UNKNOWN_ERROR:
-                alert ("An unknown error occurred.");
+                alert("An unknown error occurred.");
                 break;
         }
     }
@@ -663,12 +653,12 @@ class AddLocation extends React.Component {
     render() {
         return (
             <MainContainer>
-            <TitleEdit/>
+                <TitleEdit/>
                 {!this.state.locationType ?
                     (<MainContainer>
-                            <ChooseAddLocationType
-                                setLocationType={this.setLocationType.bind(this)}
-                            />
+                        <ChooseAddLocationType
+                            setLocationType={this.setLocationType.bind(this)}
+                        />
                     </MainContainer>)
                     : (!this.state.setCoordinates ? (<MainContainer>
                         <AddCoordinates errorMsgCoordinates={this.state.errorMsgCoordinates}
@@ -688,11 +678,12 @@ class AddLocation extends React.Component {
                                         errorMsg={this.state.errorMsg}
                                         getLocationAddLocation={this.getLocationAddLocation.bind(this)}
                         />
-                    </MainContainer>) : (this.state.locationType==="FOUNTAIN" ?
+                    </MainContainer>) : (this.state.locationType === "FOUNTAIN" ?
                         (this.state.savingLocation ? (
                             <MainContainer>
-                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
-                        </MainContainer>) : (<MainContainer>
+                                <CreatingLocation getImage={this.getImage.bind(this)}
+                                                  getTypeAsString={this.getTypeAsString.bind(this)}/>
+                            </MainContainer>) : (<MainContainer>
                             <AddFountain latitude={this.state.latitude}
                                          longitude={this.state.longitude}
                                          handleInputChange={this.handleInputChange.bind(this)}
@@ -708,32 +699,35 @@ class AddLocation extends React.Component {
                                          errorMsg={this.state.errorMsg}
                             />
                         </MainContainer>)) :
-                        (this.state.locationType==="FIREPLACE" ? (this.state.savingLocation ? (<MainContainer>
-                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
+                        (this.state.locationType === "FIREPLACE" ? (this.state.savingLocation ? (<MainContainer>
+                                <CreatingLocation getImage={this.getImage.bind(this)}
+                                                  getTypeAsString={this.getTypeAsString.bind(this)}/>
                             </MainContainer>) : (
-                            <MainContainer>
-                                <AddFireplace latitude={this.state.latitude}
-                                              longitude={this.state.longitude}
-                                              handleInputChange={this.handleInputChange.bind(this)}
-                                              setState={this.setState.bind(this)}
-                                              saveChangesFireplace={this.saveChangesFireplace.bind(this)}
-                                              setToNullState={this.setToNullState.bind(this)}
-                                              getImage={this.getImage.bind(this)}
-                                              getTypeAsString={this.getTypeAsString.bind(this)}
-                                              holz={this.state.holz}
-                                              rost={this.state.rost}
-                                              tisch={this.state.tisch}
-                                              trinkwasser={this.state.trinkwasser}
-                                              abfall={this.state.abfall}
-                                              parkplatz={this.state.parkplatz}
-                                              baden={this.state.baden}
-                                              hunde={this.state.hunde}
-                                              kinderwagen={this.state.kinderwagen}
-                                />
-                        </MainContainer>))
-                            : (this.state.locationType==="RECYCLING_STATION" ? (this.state.savingLocation ? (<MainContainer>
-                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
-                            </MainContainer>) : (
+                                <MainContainer>
+                                    <AddFireplace latitude={this.state.latitude}
+                                                  longitude={this.state.longitude}
+                                                  handleInputChange={this.handleInputChange.bind(this)}
+                                                  setState={this.setState.bind(this)}
+                                                  saveChangesFireplace={this.saveChangesFireplace.bind(this)}
+                                                  setToNullState={this.setToNullState.bind(this)}
+                                                  getImage={this.getImage.bind(this)}
+                                                  getTypeAsString={this.getTypeAsString.bind(this)}
+                                                  holz={this.state.holz}
+                                                  rost={this.state.rost}
+                                                  tisch={this.state.tisch}
+                                                  trinkwasser={this.state.trinkwasser}
+                                                  abfall={this.state.abfall}
+                                                  parkplatz={this.state.parkplatz}
+                                                  baden={this.state.baden}
+                                                  hunde={this.state.hunde}
+                                                  kinderwagen={this.state.kinderwagen}
+                                    />
+                                </MainContainer>))
+                            : (this.state.locationType === "RECYCLING_STATION" ? (this.state.savingLocation ? (
+                                <MainContainer>
+                                    <CreatingLocation getImage={this.getImage.bind(this)}
+                                                      getTypeAsString={this.getTypeAsString.bind(this)}/>
+                                </MainContainer>) : (
                                 <MainContainer>
                                     <AddRecycling
                                         latitude={this.state.latitude}
@@ -758,35 +752,39 @@ class AddLocation extends React.Component {
                                         updatePlz={this.updatePlz.bind(this)}
                                         errorMsg={this.state.errorMsg}
                                     />
-                            </MainContainer>)) : (this.state.locationType==="TOILET" ? (this.state.savingLocation ? (<MainContainer>
-                                    <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
+                                </MainContainer>)) : (this.state.locationType === "TOILET" ? (this.state.savingLocation ? (
+                                <MainContainer>
+                                    <CreatingLocation getImage={this.getImage.bind(this)}
+                                                      getTypeAsString={this.getTypeAsString.bind(this)}/>
                                 </MainContainer>) : (<MainContainer>
-                                    <AddToilet
-                                        latitude={this.state.latitude}
-                                        longitude={this.state.longitude}
-                                        handleInputChange={this.handleInputChange.bind(this)}
-                                        setState={this.setState.bind(this)}
-                                        saveChangesToilet={this.saveChangesToilet.bind(this)}
-                                        setToNullState={this.setToNullState.bind(this)}
-                                        getImage={this.getImage.bind(this)}
-                                        getTypeAsString={this.getTypeAsString.bind(this)}
-                                        openinghours={this.state.openinghours}
-                                        cost={this.state.cost}
-                                        category={this.state.category}
-                                        adresse={this.state.adresse}
-                                        plz={this.state.plz}
-                                        ort={this.state.ort}
-                                        adresseValid={this.state.adresseValid}
-                                        plzValid={this.state.plzValid}
-                                        ortValid={this.state.ortValid}
-                                        updateOrt={this.updateOrt.bind(this)}
-                                        updateAdresse={this.updateAdresse.bind(this)}
-                                        updatePlz={this.updatePlz.bind(this)}
-                                        errorMsg={this.state.errorMsg}
-                                    />
-                                </MainContainer>)) : (this.state.locationType==="TABLE_TENNIS" ? (this.state.savingLocation ? (<MainContainer>
-                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
-                            </MainContainer>): (<MainContainer>
+                                <AddToilet
+                                    latitude={this.state.latitude}
+                                    longitude={this.state.longitude}
+                                    handleInputChange={this.handleInputChange.bind(this)}
+                                    setState={this.setState.bind(this)}
+                                    saveChangesToilet={this.saveChangesToilet.bind(this)}
+                                    setToNullState={this.setToNullState.bind(this)}
+                                    getImage={this.getImage.bind(this)}
+                                    getTypeAsString={this.getTypeAsString.bind(this)}
+                                    openinghours={this.state.openinghours}
+                                    cost={this.state.cost}
+                                    category={this.state.category}
+                                    adresse={this.state.adresse}
+                                    plz={this.state.plz}
+                                    ort={this.state.ort}
+                                    adresseValid={this.state.adresseValid}
+                                    plzValid={this.state.plzValid}
+                                    ortValid={this.state.ortValid}
+                                    updateOrt={this.updateOrt.bind(this)}
+                                    updateAdresse={this.updateAdresse.bind(this)}
+                                    updatePlz={this.updatePlz.bind(this)}
+                                    errorMsg={this.state.errorMsg}
+                                />
+                            </MainContainer>)) : (this.state.locationType === "TABLE_TENNIS" ? (this.state.savingLocation ? (
+                                <MainContainer>
+                                    <CreatingLocation getImage={this.getImage.bind(this)}
+                                                      getTypeAsString={this.getTypeAsString.bind(this)}/>
+                                </MainContainer>) : (<MainContainer>
                                 <AddTableTennis
                                     latitude={this.state.latitude}
                                     longitude={this.state.longitude}
@@ -803,8 +801,9 @@ class AddLocation extends React.Component {
                                     errorMsg={this.state.errorMsg}
                                 />
                             </MainContainer>)) : (this.state.savingLocation ? (<MainContainer>
-                                <CreatingLocation getImage={this.getImage.bind(this)} getTypeAsString={this.getTypeAsString.bind(this)}/>
-                            </MainContainer>): (<MainContainer>
+                                <CreatingLocation getImage={this.getImage.bind(this)}
+                                                  getTypeAsString={this.getTypeAsString.bind(this)}/>
+                            </MainContainer>) : (<MainContainer>
                                 <AddBench
                                     latitude={this.state.latitude}
                                     longitude={this.state.longitude}

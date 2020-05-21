@@ -32,17 +32,16 @@ const Text = styled.div`
 `;
 
 
-class InfoEditProfile extends React.Component{
+class InfoEditProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
+        this.state = {}
     }
 
     render() {
         return (
             <Container>
-                {!this.props.creationDate ? (<Spinner/>) :(<div>
+                {!this.props.creationDate ? (<Spinner/>) : (<div>
                         <Title>KYC-user since: <Text>{this.props.creationDate}</Text></Title>
                     </div>
                 )}

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { api, handleError } from '../../helpers/api';
+import {api, handleError} from '../../helpers/api';
 import {Button} from "../../views/variables/Button";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import '../../views/Map/BackgroundMap.css';
 import '../../views/variables/ZurichEmblem.css';
 import Spinner from "react-bootstrap/Spinner";
@@ -118,7 +118,7 @@ const ButtonContainer = styled.div`
   }
 `;
 
-class Users extends React.Component{
+class Users extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -136,13 +136,13 @@ class Users extends React.Component{
         try {
             const response = await api.get('/users');
 
-            this.setState({ users: response.data });
+            this.setState({users: response.data});
         } catch (error) {
             alert(`Something went wrong while fetching the users: \n${handleError(error)}`);
         }
     }
 
-    async getFriends(){
+    async getFriends() {
         try {
             const url = '/users/friends/' + localStorage.getItem('userId');
 
@@ -154,20 +154,19 @@ class Users extends React.Component{
         }
     }
 
-    goToProfile(userId){
+    goToProfile(userId) {
         this.props.history.push(`/user/` + userId);
     }
 
     handleInputChange(key, value) {
-        this.setState({ [key]: value });
+        this.setState({[key]: value});
     }
 
-    filterFriends(value){
-        this.setState({ filterFriends: value });
-        if (value){
+    filterFriends(value) {
+        this.setState({filterFriends: value});
+        if (value) {
             this.getFriends();
-        }
-        else {
+        } else {
             this.getUsers();
         }
     }
@@ -176,69 +175,71 @@ class Users extends React.Component{
     render() {
         return (
             <div>
-                <SidebarUsers avatarNr={localStorage.getItem("userAvatar")} />
+                <SidebarUsers avatarNr={localStorage.getItem("userAvatar")}/>
                 <Header/>
-            <MainContainer>
-                <Title>Find other people to get to Know Your City with!</Title>
-                <SearchContainer>
-                    <SearchBar
-                        placeholder="Search other users..."
-                        onChange={e => {this.handleInputChange('searchValue', e.target.value);}}
-                    />
-                    <ButtonContainer>
-                        {this.state.filterFriends ?
-                            <Button
-                                variant="outline-secondary"
-                                height="100%"
-                                onClick={() => {
-                                    this.filterFriends(false);
-                                }}
-                            >
-                                Show all users</Button>
-                            :
-                            <Button
-                                variant="outline-secondary"
-                                height="100%"
-                                onClick={() => {
-                                    this.filterFriends(true);
-                                }}
-                            >
-                                Show your friends</Button>
-                        }
-                    </ButtonContainer>
-                </SearchContainer>
-                {!this.state.users ? (
-                    <ScrollContainer>
-                    <Spinner animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </Spinner>
-                    </ScrollContainer>
-                ) : (
-                    <ScrollContainer>
-                        <UsersList>
-                            {this.state.users.map(user => {
-                                if (this.state.searchValue === null && user.id != localStorage.getItem("userId")){
-                                    return (
-                                        <UserContainer key={user.id}>
-                                            <UserListItem user={user} goToProfile={this.goToProfile.bind(this)}/>
-                                        </UserContainer>
-                                    );
-                                }
-                                else if (this.state.searchValue !== null){
-                                    if (user.username.toLowerCase().includes(this.state.searchValue.toLowerCase()) && user.id != localStorage.getItem("userId")){
+                <MainContainer>
+                    <Title>Find other people to get to Know Your City with!</Title>
+                    <SearchContainer>
+                        <SearchBar
+                            placeholder="Search other users..."
+                            onChange={e => {
+                                this.handleInputChange('searchValue', e.target.value);
+                            }}
+                        />
+                        <ButtonContainer>
+                            {this.state.filterFriends ?
+                                <Button
+                                    variant="outline-secondary"
+                                    height="100%"
+                                    onClick={() => {
+                                        this.filterFriends(false);
+                                    }}
+                                >
+                                    Show all users</Button>
+                                :
+                                <Button
+                                    variant="outline-secondary"
+                                    height="100%"
+                                    onClick={() => {
+                                        this.filterFriends(true);
+                                    }}
+                                >
+                                    Show your friends</Button>
+                            }
+                        </ButtonContainer>
+                    </SearchContainer>
+                    {!this.state.users ? (
+                        <ScrollContainer>
+                            <Spinner animation="border" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </Spinner>
+                        </ScrollContainer>
+                    ) : (
+                        <ScrollContainer>
+                            <UsersList>
+                                {this.state.users.map(user => {
+                                    if (this.state.searchValue === null && user.id !== localStorage.getItem("userId")) {
                                         return (
                                             <UserContainer key={user.id}>
                                                 <UserListItem user={user} goToProfile={this.goToProfile.bind(this)}/>
                                             </UserContainer>
                                         );
+                                    } else if (this.state.searchValue !== null) {
+                                        if (user.username.toLowerCase().includes(this.state.searchValue.toLowerCase()) && user.id !== localStorage.getItem("userId")) {
+                                            return (
+                                                <UserContainer key={user.id}>
+                                                    <UserListItem user={user}
+                                                                  goToProfile={this.goToProfile.bind(this)}/>
+                                                </UserContainer>
+                                            );
+                                        }
                                     }
-                                }
-                            })}
-                        </UsersList>
-                    </ScrollContainer>
-                )}
-            </MainContainer>
-    </div>
+                                })}
+                            </UsersList>
+                        </ScrollContainer>
+                    )}
+                </MainContainer>
+            </div>
         );
     }
 
