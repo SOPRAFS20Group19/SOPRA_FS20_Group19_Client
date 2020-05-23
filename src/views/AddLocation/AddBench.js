@@ -5,7 +5,7 @@ import Spinner from "react-bootstrap/Spinner";
 import {Button} from "../variables/Button";
 import styled from "styled-components";
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   flex-direction: column;
   max-height: 93%;
@@ -242,7 +242,7 @@ const ErrorMessage = styled.div`
 
 function ValidationMessage(props) {
     if (!props.valid) {
-        return(
+        return (
             <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
         )
     }
@@ -250,85 +250,87 @@ function ValidationMessage(props) {
 }
 
 class AddBench extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render(){
-        return(
+    render() {
+        return (
             <div>
-            <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
-            <MainContainer>
-                <QuestionContainer>
-                    <Question>Location information: </Question>
-                </QuestionContainer>
-                <ImageContainer>
-                    <Picture>
-                    <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%" height="100%"/>
-                    </Picture>
-                </ImageContainer>
-                <Container2>
-                    <Title>Coordinates</Title>
-                    {!this.props.latitude && !this.props.longitude ? (<Spinner animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </Spinner>) : (
-                        <InfoSchrift>{this.props.latitude}, {this.props.longitude}</InfoSchrift>)}
-                </Container2>
-                <Container3>
-                    <Title>View (1-5)? </Title>
-                    <InputField
-                        placeholder="Enter number between 1-5"
-                        onChange={e => {
-                            this.props.updateView(e.target.value);
-                        }}
-                    />
-                    <ValidationMessage valid={this.props.viewValid} message={this.props.errorMsg.view}/>
-                </Container3>
-                <Container4>
-                    <Title>Peace (1-5)? </Title>
-                    <InputField
-                        placeholder="Enter number between 1-5"
-                        onChange={e => {
-                            this.props.updatePeace(e.target.value);
-                        }}
-                    />
-                    <ValidationMessage valid={this.props.peaceValid} message={this.props.errorMsg.peace}/>
-                </Container4>
-                <Container5>
-                    <Title>Romantics (1-5)? </Title>
-                    <InputField
-                        placeholder="Enter number between 1-5"
-                        onChange={e => {
-                            this.props.updateRomantics(e.target.value);
-                        }}
-                    />
-                    <ValidationMessage valid={this.props.romanticsValid} message={this.props.errorMsg.romantics}/>
-                </Container5>
-                <Container6>
-                    <Title>Comfort (1-5)? </Title>
-                    <InputField
-                        placeholder="Enter number between 1-5"
-                        onChange={e => {
-                            this.props.updateComfort(e.target.value);
-                        }}
-                    />
-                    <ValidationMessage valid={this.props.comfortValid} message={this.props.errorMsg.comfort}/>
-                </Container6>
-                <Container7>
-                    <ButtonContainer>
-                        <Button
-                            disabled={this.props.viewValid===false || this.props.peaceValid===false || this.props.romanticsValid===false || this.props.comfortValid===false}
-                            onClick={() => {this.props.saveChangesBench()}}>Save Location
-                        </Button>
-                    </ButtonContainer>
-                    <ButtonContainer>
-                        <Button
-                            onClick={() => {this.props.setToNullState();}}>Cancel
-                        </Button>
-                    </ButtonContainer>
-                </Container7>
-            </MainContainer>
+                <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
+                <MainContainer>
+                    <QuestionContainer>
+                        <Question>Location information: </Question>
+                    </QuestionContainer>
+                    <ImageContainer>
+                        <Picture>
+                            <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%"
+                                 height="100%"/>
+                        </Picture>
+                    </ImageContainer>
+                    <Container2>
+                        <Title>Coordinates</Title>
+                        {!this.props.latitude && !this.props.longitude ? (<Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>) : (
+                            <InfoSchrift>{this.props.latitude}, {this.props.longitude}</InfoSchrift>)}
+                    </Container2>
+                    <Container3>
+                        <Title>View (1-5)? </Title>
+                        <InputField
+                            placeholder="Enter number between 1-5"
+                            onChange={e => {
+                                this.props.updateView(e.target.value);
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.viewValid} message={this.props.errorMsg.view}/>
+                    </Container3>
+                    <Container4>
+                        <Title>Peace (1-5)? </Title>
+                        <InputField
+                            placeholder="Enter number between 1-5"
+                            onChange={e => {
+                                this.props.updatePeace(e.target.value);
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.peaceValid} message={this.props.errorMsg.peace}/>
+                    </Container4>
+                    <Container5>
+                        <Title>Romantics (1-5)? </Title>
+                        <InputField
+                            placeholder="Enter number between 1-5"
+                            onChange={e => {
+                                this.props.updateRomantics(e.target.value);
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.romanticsValid} message={this.props.errorMsg.romantics}/>
+                    </Container5>
+                    <Container6>
+                        <Title>Comfort (1-5)? </Title>
+                        <InputField
+                            placeholder="Enter number between 1-5"
+                            onChange={e => {
+                                this.props.updateComfort(e.target.value);
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.comfortValid} message={this.props.errorMsg.comfort}/>
+                    </Container6>
+                    <Container7>
+                        <ButtonContainer>
+                            <Button
+                                disabled={this.props.viewValid === false || this.props.peaceValid === false || this.props.romanticsValid === false || this.props.comfortValid === false}
+                                onClick={() => {
+                                    this.props.saveChangesBench()
+                                }}>Save Location
+                            </Button>
+                        </ButtonContainer>
+                        <ButtonContainer>
+                            <Button
+                                onClick={() => {
+                                    this.props.setToNullState();
+                                }}>Cancel
+                            </Button>
+                        </ButtonContainer>
+                    </Container7>
+                </MainContainer>
             </div>)
     }
 }
+
 export default withRouter(AddBench);

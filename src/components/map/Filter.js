@@ -178,7 +178,7 @@ class Filter extends React.Component {
         return (
             <div>
 
-            {this.props.filterSpinner === true ? (
+                {this.props.filterSpinner === true ? (
                     <Container>
                         <Title>Filter</Title>
                         <LoadingContainer><ButtonSpinner width="flex" variant="primary" disabled>
@@ -331,8 +331,8 @@ class Filter extends React.Component {
                         </ButtonContainer>
                     </Container>
                 )
-            }
-            </div>    )
+                }
+            </div>)
     }
 }
 

@@ -6,7 +6,7 @@ import {ButtonYesNo} from "./ButtonYesNo";
 import {Button} from "../variables/Button";
 import styled from "styled-components";
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   flex-direction: column;
   max-height: 93%;
@@ -227,7 +227,7 @@ const ErrorMessage = styled.div`
 
 function ValidationMessage(props) {
     if (!props.valid) {
-        return(
+        return (
             <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
         )
     }
@@ -235,67 +235,73 @@ function ValidationMessage(props) {
 }
 
 class AddTableTennis extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
-            <MainContainer>
-                <QuestionContainer>
-                    <Question>Location information: </Question>
-                </QuestionContainer>
-                <ImageContainer>
-                    <Picture>
-                        <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%" height="100%"/>
-                    </Picture>
-                </ImageContainer>
-                <Container2>
-                    <Title>Coordinates</Title>
-                    {!this.props.latitude && !this.props.longitude ? (<Spinner animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </Spinner>) : (
-                        <InfoSchrift>{this.props.latitude}, {this.props.longitude}</InfoSchrift>)}
-                </Container2>
-                <Container3>
-                    <Title>Quality of the table-top (1-5)? </Title>
-                    <InputField
-                        placeholder="Enter number between 1-5"
-                        onChange={e => {
-                            this.props.updateSlabQuality(e.target.value);
-                        }}
-                    />
-                    <ValidationMessage valid={this.props.slabQualityValid} message={this.props.errorMsg.slabQuality}/>
-                </Container3>
-                <Container4>
-                    <Title>Permanent net? </Title>
-                    <ButtonContainerYesNo>
-                        <ButtonYesNo
-                            disabled={this.props.net === "X"}
-                            onClick={() => {this.props.setState({net: "X"});}}>Yes
-                        </ButtonYesNo>
-                        <ButtonYesNo
-                            disabled={this.props.net === "Y"}
-                            onClick={() => {this.props.setState({net: "Y"});}}>No
-                        </ButtonYesNo>
-                    </ButtonContainerYesNo>
-                </Container4>
-                <Container5>
-                    <ButtonContainer>
-                        <Button
-                            disabled={!this.props.net || this.props.slabQualityValid===false || !this.props.latitude || !this.props.longitude}
-                            onClick={() => {this.props.saveChangesTableTennis()}}>Save Location
-                        </Button>
-                    </ButtonContainer>
-                    <ButtonContainer>
-                        <Button
-                            onClick={() => {this.props.setToNullState();}}>Cancel
-                        </Button>
-                    </ButtonContainer>
-                </Container5>
-            </MainContainer>
+                <MainContainer>
+                    <QuestionContainer>
+                        <Question>Location information: </Question>
+                    </QuestionContainer>
+                    <ImageContainer>
+                        <Picture>
+                            <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%"
+                                 height="100%"/>
+                        </Picture>
+                    </ImageContainer>
+                    <Container2>
+                        <Title>Coordinates</Title>
+                        {!this.props.latitude && !this.props.longitude ? (<Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>) : (
+                            <InfoSchrift>{this.props.latitude}, {this.props.longitude}</InfoSchrift>)}
+                    </Container2>
+                    <Container3>
+                        <Title>Quality of the table-top (1-5)? </Title>
+                        <InputField
+                            placeholder="Enter number between 1-5"
+                            onChange={e => {
+                                this.props.updateSlabQuality(e.target.value);
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.slabQualityValid}
+                                           message={this.props.errorMsg.slabQuality}/>
+                    </Container3>
+                    <Container4>
+                        <Title>Permanent net? </Title>
+                        <ButtonContainerYesNo>
+                            <ButtonYesNo
+                                disabled={this.props.net === "X"}
+                                onClick={() => {
+                                    this.props.setState({net: "X"});
+                                }}>Yes
+                            </ButtonYesNo>
+                            <ButtonYesNo
+                                disabled={this.props.net === "Y"}
+                                onClick={() => {
+                                    this.props.setState({net: "Y"});
+                                }}>No
+                            </ButtonYesNo>
+                        </ButtonContainerYesNo>
+                    </Container4>
+                    <Container5>
+                        <ButtonContainer>
+                            <Button
+                                disabled={!this.props.net || this.props.slabQualityValid === false || !this.props.latitude || !this.props.longitude}
+                                onClick={() => {
+                                    this.props.saveChangesTableTennis()
+                                }}>Save Location
+                            </Button>
+                        </ButtonContainer>
+                        <ButtonContainer>
+                            <Button
+                                onClick={() => {
+                                    this.props.setToNullState();
+                                }}>Cancel
+                            </Button>
+                        </ButtonContainer>
+                    </Container5>
+                </MainContainer>
             </div>)
     }
 }

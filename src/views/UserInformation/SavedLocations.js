@@ -57,11 +57,11 @@ class SavedLocations extends React.Component {
         this.getFavoriteLocations();
     }
 
-    goToInfoPageSavedLocations(locationId){
+    goToInfoPageSavedLocations(locationId) {
         this.props.history.push(`/map/informationpage/` + locationId);
     }
 
-    async getFavoriteLocations(){
+    async getFavoriteLocations() {
         try {
             const url = '/locations/favorites/' + this.props.userId;
 
@@ -72,11 +72,11 @@ class SavedLocations extends React.Component {
         }
     }
 
-    refreshPage(){
+    refreshPage() {
         window.location.reload();
     }
 
-    render(){
+    render() {
         return (
             <Container>
                 <Title>
@@ -88,11 +88,12 @@ class SavedLocations extends React.Component {
                     <ListContainer>
                         <LocationsList>
                             {this.state.favoriteLocations.map(location => {
-                                    return (
-                                        <LocationContainer key={location.id}>
-                                            <LocationListItem location={location} refreshPage={this.refreshPage.bind(this)} goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>
-                                        </LocationContainer>
-                                    );
+                                return (
+                                    <LocationContainer key={location.id}>
+                                        <LocationListItem location={location} refreshPage={this.refreshPage.bind(this)}
+                                                          goToInfoPageSavedLocations={this.goToInfoPageSavedLocations.bind(this)}/>
+                                    </LocationContainer>
+                                );
                             })}
                         </LocationsList>
                     </ListContainer>

@@ -6,7 +6,7 @@ import {ButtonYesNo} from "./ButtonYesNo";
 import {Button} from "../variables/Button";
 import styled from "styled-components";
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   flex-direction: column;
   max-height: 93%;
@@ -283,7 +283,7 @@ const ErrorMessage = styled.div`
 
 function ValidationMessage(props) {
     if (!props.valid) {
-        return(
+        return (
             <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
         )
     }
@@ -291,105 +291,110 @@ function ValidationMessage(props) {
 }
 
 class AddToilet extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
-            <MainContainer>
-                <QuestionContainer>
-                    <Question>Location information: </Question>
-                </QuestionContainer>
-                <ImageContainer>
-                    <Picture>
-                        <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%" height="100%"/>
-                    </Picture>
-                </ImageContainer>
-                <Container2>
-                    <Title>Coordinates</Title>
-                    {!this.props.latitude && !this.props.longitude ? (<Spinner animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </Spinner>) : (
-                        <InfoSchrift>{this.props.latitude}, {this.props.longitude}</InfoSchrift>)}
-                </Container2>
-                <Container3>
-                    <Title>Address: </Title>
-                    <InputField
-                        placeholder="Enter address here"
-                        onChange={e => {
-                            this.props.updateAdresse(e.target.value);
-                        }}
-                    />
-                    <ValidationMessage valid={this.props.adresseValid} message={this.props.errorMsg.adresse}/>
-                </Container3>
-                <Container4>
-                    <Title>Zip code: </Title>
-                    <InputField
-                        placeholder="Enter ZIP code here"
-                        onChange={e => {
-                            this.props.updatePlz(e.target.value);
-                        }}
-                    />
-                    <ValidationMessage valid={this.props.plzValid} message={this.props.errorMsg.plz}/>
-                </Container4>
-                <Container5>
-                    <Title>City: </Title>
-                    <InputField
-                        placeholder="Enter city here"
-                        onChange={e => {
-                            this.props.updateOrt(e.target.value);
-                        }}
-                    />
-                    <ValidationMessage valid={this.props.ortValid} message={this.props.errorMsg.ort}/>
-                </Container5>
-                <Container6>
-                    <Title>Opening hours (optional): </Title>
-                    <InputField
-                        placeholder="Enter opening hours here"
-                        onChange={e => {
-                            this.props.handleInputChange('openinghours', e.target.value);
-                        }}
-                    />
-                </Container6>
-                <Container7>
-                    <Title>Cost (optional): </Title>
-                    <InputField
-                        placeholder="Enter cost here"
-                        onChange={e => {
-                            this.props.handleInputChange('cost', e.target.value);
-                        }}
-                    />
-                </Container7>
-                <Container8>
-                    <Title>Suitable for disabled people? </Title>
-                    <ButtonContainerYesNo>
-                        <ButtonYesNo
-                            disabled={this.props.category === "X"}
-                            onClick={() => {this.props.setState({category: "X"});}}>Yes
-                        </ButtonYesNo>
-                        <ButtonYesNo
-                            disabled={this.props.category === "Y"}
-                            onClick={() => {this.props.setState({category: "Y"});}}>No
-                        </ButtonYesNo>
-                    </ButtonContainerYesNo>
-                </Container8>
-                <Container9>
-                    <ButtonContainer>
-                        <Button
-                            disabled={this.props.adresseValid===false || this.props.plzValid===false || this.props.ortValid===false || !this.props.category}
-                            onClick={() => {this.props.saveChangesToilet()}}>Save Location
-                        </Button>
-                    </ButtonContainer>
-                    <ButtonContainer>
-                        <Button
-                            onClick={() => {this.props.setToNullState();}}>Cancel
-                        </Button>
-                    </ButtonContainer>
-                </Container9>
-            </MainContainer>
+                <MainContainer>
+                    <QuestionContainer>
+                        <Question>Location information: </Question>
+                    </QuestionContainer>
+                    <ImageContainer>
+                        <Picture>
+                            <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%"
+                                 height="100%"/>
+                        </Picture>
+                    </ImageContainer>
+                    <Container2>
+                        <Title>Coordinates</Title>
+                        {!this.props.latitude && !this.props.longitude ? (<Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>) : (
+                            <InfoSchrift>{this.props.latitude}, {this.props.longitude}</InfoSchrift>)}
+                    </Container2>
+                    <Container3>
+                        <Title>Address: </Title>
+                        <InputField
+                            placeholder="Enter address here"
+                            onChange={e => {
+                                this.props.updateAdresse(e.target.value);
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.adresseValid} message={this.props.errorMsg.adresse}/>
+                    </Container3>
+                    <Container4>
+                        <Title>Zip code: </Title>
+                        <InputField
+                            placeholder="Enter ZIP code here"
+                            onChange={e => {
+                                this.props.updatePlz(e.target.value);
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.plzValid} message={this.props.errorMsg.plz}/>
+                    </Container4>
+                    <Container5>
+                        <Title>City: </Title>
+                        <InputField
+                            placeholder="Enter city here"
+                            onChange={e => {
+                                this.props.updateOrt(e.target.value);
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.ortValid} message={this.props.errorMsg.ort}/>
+                    </Container5>
+                    <Container6>
+                        <Title>Opening hours (optional): </Title>
+                        <InputField
+                            placeholder="Enter opening hours here"
+                            onChange={e => {
+                                this.props.handleInputChange('openinghours', e.target.value);
+                            }}
+                        />
+                    </Container6>
+                    <Container7>
+                        <Title>Cost (optional): </Title>
+                        <InputField
+                            placeholder="Enter cost here"
+                            onChange={e => {
+                                this.props.handleInputChange('cost', e.target.value);
+                            }}
+                        />
+                    </Container7>
+                    <Container8>
+                        <Title>Suitable for disabled people? </Title>
+                        <ButtonContainerYesNo>
+                            <ButtonYesNo
+                                disabled={this.props.category === "X"}
+                                onClick={() => {
+                                    this.props.setState({category: "X"});
+                                }}>Yes
+                            </ButtonYesNo>
+                            <ButtonYesNo
+                                disabled={this.props.category === "Y"}
+                                onClick={() => {
+                                    this.props.setState({category: "Y"});
+                                }}>No
+                            </ButtonYesNo>
+                        </ButtonContainerYesNo>
+                    </Container8>
+                    <Container9>
+                        <ButtonContainer>
+                            <Button
+                                disabled={this.props.adresseValid === false || this.props.plzValid === false || this.props.ortValid === false || !this.props.category}
+                                onClick={() => {
+                                    this.props.saveChangesToilet()
+                                }}>Save Location
+                            </Button>
+                        </ButtonContainer>
+                        <ButtonContainer>
+                            <Button
+                                onClick={() => {
+                                    this.props.setToNullState();
+                                }}>Cancel
+                            </Button>
+                        </ButtonContainer>
+                    </Container9>
+                </MainContainer>
             </div>)
     }
 }

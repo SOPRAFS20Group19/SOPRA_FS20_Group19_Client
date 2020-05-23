@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {Button} from "../variables/Button";
 import maleCoder from "../../views/UserInformation/coder-man.svg";
 import femaleCoder from "../../views/UserInformation/coder-woman.svg";
@@ -14,7 +14,7 @@ import maleScientistColor from "../../views/UserInformation/scientist-man-color.
 import femaleScientistColor from "../../views/UserInformation/scientist-woman-color.svg";
 import femaleYogiColor from "../../views/UserInformation/yogi-man-color.svg";
 import maleYogiColor from "../../views/UserInformation/yogi-woman-color.svg";
-import { api, handleError } from '../../helpers/api';
+import {api, handleError} from '../../helpers/api';
 
 const Container = styled.div`
   display: flex;
@@ -91,9 +91,7 @@ const PictureStyle = {
     "width": "100%",
     "height": "100%",
     "padding": "5px"
-    }
-
-
+}
 
 
 class EditPicture extends React.Component {
@@ -106,12 +104,12 @@ class EditPicture extends React.Component {
     }
 
     //saves the added picture
-    savePicture(){
+    savePicture() {
         const requestBody = JSON.stringify({
             avatarNr: this.state.chosenAvatar
         });
         const url = '/users/' + this.props.loggedInUserId;
-        try{
+        try {
             api.put(url, requestBody);
 
             // after successfully saving the changes, the user is redirected to his profile page
@@ -122,7 +120,7 @@ class EditPicture extends React.Component {
     }
 
 
-    handleClick(n){
+    handleClick(n) {
         this.setState({
             chosenAvatar: n,
             pictureChosen: true
@@ -130,30 +128,54 @@ class EditPicture extends React.Component {
     }
 
 
-    render(){
-        return(
+    render() {
+        return (
             <Container>
                 <Text>
-                    Choose or change your avatar! 
+                    Choose or change your avatar!
                 </Text>
                 <PictureContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 1} onClick={() => {this.handleClick(1)}}><img src={femaleCoder} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 2} onClick={() => {this.handleClick(2)}}><img src={femaleCoderColor} style={PictureStyle} /></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 3} onClick={() => {this.handleClick(3)}}><img src={maleCoder} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 4} onClick={() => {this.handleClick(4)}}><img src={maleCoderColor} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 5} onClick={() => {this.handleClick(5)}}><img src={femaleScientist} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 6} onClick={() => {this.handleClick(6)}}><img src={femaleScientistColor} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 7} onClick={() => {this.handleClick(7)}}><img src={maleScientist} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 8} onClick={() => {this.handleClick(8)}}><img src={maleScientistColor} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 9} onClick={() => {this.handleClick(9)}}><img src={femaleYogi} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 10} onClick={() => {this.handleClick(10)}}><img src={femaleYogiColor} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 11} onClick={() => {this.handleClick(11)}}><img src={maleYogi} style={PictureStyle}/></IconContainer>
-                    <IconContainer filled={this.state.chosenAvatar === 12} onClick={() => {this.handleClick(12)}}><img src={maleYogiColor} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 1} onClick={() => {
+                        this.handleClick(1)
+                    }}><img src={femaleCoder} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 2} onClick={() => {
+                        this.handleClick(2)
+                    }}><img src={femaleCoderColor} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 3} onClick={() => {
+                        this.handleClick(3)
+                    }}><img src={maleCoder} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 4} onClick={() => {
+                        this.handleClick(4)
+                    }}><img src={maleCoderColor} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 5} onClick={() => {
+                        this.handleClick(5)
+                    }}><img src={femaleScientist} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 6} onClick={() => {
+                        this.handleClick(6)
+                    }}><img src={femaleScientistColor} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 7} onClick={() => {
+                        this.handleClick(7)
+                    }}><img src={maleScientist} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 8} onClick={() => {
+                        this.handleClick(8)
+                    }}><img src={maleScientistColor} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 9} onClick={() => {
+                        this.handleClick(9)
+                    }}><img src={femaleYogi} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 10} onClick={() => {
+                        this.handleClick(10)
+                    }}><img src={femaleYogiColor} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 11} onClick={() => {
+                        this.handleClick(11)
+                    }}><img src={maleYogi} style={PictureStyle}/></IconContainer>
+                    <IconContainer filled={this.state.chosenAvatar === 12} onClick={() => {
+                        this.handleClick(12)
+                    }}><img src={maleYogiColor} style={PictureStyle}/></IconContainer>
 
                 </PictureContainer>
                 <ButtonContainer>
                     <Button
-                        disabled={this.state.pictureChosen===false}
+                        disabled={this.state.pictureChosen === false}
                         width="100%"
                         onClick={() => {
                             this.savePicture();

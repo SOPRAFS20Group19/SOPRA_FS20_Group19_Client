@@ -104,7 +104,7 @@ const HoverContainer = styled.div`
   }
 `;
 
-class Sidebar extends React.Component{
+class Sidebar extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -117,45 +117,45 @@ class Sidebar extends React.Component{
         this.props.history.push(`/userprofile`);
     }
 
-    toggleShowReturnHover(value){
+    toggleShowReturnHover(value) {
         this.setState({showReturnHover: value})
     }
 
     render() {
         return (
             <div>
-            <Container>
-                <div>
-                <ButtonContainer>
-                    <RoundButton
-                        width="75%"
-                        onMouseOver={() => this.toggleShowReturnHover(true)}
-                        onMouseLeave={() => this.toggleShowReturnHover(false)}
-                        onClick={() => {
-                            this.returnToPage();
-                        }}
-                    >
-                        <img src={LogoutIcon}/>
-                    </RoundButton>
-                </ButtonContainer>
-                {this.state.showReturnHover ? <HoverContainer>Return to profile</HoverContainer> : null}
-                </div>
-            </Container>
+                <Container>
+                    <div>
+                        <ButtonContainer>
+                            <RoundButton
+                                width="75%"
+                                onMouseOver={() => this.toggleShowReturnHover(true)}
+                                onMouseLeave={() => this.toggleShowReturnHover(false)}
+                                onClick={() => {
+                                    this.returnToPage();
+                                }}
+                            >
+                                <img src={LogoutIcon}/>
+                            </RoundButton>
+                        </ButtonContainer>
+                        {this.state.showReturnHover ? <HoverContainer>Return to profile</HoverContainer> : null}
+                    </div>
+                </Container>
                 <Container2>
                     <div>
-                    <ButtonContainer>
-                        <RoundButton
-                            width="75%"
-                            onMouseOver={() => this.toggleShowReturnHover(true)}
-                            onMouseLeave={() => this.toggleShowReturnHover(false)}
-                            onClick={() => {
-                                this.returnToPage();
-                            }}
-                        >
-                            <img src={LogoutIcon}/>
-                        </RoundButton>
-                    </ButtonContainer>
-                    {this.state.showReturnHover ? <HoverContainer>Return to profile</HoverContainer> : null}
+                        <ButtonContainer>
+                            <RoundButton
+                                width="75%"
+                                onMouseOver={() => this.toggleShowReturnHover(true)}
+                                onMouseLeave={() => this.toggleShowReturnHover(false)}
+                                onClick={() => {
+                                    this.returnToPage();
+                                }}
+                            >
+                                <img src={LogoutIcon}/>
+                            </RoundButton>
+                        </ButtonContainer>
+                        {this.state.showReturnHover ? <HoverContainer>Return to profile</HoverContainer> : null}
                     </div>
                 </Container2>
             </div>

@@ -6,7 +6,7 @@ import {ButtonYesNo} from "./ButtonYesNo";
 import {Button} from "../variables/Button";
 import styled from "styled-components";
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   flex-direction: column;
   max-height: 93%;
@@ -240,7 +240,7 @@ const ErrorMessage = styled.div`
 
 function ValidationMessage(props) {
     if (!props.valid) {
-        return(
+        return (
             <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
         )
     }
@@ -248,83 +248,92 @@ function ValidationMessage(props) {
 }
 
 class AddFountain extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
-
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <SidebarAddLocationtoStart avatarNr={localStorage.getItem("userAvatar")}/>
-            <MainContainer>
-        <QuestionContainer>
-            <Question>Location information: </Question>
-        </QuestionContainer>
-        <ImageContainer>
-            <Picture>
-                <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%" height="100%"/>
-            </Picture>
-        </ImageContainer>
-        <Container2>
-            <Title>Coordinates</Title>
-            {!this.props.latitude && !this.props.longitude ? (<Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-            </Spinner>) : (
-                <InfoSchrift>{this.props.latitude}, {this.props.longitude}</InfoSchrift>)}
-        </Container2>
-        <Container3>
-            <Title>Year of construction (optional): </Title>
-            <InputField
-                placeholder="Enter Year of construction here"
-                onChange={e => {
-                    this.props.updateBaujahr(e.target.value);
-                }}
-            />
-            <ValidationMessage valid={this.props.baujahrValid} message={this.props.errorMsg.baujahr}/>
-        </Container3>
-        <Container4>
-            <Title>Potable water (optional)? </Title>
-            <ButtonContainerYesNo>
-                <ButtonYesNo
-                    disabled={this.props.art_txt === "Trinkwasserbrunnen"}
-                    onClick={() => {this.props.setState({art_txt: "Trinkwasserbrunnen"});}}>Yes
-                </ButtonYesNo>
-                <ButtonYesNo
-                    disabled={this.props.art_txt === "Kein Trinkwasser"}
-                    onClick={() => {this.props.setState({art_txt: "Kein Trinkwasser"});}}>No
-                </ButtonYesNo>
-            </ButtonContainerYesNo>
-        </Container4>
-        <Container5>
-            <Title>Public access (optional)? </Title>
-            <ButtonContainerYesNo>
-                <ButtonYesNo
-                    disabled={this.props.brunnenart_txt === "öffentlicher Brunnen"}
-                    onClick={() => {this.props.setState({brunnenart_txt: "öffentlicher Brunnen"});}}>Yes
-                </ButtonYesNo>
-                <ButtonYesNo
-                    disabled={this.props.brunnenart_txt === "privater Brunnen"}
-                    onClick={() => {this.props.setState({brunnenart_txt: "privater Brunnen"});}}>No
-                </ButtonYesNo>
-            </ButtonContainerYesNo>
-        </Container5>
-        <Container6>
-            <ButtonContainer>
-                <Button
-                    disabled={this.props.baujahrValid===false}
-                    onClick={() => {this.props.saveChangesFountain()}}>Save Location
-                </Button>
-            </ButtonContainer>
-            <ButtonContainer>
-                <Button
-                    onClick={() => {this.props.setToNullState();}}>Cancel
-                </Button>
-            </ButtonContainer>
-        </Container6>
-    </MainContainer>
+                <MainContainer>
+                    <QuestionContainer>
+                        <Question>Location information: </Question>
+                    </QuestionContainer>
+                    <ImageContainer>
+                        <Picture>
+                            <img src={this.props.getImage()} alt={this.props.getTypeAsString()} width="100%"
+                                 height="100%"/>
+                        </Picture>
+                    </ImageContainer>
+                    <Container2>
+                        <Title>Coordinates</Title>
+                        {!this.props.latitude && !this.props.longitude ? (<Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>) : (
+                            <InfoSchrift>{this.props.latitude}, {this.props.longitude}</InfoSchrift>)}
+                    </Container2>
+                    <Container3>
+                        <Title>Year of construction (optional): </Title>
+                        <InputField
+                            placeholder="Enter Year of construction here"
+                            onChange={e => {
+                                this.props.updateBaujahr(e.target.value);
+                            }}
+                        />
+                        <ValidationMessage valid={this.props.baujahrValid} message={this.props.errorMsg.baujahr}/>
+                    </Container3>
+                    <Container4>
+                        <Title>Potable water (optional)? </Title>
+                        <ButtonContainerYesNo>
+                            <ButtonYesNo
+                                disabled={this.props.art_txt === "Trinkwasserbrunnen"}
+                                onClick={() => {
+                                    this.props.setState({art_txt: "Trinkwasserbrunnen"});
+                                }}>Yes
+                            </ButtonYesNo>
+                            <ButtonYesNo
+                                disabled={this.props.art_txt === "Kein Trinkwasser"}
+                                onClick={() => {
+                                    this.props.setState({art_txt: "Kein Trinkwasser"});
+                                }}>No
+                            </ButtonYesNo>
+                        </ButtonContainerYesNo>
+                    </Container4>
+                    <Container5>
+                        <Title>Public access (optional)? </Title>
+                        <ButtonContainerYesNo>
+                            <ButtonYesNo
+                                disabled={this.props.brunnenart_txt === "öffentlicher Brunnen"}
+                                onClick={() => {
+                                    this.props.setState({brunnenart_txt: "öffentlicher Brunnen"});
+                                }}>Yes
+                            </ButtonYesNo>
+                            <ButtonYesNo
+                                disabled={this.props.brunnenart_txt === "privater Brunnen"}
+                                onClick={() => {
+                                    this.props.setState({brunnenart_txt: "privater Brunnen"});
+                                }}>No
+                            </ButtonYesNo>
+                        </ButtonContainerYesNo>
+                    </Container5>
+                    <Container6>
+                        <ButtonContainer>
+                            <Button
+                                disabled={this.props.baujahrValid === false}
+                                onClick={() => {
+                                    this.props.saveChangesFountain()
+                                }}>Save Location
+                            </Button>
+                        </ButtonContainer>
+                        <ButtonContainer>
+                            <Button
+                                onClick={() => {
+                                    this.props.setToNullState();
+                                }}>Cancel
+                            </Button>
+                        </ButtonContainer>
+                    </Container6>
+                </MainContainer>
             </div>)
-}
+    }
 }
 
 export default withRouter(AddFountain);

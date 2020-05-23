@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import StarEmpty from "../variables/StarEmpty.svg";
 import StarFull from "../variables/StarFilled.svg";
@@ -104,13 +104,13 @@ const Text2 = styled.div`
   grid-row: 3;
 `;
 
-class LocationRating extends React.Component{
+class LocationRating extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ratedStars:null,
-            actualRating:0,
-            averageRating:0
+            ratedStars: null,
+            actualRating: 0,
+            averageRating: 0
         };
         this.showUserRating();
         this.showAverageRating();
@@ -122,7 +122,7 @@ class LocationRating extends React.Component{
     }
 
     //saves The Rating applied to the Stars
-    async saveRating(){
+    async saveRating() {
         try {
             const url = '/locations/rating/' + localStorage.getItem('userId') + '/' + this.props.locationId + "/" + this.state.ratedStars;
             await api.put(url);
@@ -133,7 +133,7 @@ class LocationRating extends React.Component{
         }
     }
 
-    async showAverageRating(){
+    async showAverageRating() {
         try {
             const url = '/locations/rating/' + this.props.locationId;
             const response = await api.get(url);
@@ -155,8 +155,8 @@ class LocationRating extends React.Component{
         }
     }
 
-    changeColor(number){
-        this.setState({ratedStars: number });
+    changeColor(number) {
+        this.setState({ratedStars: number});
         setTimeout(() => {
             this.saveRating();
         }, 10);
@@ -164,55 +164,55 @@ class LocationRating extends React.Component{
     }
 
     render() {
-        if (this.state.ratedStars == 0 ) {
+        if (this.state.ratedStars === 0) {
             return (
                 <Container>
                     <Text>Rate this Location:</Text>
                     <ButtonContainer2><ButtonGroup aria-label="Basic example">
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(1);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(1);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(2);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(2);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(3);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(3);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(4);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(4);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(5);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(5);
+                                 }}
+                            />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
                     <Text2>
@@ -220,55 +220,55 @@ class LocationRating extends React.Component{
                     </Text2>
                 </Container>
             );
-        } else if (this.state.ratedStars == 1){
+        } else if (this.state.ratedStars === 1) {
             return (
                 <Container>
                     <Text>Rate this Location:</Text>
                     <ButtonContainer2><ButtonGroup aria-label="Basic example">
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(0);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(0);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(2);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(2);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(3);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(3);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(4);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(4);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(5);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(5);
+                                 }}
+                            />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
                     <Text2>
@@ -276,56 +276,55 @@ class LocationRating extends React.Component{
                     </Text2>
                 </Container>
             );
-        }
-        else if (this.state.ratedStars == 2){
+        } else if (this.state.ratedStars === 2) {
             return (
                 <Container>
                     <Text>Rate this Location:</Text>
                     <ButtonContainer2><ButtonGroup aria-label="Basic example">
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(1);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(1);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(0);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(0);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(3);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(3);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(4);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(4);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(5);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(5);
+                                 }}
+                            />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
                     <Text2>
@@ -333,56 +332,55 @@ class LocationRating extends React.Component{
                     </Text2>
                 </Container>
             );
-        }
-        else if (this.state.ratedStars == 3){
+        } else if (this.state.ratedStars === 3) {
             return (
                 <Container>
                     <Text>Rate this Location:</Text>
                     <ButtonContainer2><ButtonGroup aria-label="Basic example">
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(1);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(1);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(2);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(2);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(0);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(0);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(4);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(4);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(5);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(5);
+                                 }}
+                            />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
                     <Text2>
@@ -390,56 +388,55 @@ class LocationRating extends React.Component{
                     </Text2>
                 </Container>
             );
-        }
-        else if (this.state.ratedStars == 4){
+        } else if (this.state.ratedStars === 4) {
             return (
                 <Container>
                     <Text>Rate this Location:</Text>
                     <ButtonContainer2><ButtonGroup aria-label="Basic example">
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(1);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(1);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(2);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(2);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(3);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(3);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(0);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(0);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarEmpty} alt="Star Empty"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(5);
-                             }}
-                        />
+                            <img src={StarEmpty} alt="Star Empty"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(5);
+                                 }}
+                            />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
                     <Text2>
@@ -447,56 +444,55 @@ class LocationRating extends React.Component{
                     </Text2>
                 </Container>
             );
-        }
-        else{
+        } else {
             return (
                 <Container>
                     <Text>Rate this Location:</Text>
                     <ButtonContainer2><ButtonGroup aria-label="Basic example">
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(1);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(1);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(2);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(2);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(3);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(3);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(4);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(4);
+                                 }}
+                            />
                         </Picture>
                         <Picture>
-                        <img src={StarFull} alt="Star Full"
-                             width="100%"
-                             height="100%"
-                             onClick={() => {
-                                 this.changeColor(5);
-                             }}
-                        />
+                            <img src={StarFull} alt="Star Full"
+                                 width="100%"
+                                 height="100%"
+                                 onClick={() => {
+                                     this.changeColor(5);
+                                 }}
+                            />
                         </Picture>
                     </ButtonGroup></ButtonContainer2>
                     <Text2>

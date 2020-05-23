@@ -20,7 +20,7 @@ const Container = styled.div`
   grid-template-rows: auto auto auto auto auto;
 `;
 
-const GridContainer =styled.div`
+const GridContainer = styled.div`
   color: black;
   width: 100%;
   display: grid;
@@ -39,8 +39,6 @@ const GridContainer =styled.div`
     font-size: 14px;
   }
 `;
-
-
 
 
 const Title = styled.div`
@@ -75,19 +73,17 @@ const Text = styled.div`
 `;
 
 
-class ProfilePageInformation extends React.Component{
+class ProfilePageInformation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
+        this.state = {}
     }
-
 
 
     render() {
         return (
             <Container>
-                {!this.props.user ? (<Spinner/>) :(<div>
+                {!this.props.user ? (<Spinner/>) : (<div>
                         <GridContainer row={1}>
                             <Title>Name:</Title>
                             <Text>{this.props.user.name}</Text>

@@ -17,4 +17,5 @@ class Location {
         Object.assign(this, data);
     }
 }
+
 export default Location;

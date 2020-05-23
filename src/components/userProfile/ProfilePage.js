@@ -14,7 +14,7 @@ import FriendsProfilePage from "../../views/Users/FriendsProfilePage";
 import ChatboxFriends from "../../views/Users/ChatboxFriends";
 import SidebarProfilePage from "../../views/Users/SidebarProfilePage";
 
-const MainContainer =styled.div`
+const MainContainer = styled.div`
   color: black;
   flex-direction: row;
   width: 80%;
@@ -53,7 +53,7 @@ const MainContainer =styled.div`
   }
 `;
 
-const ImageContainer= styled.div`
+const ImageContainer = styled.div`
   justify-content: start;
   flex-direction: row;
   color: black;
@@ -68,7 +68,7 @@ const ImageContainer= styled.div`
   margin-left: 10px;
 `;
 
-const ImageContainer2= styled.div`
+const ImageContainer2 = styled.div`
   display: grid;
   justify-content: start;
   align-content: left;
@@ -85,7 +85,7 @@ const Text = styled.div`
   }
 `;
 
-const Picture= styled.div`
+const Picture = styled.div`
   height: 70px;
   width: 70px;
   grid-column: 1;
@@ -141,16 +141,15 @@ class ProfilePage extends React.Component {
         }
     }
 
-    changeColor(value){
-        if (value === true){
+    changeColor(value) {
+        if (value === true) {
             this.addFriend();
-        }
-        else {
+        } else {
             this.deleteFriend();
         }
     }
 
-    async deleteFriend(){
+    async deleteFriend() {
         try {
             const url = '/users/friends/' + localStorage.getItem('userId') + '/' + this.props.match.params.userId;
 
@@ -162,20 +161,22 @@ class ProfilePage extends React.Component {
         }
     }
 
-    async addFriend(){
+    async addFriend() {
         try {
             const url = '/users/friends/' + localStorage.getItem('userId') + '/' + this.props.match.params.userId;
 
             await api.put(url);
 
-            setTimeout(() => {this.setState({isFriend: true})}, 500);
+            setTimeout(() => {
+                this.setState({isFriend: true})
+            }, 500);
         } catch (e) {
             alert(`Something went wrong while adding this friend: \n${handleError(e)}`);
         }
     }
 
-    checkIfOwnProfile(){
-        if (localStorage.getItem('userId') == this.props.match.params.userId){
+    checkIfOwnProfile() {
+        if (localStorage.getItem('userId') === this.props.match.params.userId) {
             this.props.history.push('/userprofile');
         }
     }
@@ -188,18 +189,17 @@ class ProfilePage extends React.Component {
     }
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
-        if (this.props.match.params.userId !== prevProps.match.params.userId){
-            if (localStorage.getItem('userId') == this.props.match.params.userId){
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            if (localStorage.getItem('userId') === this.props.match.params.userId) {
                 this.props.history.push('/userprofile');
-            }
-            else {
+            } else {
                 window.location.reload();
             }
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 {!this.state.shownUser ? (<Spinner animation="border" role="status">
                     <span className="sr-only">Loading...</span>
@@ -207,50 +207,51 @@ class ProfilePage extends React.Component {
                     <div>
                         <SidebarProfilePage avatarNr={localStorage.getItem("userAvatar")} column={3}/>
                         <TitleProfile/>
-                    <MainContainer>
-                        <ProfilePageHeader username={this.state.shownUser.username} avatarNr={this.state.shownUser.avatarNr}/>
-                        <ProfilePageInformation
-                            user={this.state.shownUser}
-                            username={this.state.shownUser.username}
-                            name={this.state.shownUser.name}
-                            creationDate={this.state.shownUser.creationDate}
-                        />
-                        <ImageContainer>
-                            {this.state.isFriend === false ?
-                                <ImageContainer2>
-                                    <Picture>
-                                    <img src={AddFriend} alt="Add Friend" height="100%" width="100%"
-                                         onClick={() => {
-                                             this.changeColor(true);
-                                         }}
-                                    />
-                                    </Picture>
-                                    <Text>
-                                    Add this user as a friend
-                                    </Text>
-                                </ImageContainer2>
-                                :
-                                <ImageContainer2>
-                                    <Picture>
-                                    <img src={FriendAdded} alt="FriendAdded" height="100%" width="100%"
-                                         onClick={() => {
-                                             this.changeColor(false);
-                                         }}
-                                    />
-                                    </Picture>
-                                    <Text>
-                                    Unfriend this user
-                                    </Text>
-                                </ImageContainer2>
-                            }
-                        </ImageContainer>
-                        <SavedLocationsProfilePage userId={this.state.shownUser.id}/>
-                        <FriendsProfilePage userId={this.state.shownUser.id}/>
-                        {this.state.isFriend ? <ChatboxFriends friendId={this.state.shownUser.id}/> : null}
+                        <MainContainer>
+                            <ProfilePageHeader username={this.state.shownUser.username}
+                                               avatarNr={this.state.shownUser.avatarNr}/>
+                            <ProfilePageInformation
+                                user={this.state.shownUser}
+                                username={this.state.shownUser.username}
+                                name={this.state.shownUser.name}
+                                creationDate={this.state.shownUser.creationDate}
+                            />
+                            <ImageContainer>
+                                {this.state.isFriend === false ?
+                                    <ImageContainer2>
+                                        <Picture>
+                                            <img src={AddFriend} alt="Add Friend" height="100%" width="100%"
+                                                 onClick={() => {
+                                                     this.changeColor(true);
+                                                 }}
+                                            />
+                                        </Picture>
+                                        <Text>
+                                            Add this user as a friend
+                                        </Text>
+                                    </ImageContainer2>
+                                    :
+                                    <ImageContainer2>
+                                        <Picture>
+                                            <img src={FriendAdded} alt="FriendAdded" height="100%" width="100%"
+                                                 onClick={() => {
+                                                     this.changeColor(false);
+                                                 }}
+                                            />
+                                        </Picture>
+                                        <Text>
+                                            Unfriend this user
+                                        </Text>
+                                    </ImageContainer2>
+                                }
+                            </ImageContainer>
+                            <SavedLocationsProfilePage userId={this.state.shownUser.id}/>
+                            <FriendsProfilePage userId={this.state.shownUser.id}/>
+                            {this.state.isFriend ? <ChatboxFriends friendId={this.state.shownUser.id}/> : null}
 
-                    </MainContainer>
+                        </MainContainer>
                     </div>
-                ) }
+                )}
             </div>
         )
     }

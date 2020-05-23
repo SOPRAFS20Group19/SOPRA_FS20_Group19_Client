@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import {BaseContainer} from '../../helpers/layout';
 import {api, handleError} from '../../helpers/api';
 import {Button} from '../../views/variables/Button';
 import {withRouter} from 'react-router-dom';
@@ -8,17 +7,9 @@ import SidebarInfoAndAddLocation from "../../views/InformationPage/SidebarInfoAn
 import LocationInformation from "../../views/InformationPage/LocationInformation";
 import LocationRating from "../../views/InformationPage/LocationRating";
 import Chatbox from "../../views/InformationPage/Chatbox";
-import InformationPageFavourite from "../../views/InformationPage/InformationPageFavourite";
 import Location from "../shared/models/Location";
 import InformationHeader from "../../views/InformationPage/InformationHeader";
 import Spinner from "react-bootstrap/Spinner";
-
-const Container1 = styled(BaseContainer)`
-  color: black;
-  text-align: left;
-  justify-content: left;
-  flex-direction: row;
-`;
 
 const Container = styled.div`
   color: black;
@@ -110,23 +101,24 @@ class LocationInformationPage extends React.Component {
                 </Button></LoadingContainer>) : (
                     <div>
                         <SidebarInfoAndAddLocation avatarNr={localStorage.getItem("userAvatar")} column={3}/>
-                    <Container>
-                    <InformationHeader type={this.state.locationToBeShown.locationType} locationId={this.props.match.params.locationId}/>
-                    <LocationInformation
-                        location={this.state.location}
-                        id={this.state.locationToBeShown.id}
-                        address={this.state.locationToBeShown.address}
-                        information={this.state.additionalInformation}
-                        longitude={this.state.locationToBeShown.longitude}
-                        latitude={this.state.locationToBeShown.latitude}
-                        coordinates={this.state.locationToBeShown.coordinates}
-                    />
-                    <LocationRating locationId={this.props.match.params.locationId}/>
-                    <Chatbox locationId={this.props.match.params.locationId}/>
+                        <Container>
+                            <InformationHeader type={this.state.locationToBeShown.locationType}
+                                               locationId={this.props.match.params.locationId}/>
+                            <LocationInformation
+                                location={this.state.location}
+                                id={this.state.locationToBeShown.id}
+                                address={this.state.locationToBeShown.address}
+                                information={this.state.additionalInformation}
+                                longitude={this.state.locationToBeShown.longitude}
+                                latitude={this.state.locationToBeShown.latitude}
+                                coordinates={this.state.locationToBeShown.coordinates}
+                            />
+                            <LocationRating locationId={this.props.match.params.locationId}/>
+                            <Chatbox locationId={this.props.match.params.locationId}/>
 
-                    </Container>
+                        </Container>
                     </div>
-                    )}
+                )}
             </div>
         );
     }

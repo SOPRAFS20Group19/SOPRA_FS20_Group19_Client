@@ -68,7 +68,7 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const ImageContainer= styled.div`
+const ImageContainer = styled.div`
   justify-content: right;
   align-items: right;
   grid-column: 3;
@@ -110,7 +110,7 @@ const ProfilePageButton = styled.button`
   transition: all 0.3s ease;
 `;
 
-const NotificationContainer= styled.div`
+const NotificationContainer = styled.div`
   justify-content: end;
   align-items: top;
   grid-column: 2;
@@ -131,7 +131,7 @@ const imgStyle = {
     "width": "100%"
 };
 
-class UserListItem extends React.Component{
+class UserListItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -154,7 +154,7 @@ class UserListItem extends React.Component{
             const response = await api.get(url);
 
             this.setState({isFriend: response.data});
-            if (this.state.isFriend){
+            if (this.state.isFriend) {
                 this.checkIfUnreadMessages();
             }
         } catch (e) {
@@ -162,15 +162,17 @@ class UserListItem extends React.Component{
         }
     }
 
-    async checkIfUnreadMessages(){
+    async checkIfUnreadMessages() {
         try {
             const url = '/users/chats/news/' + localStorage.getItem('userId') + '/' + this.props.user.id;
 
             const response = await api.get(url);
 
             this.setState({isUnread: response.data});
-            if (!this.state.isUnread){
-                this.timeout = setTimeout(() => {this.checkIfUnreadMessages()}, 10000);
+            if (!this.state.isUnread) {
+                this.timeout = setTimeout(() => {
+                    this.checkIfUnreadMessages()
+                }, 10000);
             }
         } catch (e) {
             alert(`Something went wrong while checking for unread messages: \n${handleError(e)}`);
@@ -181,17 +183,16 @@ class UserListItem extends React.Component{
         clearTimeout(this.timeout);
     }
 
-    changeColor(value){
-        this.setState({isFriend: value });
-        if (value === true){
+    changeColor(value) {
+        this.setState({isFriend: value});
+        if (value === true) {
             this.addFriend();
-        }
-        else {
+        } else {
             this.deleteFriend();
         }
     }
 
-    async deleteFriend(){
+    async deleteFriend() {
         try {
             const url = '/users/friends/' + localStorage.getItem('userId') + '/' + this.props.user.id;
 
@@ -203,7 +204,7 @@ class UserListItem extends React.Component{
         }
     }
 
-    async addFriend(){
+    async addFriend() {
         try {
             const url = '/users/friends/' + localStorage.getItem('userId') + '/' + this.props.user.id;
 
@@ -215,34 +216,34 @@ class UserListItem extends React.Component{
         }
     }
 
-    render(){
+    render() {
         return (
             <Container>
                 <AvatarContainer>
-                    <img src={avatarArray[this.props.user.avatarNr]} style={imgStyle} />
+                    <img src={avatarArray[this.props.user.avatarNr]} style={imgStyle}/>
                     {this.state.isFriend && this.state.isUnread ?
                         <NotificationContainer>
-                            <img src={RedCircle} height="100%" width="100%" />
+                            <img src={RedCircle} height="100%" width="100%"/>
                         </NotificationContainer>
-                    : null}
+                        : null}
                 </AvatarContainer>
                 <Title>{this.props.user.username} </Title>
                 <ButtonContainer>
-                    {this.state.isFriend ?  <ProfilePageButton
-                        variant="primary"
-                        width="100%"
-                        onClick={() => {
-                            this.props.goToProfile(this.props.user.id);
-                        }}>
-                        Chat with {this.props.user.username}
-                    </ProfilePageButton> :
+                    {this.state.isFriend ? <ProfilePageButton
+                            variant="primary"
+                            width="100%"
+                            onClick={() => {
+                                this.props.goToProfile(this.props.user.id);
+                            }}>
+                            Chat with {this.props.user.username}
+                        </ProfilePageButton> :
                         <ProfilePageButton
-                        variant="primary"
-                        width="100%"
-                        onClick={() => {
-                        this.props.goToProfile(this.props.user.id);
-                    }}>
-                        Visit {this.props.user.username}'s profile
+                            variant="primary"
+                            width="100%"
+                            onClick={() => {
+                                this.props.goToProfile(this.props.user.id);
+                            }}>
+                            Visit {this.props.user.username}'s profile
                         </ProfilePageButton>
                     }
                 </ButtonContainer>

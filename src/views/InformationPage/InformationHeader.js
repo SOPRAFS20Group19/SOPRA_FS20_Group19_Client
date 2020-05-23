@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import FireplaceCircle from "../MapMarkers/FireplaceCircle.png"
 import RecyclingCircle from "../MapMarkers/RecyclingCircle.png"
 import FountainCircle from "../MapMarkers/FountainCircle.png"
@@ -61,61 +61,59 @@ const Title = styled.div`
 class InformationHeader extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            
-        };
+        this.state = {};
     }
 
     //returns the image to be rendered according to the type
-    getImage(){
-        if (this.props.type === 'FIREPLACE'){
+    getImage() {
+        if (this.props.type === 'FIREPLACE') {
             return FireplaceCircle;
-        }else if (this.props.type === 'FOUNTAIN'){
+        } else if (this.props.type === 'FOUNTAIN') {
             return FountainCircle;
-        } else if (this.props.type === 'RECYCLING_STATION'){
+        } else if (this.props.type === 'RECYCLING_STATION') {
             return RecyclingCircle;
-        }else if (this.props.type === 'TOILET'){
+        } else if (this.props.type === 'TOILET') {
             return ToiletCircle;
-        }else if (this.props.type === 'TABLE_TENNIS'){
+        } else if (this.props.type === 'TABLE_TENNIS') {
             return TableTennisCircle;
-        }else if (this.props.type === 'BENCH'){
+        } else if (this.props.type === 'BENCH') {
             return BenchCircle;
         }
     }
 
     //returns the string to be rendered according to the type
-    getTypeAsString(){
-        if (this.props.type === 'FIREPLACE'){
+    getTypeAsString() {
+        if (this.props.type === 'FIREPLACE') {
             return "FIREPLACE";
-        }else if (this.props.type === 'FOUNTAIN'){
+        } else if (this.props.type === 'FOUNTAIN') {
             return "FOUNTAIN";
-        }else if (this.props.type === 'RECYCLING_STATION'){
+        } else if (this.props.type === 'RECYCLING_STATION') {
             return "RECYCLING";
-        }else if (this.props.type === 'TOILET'){
+        } else if (this.props.type === 'TOILET') {
             return "TOILET";
-        }else if (this.props.type === 'TABLE_TENNIS'){
+        } else if (this.props.type === 'TABLE_TENNIS') {
             return "TABLE TENNIS";
-        }else if (this.props.type === 'BENCH'){
+        } else if (this.props.type === 'BENCH') {
             return "BENCH";
         }
     }
 
-    render(){
+    render() {
         return (
-                    <Container>
-                            <Picture>
-                            <img src={this.getImage()} alt={this.getTypeAsString()} width="100%" height="100%"/>
-                            </Picture>
-                            <Title>
-                                {this.getTypeAsString()}
-                            </Title>
-                        <InformationPageFavourite locationId={this.props.locationId}/>
-                    </Container>
-        
-                )
-            }
+            <Container>
+                <Picture>
+                    <img src={this.getImage()} alt={this.getTypeAsString()} width="100%" height="100%"/>
+                </Picture>
+                <Title>
+                    {this.getTypeAsString()}
+                </Title>
+                <InformationPageFavourite locationId={this.props.locationId}/>
+            </Container>
 
-        }
+        )
+    }
+
+}
 
 
 export default withRouter(InformationHeader);

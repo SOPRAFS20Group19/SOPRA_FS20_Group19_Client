@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {api, handleError} from "../../helpers/api";
 import Message from "./Message";
 
@@ -149,20 +149,22 @@ class Chatbox extends React.Component {
         };
     }
 
-    async getChat(){
+    async getChat() {
         try {
             const url = '/locations/chats/' + this.props.locationId;
 
             const response = await api.get(url);
 
             this.setState({oldMessages: response.data.reverse()});
-            this.timeout = setTimeout(() => {this.getChat()}, 5000);
+            this.timeout = setTimeout(() => {
+                this.getChat()
+            }, 5000);
         } catch (e) {
             alert(`Something went wrong while getting the chat: \n${handleError(e)}`);
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getChat();
     }
 
@@ -171,11 +173,11 @@ class Chatbox extends React.Component {
     }
 
     handleInputChange(key, value) {
-        this.setState({ [key]: value });
+        this.setState({[key]: value});
     }
 
 
-    async sendMessage(){
+    async sendMessage() {
         try {
             const url = '/locations/chats/' + this.props.locationId;
             const requestBody = JSON.stringify({
@@ -192,34 +194,34 @@ class Chatbox extends React.Component {
         }
     }
 
-    handleClick(){
+    handleClick() {
         this.sendMessage();
         this.setState({message: ''});
     }
 
     render() {
-        return ( <Container>
-            <Text>Chat</Text>
+        return (<Container>
+                <Text>Chat</Text>
                 {!this.state.oldMessages ? <EmptyChatContainer/> :
-                <ChatContainer>
-                    <MessagesList>
-                        {this.state.oldMessages.map(message => {
-                            return (
-                                <MessageContainer>
-                                    <Message
-                                        senderId={message.senderId}
-                                        senderUsername={message.senderUsername}
-                                        content={message.content}
-                                        timestamp={message.timestamp}
-                                        messageId={message.messageId}
-                                        locationId={this.props.locationId}
-                                        getChat={this.getChat.bind(this)}
-                                    />
-                                </MessageContainer>
-                            );
-                        })}
-                    </MessagesList>
-                </ChatContainer>}
+                    <ChatContainer>
+                        <MessagesList>
+                            {this.state.oldMessages.map(message => {
+                                return (
+                                    <MessageContainer>
+                                        <Message
+                                            senderId={message.senderId}
+                                            senderUsername={message.senderUsername}
+                                            content={message.content}
+                                            timestamp={message.timestamp}
+                                            messageId={message.messageId}
+                                            locationId={this.props.locationId}
+                                            getChat={this.getChat.bind(this)}
+                                        />
+                                    </MessageContainer>
+                                );
+                            })}
+                        </MessagesList>
+                    </ChatContainer>}
                 <UserChatContainer>
                     <InputField
                         placeholder="Enter your message..."
@@ -227,25 +229,27 @@ class Chatbox extends React.Component {
                         onChange={e => {
                             this.handleInputChange('message', e.target.value);
                         }}
-                        onKeyPress={e => {if (e.key === 'Enter'){
-                            if (this.state.message){
-                                this.handleClick();
+                        onKeyPress={e => {
+                            if (e.key === 'Enter') {
+                                if (this.state.message) {
+                                    this.handleClick();
+                                }
                             }
-                        }}}
+                        }}
                     />
                     <ButtonContainer>
-                    <ButtonBlue
-                        disabled={!this.state.message}
-                        variant="outline-secondary"
+                        <ButtonBlue
+                            disabled={!this.state.message}
+                            variant="outline-secondary"
                             height="100%"
                             onClick={() => {
                                 this.handleClick();
                             }}
-                    >
-                        Send Message</ButtonBlue>
+                        >
+                            Send Message</ButtonBlue>
                     </ButtonContainer>
                 </UserChatContainer>
-                </Container>
+            </Container>
         );
     }
 

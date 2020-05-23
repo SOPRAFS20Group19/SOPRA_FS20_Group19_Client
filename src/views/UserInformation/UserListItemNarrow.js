@@ -64,7 +64,7 @@ const ButtonContainer = styled.div`
   grid-row: 2;
 `;
 
-const ImageContainer= styled.div`
+const ImageContainer = styled.div`
   justify-content: right;
   align-items: right;
   grid-column: 3;
@@ -81,7 +81,7 @@ const ImageContainer= styled.div`
   }
 `;
 
-const NotificationContainer= styled.div`
+const NotificationContainer = styled.div`
   justify-content: end;
   align-items: top;
   grid-column: 2;
@@ -127,7 +127,7 @@ const imgStyle = {
     "width": "100%"
 };
 
-class UserListItemNarrow extends React.Component{
+class UserListItemNarrow extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -143,15 +143,17 @@ class UserListItemNarrow extends React.Component{
         this.checkIfUnreadMessages()
     }
 
-    async checkIfUnreadMessages(){
+    async checkIfUnreadMessages() {
         try {
             const url = '/users/chats/news/' + localStorage.getItem('userId') + '/' + this.props.user.id;
 
             const response = await api.get(url);
 
             this.setState({isUnread: response.data});
-            if (!this.state.isUnread){
-                this.timeout = setTimeout(() => {this.checkIfUnreadMessages()}, 10000);
+            if (!this.state.isUnread) {
+                this.timeout = setTimeout(() => {
+                    this.checkIfUnreadMessages()
+                }, 10000);
             }
         } catch (e) {
             alert(`Something went wrong while checking for unread messages: \n${handleError(e)}`);
@@ -162,17 +164,16 @@ class UserListItemNarrow extends React.Component{
         clearTimeout(this.timeout);
     }
 
-    changeColor(value){
-        this.setState({isFriend: value });
-        if (value === true){
+    changeColor(value) {
+        this.setState({isFriend: value});
+        if (value === true) {
             this.addFriend();
-        }
-        else {
+        } else {
             this.deleteFriend();
         }
     }
 
-    async deleteFriend(){
+    async deleteFriend() {
         try {
             const url = '/users/friends/' + localStorage.getItem('userId') + '/' + this.props.user.id;
 
@@ -186,7 +187,7 @@ class UserListItemNarrow extends React.Component{
         }
     }
 
-    async addFriend(){
+    async addFriend() {
         try {
             const url = '/users/friends/' + localStorage.getItem('userId') + '/' + this.props.user.id;
 
@@ -200,20 +201,20 @@ class UserListItemNarrow extends React.Component{
         }
     }
 
-    render(){
+    render() {
         return (
             <Container>
                 <AvatarContainer>
-                    <img src={avatarArray[this.props.user.avatarNr]} style={imgStyle} />
+                    <img src={avatarArray[this.props.user.avatarNr]} style={imgStyle}/>
                     {this.state.isFriend && this.state.isUnread ?
                         <NotificationContainer>
-                        <img src={RedCircle} height="100%" width="100%" />
+                            <img src={RedCircle} height="100%" width="100%"/>
                         </NotificationContainer>
                         : null}
                 </AvatarContainer>
                 <Title>{this.props.user.username}</Title>
                 <ButtonContainer>
-                    {this.state.isFriend ?  <ProfilePageButton
+                    {this.state.isFriend ? <ProfilePageButton
                             variant="primary"
                             width="100%"
                             onClick={() => {

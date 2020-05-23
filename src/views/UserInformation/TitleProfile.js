@@ -66,10 +66,6 @@ const AboutUsButton = styled.div`
 `;
 
 class TitleProfile extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <Container height={this.props.height}>

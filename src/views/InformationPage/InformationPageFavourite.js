@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import HeartUnfilled from "./HeartUnfilled.png"
 import HeartRed from "./HeartRed.png"
 import {api, handleError} from "../../helpers/api";
@@ -41,7 +41,7 @@ const Container = styled.div`
  
 `;
 
-const ImageContainer= styled.div`
+const ImageContainer = styled.div`
   height: 56.5px;
   width: 63.1px;
   justify-content: top;
@@ -72,7 +72,7 @@ class InformationPageFavourite extends React.Component {
         this.checkFavoriteLocations();
     }
 
-    async checkFavoriteLocations(){
+    async checkFavoriteLocations() {
         try {
             const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.locationId;
 
@@ -80,8 +80,7 @@ class InformationPageFavourite extends React.Component {
             const location = new Location(response.data);
             if (location.id !== null) {
                 this.setState({locationId: location.id});
-            }
-            else {
+            } else {
                 this.setState({locationId: 1});
             }
         } catch (e) {
@@ -90,18 +89,17 @@ class InformationPageFavourite extends React.Component {
     }
 
     //Changes the color of the heart and saves favourite
-    changeColor(value){
-        this.setState({liked: value });
-        this.setState({locationId: 1 });
-        if (value === true){
+    changeColor(value) {
+        this.setState({liked: value});
+        this.setState({locationId: 1});
+        if (value === true) {
             this.saveToFavorites();
-        }
-        else {
+        } else {
             this.deleteFromFavorites();
         }
     }
 
-    async saveToFavorites(){
+    async saveToFavorites() {
         try {
             const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.locationId;
             await api.put(url);
@@ -110,7 +108,7 @@ class InformationPageFavourite extends React.Component {
         }
     }
 
-    async deleteFromFavorites(){
+    async deleteFromFavorites() {
         try {
             const url = '/locations/favorites/' + localStorage.getItem('userId') + '/' + this.props.locationId;
             await api.delete(url);
@@ -124,37 +122,37 @@ class InformationPageFavourite extends React.Component {
         return (
             <div>
                 {this.state.locationId === null ? null : (
-            <Container>
-                {this.state.locationId == this.props.locationId ? (
-                    <Container2>
-                    <ImageContainer>
-                        <img src={HeartRed} alt="Heart Full" height="100%" width="100%"
-                             onClick={() => {
-                                 this.changeColor(false);
-                             }}
-                        />
-                    </ImageContainer>
-                    </Container2>
-                ) : (
-                    <Container2>
-                <ImageContainer>
-                    {this.state.liked === false ?
-                        <img src={HeartUnfilled} alt="Heart Empty" height="100%" width="100%"
-                             onClick={() => {
-                                 this.changeColor(true);
-                             }}
-                        />
-                        :
-                        <img src={HeartRed} alt="Heart Full" height="100%" width="100%"
-                             onClick={() => {
-                                 this.changeColor(false);
-                             }}
-                        />
-                    }
-                </ImageContainer>
-                    </Container2>
-                    )}
-            </Container>
+                    <Container>
+                        {this.state.locationId === this.props.locationId ? (
+                            <Container2>
+                                <ImageContainer>
+                                    <img src={HeartRed} alt="Heart Full" height="100%" width="100%"
+                                         onClick={() => {
+                                             this.changeColor(false);
+                                         }}
+                                    />
+                                </ImageContainer>
+                            </Container2>
+                        ) : (
+                            <Container2>
+                                <ImageContainer>
+                                    {this.state.liked === false ?
+                                        <img src={HeartUnfilled} alt="Heart Empty" height="100%" width="100%"
+                                             onClick={() => {
+                                                 this.changeColor(true);
+                                             }}
+                                        />
+                                        :
+                                        <img src={HeartRed} alt="Heart Full" height="100%" width="100%"
+                                             onClick={() => {
+                                                 this.changeColor(false);
+                                             }}
+                                        />
+                                    }
+                                </ImageContainer>
+                            </Container2>
+                        )}
+                    </Container>
                 )}
             </div>
         );

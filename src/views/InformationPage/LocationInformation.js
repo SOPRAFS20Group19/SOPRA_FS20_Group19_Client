@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {Spinner} from "../variables/Spinner";
 
 
@@ -82,19 +82,18 @@ const ButtonReturnMap = styled.button`
   }
 `;
 
-class LocationInformation extends React.Component{
+class LocationInformation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
+        this.state = {}
     }
 
     render() {
         return (
             <Container>
-                {!this.props.location ? (<Spinner/>) :(
+                {!this.props.location ? (<Spinner/>) : (
                     <div>
-                        <Title>ID:  </Title><Text>{this.props.id}</Text>
+                        <Title>ID: </Title><Text>{this.props.id}</Text>
                         <Title>Address: </Title><Text>{this.props.address}</Text>
                         <Title>Additional Information:</Title><Text>{this.props.information}</Text>
                         <Title>Coordinates: </Title><Text>{this.props.latitude}, {this.props.longitude}</Text>
@@ -104,10 +103,10 @@ class LocationInformation extends React.Component{
                                 localStorage.setItem("currentLocationInformationLon", this.props.longitude);
                                 localStorage.setItem("showLocation", true);
                                 this.props.history.push(`/map`);
-                        }}>
+                            }}>
                             Show Location on Map</ButtonReturnMap>
                     </div>
-                    )}
+                )}
             </Container>
         );
     }

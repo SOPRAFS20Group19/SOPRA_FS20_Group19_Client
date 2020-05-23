@@ -136,7 +136,7 @@ const ErrorMessage = styled.div`
 
 function ValidationMessage(props) {
     if (props.valid) {
-        return(
+        return (
             <ErrorMessage className='error-msg'>{props.message}</ErrorMessage>
         )
     }
@@ -171,7 +171,7 @@ class Login extends React.Component {
         };
     }
 
-    handleErrorDesigned(error){
+    handleErrorDesigned(error) {
 
         const response = error.response;
 
@@ -183,15 +183,13 @@ class Login extends React.Component {
             } else {
                 this.setState({errorMessage: response.data})
             }
-        }
-        else {
+        } else {
             if (error.message.match(/Network Error/)) {
                 alert('The server cannot be reached. Did you start it?');
             }
             console.log('Something else happened.', error);
         }
     }
-
 
 
     /**
@@ -271,7 +269,8 @@ class Login extends React.Component {
                                 }}
                             />
                             <ErrorContainer>
-                                <ValidationMessage valid={this.state.hasErrorMessage} message={this.state.errorMessage}/>
+                                <ValidationMessage valid={this.state.hasErrorMessage}
+                                                   message={this.state.errorMessage}/>
                             </ErrorContainer>
                             <ButtonContainer>
                                 <Button
@@ -311,7 +310,7 @@ class Login extends React.Component {
                                         this.props.history.push(`/aboutus`);
                                     }}
                                 >
-                                    <img src={AboutUsQuestion1} width="40%" heigth= "40%"/>
+                                    <img src={AboutUsQuestion1} width="40%" heigth="40%"/>
                                 </AboutUsButton>
                             </ButtonContainer>
                         </Form>
