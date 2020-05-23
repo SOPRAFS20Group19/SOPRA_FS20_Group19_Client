@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Button} from '../../views/variables/Button';
 import {ButtonYesNo} from "../../views/AddLocation/ButtonYesNo";
+import Spinner from "react-bootstrap/Spinner";
 
 const Container = styled.div`
   height: flex;
@@ -24,6 +25,18 @@ const Container = styled.div`
     right: 0%;
     top: 0%;
   }
+`;
+
+const LoadingContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const Title = styled.h1`
@@ -90,6 +103,38 @@ const Name = styled.div`
   }
 `;
 
+const ButtonSpinner = styled.button`
+  &:hover {
+    transform: translateY(-2px);
+  }
+  padding: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  text-align: center;
+  color: #003068;
+  width: ${props => props.width || null};
+  height: 35px;
+  border: 2px solid #003068;
+  border-radius: 5px;
+  cursor: ${props => (props.disabled ? "default" : "pointer")};
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
+  background: #66A3E0;
+  transition: all 0.3s ease;
+  @media only screen and (max-width: 700px){
+    font-size: 10px;
+    height: 25px;
+    padding: 3px;
+    border: 1.5px solid #003068;
+  }
+  @media only screen and (max-width: 500px){
+    font-size: 10px;
+    height: 25px;
+    padding: 3px;
+    border: 1.5px solid #003068;
+  }
+`;
+
 
 class Filter extends React.Component {
     constructor(props) {
@@ -136,10 +181,16 @@ class Filter extends React.Component {
             {this.props.filterSpinner === true ? (
                     <Container>
                         <Title>Filter</Title>
-                        <div className="d-flex justify-content-center">
-                            <div className="spinner-border text-light" role="status">
-                            </div>
-                        </div>
+                        <LoadingContainer><ButtonSpinner width="flex" variant="primary" disabled>
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                            Applying Filter...
+                        </ButtonSpinner></LoadingContainer>
                     </Container>
                 ) : (
                     <Container>
