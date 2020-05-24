@@ -218,14 +218,14 @@ class Users extends React.Component {
                         <ScrollContainer>
                             <UsersList>
                                 {this.state.users.map(user => {
-                                    if (this.state.searchValue === null && user.id !== localStorage.getItem("userId")) {
+                                    if (this.state.searchValue === null && user.id != localStorage.getItem("userId")) {
                                         return (
                                             <UserContainer key={user.id}>
                                                 <UserListItem user={user} goToProfile={this.goToProfile.bind(this)}/>
                                             </UserContainer>
                                         );
                                     } else if (this.state.searchValue !== null) {
-                                        if (user.username.toLowerCase().includes(this.state.searchValue.toLowerCase()) && user.id !== localStorage.getItem("userId")) {
+                                        if (user.username.toLowerCase().includes(this.state.searchValue.toLowerCase()) && user.id != localStorage.getItem("userId")) {
                                             return (
                                                 <UserContainer key={user.id}>
                                                     <UserListItem user={user}
